@@ -1,0 +1,16 @@
+.p3studioLogoDark {
+    position: absolute;
+    right: -12rem;
+    bottom: 10rem;
+    max-width: 40rem;
+    height: auto;
+}
+
+.p3studioLogoLight {
+    position: absolute;
+    right: -12rem;
+    bottom: -7rem;
+    max-width: 40rem;
+    height: auto;
+    fill-opacity: 0.15;
+}

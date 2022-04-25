@@ -1,0 +1,15 @@
+.heroText {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 50%;
+    min-height: 80vh;
+}
+
+.heroText > h2 {
+    font-size: 3.75rem;
+}
+
+.heroText > h3 {
+    margin-bottom: 2rem;
+}

@@ -1,14 +1,15 @@
 import React from "react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+import "../styling/reset.css";
+import "../styling/global.css";
 
-function Layout({ children }) {
+function Layout({ page, children }) {
     return (
-        <div>
+        <div className="page-container">
             <Navbar />
             <div className="layout">{children}</div>
-            <footer>
-                <p>filler paragraph for now but use proper footer later</p>
-            </footer>
+            <Footer pageName={page} />
         </div>
     );
 }
