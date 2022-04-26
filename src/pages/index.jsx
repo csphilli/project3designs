@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
-import * as styles from "../styling/home.module.css";
+import * as styles from "../styling/hero.module.css";
 
 export default function Home() {
     return (

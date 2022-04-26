@@ -4,7 +4,7 @@ import { graphql, useStaticQuery } from "gatsby";
 
 function IndexHeader({ pageId }) {
     const query = useStaticQuery(graphql`
-        query MyQuery {
+        query indexHeaderQuery {
             site {
                 siteMetadata {
                     pages {

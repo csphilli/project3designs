@@ -6,7 +6,17 @@
 
 module.exports = {
     /* Your site config here */
-    plugins: [`gatsby-plugin-react-helmet`],
+    plugins: [
+        `gatsby-plugin-react-helmet`,
+        `gatsby-transformer-remark`,
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `headPages`,
+                path: `${__dirname}/src/headPages/`,
+            },
+        },
+    ],
     siteMetadata: {
         pages: [
             {
