@@ -12,11 +12,11 @@ export default function Home() {
                         Find inspiration with projects, articles, and video
                         tutorials for any level of DIY skill
                     </h2>
-                    <h3>
+                    <p>
                         Navigate directly to the pages above or learn more about
                         how you can take on a project <em>yourself</em> by
-                        clicking this button
-                    </h3>
+                        clicking this beautiful button
+                    </p>
                     <Button />
                 </main>
             </Layout>

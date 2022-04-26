@@ -1,0 +1,13 @@
+.p3studioLogoDark,
+.p3studioLogoLight {
+    position: absolute;
+    bottom: -30%;
+    right: -15%;
+    transform: translate(-15%, -30%);
+    max-width: 40rem;
+    height: auto;
+}
+
+.p3studioLogoLight {
+    fill-opacity: 0.15;
+}

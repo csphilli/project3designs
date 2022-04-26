@@ -6,34 +6,34 @@
 
 module.exports = {
     /* Your site config here */
-    plugins: [],
+    plugins: [`gatsby-plugin-react-helmet`],
     siteMetadata: {
-        pages: {
-            home: {
+        pages: [
+            {
+                id: "home",
                 title: "Project3 Studio | Home",
                 description: "Improve your DIY skills with Project3 Studio",
             },
-            projects: {
+            {
+                id: "projects",
                 title: "Project3 Studio | Projects",
                 description: "Get information on all the projects we've done",
             },
-            videos: {
+            {
+                id: "videos",
                 title: "Project3 Studio | Videos",
                 description: "All the videos we've done for your benefit",
             },
-            articles: {
+            {
+                id: "articles",
                 title: "Project3 Studio | Articles",
                 description: "All the reading you can handle about DIY",
             },
-            about: {
+            {
+                id: "about",
                 title: "Project3 Studio | About",
                 description: "Learn more about Project3 Studio",
             },
-        },
-
-        navBar: {
-            title: "Project3 Studio",
-            links: ["home", "projects", "videos", "articles", "about"],
-        },
+        ],
     },
 };
