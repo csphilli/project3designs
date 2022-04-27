@@ -23,6 +23,7 @@
         "react-helmet": "^6.1.0"
     },
     "devDependencies": {
+        "gatsby-plugin-react-svg": "^3.1.0",
         "prettier": "^2.6.2"
     },
     "repository": {

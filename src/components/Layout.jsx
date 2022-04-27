@@ -6,10 +6,12 @@ import IndexHeader from "./IndexHeader";
 import "../styling/reset.css";
 import "../styling/global.css";
 import HeroSection from "./HeroSection";
+import PageBannerIcon from "./PageBannerIcon";
 
 function Layout({ page, children }) {
     return (
         <div className="logo-container">
+            <PageBannerIcon pageId={page} />
             <div className="page-container">
                 <IndexHeader pageId={page} />
                 <Navbar />

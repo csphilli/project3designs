@@ -1,0 +1,18 @@
+.youtubeIcon,
+.articleIcon,
+.projectIcon {
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    transform: translate(-50%, 0);
+    max-width: 50%;
+    height: auto;
+}
+
+.articleIcon {
+    max-width: 25%;
+    height: auto;
+}
+
+/* width="41"
+height="29" */

@@ -16,6 +16,14 @@ module.exports = {
                 path: `${__dirname}/src/headPages/`,
             },
         },
+        {
+            resolve: "gatsby-plugin-react-svg",
+            options: {
+                rule: {
+                    include: `${__dirname}/src/images/pageIcons/`, // See below to configure properly
+                },
+            },
+        },
     ],
     siteMetadata: {
         pages: [
