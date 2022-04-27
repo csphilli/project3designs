@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import IndexHeader from "./IndexHeader";
 import "../styling/reset.css";
 import "../styling/global.css";
+import HeroSection from "./HeroSection";
 
 function Layout({ page, children }) {
     return (
@@ -12,6 +13,7 @@ function Layout({ page, children }) {
             <div className="page-container">
                 <IndexHeader pageId={page} />
                 <Navbar />
+                {/* <HeroSection className="layout" pageId={page} /> */}
                 <div className="layout">{children}</div>
                 <Footer />
             </div>

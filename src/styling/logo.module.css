@@ -1,9 +1,9 @@
 .p3studioLogoDark,
 .p3studioLogoLight {
     position: absolute;
-    bottom: -30%;
-    right: -15%;
-    transform: translate(-15%, -30%);
+    bottom: -7rem;
+    right: -12rem;
+
     max-width: 40rem;
     height: auto;
 }

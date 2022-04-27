@@ -15,7 +15,6 @@ body {
     font-weight: 400;
     line-height: 1.5;
     color: #000000;
-    border: 1px solid red;
 }
 
 .page-container {
@@ -27,6 +26,11 @@ body {
 .logo-container {
     position: relative;
     overflow: hidden;
+    border: 2px solid green;
+}
+
+.layout {
+    padding: 2rem;
 }
 
 h1 {
@@ -107,8 +111,4 @@ nav {
 
 footer p {
     text-align: center;
-}
-
-.layout {
-    padding: 2rem;
 }

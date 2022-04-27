@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <div>
             <Layout page="home">
-                <main className={styles.heroText}>
+                <main className={`${styles.heroText}`}>
                     <h2>
                         Find inspiration with projects, articles, and video
                         tutorials for any level of DIY skill

@@ -1,9 +1,10 @@
 .heroText {
-    position: absolute;
+    max-width: 60%;
+    position: relative;
+    padding: 0 2rem;
     /* display: flex;
     flex-direction: column;
     max-width: 50%; */
-    /* min-height: 80vh; */
 }
 
 .heroText > h2 {
@@ -14,4 +15,8 @@
 .heroText > p {
     font-size: 2rem;
     margin-bottom: 2rem;
+}
+
+.test > p {
+    font-size: 10rem;
 }
