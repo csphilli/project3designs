@@ -9,11 +9,36 @@ module.exports = {
     plugins: [
         `gatsby-plugin-react-helmet`,
         `gatsby-transformer-remark`,
+        `gatsby-plugin-image`,
+        `gatsby-transformer-sharp`,
+        `gatsby-plugin-sharp`,
+        {
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [
+                    {
+                        resolve: `gatsby-remark-images`,
+                        options: {
+                            maxWidth: 800,
+                            disableBgImageOnAlpha: true,
+                            wrapperStyle: `display: flex; justify-content: center;align-items:center`,
+                        },
+                    },
+                ],
+            },
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `headPages`,
                 path: `${__dirname}/src/headPages/`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `pageBanners`,
+                path: `${__dirname}/src/images/pageBanners/`,
             },
         },
         {

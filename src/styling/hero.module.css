@@ -1,10 +1,16 @@
-.heroText {
-    max-width: 60%;
-    position: relative;
-    padding: 0 2rem;
-    /* display: flex;
-    flex-direction: column;
-    max-width: 50%; */
+.heroSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    border: 1px solid red;
+    margin-top: 5rem;
+    padding: 0 3rem;
+    gap: 10rem;
+    /* min-height: 100vh; */
+}
+
+.heroImage {
+    z-index: 1;
 }
 
 .heroText > h2 {
@@ -13,10 +19,7 @@
 }
 
 .heroText > p {
-    font-size: 2rem;
+    font-size: 1.3rem;
+    font-weight: 300;
     margin-bottom: 2rem;
-}
-
-.test > p {
-    font-size: 10rem;
 }

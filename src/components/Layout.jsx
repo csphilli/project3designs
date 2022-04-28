@@ -16,7 +16,7 @@ function Layout({ page, children }) {
                 <IndexHeader pageId={page} />
                 <Navbar />
                 {/* <HeroSection className="layout" pageId={page} /> */}
-                <div className="layout">{children}</div>
+                <div>{children}</div>
                 <Footer />
             </div>
             <Logo pageId={page} />
