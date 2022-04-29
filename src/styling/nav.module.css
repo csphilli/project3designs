@@ -1,0 +1,80 @@
+.navBar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
+
+.navBar a {
+    padding: 0 1rem;
+}
+
+.links {
+    display: flex;
+    justify-content: right;
+    border: 1px solid blue;
+    /* display: none; */
+    /* gap: 3rem; */
+}
+
+.links a {
+    position: relative;
+    font-family: "Quattrocento Sans", sans-serif;
+    color: #2b2b2b;
+    font-size: 1.569rem;
+}
+
+.links a::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: -0.5rem;
+    right: -0.5rem;
+    border-left: 1px solid #2d2d2d;
+    border-bottom: 1px solid #2d2d2d;
+    border-right: 1px solid #2d2d2d;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.active::after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: -0.5rem;
+    right: -0.5rem;
+    border-left: 1px solid #2d2d2d;
+    border-bottom: 1px solid #2d2d2d;
+    border-right: 1px solid #2d2d2d;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    transition: 1s;
+}
+
+.links a:hover::before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: -0.5rem;
+    right: -0.5rem;
+    border-left: 1px solid #2b2b2b;
+    border-bottom: 1px solid #2b2b2b;
+    border-right: 1px solid #2b2b2b;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    border-color: #2b2b2b;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+@media (min-width: 500px) {
+}

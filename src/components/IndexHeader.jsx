@@ -1,28 +1,14 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { graphql, useStaticQuery } from "gatsby";
 
-function IndexHeader({ pageId }) {
-    const query = useStaticQuery(graphql`
-        query indexHeaderQuery {
-            site {
-                siteMetadata {
-                    pages {
-                        description
-                        title
-                        id
-                    }
-                }
-            }
-        }
-    `);
-    const pagesArr = query.site.siteMetadata.pages;
-    const page = pagesArr.find((item) => item.id === pageId);
-
+function IndexHeader({ pageData }) {
     return (
         <Helmet>
-            <title>{page.title}</title>
-            <meta name="description" content={page.description}></meta>
+            <title>{pageData.frontmatter.meta_title}</title>
+            <meta
+                name="description"
+                content={pageData.frontmatter.meta_description}
+            ></meta>
         </Helmet>
     );
 }

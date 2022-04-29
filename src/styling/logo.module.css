@@ -1,11 +1,11 @@
 .p3studioLogoDark,
 .p3studioLogoLight {
     position: absolute;
-    bottom: -7rem;
-    right: -12rem;
-
+    bottom: -5rem;
+    right: -9rem;
     max-width: 40rem;
     height: auto;
+    z-index: -1;
 }
 
 .p3studioLogoLight {

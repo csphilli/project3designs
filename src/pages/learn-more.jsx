@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 function LearnMore() {
     return (
         <div>
-            <Layout page="learn-more">
+            <Layout pageId="learn-more">
                 <h2>Learn-more</h2>
             </Layout>
         </div>

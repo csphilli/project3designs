@@ -18,6 +18,7 @@ body {
 }
 
 .page-container {
+    padding: 2rem 1rem;
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
@@ -83,32 +84,6 @@ p:last-child {
 small,
 .text_small {
     font-size: 0.563rem;
-}
-
-nav {
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: center;
-}
-
-.links {
-    display: flex;
-    justify-content: right;
-    gap: 3rem;
-}
-
-.links a {
-    font-family: "Quattrocento Sans", sans-serif;
-    color: #2b2b2b;
-    transition: 0.3s;
-    font-size: 1.569rem;
-    border-bottom: 3px solid transparent;
-}
-
-.links a:hover {
-    border-color: #2b2b2b;
 }
 
 footer p {
