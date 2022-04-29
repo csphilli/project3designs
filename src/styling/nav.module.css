@@ -1,17 +1,15 @@
 .navBar {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
     margin-bottom: 5rem;
 }
 
-.navBar a {
-    padding: 0 1rem;
-}
-
 .links {
     display: flex;
+    flex-direction: column;
     justify-content: right;
     border: 1px solid blue;
     /* display: none; */
@@ -42,22 +40,6 @@
     transition: 0.5s;
 }
 
-.active::after {
-    content: "";
-    position: absolute;
-    display: block;
-    top: 0;
-    bottom: 0;
-    left: -0.5rem;
-    right: -0.5rem;
-    border-left: 1px solid #2d2d2d;
-    border-bottom: 1px solid #2d2d2d;
-    border-right: 1px solid #2d2d2d;
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    transition: 1s;
-}
-
 .links a:hover::before {
     content: "";
     position: absolute;
@@ -77,4 +59,37 @@
 }
 
 @media (min-width: 500px) {
+    .navBar {
+        /* display: grid; */
+        grid-template-columns: 1fr;
+
+        /* align-items: center;
+		justify-content: center;
+		margin-bottom: 5rem; */
+    }
+
+    .links {
+        display: flex;
+        flex-direction: row;
+        /* justify-content: right; */
+        /* border: 1px solid blue; */
+        /* display: none; */
+        /* gap: 3rem; */
+    }
+
+    .active::after {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: -0.5rem;
+        right: -0.5rem;
+        border-left: 1px solid #2d2d2d;
+        border-bottom: 1px solid #2d2d2d;
+        border-right: 1px solid #2d2d2d;
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        transition: 1s;
+    }
 }

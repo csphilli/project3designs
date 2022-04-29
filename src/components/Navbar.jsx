@@ -8,9 +8,10 @@ function Navbar({ pageId }) {
         <nav className={styles.navBar}>
             <h1>Project3 Studio</h1>
             <div className={styles.links}>
-                {NavData.map((item) => {
+                {NavData.map((item, index) => {
                     return (
                         <Link
+                            key={index}
                             className={
                                 pageId === item.name ? styles.active : "none"
                             }
