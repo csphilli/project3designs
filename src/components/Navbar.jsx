@@ -5,26 +5,27 @@ import { NavData } from "./NavData";
 import { HiMenu } from "react-icons/hi";
 
 function Navbar({ pageId }) {
-    const [navMenu, setNavMenu] = useState(false);
+    // const [navMenu, setNavMenu] = useState(false);
 
-    const onNavClick = () => {
-        console.log("nav link clicked");
-        setNavMenu(!navMenu);
-    };
+    // const onNavClick = () => {
+    //     console.log("nav link clicked");
+    //     setNavMenu(!navMenu);
+    // };
 
     return (
         <nav className={styles.navBar}>
             <h1 className={styles.logoText}>Project3 Studio</h1>
-            <HiMenu
+            {/* <HiMenu
                 onClick={() => setNavMenu(!navMenu)}
                 className={styles.navMenuIcon}
-            />
+            /> */}
             <div
-                className={
-                    navMenu
-                        ? `${styles.navMenu} ${styles.menuActive}`
-                        : styles.navMenu
-                }
+                // className={
+                //     navMenu
+                //         ? `${styles.navMenu} ${styles.menuActive}`
+                //         : styles.navMenu
+                // }
+                className={`${styles.navBar} ${styles.links}`}
             >
                 {NavData.map((item, index) => {
                     return (
