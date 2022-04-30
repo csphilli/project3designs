@@ -40,7 +40,6 @@ function Layout({ pageId, children }) {
             <PageBannerIcon pageId={pageData.frontmatter.page_id} />
             <div className="page-container">
                 <Navbar pageId={pageData.frontmatter.page_id} />
-
                 <HeroSection pageData={pageData} />
                 <div>{children}</div>
                 <Footer />
