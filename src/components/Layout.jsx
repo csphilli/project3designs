@@ -4,8 +4,9 @@ import Footer from "./Footer";
 import Logo from "./Logo";
 import IndexHeader from "./IndexHeader";
 import { graphql, useStaticQuery } from "gatsby";
-import "../styling/reset.css";
-import "../styling/global.css";
+import "../scss/reset.scss";
+import "../scss/global.scss";
+import "../scss/typography.scss";
 import HeroSection from "./HeroSection";
 import PageBannerIcon from "./PageBannerIcon";
 

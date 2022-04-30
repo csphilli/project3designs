@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../styling/logo.module.css";
+import * as styles from "../scss/logo.module.scss";
 
 function Logo({ pageId }) {
     let svgClassName = styles.p3studioLogoDark;

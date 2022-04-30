@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import * as styles from "../styling/button.module.css";
+import * as styles from "../scss/button.module.scss";
 import React from "react";
 
 function Button() {

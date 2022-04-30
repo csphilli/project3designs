@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../styling/hero.module.css";
+import * as styles from "../scss/hero.module.scss";
 
 function HeroSection({ pageData }) {
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../styling/pageIcon.module.css";
+import * as styles from "../scss/pageIcon.module.scss";
 import ProjectIcon from "../images/pageIcons/ProjectIcon.svg";
 import YoutubeIcon from "../images/pageIcons/YoutubeIcon.svg";
 import ArticleIcon from "../images/pageIcons/ArticleIcon.svg";

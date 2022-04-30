@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import * as styles from "../styling/nav.module.css";
+import * as styles from "../scss/nav.module.scss";
 import { NavData } from "./NavData";
 
 function Navbar({ pageId }) {

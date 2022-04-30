@@ -1,0 +1,22 @@
+@use "../abstracts/variables.scss" as *;
+
+@function rem($pixels, $context: 16) {
+    @return calc($pixels / $context) * 1rem;
+}
+
+@function yIntercept($minWidth, $slope, $minFont) {
+    @return (calc($minWidth * -1 * $slope + $minFont));
+}
+
+@function slope($minFont, $maxFont, $minWidth, $maxWidth) {
+    @return (calc(($maxFont - $minFont) / ($maxWidth - $minWidth)));
+}
+// Scales any values between a min rem, max rem, and min viewport width px and max viewport width px
+@function scaled($minFont, $maxFont, $minWidth, $maxWidth, $context: 16) {
+    $minWidthRem: calc($minWidth / $context);
+    $maxWidthRem: calc($maxWidth / $context);
+    $slope: slope($minFont, $maxFont, $minWidthRem, $maxWidthRem);
+    $yInt: yIntercept($minWidthRem, $slope, $minFont);
+    $pref: calc($yInt * 1rem + ($slope * 100 * 1vw));
+    @return (clamp($minFont * 1rem, $pref, $maxFont * 1rem));
+}
