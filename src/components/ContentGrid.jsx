@@ -6,13 +6,20 @@ import Card from "./Card";
 function ContentGrid({ pageId }) {
     const query = useStaticQuery(graphql`
         query MyQuery {
-            allMarkdownRemark {
+            allMarkdownRemark(
+                sort: { fields: frontmatter___date, order: DESC }
+            ) {
                 nodes {
                     frontmatter {
                         title
-                        post_thumb
+                        post_thumb {
+                            childImageSharp {
+                                gatsbyImageData(aspectRatio: 1.5, width: 500)
+                            }
+                        }
                         slug
                         site_category
+                        date
                     }
                     id
                 }

@@ -3,7 +3,6 @@
 .card {
     z-index: 15;
     position: relative;
-    border: 1px solid red;
     border-radius: $borderRadius;
     min-height: scaled(10, 13, 320, 1400);
     overflow: hidden;
@@ -19,11 +18,9 @@
         z-index: 2;
         color: rgb(224, 224, 224);
         position: absolute;
-
         left: 50%;
         bottom: 0%;
         transform: translate(-50%, 0);
-
         font-family: "Roboto", sans-serif;
         text-transform: lowercase;
         font-size: scaled(1, 1.2, 320, 1400);

@@ -1,13 +1,11 @@
+@use "../scss/abstracts/" as *;
+
 .youtubeIcon,
 .articleIcon,
 .projectIcon {
     position: absolute;
-    top: 10rem;
-
-    /* max-width: 50%; */
-    height: auto;
-}
-
-.articleIcon {
-    height: auto;
+    top: scaled(10, 12, 320, 1400);
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: scaled(15, 60, 320, 1400);
 }
