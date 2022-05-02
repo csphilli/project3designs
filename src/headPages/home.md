@@ -2,7 +2,7 @@
 page_id: home
 meta_title: Project3 Studio | Home
 meta_description: Improve your DIY skills with Project3 Studio
-hero_h2: Have you seen something amazing made by someone else that you wanted so bad but then were met with sticker shock?
+hero_h2: Have you seen something amazing made by someone else, thought about buying it, but then were met with sticker shock?
 hero_p: Avoid that feeling of despair by taking matters into your own hands! We're sharing our knowledge through many ways in order to help you achieve that amazing feeling of pride having built something yourself, while saving a bunch of money. Want to learn how? Click the button below. If you just want to dive right in, navigate around the site using the links above.
 ---
 
