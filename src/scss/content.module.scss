@@ -1,0 +1,8 @@
+@use "../scss/abstracts/" as *;
+.contentContainer {
+    padding: scaled(1, 5, 320, 1400) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: scaled(0.5, 2, 320, 1400);
+    margin: 0 auto;
+}

@@ -36,6 +36,13 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
+                name: `projects`,
+                path: `${__dirname}/src/projects/`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
                 name: `pageBanners`,
                 path: `${__dirname}/src/images/pageBanners/`,
             },

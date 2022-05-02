@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "gatsby";
 import * as styles from "../scss/nav.module.scss";
 import { NavData } from "./NavData";
-import { HiMenu } from "react-icons/hi";
 
 function Navbar({ pageId }) {
     return (
