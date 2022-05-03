@@ -1,10 +1,10 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import HeadPageLayout from "../../components/HeadPageLayout";
 
 function About() {
     return (
         <div>
-            <Layout pageId="about"></Layout>
+            <HeadPageLayout pageId="about"></HeadPageLayout>
         </div>
     );
 }

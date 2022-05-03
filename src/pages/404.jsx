@@ -1,12 +1,12 @@
 import React from "react";
-import Layout from "../components/Layout";
+import HeadPageLayout from "../components/HeadPageLayout";
 
 function NoDice() {
     return (
         <div>
-            <Layout pageId="fourOfour">
+            <HeadPageLayout pageId="fourOfour">
                 <h2>Error 404</h2>
-            </Layout>
+            </HeadPageLayout>
         </div>
     );
 }

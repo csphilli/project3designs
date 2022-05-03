@@ -1,15 +1,15 @@
 import React from "react";
-import Layout from "../components/Layout";
+import HeadPageLayout from "../components/HeadPageLayout";
 import Button from "../components/Button";
 
 export default function Home() {
     return (
         <div>
-            <Layout pageId="home">
+            <HeadPageLayout pageId="home">
                 <main>
                     <Button />
                 </main>
-            </Layout>
+            </HeadPageLayout>
         </div>
     );
 }

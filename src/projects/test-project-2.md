@@ -10,6 +10,8 @@ post_thumb: ../images/thumbnails/three.jpg
 post_banner: ../images/featured/four.jpg
 post_thumb_alt: Image about thumbnail
 post_banner_alt: info about banner
+meta_title: meta title 2
+meta_description: meta description 2
 ---
 
 ### How to make a website with Gatsby - 2

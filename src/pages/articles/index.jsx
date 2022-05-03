@@ -1,12 +1,12 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import HeadPageLayout from "../../components/HeadPageLayout";
 
 function Articles() {
     return (
         <div>
-            <Layout pageId="articles">
+            <HeadPageLayout pageId="articles">
                 <main></main>
-            </Layout>
+            </HeadPageLayout>
         </div>
     );
 }

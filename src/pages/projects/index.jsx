@@ -1,14 +1,14 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import HeadPageLayout from "../../components/HeadPageLayout";
 import ContentGrid from "../../components/ContentGrid";
 
 function Projects() {
     return (
-        <Layout pageId="projects">
+        <HeadPageLayout pageId="projects">
             <main>
                 <ContentGrid pageId="projects" />
             </main>
-        </Layout>
+        </HeadPageLayout>
     );
 }
 

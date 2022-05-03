@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "../../components/Layout";
+import HeadPageLayout from "../../components/HeadPageLayout";
 
 function Videos() {
     return (
-        <Layout pageId="videos">
+        <HeadPageLayout pageId="videos">
             <main></main>
-        </Layout>
+        </HeadPageLayout>
     );
 }
 

@@ -1,12 +1,12 @@
 import React from "react";
-import Layout from "../components/Layout";
+import HeadPageLayout from "../components/HeadPageLayout";
 
 function LearnMore() {
     return (
         <div>
-            <Layout pageId="learn-more">
+            <HeadPageLayout pageId="learn-more">
                 <h2>Learn-more</h2>
-            </Layout>
+            </HeadPageLayout>
         </div>
     );
 }

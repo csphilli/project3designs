@@ -10,7 +10,7 @@ import "../scss/typography.scss";
 import HeroSection from "./HeroSection";
 import PageBannerIcon from "./PageBannerIcon";
 
-function Layout({ pageId, children }) {
+function HeadPageLayout({ pageId, children }) {
     const query = useStaticQuery(graphql`
         query LayoutQuery {
             allMarkdownRemark {
@@ -48,4 +48,4 @@ function Layout({ pageId, children }) {
     );
 }
 
-export default Layout;
+export default HeadPageLayout;
