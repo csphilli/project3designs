@@ -27,7 +27,6 @@ function Layout({ pageId, children }) {
             }
         }
     `);
-
     const pageData = query.allMarkdownRemark.nodes.find(
         (item) => item.frontmatter.page_id === pageId
     );

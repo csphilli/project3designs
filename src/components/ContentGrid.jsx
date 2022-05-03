@@ -29,7 +29,6 @@ function ContentGrid({ pageId }) {
     const content = query.allMarkdownRemark.nodes.filter(
         (item) => item.frontmatter.site_category === pageId
     );
-    console.log(content);
     return (
         <section className={styles.contentContainer}>
             {content.map((item) => (
