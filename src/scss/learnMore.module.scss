@@ -11,12 +11,12 @@
     place-items: center;
 }
 
-// .card_container {
-//     background-color: rgb(221, 221, 221);
-//     border-radius: $borderRadius;
-//     overflow: hidden;
-//     box-shadow: 0px 1px 25px rgba(0, 0, 0, 0.2);
-// }
+.card_container {
+    background-color: rgb(221, 221, 221);
+    border-radius: $borderRadius;
+    overflow: hidden;
+    box-shadow: 0px 1px 25px rgba(0, 0, 0, 0.2);
+}
 
 .content_container {
     position: relative;
@@ -37,28 +37,28 @@
     background: rgba(0, 0, 0, 0.3);
 }
 
-// .list_container {
-//     padding: scaled(0.5, 1.2, 320, 1400) 0;
+.list_container {
+    padding: scaled(0.5, 1.2, 320, 1400) 0;
 
-//     .item_container {
-//         display: flex;
-//         align-items: center;
+    .item_container {
+        display: flex;
+        align-items: center;
 
-//         .icon {
-//             width: scaled(1.2, 1.6, 320, 1400);
-//             height: auto;
-//             margin-right: scaled(0.5, 1, 320, 1400);
-//         }
-//     }
+        .icon {
+            width: scaled(1.2, 1.6, 320, 1400);
+            height: auto;
+            margin-right: scaled(0.5, 1, 320, 1400);
+        }
+    }
 
-//     .list_item {
-//         line-height: scaled(1.5, 1.75, 320, 1400);
-//         list-style-type: none;
-//         font-family: "Roboto", sans-serif;
-//         font-weight: 300;
-//         font-size: scaled(1.1, 1.2, 320, 1400);
-//     }
-// }
+    .list_item {
+        line-height: scaled(1.5, 1.75, 320, 1400);
+        list-style-type: none;
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        font-size: scaled(1.1, 1.2, 320, 1400);
+    }
+}
 
 .item_container {
     display: flex;

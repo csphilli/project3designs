@@ -8,8 +8,6 @@ import { IoHammerOutline, IoRibbonOutline } from "react-icons/io5";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Button from "./Button";
-import { learnMoreData } from "./LearnMoreData";
-import LearnMoreCard from "./LearnMoreCard";
 
 function LearnMore() {
     const buttonPlans = {
@@ -58,8 +56,7 @@ function LearnMore() {
                 />
             </div>
             <div className={styles.learn_more_container}>
-                <LearnMoreCard />
-                {/* <div className={styles.card_container}>
+                <div className={styles.card_container}>
                     <GatsbyImage
                         className={styles.card_image}
                         image={img1}
@@ -158,7 +155,7 @@ function LearnMore() {
                             </div>
                         </div>
                     </div>
-                </div> */}
+                </div>
             </div>
         </div>
     );
