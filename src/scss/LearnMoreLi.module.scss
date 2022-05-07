@@ -1,0 +1,20 @@
+@use "../scss/abstracts/" as *;
+
+.item_container {
+    display: flex;
+    align-items: center;
+
+    .icon {
+        width: scaled(1.2, 1.6, 320, 1400);
+        height: auto;
+        margin-right: scaled(0.5, 1, 320, 1400);
+    }
+}
+
+.list_item {
+    line-height: scaled(1.5, 1.75, 320, 1400);
+    list-style-type: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-size: scaled(1.1, 1.2, 320, 1400);
+}

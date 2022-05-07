@@ -1,6 +1,6 @@
 import React from "react";
 import HeadPageLayout from "../components/HeadPageLayout";
-import Button from "../components/Button";
+import LearnMore from "../components/LearnMore";
 
 export default function Home() {
     const buttonData = {
@@ -10,9 +10,7 @@ export default function Home() {
     return (
         <div>
             <HeadPageLayout pageId="home">
-                <main>
-                    <Button data={buttonData} />
-                </main>
+                <LearnMore />
             </HeadPageLayout>
         </div>
     );
