@@ -1,15 +1,21 @@
 ---
 page_id: learn-more
 meta_title: Project3 Studio | Learn More
-meta_description: What can Project3 Studio do for you?
-hero_h2: You've come to a great place to learn more how you can get started with DIY building
-hero_p: I will fill this out later
+meta_description: You can become an amazing DIYer! Learn How
+hero_h2: Applying over a decade’s worth of experience to make your life easier.
+hero_p: From a basic bird house, to an attention grabbing infinity box, I share my knowledge with you so that you can build these projects at a fraction of what you'd pay someone else to make it for you.
+card_img_1: ../images/thumbnails/build_plans.jpg
+card_img_2: ../images/thumbnails/courses.jpg
 ---
 
-#### Learn More
+### Must Read!
 
-Grew up in rural Wisconsin. Relocated to NYC in 2002. Pursued Finance and began work on Wall Street in 2008 (just before the crash). During that, had my first son in 2007.
+Before reading on, you should know that by signing up via the form below, you'll get access to my FREE course about how to make a mesmerizing inifinity box.
 
-Had twins in 2008 and relocated to Finland in 2010 due to medical reason surrounding the twins. Began working in finance there nearly immediately and purchased a summer cottage. That was the formal beginning of my DIY skills and have been doing it since.
+### Ok, now for more details on HOW I can help you
 
-Quite finance in 2016 and began working towards a career in web development. In fact, I've used my skills to build this site.
+I'm offering building plans and courses both in the free and paid variety for all the projects I've personally built and listed on this site.
+
+For individuals with plenty of skill already who want to build a project, all you need are the plans.
+
+And for the individuals who want to take on a project themselves and are just getting into DIY, courses are a great way for me to pass on my knowledge to you about every step of the process.

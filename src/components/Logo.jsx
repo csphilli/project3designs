@@ -1,17 +1,11 @@
 import React from "react";
 import * as styles from "../scss/logo.module.scss";
 
-function Logo({ pageId }) {
-    let svgClassName = styles.p3studioLogoDark;
-    if (pageId === "logoInBanner") {
-        svgClassName = styles.p3studioLogoInBanner;
-    } else if (pageId !== "home") {
-        svgClassName = styles.p3studioLogoLight;
-    }
+function Logo() {
     return (
         <div>
             <svg
-                className={svgClassName}
+                className={styles.p3StudioLogo}
                 viewBox="0 0 32 32"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

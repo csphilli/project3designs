@@ -43,7 +43,7 @@ function HeadPageLayout({ pageId, children }) {
                 <div>{children}</div>
                 <Footer />
             </div>
-            <Logo pageId={pageData.frontmatter.page_id} />
+            <Logo />
         </div>
     );
 }

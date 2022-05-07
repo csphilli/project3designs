@@ -5,7 +5,12 @@ import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import IndexHeader from "../components/IndexHeader";
 import Logo from "../components/Logo";
-import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
+import {
+    BsCalendarWeek,
+    BsPencilSquare,
+    BsClock,
+    BsHammer,
+} from "react-icons/bs";
 
 function readTime(text) {
     const time = Math.ceil((text.split(" ").length + 1) / 130);
@@ -28,7 +33,7 @@ export default function ProjectDetails({ data }) {
             {/* <IndexHeader pageData={pageData} /> */}
             <div className={styles.heading_container}>
                 <div className={styles.title_banner_container}>
-                    <h3 className={styles.title}>{base.title}</h3>
+                    <h2 className={styles.title}>{base.title}</h2>
                     <GatsbyImage
                         className={styles.banner_image}
                         image={banner_image}
@@ -42,14 +47,16 @@ export default function ProjectDetails({ data }) {
                     </div>
                     <div className={styles.author_container}>
                         <BsPencilSquare className={styles.icon} />
-                        <h5 className={styles.author_name}>
-                            {base.author_name}
-                        </h5>
+                        <p className={styles.author_name}>{base.author_name}</p>
                     </div>
 
                     <div className={styles.read_time_container}>
                         <BsClock className={styles.icon} />
                         <p className={styles.readTime}>{time}</p>
+                    </div>
+                    <div className={styles.build_time_container}>
+                        <BsHammer className={styles.icon} />
+                        <p className={styles.build_time}>{base.build_time}</p>
                     </div>
                 </div>
             </div>
@@ -59,6 +66,7 @@ export default function ProjectDetails({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
             </div>
+            <Logo pageId={base.site_category} />
         </PageLayout>
     );
 }
@@ -77,6 +85,7 @@ export const query = graphql`
                 author_name
                 author_title
                 site_category
+                build_time
                 author_img {
                     childImageSharp {
                         gatsbyImageData(width: 75, aspectRatio: 1)

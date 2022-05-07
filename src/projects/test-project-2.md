@@ -1,7 +1,7 @@
 ---
 site_category: projects
 title: Test title 2
-title_snippet: $2,000 computer desk
+build_time: 1 day
 slug: test-project-2
 date: 2022-05-01T10:15:10+00:00
 author_img: ../images/authors/author_1.jpg

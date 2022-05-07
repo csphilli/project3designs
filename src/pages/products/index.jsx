@@ -1,14 +1,14 @@
 import React from "react";
 import HeadPageLayout from "../../components/HeadPageLayout";
 
-function Articles() {
+function Products() {
     return (
         <div>
-            <HeadPageLayout pageId="articles">
+            <HeadPageLayout pageId="products">
                 <main></main>
             </HeadPageLayout>
         </div>
     );
 }
 
-export default Articles;
+export default Products;

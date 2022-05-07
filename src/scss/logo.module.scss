@@ -1,24 +1,33 @@
 @use "../scss/abstracts/" as *;
-
-.p3studioLogoDark,
-.p3studioLogoLight {
+.p3StudioLogo {
     position: absolute;
     bottom: -5rem;
     right: -9rem;
     max-width: 30rem;
     height: auto;
     z-index: -1;
-}
-
-.p3studioLogoLight {
     fill-opacity: 0.15;
 }
 
-.p3studioLogoInBanner {
-    position: absolute;
-    bottom: -5rem;
-    right: -9rem;
-    width: scaled(10, 20, 320, 1400);
-    height: auto;
-    z-index: 0;
-}
+// .p3studioLogoDark,
+// .p3studioLogoLight {
+//     position: absolute;
+//     bottom: -5rem;
+//     right: -9rem;
+//     max-width: 30rem;
+//     height: auto;
+//     z-index: -1;
+// }
+
+// .p3studioLogoLight {
+//     fill-opacity: 0.15;
+// }
+
+// .p3studioLogoInBanner {
+//     position: absolute;
+//     bottom: -5rem;
+//     right: -9rem;
+//     width: scaled(10, 20, 320, 1400);
+//     height: auto;
+//     z-index: 0;
+// }

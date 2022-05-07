@@ -1,11 +1,13 @@
+@use "../scss/abstracts/" as *;
+
 .btnContainer {
     display: flex;
     align-items: center;
 }
 
 .btn {
-    border-radius: 0.75rem;
-    padding: 0.75em 3em;
+    border-radius: $borderRadius;
+    padding: scaled(0.5, 0.75, 320, 1400) scaled(1, 2.5, 320, 1400);
     background-image: linear-gradient(
         to right,
         rgba(50, 218, 255, 1) 0%,

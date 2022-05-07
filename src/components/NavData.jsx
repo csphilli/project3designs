@@ -12,8 +12,8 @@ export const NavData = [
         link: "/videos",
     },
     {
-        name: "articles",
-        link: "/articles",
+        name: "products",
+        link: "/products",
     },
     {
         name: "about",

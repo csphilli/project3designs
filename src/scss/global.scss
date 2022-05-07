@@ -24,6 +24,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 0.5rem;
+    min-width: 320px;
 }
 
 .logo-container {
@@ -31,10 +32,6 @@ body {
     overflow: hidden;
     // border: 2px solid green;
 }
-
-/* .layout {
-    padding: 2rem;
-} */
 
 footer p {
     text-align: center;
