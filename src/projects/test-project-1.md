@@ -1,9 +1,10 @@
 ---
 site_category: projects
 title: Test title 1
+title_snippet: $2,000 computer desk
 slug: test-project-1
 date: 2022-04-28T10:15:10+00:00
-author_img: ../images/authors/author_img1.jpg
+author_img: ../images/authors/author_1.jpg
 author_title: CEO Project3 Studio
 author_name: Christopher Phillips
 post_thumb: ../images/thumbnails/four.jpg

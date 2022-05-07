@@ -11,7 +11,7 @@ function ContentGrid({ pageId }) {
             ) {
                 nodes {
                     frontmatter {
-                        title
+                        title_snippet
                         post_thumb {
                             childImageSharp {
                                 gatsbyImageData(aspectRatio: 1.6, width: 600)

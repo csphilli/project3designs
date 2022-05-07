@@ -7,7 +7,7 @@ function Card({ props }) {
     return (
         <div className={styles.card}>
             <GatsbyImage image={image} alt="alt image text" />
-            <h3>{props.title}</h3>
+            <h3 className={styles.title}>{props.title_snippet}</h3>
         </div>
     );
 }

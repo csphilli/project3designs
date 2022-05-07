@@ -4,17 +4,17 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Logo from "./Logo";
 
-function PageLayout({ children }) {
+function PageLayout({ children, pageData }) {
     return (
         <article>
-            <div>{children}</div>
-            {/* <IndexHeader pageData={pageData} />
-            <div className="page-container">
-                <Navbar pageId={pageData.frontmatter.page_id} />
-                <div>{children}</div>
-                <Footer />
+            <div className="logo-container">
+                <div className="page-container">
+                    <Navbar pageId="none" />
+                    <div>{children}</div>
+                    <Footer />
+                </div>
+                {/* <Logo pageId={pageData.site_category} /> */}
             </div>
-            <Logo pageId={pageData.frontmatter.page_id} /> */}
         </article>
     );
 }

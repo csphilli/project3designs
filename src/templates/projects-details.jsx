@@ -3,53 +3,61 @@ import PageLayout from "../components/PageLayout";
 import * as styles from "../scss/project-details.module.scss";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import IndexHeader from "../components/IndexHeader";
+import Logo from "../components/Logo";
+import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
+
+function readTime(text) {
+    const time = Math.ceil((text.split(" ").length + 1) / 130);
+    if (time <= 1) return `${time} minute`;
+    return `${time} minutes`;
+}
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
+    const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
-    const {
-        title,
-        date,
-        author_name,
-        author_title,
-        meta_title,
-        meta_description,
-        post_banner_alt,
-    } = base;
     const author_image = getImage(
         base.author_img.childImageSharp.gatsbyImageData
     );
-    // console.log(author_image);
-
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData
     );
     return (
-        <PageLayout>
-            <div className={styles.project_banner_container}>
-                <GatsbyImage image={banner_image} alt={post_banner_alt} />
-                <h3>{title}</h3>
-                <p>{date}</p>
-                <div className={styles.article_info_container}>
-                    <div className={styles.author_container}>
-                        <GatsbyImage
-                            image={author_image}
-                            alt={`Picture of ${author_name}`}
-                        />
-                        <div className={styles.author_details}>
-                            <h5>{author_name}</h5>
-                            <p>{author_title}</p>
-                        </div>
+        <PageLayout pageData={base}>
+            {/* <IndexHeader pageData={pageData} /> */}
+            <div className={styles.heading_container}>
+                <div className={styles.title_banner_container}>
+                    <h3 className={styles.title}>{base.title}</h3>
+                    <GatsbyImage
+                        className={styles.banner_image}
+                        image={banner_image}
+                        alt={base.post_banner_alt}
+                    />
+                </div>
+                <div className={styles.publishing_container}>
+                    <div className={styles.date_container}>
+                        <BsCalendarWeek className={styles.icon} />
+                        <p>{base.date}</p>
                     </div>
-                    <div className={styles.share_icons_container}>
-                        <p className={styles.fbook_icon}>icon facebook</p>
-                        <p className={styles.twitter_icon}>icon twitter</p>
+                    <div className={styles.author_container}>
+                        <BsPencilSquare className={styles.icon} />
+                        <h5 className={styles.author_name}>
+                            {base.author_name}
+                        </h5>
+                    </div>
+
+                    <div className={styles.read_time_container}>
+                        <BsClock className={styles.icon} />
+                        <p className={styles.readTime}>{time}</p>
                     </div>
                 </div>
             </div>
-            <div className={styles.divider} />
+
             <div className={styles.article_container}>
-                <div dangerouslySetInnerHTML={{ __html: html }} />
+                <div className={styles.article_content}>
+                    <div dangerouslySetInnerHTML={{ __html: html }} />
+                </div>
             </div>
         </PageLayout>
     );
@@ -61,21 +69,26 @@ export const query = graphql`
             html
             frontmatter {
                 title
-                date
+                date(formatString: "MMMM DD, YYYY")
                 meta_title
                 meta_description
                 post_banner_alt
                 slug
                 author_name
                 author_title
+                site_category
                 author_img {
                     childImageSharp {
-                        gatsbyImageData(width: 250, aspectRatio: 1)
+                        gatsbyImageData(width: 75, aspectRatio: 1)
                     }
                 }
                 post_banner {
                     childImageSharp {
-                        gatsbyImageData(width: 1400, aspectRatio: 1.5)
+                        gatsbyImageData(
+                            width: 1400
+                            aspectRatio: 1.6
+                            height: 300
+                        )
                     }
                 }
             }

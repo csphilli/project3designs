@@ -3,7 +3,9 @@ import * as styles from "../scss/logo.module.scss";
 
 function Logo({ pageId }) {
     let svgClassName = styles.p3studioLogoDark;
-    if (pageId !== "home") {
+    if (pageId === "logoInBanner") {
+        svgClassName = styles.p3studioLogoInBanner;
+    } else if (pageId !== "home") {
         svgClassName = styles.p3studioLogoLight;
     }
     return (
