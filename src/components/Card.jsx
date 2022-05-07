@@ -6,16 +6,18 @@ function Card({ props }) {
     const image = getImage(props.post_thumb.childImageSharp.gatsbyImageData);
     return (
         <div className={styles.card}>
-            <GatsbyImage image={image} alt="alt image text" />
-            <h3 className={styles.title}>{props.title_snippet}</h3>
+            <div className={styles.image_container}>
+                <GatsbyImage
+                    className={styles.image}
+                    image={image}
+                    alt="alt image text"
+                />
+            </div>
+            <div className={styles.title_container}>
+                <h3 className={styles.title}>{props.title}</h3>
+            </div>
         </div>
     );
 }
-
-// post_thumb {
-// 	childImageSharp {
-// 		gatsbyImageData
-// 	}
-// }
 
 export default Card;
