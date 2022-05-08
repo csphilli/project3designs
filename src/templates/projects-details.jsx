@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PageLayout from "../components/PageLayout";
 import * as styles from "../scss/project-details.module.scss";
 import { graphql } from "gatsby";
@@ -19,15 +19,18 @@ function readTime(text) {
 }
 
 export default function ProjectDetails({ data }) {
+    const [visible, setVisible] = useState(true);
+
     const base = data.markdownRemark.frontmatter;
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
-    // const author_image = getImage(
-    //     base.author_img.childImageSharp.gatsbyImageData
-    // );
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData
     );
+    if (base.build_time === "hide") {
+        setVisible(false);
+    }
+    console.log("visible:", visible);
     return (
         <PageLayout pageData={base}>
             {/* <IndexHeader pageData={pageData} /> */}
