@@ -1,5 +1,6 @@
 ---
 page_id: about
+page_category: head
 meta_title: Project3 Studio | About
 meta_description: Learn more about Project3 Studio
 hero_h2: Here's the TLDR

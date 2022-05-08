@@ -1,5 +1,4 @@
 import React from "react";
-import HeadPageLayout from "./HeadPageLayout";
 import * as styles from "../scss/learnMore.module.scss";
 import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -51,19 +50,15 @@ function LearnMore() {
         <div>
             <div className={styles.html_container}>
                 <div
-                    className={styles.html}
+                    // className={styles.html}
                     dangerouslySetInnerHTML={{ __html: html }}
                 />
             </div>
             <div className={styles.learn_more_container}>
                 <div className={styles.card_container}>
-                    <GatsbyImage
-                        className={styles.card_image}
-                        image={img1}
-                        alt="About image 1"
-                    />
+                    <GatsbyImage image={img1} alt="About image 1" />
                     <div className={styles.content_container}>
-                        <h3 className={styles.title}>Build Plans</h3>
+                        <h3>Build Plans</h3>
 
                         <ul className={styles.list_container}>
                             <div className={styles.item_container}>
@@ -91,28 +86,22 @@ function LearnMore() {
                         </ul>
                     </div>
                     <div className={styles.cost_container}>
-                        <div className={styles.cost_context}>
-                            <h4 className={styles.cost_title}>Total Cost</h4>
-                            <div className={styles.cost_figures}>
-                                <BiDollar className={styles.cost_icon} />
-                                <p className={styles.cost_text}>
-                                    Free & Paid options available
-                                </p>
-                            </div>
-                            <div className={styles.btn_container}>
-                                <Button data={buttonPlans} />
-                            </div>
+                        <h4 className={styles.cost_title}>Total Cost</h4>
+                        <div className={styles.cost_figures}>
+                            <BiDollar className={styles.cost_icon} />
+                            <p className={styles.cost_text}>
+                                Free & Paid options available
+                            </p>
+                        </div>
+                        <div className={styles.btn_container}>
+                            <Button data={buttonPlans} />
                         </div>
                     </div>
                 </div>
                 <div className={styles.card_container}>
-                    <GatsbyImage
-                        className={styles.card_image}
-                        image={img2}
-                        alt="About image 2"
-                    />
+                    <GatsbyImage image={img2} alt="About image 2" />
                     <div className={styles.content_container}>
-                        <h3 className={styles.title}>Courses</h3>
+                        <h3>Courses</h3>
 
                         <ul className={styles.list_container}>
                             <div className={styles.item_container}>
@@ -142,17 +131,15 @@ function LearnMore() {
                         </ul>
                     </div>
                     <div className={styles.cost_container}>
-                        <div className={styles.cost_context}>
-                            <h4 className={styles.cost_title}>Total Cost</h4>
-                            <div className={styles.cost_figures}>
-                                <BiDollar className={styles.cost_icon} />
-                                <p className={styles.cost_text}>
-                                    Free & Paid options available
-                                </p>
-                            </div>
-                            <div className={styles.btn_container}>
-                                <Button data={buttonCourses} />
-                            </div>
+                        <h4 className={styles.cost_title}>Total Cost</h4>
+                        <div className={styles.cost_figures}>
+                            <BiDollar className={styles.cost_icon} />
+                            <p className={styles.cost_text}>
+                                Free & Paid options available
+                            </p>
+                        </div>
+                        <div className={styles.btn_container}>
+                            <Button data={buttonCourses} />
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,6 @@ import React from "react";
 import IndexHeader from "./IndexHeader";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Logo from "./Logo";
 
 function PageLayout({ children, pageData }) {
     return (
@@ -13,7 +12,6 @@ function PageLayout({ children, pageData }) {
                     <div>{children}</div>
                     <Footer />
                 </div>
-                {/* <Logo pageId={pageData.site_category} /> */}
             </div>
         </article>
     );

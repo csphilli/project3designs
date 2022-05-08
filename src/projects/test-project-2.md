@@ -1,5 +1,6 @@
 ---
-site_category: projects
+page_category: sub
+page_root: projects
 title: Test title 2
 build_time: 1 day
 slug: test-project-2

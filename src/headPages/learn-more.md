@@ -1,5 +1,6 @@
 ---
 page_id: learn-more
+page_category: head
 meta_title: Project3 Studio | Learn More
 meta_description: You can become an amazing DIYer! Learn How
 hero_h2: Applying over a decade’s worth of experience to make your life easier.

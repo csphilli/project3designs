@@ -1,8 +1,9 @@
 ---
 page_id: products
+page_category: head
 meta_title: Project3 Studio | Products
 meta_description: Build our projects with plans or courses
-hero_h2: Every project we build available to you in build plans or courses
+hero_h2: Every project we build is available to you in either build plans or courses
 hero_p: We offer plans and courses both free and paid. Plans are for the more experienced DIYers who just want to dive in and tackle the project on their own. Whereas courses are for individuals who have the desire to take on the project but feel more comfortable having guidance along every step of the way.
 ---
 

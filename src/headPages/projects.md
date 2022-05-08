@@ -1,5 +1,6 @@
 ---
 page_id: projects
+page_category: head
 meta_title: Project3 Studio | Projects
 meta_description: Get information on all the projects we've done
 hero_h2: Every project provides an opportunity for you to hone your DIY skills

@@ -18,7 +18,7 @@ function ContentGrid({ pageId }) {
                             }
                         }
                         slug
-                        site_category
+                        page_root
                         date
                     }
                     id
@@ -27,7 +27,7 @@ function ContentGrid({ pageId }) {
         }
     `);
     const content = query.allMarkdownRemark.nodes.filter(
-        (item) => item.frontmatter.site_category === pageId
+        (item) => item.frontmatter.page_root === pageId
     );
     return (
         <section className={styles.contentContainer}>

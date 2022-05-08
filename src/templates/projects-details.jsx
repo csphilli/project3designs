@@ -22,9 +22,9 @@ export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
-    const author_image = getImage(
-        base.author_img.childImageSharp.gatsbyImageData
-    );
+    // const author_image = getImage(
+    //     base.author_img.childImageSharp.gatsbyImageData
+    // );
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData
     );
@@ -52,11 +52,11 @@ export default function ProjectDetails({ data }) {
 
                     <div className={styles.read_time_container}>
                         <BsClock className={styles.icon} />
-                        <p className={styles.readTime}>{time}</p>
+                        <p>{time}</p>
                     </div>
                     <div className={styles.build_time_container}>
                         <BsHammer className={styles.icon} />
-                        <p className={styles.build_time}>{base.build_time}</p>
+                        <p>{base.build_time}</p>
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ export default function ProjectDetails({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
             </div>
-            <Logo pageId={base.site_category} />
+            <Logo pageId={base.page_root} />
         </PageLayout>
     );
 }
@@ -84,7 +84,7 @@ export const query = graphql`
                 slug
                 author_name
                 author_title
-                site_category
+                page_root
                 build_time
                 author_img {
                     childImageSharp {

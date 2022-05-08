@@ -1,5 +1,6 @@
 ---
-site_category: projects
+page_category: sub
+page_root: projects
 title: How to make a $2,000 computer desk for less than $500
 build_time: 1 day
 slug: test-project-4
