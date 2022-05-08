@@ -6,7 +6,7 @@ import { BiRuler, BiMoney, BiListOl, BiWrench, BiDollar } from "react-icons/bi";
 import { IoHammerOutline, IoRibbonOutline } from "react-icons/io5";
 import { BsFileEarmarkPdf } from "react-icons/bs";
 import { AiOutlineYoutube } from "react-icons/ai";
-import Button from "./Button";
+import Button from "./LinkButton";
 
 function LearnMore() {
     const buttonPlans = {
