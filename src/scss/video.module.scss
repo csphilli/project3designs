@@ -1,0 +1,13 @@
+@use "../scss/abstracts/" as *;
+
+.video_container {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    margin-bottom: scaled(1, 2, 320, 1400);
+    .video {
+        display: inline-block;
+        width: scaled(19, 60, 320, 1400);
+        aspect-ratio: 16/9;
+    }
+}

@@ -1,16 +1,11 @@
 import React from "react";
 import PageLayout from "../components/PageLayout";
-import * as styles from "../scss/project-details.module.scss";
+import * as styles from "../scss/video-details.module.scss";
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import IndexHeader from "../components/IndexHeader";
 import Logo from "../components/Logo";
-import {
-    BsCalendarWeek,
-    BsPencilSquare,
-    BsClock,
-    BsHammer,
-} from "react-icons/bs";
+import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
+import Video from "../components/Video";
 
 function readTime(text) {
     const time = Math.ceil((text.split(" ").length + 1) / 130);
@@ -22,19 +17,15 @@ export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
-    const banner_image = getImage(
-        base.post_banner.childImageSharp.gatsbyImageData
-    );
     return (
         <PageLayout pageData={base}>
             {/* <IndexHeader pageData={pageData} /> */}
             <div className={styles.heading_container}>
                 <div className={styles.title_banner_container}>
                     <h2 className={styles.title}>{base.title}</h2>
-                    <GatsbyImage
-                        className={styles.banner_image}
-                        image={banner_image}
-                        alt={base.post_banner_alt}
+                    <Video
+                        videoID={base.videoID}
+                        videoTitle={base.videoTitle}
                     />
                 </div>
                 <div className={styles.publishing_container}>
@@ -51,10 +42,6 @@ export default function ProjectDetails({ data }) {
                         <BsClock className={styles.icon} />
                         <p>{time}</p>
                     </div>
-                    <div className={styles.build_time_container}>
-                        <BsHammer className={styles.icon} />
-                        <p>{base.build_time}</p>
-                    </div>
                 </div>
             </div>
 
@@ -69,7 +56,7 @@ export default function ProjectDetails({ data }) {
 }
 
 export const query = graphql`
-    query ProjectDetails($slug: String) {
+    query VideoDetails($slug: String) {
         markdownRemark(frontmatter: { slug: { eq: $slug } }) {
             html
             frontmatter {
@@ -77,26 +64,11 @@ export const query = graphql`
                 date(formatString: "MMMM DD, YYYY")
                 meta_title
                 meta_description
-                post_banner_alt
                 slug
                 author_name
-                author_title
                 page_root
-                build_time
-                author_img {
-                    childImageSharp {
-                        gatsbyImageData(width: 75, aspectRatio: 1)
-                    }
-                }
-                post_banner {
-                    childImageSharp {
-                        gatsbyImageData(
-                            width: 1400
-                            aspectRatio: 1.6
-                            height: 300
-                        )
-                    }
-                }
+                videoID
+                videoTitle
             }
         }
     }
