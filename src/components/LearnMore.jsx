@@ -86,7 +86,6 @@ function LearnMore() {
                         </ul>
                     </div>
                     <div className={styles.cost_container}>
-                        <h4 className={styles.cost_title}>Total Cost</h4>
                         <div className={styles.cost_figures}>
                             <BiDollar className={styles.cost_icon} />
                             <p className={styles.cost_text}>
@@ -131,7 +130,6 @@ function LearnMore() {
                         </ul>
                     </div>
                     <div className={styles.cost_container}>
-                        <h4 className={styles.cost_title}>Total Cost</h4>
                         <div className={styles.cost_figures}>
                             <BiDollar className={styles.cost_icon} />
                             <p className={styles.cost_text}>

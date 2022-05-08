@@ -7,7 +7,6 @@
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: scaled(1, 3, 320, 1400);
     margin: 0 auto;
-    border: 1px solid red;
     place-items: center;
 }
 
@@ -75,11 +74,12 @@
     padding: 0;
     margin: 0;
     background-color: #2d2d2d;
-    padding: scaled(1, 1.5, 320, 1400) scaled(1, 2, 320, 1400);
+    padding: scaled(0.5, 1, 320, 1400) scaled(1, 2, 320, 1400);
 
-    .cost_title {
-        color: rgb(221, 221, 221);
-    }
+    // .cost_title {
+    //     margin: 0;
+    //     color: rgb(221, 221, 221);
+    // }
 
     .cost_figures {
         display: flex;
