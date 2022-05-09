@@ -1,6 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
-import * as styles from "../scss/content.module.scss";
+import * as styles from "../scss/contentGrid.module.scss";
 import Card from "./Card";
 
 function ContentGrid({ pageId }) {
