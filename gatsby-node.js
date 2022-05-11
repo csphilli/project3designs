@@ -1,5 +1,7 @@
 "use strict";
 const path = require("path");
+
+// exports.createPages = async ({ graphql, actions }) => {
 exports.createPages = async ({ graphql, actions }) => {
     const { data } = await graphql(`
         query MyQuery {
@@ -26,16 +28,3 @@ exports.createPages = async ({ graphql, actions }) => {
         });
     });
 };
-
-// query MyQuery {
-// 	allMarkdownRemark(
-// 		filter: { frontmatter: { site_category: { eq: "projects" } } }
-// 	) {
-// 		nodes {
-// 			frontmatter {
-// 				site_category
-// 				slug
-// 			}
-// 		}
-// 	}
-// }

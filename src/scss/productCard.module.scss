@@ -1,0 +1,132 @@
+@use "../scss/abstracts/" as *;
+
+.product_card {
+    background-color: rgb(255, 255, 255);
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: scaled(0.75, 1, 320, 1400) scaled(0.5, 1.2, 320, 1400);
+    display: flex;
+    flex-direction: column;
+    box-shadow: $boxShadow;
+
+    .title {
+        margin-bottom: scaled(0.5, 0.75, 320, 1400);
+        font-size: scaled(1.5, 1.2, 320, 1400);
+        font-weight: 500;
+    }
+}
+
+.card_details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: scaled(1, 2, 320, 1400);
+    grid-template-areas:
+        "pic"
+        "plan"
+        "course";
+
+    .img_container {
+        grid-area: pic;
+        width: 100%;
+        margin: 0 auto;
+
+        .product_img {
+            width: 100%;
+        }
+    }
+}
+
+.plan_container,
+.course_container {
+    display: grid;
+    grid-template-areas: "pricing_text button";
+    grid-template-columns: auto 10rem;
+    padding: scaled(0.5, 1, 320, 1400) scaled(0.75, 2, 320, 1400);
+}
+
+.plan_container {
+    grid-area: plan;
+}
+
+.course_container {
+    grid-area: course;
+}
+
+.pricing_text {
+    display: grid;
+    grid-area: pricing_text;
+    grid-template-areas:
+        "subtitle"
+        "price";
+
+    .subtitle {
+        grid-area: subtitle;
+        margin: 0;
+        font-size: scaled(1.2, 1.5, 320, 1400);
+    }
+
+    .price {
+        grid-area: price;
+        font-size: scaled(1.2, 1.4, 320, 1400);
+        font-weight: bold;
+    }
+}
+
+.cart_button {
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: $borderRadius;
+    margin: 0.5rem 0.5rem;
+    background-image: linear-gradient(
+        to right,
+        rgba(50, 218, 255, 1) 0%,
+        rgba(55, 51, 255, 1) 100%
+    );
+    color: white;
+    transition: 0.5s;
+    background-size: 150% auto;
+    font-family: "Montserrat", sans-serif;
+}
+
+.cart_button:hover {
+    background-position: 75% 70%;
+    cursor: pointer;
+}
+
+.cart_button:active {
+    transform: scale(0.97);
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+@media (min-width: 460px) {
+    .card_details {
+        gap: 0;
+        grid-template-columns: rem(200) 1fr;
+        grid-template-areas:
+            "pic plan"
+            "pic course";
+    }
+    .cart_button {
+        margin: 1.2rem 0.5rem;
+    }
+}
+
+@media (min-width: 650px) {
+    .card_details {
+        grid-template-columns: rem(200) repeat(2, auto);
+        grid-template-areas: "pic plan course";
+
+        .plan_container,
+        .course_container {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "pricing_text"
+                "button";
+        }
+        .pricing-text {
+            grid-template-areas: "subtitle price";
+        }
+    }
+}

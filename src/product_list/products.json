@@ -1,29 +1,27 @@
-{
-    "products": [
-        {
-            "id": "px-1111",
-            "name": "build plan 1",
-            "price": 100
-        },
-        {
-            "id": "px-1112",
-            "name": "build plan 2",
-            "price": 200
-        },
-        {
-            "id": "px-1113",
-            "name": "build plan 3",
-            "price": 300
-        },
-        {
-            "id": "px-1114",
-            "name": "build plan 4",
-            "price": 400
-        },
-        {
-            "id": "px-1115",
-            "name": "build plan 5",
-            "price": 500
-        }
-    ]
-}
+[
+    {
+        "id": "px-1111",
+        "name": "build plan 1",
+        "price": 100
+    },
+    {
+        "id": "px-1112",
+        "name": "build plan 2",
+        "price": 200
+    },
+    {
+        "id": "px-1113",
+        "name": "build plan 3",
+        "price": 300
+    },
+    {
+        "id": "px-1114",
+        "name": "build plan 4",
+        "price": 400
+    },
+    {
+        "id": "px-1115",
+        "name": "build plan 5",
+        "price": 500
+    }
+]
