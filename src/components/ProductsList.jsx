@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import * as styles from "../scss/productGrid.module.scss";
+import React, { useEffect, useState } from "react";
+import * as styles from "../scss/productList.module.scss";
 import ProductCard from "./ProductCard";
 
-function ProductGrid() {
+function ProductsList() {
     const url = process.env.GATSBY_STRIPE_URL;
     const [products, setProducts] = useState([]);
 
@@ -13,13 +13,9 @@ function ProductGrid() {
     }, []);
     return (
         <div className={styles.product_grid_container}>
-            {products &&
-                products.map((item) => (
-                    // <ProductCard key={item.id} data={item} />
-                    <ProductCard data={item} />
-                ))}
+            {products && products.map((item) => <ProductCard data={item} />)}
         </div>
     );
 }
 
-export default ProductGrid;
+export default ProductsList;

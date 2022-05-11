@@ -1,0 +1,34 @@
+@use "../scss/abstracts/" as *;
+
+.container_grid {
+    display: grid;
+    gap: scaled(1, 1.2, 320, 1400);
+    grid-template-columns: 1fr;
+
+    overflow: hidden;
+
+    grid-template-areas:
+        "cart"
+        "products";
+}
+
+.cart {
+    grid-area: cart;
+    background-color: rgb(218, 218, 218);
+    min-height: 40rem;
+    align-self: start;
+    border-radius: $borderRadius;
+}
+
+.products {
+    grid-area: products;
+    background-color: rgb(218, 218, 218);
+    border-radius: $borderRadius;
+}
+
+@media (min-width: 650px) {
+    .container_grid {
+        grid-template-columns: 2.5fr 1fr;
+        grid-template-areas: "products cart";
+    }
+}

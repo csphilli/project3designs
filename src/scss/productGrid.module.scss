@@ -1,8 +1,0 @@
-@use "../scss/abstracts/" as *;
-
-.product_grid_container {
-    display: grid;
-    grid-template-columns: minmax(15rem, 60rem);
-    justify-content: left;
-    gap: scaled(1, 1.5, 320, 1400);
-}
