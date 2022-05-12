@@ -11,8 +11,9 @@ function ProductCard(props) {
             <div className={styles.product_card}>
                 <div className={styles.img_container}>
                     <a
-                        to="https://via.placeholder.com/150/92c952"
+                        href="https://via.placeholder.com/150/92c952"
                         target="_blank"
+                        rel="noreferrer"
                     >
                         <img
                             className={styles.product_img}
