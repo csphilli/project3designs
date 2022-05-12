@@ -1,6 +1,6 @@
 import React from "react";
 import * as styles from "../scss/productCard.module.scss";
-import { Link } from "gatsby";
+import { BsCartPlus } from "react-icons/bs";
 
 function ProductCard(props) {
     const { data } = props;
@@ -22,25 +22,31 @@ function ProductCard(props) {
                         />
                     </a>
                 </div>
-                <h3 className={styles.title}>{data.title}</h3>
-                <div className={styles.deets_container}>
-                    <div className={styles.pricing_text}>
-                        <h4 className={styles.subtitle}>Plans</h4>
-                        <p className={styles.price}>{`€${test}`}</p>
+                <div className={styles.outer_deets_container}>
+                    <div className={styles.inner_deets_container}>
+                        <h3 className={styles.title}>{data.title}</h3>
+                        <div className={styles.pricing_text}>
+                            {/* <h4 className={styles.subtitle}>Plans</h4> */}
+                            <p className={styles.price}>{`€${test}`}</p>
+                            <button className={styles.btn_container}>
+                                <BsCartPlus className={styles.btn_icon} />
+                            </button>
+                        </div>
                     </div>
-                    <div className={styles.button_container}>
+                    {/* <div className={styles.button_container}>
                         <button className={styles.cart_button}>
                             Add to Cart
                         </button>
-                    </div>
+                    </div> */}
                 </div>
-                <div className={styles.deets_container}>
+
+                {/* <div className={styles.deets_container}>
                     <div className={styles.pricing_text}>
                         <h4 className={styles.subtitle}>Course</h4>
                         <p className={styles.price}>{`€${test}`}</p>
                     </div>
                     <button className={styles.cart_button}>See Course</button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
