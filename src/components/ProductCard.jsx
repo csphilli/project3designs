@@ -1,16 +1,16 @@
 import React from "react";
 import * as styles from "../scss/productCard.module.scss";
 import { Link } from "gatsby";
-import { BsCartPlus } from "react-icons/bs";
 
 function ProductCard(props) {
     const { data } = props;
+    console.log(data);
     const test = "20";
     return (
         <div>
             <div className={styles.product_card}>
                 <div className={styles.img_container}>
-                    <Link
+                    <a
                         to="https://via.placeholder.com/150/92c952"
                         target="_blank"
                     >
@@ -19,7 +19,7 @@ function ProductCard(props) {
                             src="https://via.placeholder.com/150/92c952"
                             alt="testing"
                         />
-                    </Link>
+                    </a>
                 </div>
                 <h3 className={styles.title}>{data.title}</h3>
                 <div className={styles.deets_container}>
