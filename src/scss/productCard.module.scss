@@ -46,6 +46,7 @@
 }
 
 .pricing_text {
+    position: relative;
     font-size: scaled(1.2, 1.5, 320, 1400);
     display: flex;
     justify-content: space-between;
@@ -78,13 +79,13 @@
     font-family: "Montserrat", sans-serif;
 }
 
-.btn_prevent:hover {
-    cursor: not-allowed;
-}
-
 .btn_container:hover {
     background-position: 75% 70%;
     cursor: pointer;
+}
+
+.btn_prevent:hover {
+    cursor: not-allowed;
 }
 
 .btn_container:active {

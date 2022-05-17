@@ -21,6 +21,7 @@ function Products() {
                     metadata {
                         p3d_id
                         slug
+                        max_qty
                     }
                     name
                     localFiles {
@@ -39,18 +40,39 @@ function Products() {
         }
     `);
 
+    const isClickAllowed = (quantity, product) => {
+        // console.log("product", product);
+        console.log(`product quantity: ${quantity}`);
+        return quantity < parseInt(product.metadata.max_qty);
+    };
+
     const onAdd = (product) => {
         const exist = cartItems.find((obj) => product.id === obj.id);
         if (exist) {
             setCartItems(
                 cartItems.map((obj) =>
-                    obj.id === product.id
-                        ? { ...exist, quantity: exist.quantity + 1 }
+                    obj.id === product.id &&
+                    obj.quantity < product.metadata.max_qty
+                        ? {
+                              ...exist,
+                              quantity: (exist.quantity += 1),
+                              clickAllowed: isClickAllowed(
+                                  exist.quantity,
+                                  product
+                              ),
+                          }
                         : obj
                 )
             );
         } else {
-            setCartItems([...cartItems, { ...product, quantity: 1 }]);
+            setCartItems([
+                ...cartItems,
+                {
+                    ...product,
+                    quantity: 1,
+                    clickAllowed: isClickAllowed(1, product),
+                },
+            ]);
         }
     };
 
@@ -62,7 +84,14 @@ function Products() {
             setCartItems(
                 cartItems.map((obj) =>
                     obj.id === product.id
-                        ? { ...exist, quantity: exist.quantity - 1 }
+                        ? {
+                              ...exist,
+                              quantity: (exist.quantity -= 1),
+                              clickAllowed: isClickAllowed(
+                                  exist.quantity,
+                                  product
+                              ),
+                          }
                         : obj
                 )
             );
@@ -76,8 +105,10 @@ function Products() {
                 prices.nodes.find((item) => item.id === obj.default_price)
                     .unit_amount / 100;
             obj.quantity = 0;
+            obj.clickAllowed = true;
         });
         setProducts(productList.nodes);
+        console.log(products);
     }, []);
     return (
         <div>
@@ -93,6 +124,7 @@ function Products() {
                     <main className={styles.products}>
                         {products.map((product) => (
                             <ProductCard
+                                cartItems={cartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
                                 key={product.id}
