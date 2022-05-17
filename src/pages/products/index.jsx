@@ -1,22 +1,52 @@
 import React, { useState, useEffect } from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import HeadPageLayout from "../../components/HeadPageLayout";
-// import ProductsList from "../../components/ProductsList";
 import ProductCard from "../../components/ProductCard";
 import Cart from "../../components/Cart";
 import * as styles from "../../scss/products.module.scss";
 
 function Products() {
-    const url = process.env.GATSBY_STRIPE_URL;
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
+    const query = useStaticQuery(graphql`
+        query Products {
+            allStripeProduct(
+                filter: { active: { eq: true } }
+                sort: { order: DESC, fields: created }
+            ) {
+                nodes {
+                    default_price
+                    id
+                    metadata {
+                        p3d_id
+                        slug
+                    }
+                    name
+                    localFiles {
+                        childImageSharp {
+                            gatsbyImageData(aspectRatio: 1.6)
+                        }
+                    }
+                }
+            }
+            allStripePrice {
+                nodes {
+                    id
+                    unit_amount
+                }
+            }
+        }
+    `);
     useEffect(() => {
-        fetch(url)
-            .then((resp) => resp.json())
-            .then((obj) => setProducts(obj));
+        const { allStripeProduct: productList, allStripePrice: prices } = query;
+        productList.nodes.forEach((obj) => {
+            obj.price =
+                prices.nodes.find((item) => item.id === obj.default_price)
+                    .unit_amount / 100;
+        });
+        setProducts(productList.nodes);
     }, []);
-    console.log("url", url);
-    console.log("products", products);
     return (
         <div>
             <HeadPageLayout pageId="products">
@@ -25,10 +55,9 @@ function Products() {
                         <Cart />
                     </aside>
                     <main className={styles.products}>
-                        {products &&
-                            products.map((product) => (
-                                <ProductCard key={product.id} data={product} />
-                            ))}
+                        {products.map((product) => (
+                            <ProductCard key={product.id} data={product} />
+                        ))}
                     </main>
                 </div>
             </HeadPageLayout>
