@@ -6,6 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 function ProductCard(props) {
     const { data } = props;
     const img = getImage(data.localFiles[0].childImageSharp.gatsbyImageData);
+    const price = data.price === 0 ? `FREE` : data.price;
     console.log(img);
     return (
         <div>
@@ -30,7 +31,7 @@ function ProductCard(props) {
                         </div>
                     </div>
                     <div className={styles.pricing_text}>
-                        <p className={styles.price}>{`€ ${data.price}`}</p>
+                        <p className={styles.price}>{`€ ${price}`}</p>
                         <button className={styles.btn_container}>
                             <BsCartPlus
                                 className={styles.btn_icon}
