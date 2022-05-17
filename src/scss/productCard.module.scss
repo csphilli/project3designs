@@ -78,6 +78,10 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.btn_prevent:hover {
+    cursor: not-allowed;
+}
+
 .btn_container:hover {
     background-position: 75% 70%;
     cursor: pointer;

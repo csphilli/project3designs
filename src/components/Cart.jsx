@@ -4,8 +4,14 @@ import { BsCart } from "react-icons/bs";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 function Cart(props) {
-    const { items } = props;
-    if (!items) {
+    const { cartItems, onAdd, onMinus } = props;
+    const totalPrice = cartItems.reduce(
+        (acc, prod) => prod.quantity * prod.price + acc,
+        0
+    );
+    const totalQty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
+
+    if (cartItems.length === 0) {
         return (
             <aside className={styles.empty_cart_container}>
                 <p className={styles.empty_cart_text}>No Items in Cart</p>
@@ -19,30 +25,41 @@ function Cart(props) {
                     <div className={styles.cart_icon_container}>
                         <BsCart className={styles.cart_icon} />
                         <div className={styles.total_qty_container}>
-                            <p className={styles.total_qty}>13</p>
+                            <p className={styles.total_qty}>{totalQty}</p>
                         </div>
                     </div>
-                    <p className={styles.total}>Total: €1,000</p>
+                    <p className={styles.total}>{`Total: € ${totalPrice}`}</p>
                 </div>
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
                         <p className={styles.heading}>Qty</p>
-                        <p className={styles.heading}>Product</p>
-                        <p className={styles.heading}>Sum</p>
+                        <p className={styles.heading}>Product-Id</p>
+                        <p className={styles.heading}>Subtotal</p>
                     </div>
-                    <div className={styles.list_item}>
-                        <div className={styles.qty_container}>
-                            <FiPlusCircle
-                                className={`${styles.qty_icon} ${styles.qty_plus}`}
-                            />
-                            <p className={styles.qty_value}>1</p>
-                            <FiMinusCircle
-                                className={`${styles.qty_icon} ${styles.qty_minus}`}
-                            />
-                        </div>
-                        <p className={styles.product_name}>name</p>
-                        <p className={styles.sum}>sum</p>
-                    </div>
+                    {cartItems.map((item) => {
+                        const subtotal = item.price * item.quantity;
+                        return (
+                            <div key={item.id} className={styles.list_item}>
+                                <div className={styles.qty_container}>
+                                    <FiPlusCircle
+                                        onClick={() => onAdd(item)}
+                                        className={`${styles.qty_icon} ${styles.qty_plus}`}
+                                    />
+                                    <p className={styles.qty_value}>
+                                        {item.quantity}
+                                    </p>
+                                    <FiMinusCircle
+                                        onClick={() => onMinus(item)}
+                                        className={`${styles.qty_icon} ${styles.qty_minus}`}
+                                    />
+                                </div>
+                                <p className={styles.product_name}>
+                                    {item.metadata.p3d_id}
+                                </p>
+                                <p className={styles.sum}>€ {subtotal}</p>
+                            </div>
+                        );
+                    })}
                 </div>
                 <div className={styles.checkout_button_container}>
                     <button className={styles.checkout_button}>
