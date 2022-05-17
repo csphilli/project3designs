@@ -129,6 +129,10 @@ p {
         cursor: pointer;
     }
 
+    .qty_plus_prevent:hover {
+        cursor: not-allowed;
+    }
+
     .qty_minus {
         fill: $cart_minus_color;
     }

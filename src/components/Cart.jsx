@@ -37,13 +37,21 @@ function Cart(props) {
                         <p className={styles.heading}>Subtotal</p>
                     </div>
                     {cartItems.map((item) => {
+                        const plusBtnClasses = !item.clickAllowed
+                            ? `${styles.qty_icon} ${styles.qty_plus} ${styles.qty_plus_prevent}`
+                            : `${styles.qty_icon} ${styles.qty_plus}`;
+
                         const subtotal = item.price * item.quantity;
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
                                     <FiPlusCircle
-                                        onClick={() => onAdd(item)}
-                                        className={`${styles.qty_icon} ${styles.qty_plus}`}
+                                        onClick={(e) =>
+                                            !item.clickAllowed
+                                                ? e.preventDefault()
+                                                : onAdd(item)
+                                        }
+                                        className={plusBtnClasses}
                                     />
                                     <p className={styles.qty_value}>
                                         {item.quantity}

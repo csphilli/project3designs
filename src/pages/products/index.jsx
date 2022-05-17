@@ -41,8 +41,6 @@ function Products() {
     `);
 
     const isClickAllowed = (quantity, product) => {
-        // console.log("product", product);
-        console.log(`product quantity: ${quantity}`);
         return quantity < parseInt(product.metadata.max_qty);
     };
 
