@@ -1,6 +1,6 @@
 import React from "react";
 import * as styles from "../scss/productCard.module.scss";
-import { BsCartPlus } from "react-icons/bs";
+import { BsCartPlus, BsFillInfoCircleFill } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 function ProductCard(props) {
@@ -20,7 +20,15 @@ function ProductCard(props) {
                     </a>
                 </div>
                 <div>
-                    <h3 className={styles.title}>{data.name}</h3>
+                    <div className={styles.title_info_container}>
+                        <h3 className={styles.title}>{data.name}</h3>
+                        <div className={styles.product_id_container}>
+                            <BsFillInfoCircleFill />
+                            <p className={styles.product_id}>
+                                product-id: {data.metadata.p3d_id}
+                            </p>
+                        </div>
+                    </div>
                     <div className={styles.pricing_text}>
                         <p className={styles.price}>{`€ ${data.price}`}</p>
                         <button className={styles.btn_container}>

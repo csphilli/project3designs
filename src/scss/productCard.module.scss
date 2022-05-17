@@ -22,6 +22,18 @@
     margin: scaled(0.5, 1, 320, 1400) scaled(0.2, 0.7, 320, 1400);
 }
 
+.product_id_container {
+    display: flex;
+    align-items: center;
+    color: #a3a3a3;
+    font-style: italic;
+    margin: 0 scaled(0.2, 0.7, 320, 1400);
+
+    .product_id {
+        margin-left: 0.5rem;
+    }
+}
+
 .subtitle {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
