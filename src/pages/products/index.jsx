@@ -40,6 +40,22 @@ function Products() {
         }
     `);
 
+    // const saveToCart = (items) => {
+    //     console.log("items before save", items);
+    //     if (!items) {
+    //         localStorage.removeItem("cartItems");
+    //     } else {
+    //         localStorage.setItem("cartItems", JSON.stringify(items));
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     const check = localStorage.getItem("cartItems");
+    //     if (check) {
+    //         cartItems = JSON.parse(check);
+    //     }
+    // }, []);
+
     const isClickAllowed = (quantity, product) => {
         return quantity < parseInt(product.metadata.max_qty);
     };
@@ -72,6 +88,7 @@ function Products() {
                 },
             ]);
         }
+        // console.log("cart items after plus", cartItems);
     };
 
     const onMinus = (product) => {
@@ -106,8 +123,7 @@ function Products() {
             obj.clickAllowed = true;
         });
         setProducts(productList.nodes);
-        console.log(products);
-    }, []);
+    }, [query]);
     return (
         <div>
             <HeadPageLayout pageId="products">
@@ -116,6 +132,7 @@ function Products() {
                         <Cart
                             onMinus={onMinus}
                             onAdd={onAdd}
+                            setCartItems={setCartItems}
                             cartItems={cartItems}
                         />
                     </aside>

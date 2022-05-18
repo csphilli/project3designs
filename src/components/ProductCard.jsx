@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as styles from "../scss/productCard.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -48,7 +48,6 @@ function ProductCard(props) {
                                     : onAdd(product)
                             }
                             className={btn}
-                            // className={styles.btn_container}
                         >
                             <BsCartPlus
                                 className={styles.btn_icon}

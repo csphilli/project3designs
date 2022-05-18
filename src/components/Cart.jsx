@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
 import { BsCart } from "react-icons/bs";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 function Cart(props) {
-    const { cartItems, onAdd, onMinus } = props;
+    const { cartItems, setCartItems, onAdd, onMinus } = props;
     const totalPrice = cartItems.reduce(
         (acc, prod) => prod.quantity * prod.price + acc,
         0
     );
     const totalQty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
+
+    useEffect(() => {
+        const check = localStorage.getItem("cartItems");
+        if (check) {
+            setCartItems(JSON.parse(check));
+        }
+    }, [setCartItems]);
+
+    useEffect(() => {
+        if (cartItems.length === 0) {
+            localStorage.removeItem("cartItems");
+        } else {
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }, [cartItems]);
 
     if (cartItems.length === 0) {
         return (
