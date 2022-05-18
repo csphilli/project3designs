@@ -142,10 +142,11 @@ p {
     }
 }
 
-.checkout_button_container {
+.buttons_container {
     display: flex;
     align-items: center;
     justify-content: right;
+    justify-content: space-between;
     margin-top: scaled(0.5, 2, 320, 1400);
 
     .checkout_button {
@@ -159,6 +160,36 @@ p {
         transition: 0.5s;
         background-size: 150% auto;
         font-family: "Montserrat", sans-serif;
+    }
+
+    .empty_cart_button {
+        display: grid;
+        place-items: center;
+        border: none;
+        border-radius: $borderRadius;
+        background-color: #2d2d2d;
+        color: rgb(209, 209, 209);
+        height: scaled(1.5, 2.2, 320, 1400);
+        aspect-ratio: 1;
+        transition: 0.5s;
+        background-size: 150% auto;
+        font-family: "Montserrat", sans-serif;
+    }
+
+    .trash_icon {
+        width: scaled(1.25, 1.5, 320, 1400);
+        aspect-ratio: 1;
+    }
+
+    .empty_cart_button:hover {
+        background-color: #4f4f4f;
+        cursor: pointer;
+    }
+
+    .empty_cart_button:active {
+        transform: scale(0.97);
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
     }
 
     .checkout_button:hover {

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
-import { BsCart } from "react-icons/bs";
+import { BsCart, BsTrash } from "react-icons/bs";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
 
 function Cart(props) {
@@ -25,6 +25,10 @@ function Cart(props) {
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
         }
     }, [cartItems]);
+
+    const emptyCart = () => {
+        setCartItems([]);
+    };
 
     if (cartItems.length === 0) {
         return (
@@ -84,7 +88,13 @@ function Cart(props) {
                         );
                     })}
                 </div>
-                <div className={styles.checkout_button_container}>
+                <div className={styles.buttons_container}>
+                    <button
+                        onClick={() => emptyCart()}
+                        className={styles.empty_cart_button}
+                    >
+                        <BsTrash className={styles.trash_icon} />
+                    </button>
                     <button className={styles.checkout_button}>
                         Proceed to Checkout
                     </button>
