@@ -111,33 +111,33 @@ p {
     align-items: center;
     margin-left: 0.2rem;
 
-    .qty_icon {
+    .qty_plus {
         width: 1.2rem;
         height: auto;
+        fill: $cart_plus_color;
     }
 
-    .qty_icon:active {
+    .qty_minus {
+        width: 1.2rem;
+        height: auto;
+        fill: $cart_minus_color;
+    }
+
+    .qty_plus_prevent {
+        width: 1.2rem;
+        height: auto;
+        fill: rgb(202, 202, 202);
+        cursor: not-allowed;
+    }
+
+    .qty_plus:active,
+    .qty_minus:active {
         transform: scale(0.9);
         transition: 0.1s ease-in-out;
     }
 
-    .qty_plus {
-        fill: $cart_plus_color;
-    }
-
+    .qty_minus:hover,
     .qty_plus:hover {
-        cursor: pointer;
-    }
-
-    .qty_plus_prevent:hover {
-        cursor: not-allowed;
-    }
-
-    .qty_minus {
-        fill: $cart_minus_color;
-    }
-
-    .qty_minus:hover {
         cursor: pointer;
     }
 }

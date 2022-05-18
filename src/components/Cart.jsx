@@ -38,8 +38,8 @@ function Cart(props) {
                     </div>
                     {cartItems.map((item) => {
                         const plusBtnClasses = !item.clickAllowed
-                            ? `${styles.qty_icon} ${styles.qty_plus} ${styles.qty_plus_prevent}`
-                            : `${styles.qty_icon} ${styles.qty_plus}`;
+                            ? styles.qty_plus_prevent
+                            : styles.qty_plus;
 
                         const subtotal = item.price * item.quantity;
                         return (
@@ -58,7 +58,7 @@ function Cart(props) {
                                     </p>
                                     <FiMinusCircle
                                         onClick={() => onMinus(item)}
-                                        className={`${styles.qty_icon} ${styles.qty_minus}`}
+                                        className={styles.qty_minus}
                                     />
                                 </div>
                                 <p className={styles.product_name}>

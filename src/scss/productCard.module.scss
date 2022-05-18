@@ -51,7 +51,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // border: 1px solid red;
     background-color: #2d2d2d;
     padding: scaled(1, 1.2, 320, 1400) scaled(0.5, 1, 320, 1400);
 
@@ -84,17 +83,30 @@
     cursor: pointer;
 }
 
+.btn_container_prevent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: scaled(0.5, 1, 320, 1400) scaled(1, 1.5, 320, 1400);
+    height: 2.5rem;
+    border-radius: $borderRadius;
+    background-image: linear-gradient(
+        to right,
+        rgb(183, 183, 183) 0%,
+        rgb(141, 141, 141) 100%
+    );
+    color: #2d2d2d;
+    transition: 0.5s;
+    font-family: "Montserrat", sans-serif;
+}
+
 .btn_prevent:hover {
     cursor: not-allowed;
 }
 
 .btn_container:active {
-    transform: scale(0.98);
-    transition: 0.1s ease-in-out;
-}
-
-.btn_container:active {
-    transform: scale(0.95);
+    transform: scale(0.97);
     transition: 0.1s ease-in-out;
     cursor: pointer;
 }

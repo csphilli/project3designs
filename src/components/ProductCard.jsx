@@ -11,7 +11,7 @@ function ProductCard(props) {
     if (cartItems.length > 0) {
         const exist = cartItems.find((obj) => obj.id === product.id);
         if (exist && !exist.clickAllowed) {
-            btn = `${styles.btn_container} ${styles.btn_prevent}`;
+            btn = `${styles.btn_container_prevent} ${styles.btn_prevent}`;
             clickAllowed = false;
         }
     }
