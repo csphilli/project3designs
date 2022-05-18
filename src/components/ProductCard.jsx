@@ -32,11 +32,20 @@ function ProductCard(props) {
                 <div>
                     <div className={styles.title_info_container}>
                         <h3 className={styles.title}>{product.name}</h3>
-                        <div className={styles.product_id_container}>
-                            <BsFillInfoCircleFill />
-                            <p className={styles.product_id}>
-                                product-id: {product.metadata.p3d_id}
-                            </p>
+                        <div className={styles.purchase_info_outer_container}>
+                            <div
+                                className={styles.purchase_info_inner_container}
+                            >
+                                <BsFillInfoCircleFill />
+                                <p className={styles.purchase_info_id}>
+                                    product-id: {product.metadata.p3d_id}
+                                </p>
+                            </div>
+                            <div
+                                className={styles.purchase_info_inner_container}
+                            >
+                                <p>max qty: {product.metadata.max_qty}</p>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.pricing_text}>
