@@ -35,17 +35,18 @@ function Products() {
                 nodes {
                     id
                     unit_amount
+                    currency
                 }
             }
         }
     `);
 
-    const formattedPrice = (value) => {
-        const nbr = value;
+    // const formattedPrice = (value) => {
+    const formattedPrice = (value, ccy = "eur") => {
         return Intl.NumberFormat("en-EU", {
             style: "currency",
-            currency: "EUR",
-        }).format(nbr);
+            currency: ccy,
+        }).format(value);
     };
 
     const isClickAllowed = (quantity, product) => {
@@ -112,6 +113,9 @@ function Products() {
                     .unit_amount / 100;
             obj.quantity = 0;
             obj.clickAllowed = true;
+            obj.currency = prices.nodes.find(
+                (item) => item.id === obj.default_price
+            ).currency;
         });
         setProducts(productList.nodes);
     }, [query]);

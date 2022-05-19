@@ -63,7 +63,8 @@ function Cart(props) {
                             : styles.qty_plus;
 
                         const subtotal = formattedPrice(
-                            item.price * item.quantity
+                            item.price * item.quantity,
+                            item.currency
                         );
                         return (
                             <div key={item.id} className={styles.list_item}>

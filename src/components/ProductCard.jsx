@@ -50,7 +50,7 @@ function ProductCard(props) {
                     </div>
                     <div className={styles.pricing_text}>
                         <p className={styles.price}>
-                            {formattedPrice(product.price)}
+                            {formattedPrice(product.price, product.currency)}
                         </p>
                         <button
                             onClick={(e) =>
