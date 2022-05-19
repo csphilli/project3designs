@@ -41,7 +41,6 @@ function Products() {
         }
     `);
 
-    // const formattedPrice = (value) => {
     const formattedPrice = (value, ccy = "eur") => {
         return Intl.NumberFormat("en-EU", {
             style: "currency",

@@ -42,7 +42,12 @@ function Checkout(props) {
     };
 
     return (
-        <button className={styles.checkout_button}>Proceed to Checkout</button>
+        <button
+            // onClick={() => redirectToCheckout()}
+            className={styles.checkout_button}
+        >
+            Proceed to Checkout
+        </button>
     );
 }
 
