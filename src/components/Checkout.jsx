@@ -41,10 +41,15 @@ function Checkout(props) {
         }
     };
 
+    const btnStyle = setLoading
+        ? styles.checkout_button
+        : styles.checkout_button_prevent;
+
     return (
         <button
-            // onClick={() => redirectToCheckout()}
-            className={styles.checkout_button}
+            onClick={redirectToCheckout}
+            // className={styles.checkout_button}
+            className={btnStyle}
         >
             Proceed to Checkout
         </button>
