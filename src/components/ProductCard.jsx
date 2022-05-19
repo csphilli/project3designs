@@ -4,7 +4,7 @@ import { BsCartPlus, BsFillInfoCircleFill } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 function ProductCard(props) {
-    const { cartItems, product, onAdd } = props;
+    const { cartItems, product, onAdd, formattedPrice } = props;
     let btn = styles.btn_container;
     let clickAllowed = true;
 
@@ -16,7 +16,7 @@ function ProductCard(props) {
         }
     }
     const img = getImage(product.localFiles[0].childImageSharp.gatsbyImageData);
-    const price = product.price === 0 ? `FREE` : product.price;
+
     return (
         <div>
             <div className={styles.product_card}>
@@ -49,7 +49,9 @@ function ProductCard(props) {
                         </div>
                     </div>
                     <div className={styles.pricing_text}>
-                        <p className={styles.price}>{`€ ${price}`}</p>
+                        <p className={styles.price}>
+                            {formattedPrice(product.price)}
+                        </p>
                         <button
                             onClick={(e) =>
                                 !clickAllowed

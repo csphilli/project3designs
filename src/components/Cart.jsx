@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
 import { BsCart, BsTrash } from "react-icons/bs";
 import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import Checkout from "./Checkout";
 
 function Cart(props) {
-    const { cartItems, setCartItems, onAdd, onMinus } = props;
-    const totalPrice = cartItems.reduce(
-        (acc, prod) => prod.quantity * prod.price + acc,
-        0
+    const { cartItems, setCartItems, onAdd, onMinus, formattedPrice } = props;
+
+    const totalPrice = formattedPrice(
+        cartItems.reduce((acc, prod) => prod.quantity * prod.price + acc, 0)
     );
+
     const totalQty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
 
     useEffect(() => {
@@ -47,7 +49,7 @@ function Cart(props) {
                             <p className={styles.total_qty}>{totalQty}</p>
                         </div>
                     </div>
-                    <p className={styles.total}>{`Total: € ${totalPrice}`}</p>
+                    <p className={styles.total}>{totalPrice}</p>
                 </div>
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
@@ -60,7 +62,9 @@ function Cart(props) {
                             ? styles.qty_plus_prevent
                             : styles.qty_plus;
 
-                        const subtotal = item.price * item.quantity;
+                        const subtotal = formattedPrice(
+                            item.price * item.quantity
+                        );
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
@@ -83,7 +87,7 @@ function Cart(props) {
                                 <p className={styles.product_name}>
                                     {item.metadata.p3d_id}
                                 </p>
-                                <p className={styles.sum}>€ {subtotal}</p>
+                                <p className={styles.sum}>{subtotal}</p>
                             </div>
                         );
                     })}
@@ -95,9 +99,7 @@ function Cart(props) {
                     >
                         <BsTrash className={styles.trash_icon} />
                     </button>
-                    <button className={styles.checkout_button}>
-                        Proceed to Checkout
-                    </button>
+                    <Checkout cartItems={cartItems} />
                 </div>
             </aside>
         );

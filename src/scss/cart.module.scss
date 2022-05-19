@@ -149,18 +149,18 @@ p {
     justify-content: space-between;
     margin-top: scaled(0.5, 2, 320, 1400);
 
-    .checkout_button {
-        display: grid;
-        place-items: center;
-        border: none;
-        background-image: $checkout_button_color;
-        border-radius: $borderRadius;
-        color: white;
-        height: 3rem;
-        transition: 0.5s;
-        background-size: 150% auto;
-        font-family: "Montserrat", sans-serif;
-    }
+    // .checkout_button {
+    //     display: grid;
+    //     place-items: center;
+    //     border: none;
+    //     background-image: $checkout_button_color;
+    //     border-radius: $borderRadius;
+    //     color: white;
+    //     height: 3rem;
+    //     transition: 0.5s;
+    //     background-size: 150% auto;
+    //     font-family: "Montserrat", sans-serif;
+    // }
 
     .empty_cart_button {
         display: grid;
@@ -192,15 +192,15 @@ p {
         cursor: pointer;
     }
 
-    .checkout_button:hover {
-        background-position: 75% 70%;
-        cursor: pointer;
-    }
+    // .checkout_button:hover {
+    //     background-position: 75% 70%;
+    //     cursor: pointer;
+    // }
 
-    .checkout_button:active {
-        transform: scale(0.98);
-        transition: 0.1s ease-in-out;
-    }
+    // .checkout_button:active {
+    //     transform: scale(0.98);
+    //     transition: 0.1s ease-in-out;
+    // }
 }
 
 .total {

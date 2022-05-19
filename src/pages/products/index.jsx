@@ -40,6 +40,14 @@ function Products() {
         }
     `);
 
+    const formattedPrice = (value) => {
+        const nbr = value;
+        return Intl.NumberFormat("en-EU", {
+            style: "currency",
+            currency: "EUR",
+        }).format(nbr);
+    };
+
     const isClickAllowed = (quantity, product) => {
         return quantity < parseInt(product.metadata.max_qty);
     };
@@ -113,6 +121,7 @@ function Products() {
                 <div className={styles.container_grid}>
                     <aside className={styles.cart}>
                         <Cart
+                            formattedPrice={formattedPrice}
                             onMinus={onMinus}
                             onAdd={onAdd}
                             setCartItems={setCartItems}
@@ -122,6 +131,7 @@ function Products() {
                     <main className={styles.products}>
                         {products.map((product) => (
                             <ProductCard
+                                formattedPrice={formattedPrice}
                                 cartItems={cartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
