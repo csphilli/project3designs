@@ -149,19 +149,6 @@ p {
     justify-content: space-between;
     margin-top: scaled(0.5, 2, 320, 1400);
 
-    // .checkout_button {
-    //     display: grid;
-    //     place-items: center;
-    //     border: none;
-    //     background-image: $checkout_button_color;
-    //     border-radius: $borderRadius;
-    //     color: white;
-    //     height: 3rem;
-    //     transition: 0.5s;
-    //     background-size: 150% auto;
-    //     font-family: "Montserrat", sans-serif;
-    // }
-
     .empty_cart_button {
         display: grid;
         place-items: center;
@@ -169,7 +156,7 @@ p {
         border-radius: $borderRadius;
         background-color: #2d2d2d;
         color: rgb(209, 209, 209);
-        height: scaled(1.5, 2.2, 320, 1400);
+        width: scaled(1.8, 2.2, 320, 1400);
         aspect-ratio: 1;
         transition: 0.5s;
         background-size: 150% auto;
@@ -177,7 +164,7 @@ p {
     }
 
     .trash_icon {
-        width: scaled(1.25, 1.5, 320, 1400);
+        width: scaled(1, 1.6, 320, 1400);
         aspect-ratio: 1;
     }
 
@@ -191,16 +178,6 @@ p {
         transition: 0.3s ease-in-out;
         cursor: pointer;
     }
-
-    // .checkout_button:hover {
-    //     background-position: 75% 70%;
-    //     cursor: pointer;
-    // }
-
-    // .checkout_button:active {
-    //     transform: scale(0.98);
-    //     transition: 0.1s ease-in-out;
-    // }
 }
 
 .total {
