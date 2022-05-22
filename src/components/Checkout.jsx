@@ -21,10 +21,9 @@ const compileLineItems = (items) => {
 };
 
 function Checkout(props) {
-    const { cartItems } = props;
+    const { cartItems, setCartItems } = props;
     const [loading, setLoading] = useState(true);
     const lineItems = compileLineItems(cartItems);
-    console.log("items", lineItems);
     const redirectToCheckout = async (event) => {
         event.preventDefault();
         setLoading(false);
@@ -35,22 +34,25 @@ function Checkout(props) {
             successUrl: `http://localhost:8000/page-2/`,
             cancelUrl: `http://localhost:8000/`,
         });
+        console.log("checking error state");
+        
         if (error) {
             console.warn("Error:", error);
             setLoading(false);
         }
+        
     };
-
+    
     const btnStyle = loading
         ? styles.checkout_button
         : styles.checkout_button_prevent;
 
     return (
         <button
-            onClick={redirectToCheckout}
             className={btnStyle}
+            onClick={redirectToCheckout}
         >
-            Proceed to Checkout
+            <p>Proceed to Checkout</p>
         </button>
     );
 }

@@ -49,7 +49,7 @@ function Cart(props) {
                             <p className={styles.total_qty}>{totalQty}</p>
                         </div>
                     </div>
-                    <p className={styles.total}>{totalPrice}</p>
+                    <p className={styles.total}>Total: {totalPrice}</p>
                 </div>
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
@@ -100,7 +100,7 @@ function Cart(props) {
                     >
                         <BsTrash className={styles.trash_icon} />
                     </button>
-                    <Checkout cartItems={cartItems} />
+                    <Checkout cartItems={cartItems} setCartItems={setCartItems} />
                 </div>
                 <div className={styles.secure_checkout}>
                     <BsFillShieldLockFill />

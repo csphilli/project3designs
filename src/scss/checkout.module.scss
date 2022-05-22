@@ -11,6 +11,9 @@
     transition: 0.5s;
     background-size: 150% auto;
     font-family: "Montserrat", sans-serif;
+    p{
+        transition: all .2s;
+    }
 }
 
 .checkout_button:hover {
@@ -24,10 +27,10 @@
 }
 
 .checkout_button_prevent {
+    position: relative;
     display: grid;
     place-items: center;
     border: none;
-    // padding: scaled(0.5, 1, 320, 1400) scaled(1, 1.5, 320, 1400);
     background-image: linear-gradient(
         to right,
         rgb(183, 183, 183) 0%,
@@ -39,8 +42,40 @@
     transition: 0.5s;
     background-size: 150% auto;
     font-family: "Montserrat", sans-serif;
+
+    p {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+.checkout_button_prevent::after{
+    content: "";
+    position: absolute;
+    width: 2rem;
+    aspect-ratio: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: .2rem solid transparent;
+    border-top-color: #757575;
+    border-radius: 50%;
+    animation: loading_spinner 1s ease infinite;
+
+
 }
 
 .checkout_button_prevent:hover {
     cursor: not-allowed;
+}
+
+@keyframes loading_spinner {
+    from {
+        transform: rotate(0turn);
+    }
+    to {
+        transform: rotate(1turn);
+    }
 }
