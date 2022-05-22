@@ -6,7 +6,7 @@ import { NavData } from "./NavData";
 function Navbar({ pageId }) {
     return (
         <nav className={styles.navBar}>
-            <h1 className={styles.logoText}>Project3 Designs</h1>
+            <h1 className={styles.logoText}>Awesome(sauce)</h1>
             <div className={styles.links}>
                 {NavData.map((item, index) => {
                     return (
