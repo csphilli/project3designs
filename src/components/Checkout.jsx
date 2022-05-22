@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as styles from "../scss/checkout.module.scss";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -21,12 +21,15 @@ const compileLineItems = (items) => {
 };
 
 function Checkout(props) {
-    const { cartItems, setCartItems } = props;
-    const [loading, setLoading] = useState(true);
+    const { cartItems } = props;
+
+    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState([]);
+
     const lineItems = compileLineItems(cartItems);
     const redirectToCheckout = async (event) => {
         event.preventDefault();
-        setLoading(false);
+        setLoading(true);
         const stripe = await getStripe();
         const { error } = await stripe.redirectToCheckout({
             mode: "payment",
@@ -35,23 +38,19 @@ function Checkout(props) {
             cancelUrl: `http://localhost:8000/`,
         });
         console.log("checking error state");
-        
+
         if (error) {
             console.warn("Error:", error);
-            setLoading(false);
+            setLoading(true);
         }
-        
     };
-    
-    const btnStyle = loading
+
+    const btnStyle = !loading
         ? styles.checkout_button
         : styles.checkout_button_prevent;
 
     return (
-        <button
-            className={btnStyle}
-            onClick={redirectToCheckout}
-        >
+        <button className={btnStyle} onClick={redirectToCheckout}>
             <p>Proceed to Checkout</p>
         </button>
     );
