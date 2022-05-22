@@ -12,6 +12,7 @@ const getStripe = () => {
 };
 
 // How to check Stripe account for available inventory so if I sell my own products with specific inventory, I don't oversell.
+// This should be performed on a server so that it cannot be manipulated
 const compileLineItems = (items) => {
     return items.map((obj) => ({
         price: obj.default_price,
@@ -21,17 +22,16 @@ const compileLineItems = (items) => {
 
 function Checkout(props) {
     const { cartItems } = props;
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const lineItems = compileLineItems(cartItems);
     console.log("items", lineItems);
     const redirectToCheckout = async (event) => {
         event.preventDefault();
-        setLoading(true);
+        setLoading(false);
         const stripe = await getStripe();
         const { error } = await stripe.redirectToCheckout({
             mode: "payment",
             lineItems: lineItems,
-            // lineItems: [{ price: "price_1GriHeAKu92npuros981EDUL", quantity: 1 }],
             successUrl: `http://localhost:8000/page-2/`,
             cancelUrl: `http://localhost:8000/`,
         });
@@ -41,7 +41,7 @@ function Checkout(props) {
         }
     };
 
-    const btnStyle = setLoading
+    const btnStyle = loading
         ? styles.checkout_button
         : styles.checkout_button_prevent;
 

@@ -58,9 +58,10 @@ function Cart(props) {
                         <p className={styles.heading}>Subtotal</p>
                     </div>
                     {cartItems.map((item) => {
-                        const plusBtnClasses = !item.clickAllowed
-                            ? styles.qty_plus_prevent
-                            : styles.qty_plus;
+                        const btn = !item.clickAllowed
+                            ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
+                            // : styles.qty_plus;
+                            : `${styles.button} ${styles.qty_plus}`;
 
                         const subtotal = formattedPrice(
                             item.price * item.quantity,
@@ -69,21 +70,21 @@ function Cart(props) {
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
-                                    <FiPlusCircle
-                                        onClick={(e) =>
+                                    <button onClick={(e) =>
                                             !item.clickAllowed
                                                 ? e.preventDefault()
                                                 : onAdd(item)
                                         }
-                                        className={plusBtnClasses}
-                                    />
+                                        className={btn}>+
+                                    </button>
                                     <p className={styles.qty_value}>
                                         {item.quantity}
                                     </p>
-                                    <FiMinusCircle
-                                        onClick={() => onMinus(item)}
-                                        className={styles.qty_minus}
-                                    />
+                                    <button onClick={(e) =>
+                                                onMinus(item)
+                                        }
+                                        className={`${styles.button} ${styles.qty_minus}`}>-
+                                    </button>
                                 </div>
                                 <p className={styles.product_name}>
                                     {item.metadata.p3d_id}

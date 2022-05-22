@@ -105,7 +105,7 @@ function Products() {
     };
 
     useEffect(() => {
-        const { allStripeProduct: productList, allStripePrice: prices } = query;
+        const { allStripeProduct: productList, allStripePrice: prices } = query;        
         productList.nodes.forEach((obj) => {
             obj.price =
                 prices.nodes.find((item) => item.id === obj.default_price)
