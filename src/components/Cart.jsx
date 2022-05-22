@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
-import { BsCart, BsTrash } from "react-icons/bs";
-import { FiPlusCircle, FiMinusCircle } from "react-icons/fi";
+import { BsCart, BsTrash, BsFillShieldLockFill } from "react-icons/bs";
+
 import Checkout from "./Checkout";
 
 function Cart(props) {
@@ -60,7 +60,6 @@ function Cart(props) {
                     {cartItems.map((item) => {
                         const btn = !item.clickAllowed
                             ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
-                            // : styles.qty_plus;
                             : `${styles.button} ${styles.qty_plus}`;
 
                         const subtotal = formattedPrice(
@@ -77,7 +76,7 @@ function Cart(props) {
                                         }
                                         className={btn}>+
                                     </button>
-                                    <p className={styles.qty_value}>
+                                    <p>
                                         {item.quantity}
                                     </p>
                                     <button onClick={(e) =>
@@ -86,10 +85,10 @@ function Cart(props) {
                                         className={`${styles.button} ${styles.qty_minus}`}>-
                                     </button>
                                 </div>
-                                <p className={styles.product_name}>
+                                <p>
                                     {item.metadata.p3d_id}
                                 </p>
-                                <p className={styles.sum}>{subtotal}</p>
+                                <p>{subtotal}</p>
                             </div>
                         );
                     })}
@@ -103,6 +102,11 @@ function Cart(props) {
                     </button>
                     <Checkout cartItems={cartItems} />
                 </div>
+                <div className={styles.secure_checkout}>
+                    <BsFillShieldLockFill />
+                    <p>Checkout powered by <a href="http://www.stripe.com" rel="noreferrer" target="_blank"> Stripe</a></p>
+                </div>
+
             </aside>
         );
 }

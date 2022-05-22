@@ -213,3 +213,22 @@ p {
     font-weight: 400;
     font-size: scaled(1.1, 1.4, 320, 1400);
 }
+
+.secure_checkout{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    color: #a3a3a3;
+    
+    p {
+        font-style: italic;
+        font-family: "Montserrat", sans-serif;
+        font-size: scaled(.5, .75, 320, 1400);
+        margin-left: .3rem;
+    }
+
+    a:link, a:visited{
+        color: #a3a3a3;
+    }
+}

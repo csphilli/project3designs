@@ -48,7 +48,6 @@ function Checkout(props) {
     return (
         <button
             onClick={redirectToCheckout}
-            // className={styles.checkout_button}
             className={btnStyle}
         >
             Proceed to Checkout

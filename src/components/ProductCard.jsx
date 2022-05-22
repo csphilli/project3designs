@@ -30,7 +30,7 @@ function ProductCard(props) {
                     </a>
                 </div>
                 <div>
-                    <div className={styles.title_info_container}>
+                    <div>
                         <h3 className={styles.title}>{product.name}</h3>
                         <div className={styles.purchase_info_outer_container}>
                             <div
