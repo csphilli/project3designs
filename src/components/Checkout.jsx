@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as styles from "../scss/checkout.module.scss";
+
+const express = require("express");
+const app = express();
 import { loadStripe } from "@stripe/stripe-js";
 
 let stripePromise;
