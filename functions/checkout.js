@@ -1,7 +1,7 @@
 "use strict";
 
 exports.handler = async (event, context) => {
-    console.log(context);
+    // console.log(context);
 
     // const express = require("express");
     // const app = express();
@@ -28,6 +28,7 @@ exports.handler = async (event, context) => {
 
     return {
         statusCode: 200,
-        body: JSON.stringify(data),
+        body: JSON.stringify(context.clientContext),
+        // body: JSON.stringify(data),
     };
 };
