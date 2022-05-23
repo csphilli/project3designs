@@ -110,7 +110,7 @@ function Products() {
 
     const sortProducts = (products) => {
         products.forEach((obj) => {
-            obj.products.sort((b, a) => b.price - a.price);
+            obj.product_list.sort((b, a) => b.price - a.price);
         });
     };
 
@@ -137,7 +137,7 @@ function Products() {
                 unit_amount,
             } = prices.nodes.find((item) => item.id === obj.default_price);
             if (exist) {
-                exist.products.push({
+                exist.product_list.push({
                     ...obj,
                     quantity: 0,
                     clickAllowed: true,
@@ -148,7 +148,7 @@ function Products() {
             } else {
                 products.push({
                     p3d_id: Number(obj.metadata.p3d_id),
-                    products: new Array({
+                    product_list: new Array({
                         ...obj,
                         quantity: 0,
                         clickAllowed: true,
