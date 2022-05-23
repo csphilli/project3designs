@@ -69,24 +69,27 @@ function Cart(props) {
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
-                                    <button onClick={(e) =>
+                                    <button
+                                        onClick={(e) =>
                                             !item.clickAllowed
                                                 ? e.preventDefault()
                                                 : onAdd(item)
                                         }
-                                        className={btn}>+
+                                        className={btn}
+                                    >
+                                        +
                                     </button>
-                                    <p>
-                                        {item.quantity}
-                                    </p>
-                                    <button onClick={(e) =>
-                                                onMinus(item)
-                                        }
-                                        className={`${styles.button} ${styles.qty_minus}`}>-
+                                    <p>{item.quantity}</p>
+                                    <button
+                                        onClick={(e) => onMinus(item)}
+                                        className={`${styles.button} ${styles.qty_minus}`}
+                                    >
+                                        -
                                     </button>
                                 </div>
                                 <p>
-                                    {item.metadata.p3d_id}
+                                    {/* {item.metadata.p3d_id} */}
+                                    {item.description}
                                 </p>
                                 <p>{subtotal}</p>
                             </div>
@@ -100,13 +103,25 @@ function Cart(props) {
                     >
                         <BsTrash className={styles.trash_icon} />
                     </button>
-                    <Checkout cartItems={cartItems} setCartItems={setCartItems} />
+                    <Checkout
+                        cartItems={cartItems}
+                        setCartItems={setCartItems}
+                    />
                 </div>
                 <div className={styles.secure_checkout}>
                     <BsFillShieldLockFill />
-                    <p>Checkout powered by <a href="http://www.stripe.com" rel="noreferrer" target="_blank"> Stripe</a></p>
+                    <p>
+                        Checkout powered by{" "}
+                        <a
+                            href="http://www.stripe.com"
+                            rel="noreferrer"
+                            target="_blank"
+                        >
+                            {" "}
+                            Stripe
+                        </a>
+                    </p>
                 </div>
-
             </aside>
         );
 }

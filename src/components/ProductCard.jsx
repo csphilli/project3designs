@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill, BsThreeDots } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -7,10 +7,15 @@ import ProductModal from "./ProductModal";
 function ProductCard(props) {
     const { cartItems, setCartItems, product, onAdd, onMinus, formattedPrice } =
         props;
+    const [showModal, setShowModal] = useState(false);
     const featured = product.product_list[0];
     let btn = styles.btn_container;
 
-    console.log(product);
+    const toggleModal = () => {
+        setShowModal(!showModal);
+        if (showModal) document.body.style.overflow = "unset";
+        if (!showModal) document.body.style.overflow = "hidden";
+    };
 
     // if (cartItems.length > 0) {
     //     const exist = cartItems.find((obj) => obj.id === product.id);
@@ -81,34 +86,33 @@ function ProductCard(props) {
                         <div className={styles.pricing_text}>
                             <p className={styles.price}>€</p>
                             <button
-                                className={btn}
+                                className={styles.btn_container}
                                 // this onclick will open modal
-                                onClick={
-                                    (e) =>
-                                        !featured.clickAllowed
-                                            ? e.preventDefault()
-                                            : onAdd(product.product_list[i]) // will have to change this to account for multiple varations of product
-                                }
+                                onClick={toggleModal}
                             >
                                 <BsThreeDots />
                             </button>
                         </div>
                     </div>
                 </div>
-                <ProductModal
-                    product={product}
-                    cartItems={cartItems}
-                    setCartItems={setCartItems}
-                    onAdd={onAdd}
-                    onMinus={onMinus}
-                    formattedPrice={formattedPrice}
-                />
+                {showModal ? (
+                    <ProductModal
+                        toggleModal={toggleModal}
+                        product={product}
+                        cartItems={cartItems}
+                        setCartItems={setCartItems}
+                        onAdd={onAdd}
+                        onMinus={onMinus}
+                        formattedPrice={formattedPrice}
+                    />
+                ) : null}
             </div>
         );
     } else {
         const index = product.product_list.length - 1;
-        const { price, currency, name } = product.product_list[index];
-        const { p3d_id } = product;
+        const { price, currency, name, description } =
+            product.product_list[index];
+        // const { p3d_id } = product;
         const { slug, max_qty } = product.product_list[index].metadata;
         const img = getImage(
             product.product_list[index].localFiles[index].childImageSharp
@@ -139,7 +143,7 @@ function ProductCard(props) {
                                 >
                                     <BsFillInfoCircleFill />
                                     <p className={styles.purchase_info_id}>
-                                        product-id: {p3d_id}
+                                        product-id: {description}
                                     </p>
                                 </div>
                                 <div

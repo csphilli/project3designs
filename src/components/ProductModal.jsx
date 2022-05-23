@@ -1,23 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 
 function ProductModal(props) {
-    const { product, cartItems, setCartItems, onAdd, onMinus, formattedPrice } =
-        props;
+    const {
+        product,
+        cartItems,
+        setCartItems,
+        onAdd,
+        onMinus,
+        formattedPrice,
+        toggleModal,
+    } = props;
     const img = getImage(
         product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
     );
-    // console.log("product", product);
+
+    useEffect(() => {
+        const close = (e) => {
+            if (e.key === "Escape") {
+                toggleModal();
+                document.activeElement.blur();
+            }
+        };
+        window.addEventListener("keydown", close);
+        return () => window.removeEventListener("keydown", close);
+    }, []);
 
     return (
-        <aside className={styles.modal}>
+        <aside className={styles.modal} role="dialog" aria-modal="true">
             <div className={styles.modal_content}>
                 <div className={styles.menu_bar}>
                     <p className={styles.menu_bar_text}>
                         Select specific variation
                     </p>
-                    <button className={styles.close_modal_btn}>X</button>
+                    <button
+                        className={styles.close_modal_btn}
+                        onClick={toggleModal}
+                    >
+                        X
+                    </button>
                 </div>
                 <GatsbyImage
                     className={styles.content_img}
@@ -32,6 +55,16 @@ function ProductModal(props) {
                     There are multiple choices for this specific product. The
                     item description details the differences.
                 </p>
+                {/* <div className={styles.modal_info_container}>
+                    {product.product_list.map((item) => {
+                        return (
+                            <div>
+                                <BsFillInfoCircleFill className={styles.icon} />
+                                <p>{item.}</p>
+                            </div>
+                        )
+                    })}
+                </div> */}
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
                         <p className={styles.heading}>Price</p>

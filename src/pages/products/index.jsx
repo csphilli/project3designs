@@ -53,7 +53,7 @@ function Products() {
     };
 
     const isClickAllowed = (quantity, product) => {
-        console.log(quantity, "vs", parseInt(product.metadata.max_qty));
+        // console.log(quantity, "vs", parseInt(product.metadata.max_qty));
 
         return quantity < parseInt(product.metadata.max_qty);
     };
@@ -116,53 +116,43 @@ function Products() {
         });
     };
 
+    const createProdObj = (product, unit_amt, ccy) => {
+        return {
+            ...product,
+            quantity: 0,
+            clickAllowed: true,
+            price: (Number(unit_amt) / 100).toFixed(2),
+            currency: ccy,
+            // product_id: `${product.metadata.p3d_id}-${product.description}`,
+        };
+    };
+
     useEffect(() => {
         const { allStripeProduct: productList, allStripePrice: prices } = query;
-        // productList.nodes.forEach((obj) => {
-        //     obj.price =
-        //         prices.nodes.find((item) => item.id === obj.default_price)
-        //             .unit_amount / 100;
-        //     obj.quantity = 0;
-        //     obj.clickAllowed = true;
-        //     obj.currency = prices.nodes.find(
-        //         (item) => item.id === obj.default_price
-        //     ).currency;
-        // });
         let products = [];
         productList.nodes.forEach((obj) => {
             const exist = products.find(
-                (arr) => arr.p3d_id === Number(obj.metadata.p3d_id)
+                (arr) => arr.p3d_id === obj.metadata.p3d_id
             );
-            const {
-                id: price_id,
-                currency,
-                unit_amount,
-            } = prices.nodes.find((item) => item.id === obj.default_price);
+            const { currency, unit_amount } = prices.nodes.find(
+                (item) => item.id === obj.default_price
+            );
             if (exist) {
-                exist.product_list.push({
-                    ...obj,
-                    quantity: 0,
-                    clickAllowed: true,
-                    price: (Number(unit_amount) / 100).toFixed(2),
-                    price_id: price_id,
-                    currency: currency,
-                });
+                exist.product_list.push(
+                    createProdObj(obj, unit_amount, currency)
+                );
             } else {
                 products.push({
-                    p3d_id: Number(obj.metadata.p3d_id),
-                    product_list: new Array({
-                        ...obj,
-                        quantity: 0,
-                        clickAllowed: true,
-                        price: (Number(unit_amount) / 100).toFixed(2),
-                        price_id: price_id,
-                        currency: currency,
-                    }),
+                    p3d_id: obj.metadata.p3d_id,
+                    product_list: new Array(
+                        createProdObj(obj, unit_amount, currency)
+                    ),
                 });
             }
         });
         sortProducts(products);
         setProducts(products);
+        console.log(products);
     }, [query]);
     return (
         <div>
