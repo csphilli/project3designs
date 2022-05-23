@@ -53,6 +53,8 @@ function Products() {
     };
 
     const isClickAllowed = (quantity, product) => {
+        console.log(quantity, "vs", parseInt(product.metadata.max_qty));
+
         return quantity < parseInt(product.metadata.max_qty);
     };
 
@@ -141,7 +143,7 @@ function Products() {
                     ...obj,
                     quantity: 0,
                     clickAllowed: true,
-                    price: Number(unit_amount),
+                    price: (Number(unit_amount) / 100).toFixed(2),
                     price_id: price_id,
                     currency: currency,
                 });
@@ -152,7 +154,7 @@ function Products() {
                         ...obj,
                         quantity: 0,
                         clickAllowed: true,
-                        price: Number(unit_amount),
+                        price: (Number(unit_amount) / 100).toFixed(2),
                         price_id: price_id,
                         currency: currency,
                     }),
@@ -167,27 +169,30 @@ function Products() {
             <HeadPageLayout pageId="products">
                 <div className={styles.container_grid}>
                     <aside className={styles.cart}>
-                        cart
-                        {/* <Cart
+                        {/* cart */}
+                        <Cart
                             formattedPrice={formattedPrice}
                             onMinus={onMinus}
                             onAdd={onAdd}
                             setCartItems={setCartItems}
                             cartItems={cartItems}
-                        /> */}
+                        />
                     </aside>
                     <main className={styles.products}>
-                        product card
-                        {/* {products.map((product) => (
+                        {/* product card */}
+                        {products.map((product) => (
                             <ProductCard
                                 formattedPrice={formattedPrice}
                                 cartItems={cartItems}
+                                setCartItems={setCartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
-                                key={product.id}
+                                // key={product.id}
+                                // product={product}
+                                key={product.product_list[0].id}
                                 product={product}
                             />
-                        ))} */}
+                        ))}
                     </main>
                 </div>
             </HeadPageLayout>

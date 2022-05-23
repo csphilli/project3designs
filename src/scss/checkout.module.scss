@@ -11,12 +11,13 @@
     transition: 0.5s;
     background-size: 150% auto;
     font-family: "Montserrat", sans-serif;
-    p{
-        transition: all .2s;
+    p {
+        transition: all 0.2s;
     }
 }
 
-.checkout_button:hover {
+.checkout_button:hover,
+.checkout_button:focus {
     background-position: 75% 70%;
     cursor: pointer;
 }
@@ -49,7 +50,7 @@
     }
 }
 
-.checkout_button_prevent::after{
+.checkout_button_prevent::after {
     content: "";
     position: absolute;
     width: 2rem;
@@ -59,15 +60,14 @@
     right: 0;
     bottom: 0;
     margin: auto;
-    border: .2rem solid transparent;
+    border: 0.2rem solid transparent;
     border-top-color: #757575;
     border-radius: 50%;
     animation: loading_spinner 1s ease infinite;
-
-
 }
 
-.checkout_button_prevent:hover {
+.checkout_button_prevent:hover,
+.checkout_button_prevent:focus {
     cursor: not-allowed;
 }
 

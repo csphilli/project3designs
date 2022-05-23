@@ -17,7 +17,8 @@
     font-family: "Montserrat", sans-serif;
 }
 
-.btn:hover {
+.btn:hover,
+.btn:focus {
     background-position: 75% 70%;
     cursor: pointer;
 }

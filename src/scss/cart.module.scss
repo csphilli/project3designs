@@ -83,7 +83,7 @@ p {
     background-color: #2d2d2d;
     color: white;
     padding: 0.5rem 0;
-    border: none
+    border: none;
 }
 
 .heading:first-child {
@@ -99,7 +99,7 @@ p {
     grid-template-columns: 2fr 4fr 1fr;
     align-items: center;
     padding: 0.2rem 0;
-    padding: scaled(.25, .5, 320, 1400) 0;
+    padding: scaled(0.25, 0.5, 320, 1400) 0;
 }
 
 .list_item:nth-child(even) {
@@ -116,26 +116,27 @@ p {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid rgba(0,0,0,.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
         height: 1.3rem;
         width: 1.2rem;
-        box-shadow: 1px 2px 4px rgba(0,0,0,.3);
-        border-radius: .2rem;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+        border-radius: 0.2rem;
         color: black;
     }
-    
-    .button:hover {
+
+    .button:hover,
+    .button:focus {
         cursor: pointer;
     }
 
-    .button_prevent{
+    .button_prevent {
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid rgba(0,0,0,.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
         height: 1.3rem;
         width: 1.2rem;
-        border-radius: .2rem;
+        border-radius: 0.2rem;
         color: black;
         fill: rgb(202, 202, 202);
         cursor: not-allowed;
@@ -143,12 +144,12 @@ p {
 
     .qty_plus {
         background: rgb(115, 197, 153);
-        border: 1px solid rgba(0,0,0,.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
     }
 
     .qty_minus {
         background: rgb(197, 133, 115);
-        border: 1px solid rgba(0,0,0,.4);
+        border: 1px solid rgba(0, 0, 0, 0.4);
     }
 
     .qty_plus_prevent {
@@ -166,7 +167,9 @@ p {
     }
 
     .qty_minus:hover,
-    .qty_plus:hover {
+    .qty_plus:hover,
+    .qty_minus:focus,
+    .qty_plus:focus {
         cursor: pointer;
     }
 }
@@ -214,21 +217,22 @@ p {
     font-size: scaled(1.1, 1.4, 320, 1400);
 }
 
-.secure_checkout{
+.secure_checkout {
     margin-top: 1rem;
     display: flex;
     align-items: center;
     justify-content: right;
     color: #a3a3a3;
-    
+
     p {
         font-style: italic;
         font-family: "Montserrat", sans-serif;
-        font-size: scaled(.5, .75, 320, 1400);
-        margin-left: .3rem;
+        font-size: scaled(0.5, 0.75, 320, 1400);
+        margin-left: 0.3rem;
     }
 
-    a:link, a:visited{
+    a:link,
+    a:visited {
         color: #a3a3a3;
     }
 }
