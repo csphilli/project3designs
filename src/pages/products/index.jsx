@@ -108,6 +108,12 @@ function Products() {
         }
     };
 
+    const sortProducts = (products) => {
+        products.forEach((obj) => {
+            obj.products.sort((b, a) => b.price - a.price);
+        });
+    };
+
     useEffect(() => {
         const { allStripeProduct: productList, allStripePrice: prices } = query;
         // productList.nodes.forEach((obj) => {
@@ -153,8 +159,8 @@ function Products() {
                 });
             }
         });
+        sortProducts(products);
         setProducts(products);
-        console.log(products);
     }, [query]);
     return (
         <div>
