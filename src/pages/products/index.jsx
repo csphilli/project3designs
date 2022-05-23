@@ -17,6 +17,7 @@ function Products() {
             ) {
                 nodes {
                     default_price
+                    description
                     id
                     metadata {
                         p3d_id
@@ -36,6 +37,9 @@ function Products() {
                     id
                     unit_amount
                     currency
+                    product {
+                        id
+                    }
                 }
             }
         }
@@ -105,34 +109,70 @@ function Products() {
     };
 
     useEffect(() => {
-        const { allStripeProduct: productList, allStripePrice: prices } = query;        
+        const { allStripeProduct: productList, allStripePrice: prices } = query;
+        // productList.nodes.forEach((obj) => {
+        //     obj.price =
+        //         prices.nodes.find((item) => item.id === obj.default_price)
+        //             .unit_amount / 100;
+        //     obj.quantity = 0;
+        //     obj.clickAllowed = true;
+        //     obj.currency = prices.nodes.find(
+        //         (item) => item.id === obj.default_price
+        //     ).currency;
+        // });
+        let products = [];
         productList.nodes.forEach((obj) => {
-            obj.price =
-                prices.nodes.find((item) => item.id === obj.default_price)
-                    .unit_amount / 100;
-            obj.quantity = 0;
-            obj.clickAllowed = true;
-            obj.currency = prices.nodes.find(
-                (item) => item.id === obj.default_price
-            ).currency;
+            const exist = products.find(
+                (arr) => arr.p3d_id === Number(obj.metadata.p3d_id)
+            );
+            const {
+                id: price_id,
+                currency,
+                unit_amount,
+            } = prices.nodes.find((item) => item.id === obj.default_price);
+            if (exist) {
+                exist.products.push({
+                    ...obj,
+                    quantity: 0,
+                    clickAllowed: true,
+                    price: Number(unit_amount),
+                    price_id: price_id,
+                    currency: currency,
+                });
+            } else {
+                products.push({
+                    p3d_id: Number(obj.metadata.p3d_id),
+                    products: new Array({
+                        ...obj,
+                        quantity: 0,
+                        clickAllowed: true,
+                        price: Number(unit_amount),
+                        price_id: price_id,
+                        currency: currency,
+                    }),
+                });
+            }
         });
-        setProducts(productList.nodes);
+        setProducts(products);
+        console.log(products);
     }, [query]);
     return (
         <div>
             <HeadPageLayout pageId="products">
                 <div className={styles.container_grid}>
                     <aside className={styles.cart}>
-                        <Cart
+                        cart
+                        {/* <Cart
                             formattedPrice={formattedPrice}
                             onMinus={onMinus}
                             onAdd={onAdd}
                             setCartItems={setCartItems}
                             cartItems={cartItems}
-                        />
+                        /> */}
                     </aside>
                     <main className={styles.products}>
-                        {products.map((product) => (
+                        product card
+                        {/* {products.map((product) => (
                             <ProductCard
                                 formattedPrice={formattedPrice}
                                 cartItems={cartItems}
@@ -141,7 +181,7 @@ function Products() {
                                 key={product.id}
                                 product={product}
                             />
-                        ))}
+                        ))} */}
                     </main>
                 </div>
             </HeadPageLayout>
