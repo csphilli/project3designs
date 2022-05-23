@@ -17,6 +17,7 @@ function Products() {
             ) {
                 nodes {
                     default_price
+                    description
                     id
                     metadata {
                         p3d_id
@@ -36,6 +37,9 @@ function Products() {
                     id
                     unit_amount
                     currency
+                    product {
+                        id
+                    }
                 }
             }
         }
@@ -49,6 +53,8 @@ function Products() {
     };
 
     const isClickAllowed = (quantity, product) => {
+        console.log(quantity, "vs", parseInt(product.metadata.max_qty));
+
         return quantity < parseInt(product.metadata.max_qty);
     };
 
@@ -104,25 +110,66 @@ function Products() {
         }
     };
 
-    useEffect(() => {
-        const { allStripeProduct: productList, allStripePrice: prices } = query;        
-        productList.nodes.forEach((obj) => {
-            obj.price =
-                prices.nodes.find((item) => item.id === obj.default_price)
-                    .unit_amount / 100;
-            obj.quantity = 0;
-            obj.clickAllowed = true;
-            obj.currency = prices.nodes.find(
-                (item) => item.id === obj.default_price
-            ).currency;
+    const sortProducts = (products) => {
+        products.forEach((obj) => {
+            obj.product_list.sort((b, a) => b.price - a.price);
         });
-        setProducts(productList.nodes);
+    };
+
+    useEffect(() => {
+        const { allStripeProduct: productList, allStripePrice: prices } = query;
+        // productList.nodes.forEach((obj) => {
+        //     obj.price =
+        //         prices.nodes.find((item) => item.id === obj.default_price)
+        //             .unit_amount / 100;
+        //     obj.quantity = 0;
+        //     obj.clickAllowed = true;
+        //     obj.currency = prices.nodes.find(
+        //         (item) => item.id === obj.default_price
+        //     ).currency;
+        // });
+        let products = [];
+        productList.nodes.forEach((obj) => {
+            const exist = products.find(
+                (arr) => arr.p3d_id === Number(obj.metadata.p3d_id)
+            );
+            const {
+                id: price_id,
+                currency,
+                unit_amount,
+            } = prices.nodes.find((item) => item.id === obj.default_price);
+            if (exist) {
+                exist.product_list.push({
+                    ...obj,
+                    quantity: 0,
+                    clickAllowed: true,
+                    price: (Number(unit_amount) / 100).toFixed(2),
+                    price_id: price_id,
+                    currency: currency,
+                });
+            } else {
+                products.push({
+                    p3d_id: Number(obj.metadata.p3d_id),
+                    product_list: new Array({
+                        ...obj,
+                        quantity: 0,
+                        clickAllowed: true,
+                        price: (Number(unit_amount) / 100).toFixed(2),
+                        price_id: price_id,
+                        currency: currency,
+                    }),
+                });
+            }
+        });
+        sortProducts(products);
+        setProducts(products);
     }, [query]);
     return (
         <div>
             <HeadPageLayout pageId="products">
                 <div className={styles.container_grid}>
                     <aside className={styles.cart}>
+                        {/* cart */}
                         <Cart
                             formattedPrice={formattedPrice}
                             onMinus={onMinus}
@@ -132,13 +179,17 @@ function Products() {
                         />
                     </aside>
                     <main className={styles.products}>
+                        {/* product card */}
                         {products.map((product) => (
                             <ProductCard
                                 formattedPrice={formattedPrice}
                                 cartItems={cartItems}
+                                setCartItems={setCartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
-                                key={product.id}
+                                // key={product.id}
+                                // product={product}
+                                key={product.product_list[0].id}
                                 product={product}
                             />
                         ))}

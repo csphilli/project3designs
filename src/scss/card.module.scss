@@ -11,7 +11,8 @@
     box-shadow: $boxShadow;
     transition: 0.3s ease-in-out;
 
-    &:hover {
+    &:hover,
+    &:focus {
         transform: scale(1.02);
         transition: 0.3s ease-in-out;
     }
