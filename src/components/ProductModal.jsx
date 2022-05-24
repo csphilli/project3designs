@@ -28,6 +28,20 @@ function ProductModal(props) {
         return () => window.removeEventListener("keydown", close);
     }, []);
 
+    useEffect(() => {
+        console.log(product.product_list);
+    }, [cartItems]);
+    // useEffect(() => {
+    //     product.product_list.forEach((prod) => {
+    //         const inCart = cartItems.find(
+    //             (item) => item.description === prod.description
+    //         );
+    //         if (inCart) {
+    //             prod.quantity = inCart.quantity;
+    //         }
+    //     });
+    // }, [product.product_list, cartItems]);
+
     return (
         <aside className={styles.modal} role="dialog" aria-modal="true">
             <div className={styles.modal_content}>
@@ -58,18 +72,19 @@ function ProductModal(props) {
                 {/* <div className={styles.modal_info_container}>
                     {product.product_list.map((item) => {
                         return (
-                            <div>
+                            <div className={styles.modal_info_line_item}>
                                 <BsFillInfoCircleFill className={styles.icon} />
-                                <p>{item.}</p>
+                                <p>product: {item.description}</p>
+                                <p>max qty: {item.metadata.max_qty}</p>
                             </div>
-                        )
+                        );
                     })}
                 </div> */}
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
                         <p className={styles.heading}>Price</p>
-                        <p className={styles.heading}>Description</p>
-                        <p className={styles.heading}>Max Qty</p>
+                        <p className={styles.heading}>Product-Id</p>
+                        {/* <p className={styles.heading}>Max Qty</p> */}
                         <p className={styles.heading}>In Cart</p>
                         {/* <p className={styles.heading}>Subtotal</p> */}
                     </div>
@@ -77,6 +92,7 @@ function ProductModal(props) {
                         const btn = !item.clickAllowed
                             ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
                             : `${styles.button} ${styles.qty_plus}`;
+                        // console.log(btn);
 
                         // const subtotal = formattedPrice(
                         //     item.price * item.quantity,
@@ -88,14 +104,19 @@ function ProductModal(props) {
                                     {formattedPrice(item.price)}
                                 </p>
                                 <p>{item.description}</p>
-                                <p>{item.metadata.max_qty}</p>
+                                {/* <p>{item.metadata.max_qty}</p> */}
                                 <div className={styles.qty_container}>
                                     <button
-                                        onClick={(e) =>
+                                        onClick={(e) => {
+                                            // console.log(
+                                            //     "plus clicked",
+                                            //     item.clickAllowed
+                                            // );
+
                                             !item.clickAllowed
                                                 ? e.preventDefault()
-                                                : onAdd(item)
-                                        }
+                                                : onAdd(item);
+                                        }}
                                         className={btn}
                                     >
                                         +

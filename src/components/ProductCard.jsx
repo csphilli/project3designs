@@ -74,13 +74,13 @@ function ProductCard(props) {
                                         product-id: multiple
                                     </p>
                                 </div>
-                                <div
+                                {/* <div
                                     className={
                                         styles.purchase_info_inner_container
                                     }
                                 >
                                     <p>max qty: ...</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className={styles.pricing_text}>
@@ -146,13 +146,13 @@ function ProductCard(props) {
                                         product-id: {description}
                                     </p>
                                 </div>
-                                <div
+                                {/* <div
                                     className={
                                         styles.purchase_info_inner_container
                                     }
                                 >
                                     <p>max qty: {max_qty}</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className={styles.pricing_text}>

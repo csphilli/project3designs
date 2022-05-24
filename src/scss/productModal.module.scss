@@ -24,6 +24,23 @@
     border-radius: $borderRadius;
 }
 
+.modal_info_line_item {
+    display: grid;
+    grid-template-columns: 1.2rem repeat(auto-fit, minmax(30px, 1fr));
+    align-items: center;
+    // flex-direction: column;
+
+    & > * {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+    }
+}
+
+.modal_info_line_item p {
+    margin-left: 1rem;
+}
+
 .menu_bar {
     display: flex;
     align-items: center;
@@ -64,7 +81,7 @@
 
 .cart_items_table_header {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 1fr;
+    grid-template-columns: 2fr 4fr 1fr;
     background-color: #2d2d2d;
     color: white;
     padding: 0.5rem 0;
@@ -81,7 +98,7 @@
 
 .list_item {
     display: grid;
-    grid-template-columns: 2fr 4fr 2fr 1fr;
+    grid-template-columns: 2fr 4fr 1fr;
     align-items: center;
     // padding: 0.2rem 0;
     padding: scaled(0.25, 0.5, 320, 1400) scaled(0.3, 0.7, 320, 1400);
