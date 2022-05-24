@@ -1,11 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
 import { BsCart, BsTrash, BsFillShieldLockFill } from "react-icons/bs";
 
 import Checkout from "./Checkout";
 
 function Cart(props) {
-    const { cartItems, setCartItems, onAdd, onMinus, formattedPrice } = props;
+    // const { cartItems, setCartItems, onAdd, onMinus, formattedPrice } = props;
+    const {
+        products,
+        btnClick,
+        handleClick,
+        onAdd,
+        onMinus,
+        formattedPrice,
+        emptyCart,
+    } = props;
+
+    const [cartItems, setCartItems] = useState([]);
+
+    useEffect(() => {
+        let items = [];
+        products.forEach((obj) => {
+            obj.product_list.forEach((prod) => {
+                if (prod.quantity > 0) {
+                    items.push(prod);
+                }
+            });
+        });
+        setCartItems(items);
+    }, [btnClick, products]);
 
     const totalPrice = formattedPrice(
         cartItems.reduce((acc, prod) => prod.quantity * prod.price + acc, 0)
@@ -13,24 +36,7 @@ function Cart(props) {
 
     const totalQty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
 
-    useEffect(() => {
-        const check = localStorage.getItem("cartItems");
-        if (check) {
-            setCartItems(JSON.parse(check));
-        }
-    }, [setCartItems]);
-
-    useEffect(() => {
-        if (cartItems.length === 0) {
-            localStorage.removeItem("cartItems");
-        } else {
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        }
-    }, [cartItems]);
-
-    const emptyCart = () => {
-        setCartItems([]);
-    };
+    // return <div>testing</div>;
 
     if (cartItems.length === 0) {
         return (
@@ -70,27 +76,30 @@ function Cart(props) {
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
                                     <button
-                                        onClick={(e) =>
-                                            !item.clickAllowed
-                                                ? e.preventDefault()
-                                                : onAdd(item)
-                                        }
+                                        onClick={(e) => {
+                                            if (!item.clickAllowed) {
+                                                e.preventDefault();
+                                            } else {
+                                                onAdd(item);
+                                                handleClick();
+                                            }
+                                        }}
                                         className={btn}
                                     >
                                         +
                                     </button>
                                     <p>{item.quantity}</p>
                                     <button
-                                        onClick={(e) => onMinus(item)}
+                                        onClick={(e) => {
+                                            onMinus(item);
+                                            handleClick();
+                                        }}
                                         className={`${styles.button} ${styles.qty_minus}`}
                                     >
                                         -
                                     </button>
                                 </div>
-                                <p>
-                                    {/* {item.metadata.p3d_id} */}
-                                    {item.description}
-                                </p>
+                                <p>{item.description}</p>
                                 <p>{subtotal}</p>
                             </div>
                         );
@@ -98,7 +107,7 @@ function Cart(props) {
                 </div>
                 <div className={styles.buttons_container}>
                     <button
-                        onClick={() => emptyCart()}
+                        onClick={emptyCart}
                         className={styles.empty_cart_button}
                     >
                         <BsTrash className={styles.trash_icon} />

@@ -7,7 +7,9 @@ import * as styles from "../../scss/products.module.scss";
 
 function Products() {
     const [products, setProducts] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
+    let [btnClick, setBtnClick] = useState(0);
+    let [local, setLocal] = useState([]);
+    // const [cartItems, setCartItems] = useState([]);
 
     const query = useStaticQuery(graphql`
         query Products {
@@ -52,61 +54,27 @@ function Products() {
         }).format(value);
     };
 
-    const isClickAllowed = (quantity, product) => {
-        // console.log(quantity, "vs", parseInt(product.metadata.max_qty));
-
-        return quantity < parseInt(product.metadata.max_qty);
+    // Cart items are populated based on product quantities. Since useEffect can't monitor changes in array child elements, I have to use a button click state to monitor changes. Each time any button (onAdd, onMinus, emptyCart) fires, it updates the products and triggers a refresh of the cart list.
+    const handleClick = () => {
+        setBtnClick((_btnClick) => _btnClick + 1);
     };
 
-    const onAdd = (product) => {
-        const exist = cartItems.find((obj) => product.id === obj.id);
-        if (exist) {
-            setCartItems(
-                cartItems.map((obj) =>
-                    obj.id === product.id &&
-                    obj.quantity < product.metadata.max_qty
-                        ? {
-                              ...exist,
-                              quantity: (exist.quantity += 1),
-                              clickAllowed: isClickAllowed(
-                                  exist.quantity,
-                                  product
-                              ),
-                          }
-                        : obj
-                )
-            );
-        } else {
-            setCartItems([
-                ...cartItems,
-                {
-                    ...product,
-                    quantity: 1,
-                    clickAllowed: isClickAllowed(1, product),
-                },
-            ]);
+    // Used to set the clickAllowed property of the product object.
+    const isClickAllowed = (product) => {
+        return product.quantity < parseInt(product.metadata.max_qty);
+    };
+
+    const onAdd = (item) => {
+        if (item.clickAllowed === true) {
+            item.quantity++;
+            item.clickAllowed = isClickAllowed(item);
         }
     };
 
-    const onMinus = (product) => {
-        const exist = cartItems.find((obj) => product.id === obj.id);
-        if (exist && exist.quantity === 1) {
-            setCartItems(cartItems.filter((obj) => obj.id !== product.id));
-        } else {
-            setCartItems(
-                cartItems.map((obj) =>
-                    obj.id === product.id
-                        ? {
-                              ...exist,
-                              quantity: (exist.quantity -= 1),
-                              clickAllowed: isClickAllowed(
-                                  exist.quantity,
-                                  product
-                              ),
-                          }
-                        : obj
-                )
-            );
+    const onMinus = (item) => {
+        if (item.quantity > 0) {
+            item.quantity--;
+            item.clickAllowed = isClickAllowed(item);
         }
     };
 
@@ -125,6 +93,18 @@ function Products() {
             currency: ccy,
             // product_id: `${product.metadata.p3d_id}-${product.description}`,
         };
+    };
+
+    const emptyCart = () => {
+        products.forEach((obj) => {
+            obj.product_list.forEach((prod) => {
+                prod.quantity = 0;
+                prod.clickAllowed = true;
+            });
+        });
+        setLocal([]);
+        localStorage.removeItem("cartItems");
+        handleClick();
     };
 
     useEffect(() => {
@@ -151,8 +131,11 @@ function Products() {
             }
         });
         sortProducts(products);
+        // if (local) {
+        //     loadQuantitiesFromLocal(products, JSON.parse(local));
+        // }
         setProducts(products);
-        console.log(products);
+        // console.log(products);
     }, [query]);
     return (
         <div>
@@ -164,8 +147,12 @@ function Products() {
                             formattedPrice={formattedPrice}
                             onMinus={onMinus}
                             onAdd={onAdd}
-                            setCartItems={setCartItems}
-                            cartItems={cartItems}
+                            products={products}
+                            handleClick={handleClick}
+                            btnClick={btnClick}
+                            emptyCart={emptyCart}
+                            // setCartItems={setCartItems}
+                            // cartItems={cartItems}
                         />
                     </aside>
                     <main className={styles.products}>
@@ -173,8 +160,10 @@ function Products() {
                         {products.map((product) => (
                             <ProductCard
                                 formattedPrice={formattedPrice}
-                                cartItems={cartItems}
-                                setCartItems={setCartItems}
+                                handleClick={handleClick}
+                                btnClick={btnClick}
+                                // cartItems={cartItems}
+                                // setCartItems={setCartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
                                 // key={product.id}

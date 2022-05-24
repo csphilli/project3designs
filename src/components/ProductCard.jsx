@@ -5,11 +5,13 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ProductModal from "./ProductModal";
 
 function ProductCard(props) {
-    const { cartItems, setCartItems, product, onAdd, onMinus, formattedPrice } =
+    const { product, handleClick, btnClick, onAdd, onMinus, formattedPrice } =
         props;
     const [showModal, setShowModal] = useState(false);
-    const featured = product.product_list[0];
-    let btn = styles.btn_container;
+
+    let btn = product.product_list[0].clickAllowed
+        ? styles.btn_container
+        : `${styles.btn_container_prevent} ${styles.btn_prevent}`;
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -17,31 +19,11 @@ function ProductCard(props) {
         if (!showModal) document.body.style.overflow = "hidden";
     };
 
-    // if (cartItems.length > 0) {
-    //     const exist = cartItems.find((obj) => obj.id === product.id);
-    //     if (exist && !exist.clickAllowed) {
-    //         btn = `${styles.btn_container_prevent} ${styles.btn_prevent}`;
-    //         clickAllowed = false;
-    //     }
-    // }
-
-    if (cartItems.length > 0) {
-        // const exist = cartItems.find((obj) => obj.id === featured.id);
-        const exist = cartItems.find((obj) => obj.id === featured.id);
-
-        if (exist && !exist.clickAllowed) {
-            btn = `${styles.btn_container_prevent} ${styles.btn_prevent}`;
-        }
-    }
-
-    // const img = getImage(product.localFiles[0].childImageSharp.gatsbyImageData);
-
     if (product.product_list.length > 1) {
-        let i = 0;
-        const { name } = product.product_list[i];
-        const { slug } = product.product_list[i].metadata;
+        const { name } = product.product_list[0];
+        const { slug } = product.product_list[0].metadata;
         const img = getImage(
-            product.product_list[i].localFiles[0].childImageSharp
+            product.product_list[0].localFiles[0].childImageSharp
                 .gatsbyImageData
         );
 
@@ -74,20 +56,12 @@ function ProductCard(props) {
                                         product-id: multiple
                                     </p>
                                 </div>
-                                {/* <div
-                                    className={
-                                        styles.purchase_info_inner_container
-                                    }
-                                >
-                                    <p>max qty: ...</p>
-                                </div> */}
                             </div>
                         </div>
                         <div className={styles.pricing_text}>
                             <p className={styles.price}>€</p>
                             <button
                                 className={styles.btn_container}
-                                // this onclick will open modal
                                 onClick={toggleModal}
                             >
                                 <BsThreeDots />
@@ -99,8 +73,8 @@ function ProductCard(props) {
                     <ProductModal
                         toggleModal={toggleModal}
                         product={product}
-                        cartItems={cartItems}
-                        setCartItems={setCartItems}
+                        btnClick={btnClick}
+                        handleClick={handleClick}
                         onAdd={onAdd}
                         onMinus={onMinus}
                         formattedPrice={formattedPrice}
@@ -109,13 +83,10 @@ function ProductCard(props) {
             </div>
         );
     } else {
-        const index = product.product_list.length - 1;
-        const { price, currency, name, description } =
-            product.product_list[index];
-        // const { p3d_id } = product;
-        const { slug, max_qty } = product.product_list[index].metadata;
+        const { price, currency, name, description } = product.product_list[0];
+        const { slug } = product.product_list[0].metadata;
         const img = getImage(
-            product.product_list[index].localFiles[index].childImageSharp
+            product.product_list[0].localFiles[0].childImageSharp
                 .gatsbyImageData
         );
         return (
@@ -146,13 +117,6 @@ function ProductCard(props) {
                                         product-id: {description}
                                     </p>
                                 </div>
-                                {/* <div
-                                    className={
-                                        styles.purchase_info_inner_container
-                                    }
-                                >
-                                    <p>max qty: {max_qty}</p>
-                                </div> */}
                             </div>
                         </div>
                         <div className={styles.pricing_text}>
@@ -161,16 +125,18 @@ function ProductCard(props) {
                             </p>
                             <button
                                 className={btn}
-                                onClick={
-                                    (e) =>
-                                        !featured.clickAllowed
-                                            ? e.preventDefault()
-                                            : onAdd(product.product_list[index]) // will have to change this to account for multiple varations of product
-                                }
+                                onClick={(e) => {
+                                    if (!product.product_list[0].clickAllowed) {
+                                        e.preventDefault();
+                                    } else {
+                                        onAdd(product.product_list[0]);
+                                        handleClick();
+                                    }
+                                }}
                             >
                                 <BsCartPlus
                                     className={styles.btn_icon}
-                                    id={featured.id}
+                                    id={product.product_list[0].id}
                                 />
                             </button>
                         </div>

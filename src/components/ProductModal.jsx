@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { BsFillInfoCircleFill } from "react-icons/bs";
 
 function ProductModal(props) {
     const {
         product,
-        cartItems,
-        setCartItems,
+        handleClick,
         onAdd,
         onMinus,
         formattedPrice,
@@ -26,21 +24,7 @@ function ProductModal(props) {
         };
         window.addEventListener("keydown", close);
         return () => window.removeEventListener("keydown", close);
-    }, []);
-
-    useEffect(() => {
-        console.log(product.product_list);
-    }, [cartItems]);
-    // useEffect(() => {
-    //     product.product_list.forEach((prod) => {
-    //         const inCart = cartItems.find(
-    //             (item) => item.description === prod.description
-    //         );
-    //         if (inCart) {
-    //             prod.quantity = inCart.quantity;
-    //         }
-    //     });
-    // }, [product.product_list, cartItems]);
+    }, [toggleModal]);
 
     return (
         <aside className={styles.modal} role="dialog" aria-modal="true">
@@ -61,7 +45,6 @@ function ProductModal(props) {
                     image={img}
                     alt="picture of product"
                 />
-
                 <h4 className={styles.modal_title}>
                     {product.product_list[0].name}
                 </h4>
@@ -69,53 +52,31 @@ function ProductModal(props) {
                     There are multiple choices for this specific product. The
                     item description details the differences.
                 </p>
-                {/* <div className={styles.modal_info_container}>
-                    {product.product_list.map((item) => {
-                        return (
-                            <div className={styles.modal_info_line_item}>
-                                <BsFillInfoCircleFill className={styles.icon} />
-                                <p>product: {item.description}</p>
-                                <p>max qty: {item.metadata.max_qty}</p>
-                            </div>
-                        );
-                    })}
-                </div> */}
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
                         <p className={styles.heading}>Price</p>
                         <p className={styles.heading}>Product-Id</p>
-                        {/* <p className={styles.heading}>Max Qty</p> */}
                         <p className={styles.heading}>In Cart</p>
-                        {/* <p className={styles.heading}>Subtotal</p> */}
                     </div>
                     {product.product_list.map((item) => {
                         const btn = !item.clickAllowed
                             ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
                             : `${styles.button} ${styles.qty_plus}`;
-                        // console.log(btn);
-
-                        // const subtotal = formattedPrice(
-                        //     item.price * item.quantity,
-                        //     item.currency
-                        // );
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <p className={styles.modal_price}>
                                     {formattedPrice(item.price)}
                                 </p>
                                 <p>{item.description}</p>
-                                {/* <p>{item.metadata.max_qty}</p> */}
                                 <div className={styles.qty_container}>
                                     <button
                                         onClick={(e) => {
-                                            // console.log(
-                                            //     "plus clicked",
-                                            //     item.clickAllowed
-                                            // );
-
-                                            !item.clickAllowed
-                                                ? e.preventDefault()
-                                                : onAdd(item);
+                                            if (!item.clickAllowed) {
+                                                e.preventDefault();
+                                            } else {
+                                                onAdd(item);
+                                                handleClick();
+                                            }
                                         }}
                                         className={btn}
                                     >
@@ -123,7 +84,10 @@ function ProductModal(props) {
                                     </button>
                                     <p>{item.quantity}</p>
                                     <button
-                                        onClick={(e) => onMinus(item)}
+                                        onClick={(e) => {
+                                            onMinus(item);
+                                            handleClick();
+                                        }}
                                         className={`${styles.button} ${styles.qty_minus}`}
                                     >
                                         -
