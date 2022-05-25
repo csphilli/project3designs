@@ -8,7 +8,7 @@ import * as styles from "../../scss/products.module.scss";
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(0);
-    let [local, setLocal] = useState([]);
+    // let [local, setLocal] = useState([]);
     // const [cartItems, setCartItems] = useState([]);
 
     const query = useStaticQuery(graphql`
@@ -64,17 +64,46 @@ function Products() {
         return product.quantity < parseInt(product.metadata.max_qty);
     };
 
+    // Saves a key and value pair to local storage. Will update the quantity
+    const saveToLocal = () => {
+        let local = [];
+        products.forEach((list) =>
+            list.product_list.forEach((prod) => {
+                local.push({ key: prod.id, value: prod });
+            })
+        );
+        localStorage.setItem("cartItems", JSON.stringify(local));
+    };
+
+    // Updates the quantities that were saved to the local storage for repopulating the cart contents if a user leaves the page before checking out.
+    const updateFromLocal = (products) => {
+        const local = JSON.parse(localStorage.getItem("cartItems"));
+        if (local) {
+            products.forEach((list) =>
+                list.product_list.forEach((item) => {
+                    item.quantity = local.find(
+                        (obj) => obj.key === item.id
+                    )?.value?.quantity;
+                })
+            );
+        }
+    };
+
+    // Simple function to handle adding items to cart.
     const onAdd = (item) => {
         if (item.clickAllowed === true) {
             item.quantity++;
             item.clickAllowed = isClickAllowed(item);
+            saveToLocal(item.id, item);
         }
     };
 
+    // Simple function to handle removing items from cart.
     const onMinus = (item) => {
         if (item.quantity > 0) {
             item.quantity--;
             item.clickAllowed = isClickAllowed(item);
+            saveToLocal(item.id, item);
         }
     };
 
@@ -91,7 +120,6 @@ function Products() {
             clickAllowed: true,
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
-            // product_id: `${product.metadata.p3d_id}-${product.description}`,
         };
     };
 
@@ -102,7 +130,7 @@ function Products() {
                 prod.clickAllowed = true;
             });
         });
-        setLocal([]);
+        // setLocal([]);
         localStorage.removeItem("cartItems");
         handleClick();
     };
@@ -131,11 +159,8 @@ function Products() {
             }
         });
         sortProducts(products);
-        // if (local) {
-        //     loadQuantitiesFromLocal(products, JSON.parse(local));
-        // }
+        updateFromLocal(products);
         setProducts(products);
-        // console.log(products);
     }, [query]);
     return (
         <div>
@@ -151,8 +176,6 @@ function Products() {
                             handleClick={handleClick}
                             btnClick={btnClick}
                             emptyCart={emptyCart}
-                            // setCartItems={setCartItems}
-                            // cartItems={cartItems}
                         />
                     </aside>
                     <main className={styles.products}>
@@ -162,12 +185,8 @@ function Products() {
                                 formattedPrice={formattedPrice}
                                 handleClick={handleClick}
                                 btnClick={btnClick}
-                                // cartItems={cartItems}
-                                // setCartItems={setCartItems}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
-                                // key={product.id}
-                                // product={product}
                                 key={product.product_list[0].id}
                                 product={product}
                             />
