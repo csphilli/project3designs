@@ -47,6 +47,7 @@ function Products() {
         }
     `);
 
+    // Formats the product pricing. Default is eur.
     const formattedPrice = (value, ccy = "eur") => {
         return Intl.NumberFormat("en-EU", {
             style: "currency",
@@ -79,13 +80,15 @@ function Products() {
     const updateFromLocal = (products) => {
         const local = JSON.parse(localStorage.getItem("cartItems"));
         if (local) {
-            products.forEach((list) =>
+            products.forEach((list) => {
                 list.product_list.forEach((item) => {
-                    item.quantity = local.find(
-                        (obj) => obj.key === item.id
-                    )?.value?.quantity;
-                })
-            );
+                    const prod = local.find((prod) => prod.key === item.id);
+                    if (prod) {
+                        item.quantity = prod.value.quantity;
+                        item.clickAllowed = prod.value.clickAllowed;
+                    }
+                });
+            });
         }
     };
 
@@ -113,6 +116,7 @@ function Products() {
         });
     };
 
+    // Helper function to create product obljects and then add custom properties.
     const createProdObj = (product, unit_amt, ccy) => {
         return {
             ...product,
@@ -123,6 +127,7 @@ function Products() {
         };
     };
 
+    // As it says. The cart is populated by products with quantity props > 0. To empty the cart, all those are set back to 0, clickAllowed toggled to true and the localStorage is removed. clickAllowed is a property that the add to cart buttons check whether or not more quantity can be added to the cart. It is vital to have max_qty as metadata in the Stripe dashboard for the specific product.
     const emptyCart = () => {
         products.forEach((obj) => {
             obj.product_list.forEach((prod) => {
@@ -130,11 +135,11 @@ function Products() {
                 prod.clickAllowed = true;
             });
         });
-        // setLocal([]);
         localStorage.removeItem("cartItems");
         handleClick();
     };
 
+    // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
     useEffect(() => {
         const { allStripeProduct: productList, allStripePrice: prices } = query;
         let products = [];
@@ -167,7 +172,6 @@ function Products() {
             <HeadPageLayout pageId="products">
                 <div className={styles.container_grid}>
                     <aside className={styles.cart}>
-                        {/* cart */}
                         <Cart
                             formattedPrice={formattedPrice}
                             onMinus={onMinus}
@@ -179,7 +183,6 @@ function Products() {
                         />
                     </aside>
                     <main className={styles.products}>
-                        {/* product card */}
                         {products.map((product) => (
                             <ProductCard
                                 formattedPrice={formattedPrice}

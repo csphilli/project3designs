@@ -8,6 +8,7 @@ function ProductCard(props) {
     const { product, handleClick, btnClick, onAdd, onMinus, formattedPrice } =
         props;
     const [showModal, setShowModal] = useState(false);
+    const [tooltip, setTooltip] = useState(false);
 
     let btn = product.product_list[0].clickAllowed
         ? styles.btn_container

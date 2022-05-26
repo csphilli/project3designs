@@ -50,7 +50,7 @@ function ProductModal(props) {
                 </h4>
                 <p>
                     There are multiple choices for this specific product. The
-                    item description details the differences.
+                    product-id details the differences.
                 </p>
                 <div className={styles.cart_items_table}>
                     <div className={styles.cart_items_table_header}>
