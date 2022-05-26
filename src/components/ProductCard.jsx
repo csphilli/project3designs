@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
+import * as tooltip from "../scss/tooltip.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill, BsThreeDots } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ProductModal from "./ProductModal";
@@ -8,11 +9,10 @@ function ProductCard(props) {
     const { product, handleClick, btnClick, onAdd, onMinus, formattedPrice } =
         props;
     const [showModal, setShowModal] = useState(false);
-    const [tooltip, setTooltip] = useState(false);
 
     let btn = product.product_list[0].clickAllowed
         ? styles.btn_container
-        : `${styles.btn_container_prevent} ${styles.btn_prevent}`;
+        : `${styles.btn_container_prevent} ${styles.btn_prevent} ${tooltip.tooltip}`;
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -38,7 +38,11 @@ function ProductCard(props) {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <GatsbyImage image={img} alt="picture of product" />
+                            <GatsbyImage
+                                className={styles.image_container}
+                                image={img}
+                                alt="picture of product"
+                            />
                         </a>
                     </div>
                     <div>
@@ -99,7 +103,11 @@ function ProductCard(props) {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <GatsbyImage image={img} alt="picture of product" />
+                            <GatsbyImage
+                                image={img}
+                                className={styles.image_container}
+                                alt="picture of product"
+                            />
                         </a>
                     </div>
                     <div>
@@ -125,6 +133,8 @@ function ProductCard(props) {
                                 {formattedPrice(price, currency)}
                             </p>
                             <button
+                                // className={btn}
+                                data-tooltip="max quantity"
                                 className={btn}
                                 onClick={(e) => {
                                     if (!product.product_list[0].clickAllowed) {

@@ -6,7 +6,7 @@
     grid-auto-rows: auto;
     border-radius: $borderRadius;
     box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+    // overflow: hidden;
     // padding: scaled(0.5, 1, 320, 1400) scaled(0.2, 0.7, 320, 1400);
     background-color: white;
 }
@@ -14,6 +14,11 @@
 .product_img {
     width: 100%;
     aspect-ratio: 16/9;
+}
+
+.image_container {
+    border-top-left-radius: $borderRadius;
+    border-top-right-radius: $borderRadius;
 }
 
 .title {
@@ -58,6 +63,8 @@
     align-items: center;
     background-color: #2d2d2d;
     padding: scaled(1, 1.2, 320, 1400) scaled(0.5, 1, 320, 1400);
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
 
     .price {
         color: white;
@@ -65,6 +72,7 @@
 }
 
 .btn_container {
+    position: relative; // needed for tootlip
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,6 +98,7 @@
 }
 
 .btn_container_prevent {
+    position: relative; // needed for tooltip
     display: flex;
     align-items: center;
     justify-content: center;
