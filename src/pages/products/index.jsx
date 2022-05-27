@@ -60,9 +60,12 @@ function Products() {
         setBtnClick((_btnClick) => _btnClick + 1);
     };
 
-    // Used to set the clickAllowed property of the product object.
+    // Used to check if buttons can be clicked.
     const isClickAllowed = (product) => {
-        return product.quantity < parseInt(product.metadata.max_qty);
+        return (
+            product.quantity < parseInt(product.metadata.max_qty) &&
+            product.inventory >= 1
+        );
     };
 
     // Saves a key and value pair to local storage. Will update the quantity
@@ -85,7 +88,6 @@ function Products() {
                     const prod = local.find((prod) => prod.key === item.id);
                     if (prod) {
                         item.quantity = prod.value.quantity;
-                        item.clickAllowed = prod.value.clickAllowed;
                     }
                 });
             });
@@ -94,18 +96,16 @@ function Products() {
 
     // Simple function to handle adding items to cart.
     const onAdd = (item) => {
-        if (item.clickAllowed === true) {
+        if (isClickAllowed(item) === true) {
             item.quantity++;
-            item.clickAllowed = isClickAllowed(item);
             saveToLocal(item.id, item);
         }
     };
 
     // Simple function to handle removing items from cart.
     const onMinus = (item) => {
-        if (item.quantity > 0) {
+        if (item.quantity >= 1) {
             item.quantity--;
-            item.clickAllowed = isClickAllowed(item);
             saveToLocal(item.id, item);
         }
     };
@@ -121,9 +121,10 @@ function Products() {
         return {
             ...product,
             quantity: 0,
-            clickAllowed: true,
+            // clickAllowed: true,
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
+            inventory: 1,
         };
     };
 
@@ -132,7 +133,7 @@ function Products() {
         products.forEach((obj) => {
             obj.product_list.forEach((prod) => {
                 prod.quantity = 0;
-                prod.clickAllowed = true;
+                // prod.clickAllowed = true;
             });
         });
         localStorage.removeItem("cartItems");

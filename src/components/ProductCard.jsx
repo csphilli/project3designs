@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
-import * as tooltip from "../scss/tooltip.module.scss";
+// import * as tooltip from "../scss/tooltip.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill, BsThreeDots } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ProductModal from "./ProductModal";
+import AddToCartBtn from "./AddToCartBtn";
 
 function ProductCard(props) {
     const { product, handleClick, btnClick, onAdd, onMinus, formattedPrice } =
         props;
     const [showModal, setShowModal] = useState(false);
-
-    let btn = product.product_list[0].clickAllowed
-        ? styles.btn_container
-        : `${styles.btn_container_prevent} ${styles.btn_prevent} ${tooltip.tooltip}`;
 
     const toggleModal = () => {
         setShowModal(!showModal);
@@ -41,7 +38,7 @@ function ProductCard(props) {
                             <GatsbyImage
                                 className={styles.image_container}
                                 image={img}
-                                alt="picture of product"
+                                alt="picture of the product"
                             />
                         </a>
                     </div>
@@ -132,24 +129,18 @@ function ProductCard(props) {
                             <p className={styles.price}>
                                 {formattedPrice(price, currency)}
                             </p>
-                            <button
-                                // className={btn}
-                                data-tooltip="max quantity"
-                                className={btn}
-                                onClick={(e) => {
-                                    if (!product.product_list[0].clickAllowed) {
-                                        e.preventDefault();
-                                    } else {
-                                        onAdd(product.product_list[0]);
-                                        handleClick();
-                                    }
-                                }}
+                            <AddToCartBtn
+                                src="card"
+                                product={product.product_list[0]}
+                                onAdd={onAdd}
+                                handleClick={handleClick}
+                                btnClick={btnClick}
                             >
                                 <BsCartPlus
                                     className={styles.btn_icon}
                                     id={product.product_list[0].id}
                                 />
-                            </button>
+                            </AddToCartBtn>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
 import { BsCart, BsTrash, BsFillShieldLockFill } from "react-icons/bs";
+import AddToCartBtn from "./AddToCartBtn";
+import RemoveFromCartBtn from "./RemoveFromCartBtn";
 
 import Checkout from "./Checkout";
 
@@ -75,7 +77,16 @@ function Cart(props) {
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
-                                    <button
+                                    <AddToCartBtn
+                                        src="cart"
+                                        product={item}
+                                        onAdd={onAdd}
+                                        handleClick={handleClick}
+                                        btnClick={btnClick}
+                                    >
+                                        +
+                                    </AddToCartBtn>
+                                    {/* <button
                                         onClick={(e) => {
                                             if (!item.clickAllowed) {
                                                 e.preventDefault();
@@ -87,9 +98,18 @@ function Cart(props) {
                                         className={btn}
                                     >
                                         +
-                                    </button>
+                                    </button> */}
                                     <p>{item.quantity}</p>
-                                    <button
+                                    <RemoveFromCartBtn
+                                        product={item}
+                                        onMinus={onMinus}
+                                        handleClick={handleClick}
+                                        btnClick={btnClick}
+                                    >
+                                        -
+                                    </RemoveFromCartBtn>
+
+                                    {/* <button
                                         onClick={(e) => {
                                             onMinus(item);
                                             handleClick();
@@ -97,7 +117,7 @@ function Cart(props) {
                                         className={`${styles.button} ${styles.qty_minus}`}
                                     >
                                         -
-                                    </button>
+                                    </button> */}
                                 </div>
                                 <p>{item.description}</p>
                                 <p>{subtotal}</p>

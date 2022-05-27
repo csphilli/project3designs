@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import AddToCartBtn from "./AddToCartBtn";
+import RemoveFromCartBtn from "./RemoveFromCartBtn";
 
 function ProductModal(props) {
     const {
@@ -10,6 +12,7 @@ function ProductModal(props) {
         onMinus,
         formattedPrice,
         toggleModal,
+        btnClick,
     } = props;
     const img = getImage(
         product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
@@ -59,9 +62,6 @@ function ProductModal(props) {
                         <p className={styles.heading}>In Cart</p>
                     </div>
                     {product.product_list.map((item) => {
-                        const btn = !item.clickAllowed
-                            ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
-                            : `${styles.button} ${styles.qty_plus}`;
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <p className={styles.modal_price}>
@@ -69,29 +69,24 @@ function ProductModal(props) {
                                 </p>
                                 <p>{item.description}</p>
                                 <div className={styles.qty_container}>
-                                    <button
-                                        onClick={(e) => {
-                                            if (!item.clickAllowed) {
-                                                e.preventDefault();
-                                            } else {
-                                                onAdd(item);
-                                                handleClick();
-                                            }
-                                        }}
-                                        className={btn}
+                                    <AddToCartBtn
+                                        src="modal"
+                                        product={item}
+                                        onAdd={onAdd}
+                                        handleClick={handleClick}
+                                        btnClick={btnClick}
                                     >
                                         +
-                                    </button>
+                                    </AddToCartBtn>
                                     <p>{item.quantity}</p>
-                                    <button
-                                        onClick={(e) => {
-                                            onMinus(item);
-                                            handleClick();
-                                        }}
-                                        className={`${styles.button} ${styles.qty_minus}`}
+                                    <RemoveFromCartBtn
+                                        product={item}
+                                        onMinus={onMinus}
+                                        handleClick={handleClick}
+                                        btnClick={btnClick}
                                     >
                                         -
-                                    </button>
+                                    </RemoveFromCartBtn>
                                 </div>
                             </div>
                         );
