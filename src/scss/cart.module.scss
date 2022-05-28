@@ -87,18 +87,17 @@ p {
 }
 
 .heading:first-child {
-    margin-left: 0.2rem;
+    margin-left: 0.25rem;
 }
 
 .heading:last-child {
-    margin-right: 0.2rem;
+    margin-right: 0.25rem;
 }
 
 .list_item {
     display: grid;
     grid-template-columns: 2fr 4fr 1fr;
     align-items: center;
-    padding: 0.2rem 0;
     padding: scaled(0.25, 0.5, 320, 1400) 0;
 }
 
@@ -106,72 +105,16 @@ p {
     background-color: rgb(206, 206, 206);
 }
 
+.subtotal {
+    text-align: right;
+    padding-right: 0.25rem;
+}
+
 .qty_container {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     margin-left: 0.2rem;
-
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        height: 1.3rem;
-        width: 1.2rem;
-        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
-        border-radius: 0.2rem;
-        color: black;
-    }
-
-    .button:hover,
-    .button:focus {
-        cursor: pointer;
-    }
-
-    .button_prevent {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        height: 1.3rem;
-        width: 1.2rem;
-        border-radius: 0.2rem;
-        color: black;
-        fill: rgb(202, 202, 202);
-        cursor: not-allowed;
-    }
-
-    .qty_plus {
-        background: rgb(115, 197, 153);
-        border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
-    .qty_minus {
-        background: rgb(197, 133, 115);
-        border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
-    .qty_plus_prevent {
-        border: 1px solid rgba(133, 133, 133, 0.4);
-        color: rgb(180, 180, 180);
-        fill: rgb(202, 202, 202);
-        cursor: not-allowed;
-    }
-
-    .qty_plus:active,
-    .qty_minus:active {
-        transform: scale(0.9);
-        box-shadow: none;
-        transition: 0.1s ease-in-out;
-    }
-
-    .qty_minus:hover,
-    .qty_plus:hover,
-    .qty_minus:focus,
-    .qty_plus:focus {
-        cursor: pointer;
-    }
 }
 
 .buttons_container {
@@ -227,7 +170,7 @@ p {
     p {
         font-style: italic;
         font-family: "Montserrat", sans-serif;
-        font-size: scaled(0.5, 0.75, 320, 1400);
+        font-size: scaled(0.75, 0.75, 320, 1400);
         margin-left: 0.3rem;
     }
 

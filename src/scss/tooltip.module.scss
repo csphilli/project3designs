@@ -1,11 +1,17 @@
 @use "../scss/abstracts/" as *;
 
+.tooltip_parent {
+    position: relative;
+}
+
 .tooltip::before,
 .tooltip::after {
     --scale: 0;
     --font-color: rgb(16, 16, 16);
     --background-color: #cdcdcd;
     --arrow-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
     position: absolute;
     top: -0.1rem;
     left: 50%;

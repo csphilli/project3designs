@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
-// import * as tooltip from "../scss/tooltip.module.scss";
+import * as tooltip from "../scss/tooltip.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill, BsThreeDots } from "react-icons/bs";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import ProductModal from "./ProductModal";
@@ -129,18 +129,20 @@ function ProductCard(props) {
                             <p className={styles.price}>
                                 {formattedPrice(price, currency)}
                             </p>
-                            <AddToCartBtn
-                                src="card"
-                                product={product.product_list[0]}
-                                onAdd={onAdd}
-                                handleClick={handleClick}
-                                btnClick={btnClick}
-                            >
-                                <BsCartPlus
-                                    className={styles.btn_icon}
-                                    id={product.product_list[0].id}
-                                />
-                            </AddToCartBtn>
+                            <div className={tooltip.tooltip_parent}>
+                                <AddToCartBtn
+                                    src="card"
+                                    product={product.product_list[0]}
+                                    onAdd={onAdd}
+                                    handleClick={handleClick}
+                                    btnClick={btnClick}
+                                >
+                                    <BsCartPlus
+                                        className={styles.btn_icon}
+                                        id={product.product_list[0].id}
+                                    />
+                                </AddToCartBtn>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -25,6 +25,7 @@ function Products() {
                         p3d_id
                         slug
                         max_qty
+                        product_type
                     }
                     name
                     localFiles {
@@ -52,6 +53,7 @@ function Products() {
         return Intl.NumberFormat("en-EU", {
             style: "currency",
             currency: ccy,
+            maximumSignificantDigits: 5, // might have an issue with numbers
         }).format(value);
     };
 

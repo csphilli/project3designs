@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as styles from "../scss/cart.module.scss";
+import * as tooltip from "../scss/tooltip.module.scss";
 import { BsCart, BsTrash, BsFillShieldLockFill } from "react-icons/bs";
 import AddToCartBtn from "./AddToCartBtn";
 import RemoveFromCartBtn from "./RemoveFromCartBtn";
@@ -66,10 +67,6 @@ function Cart(props) {
                         <p className={styles.heading}>Subtotal</p>
                     </div>
                     {cartItems.map((item) => {
-                        const btn = !item.clickAllowed
-                            ? `${styles.button_prevent} ${styles.qty_plus_prevent}`
-                            : `${styles.button} ${styles.qty_plus}`;
-
                         const subtotal = formattedPrice(
                             item.price * item.quantity,
                             item.currency
@@ -77,28 +74,17 @@ function Cart(props) {
                         return (
                             <div key={item.id} className={styles.list_item}>
                                 <div className={styles.qty_container}>
-                                    <AddToCartBtn
-                                        src="cart"
-                                        product={item}
-                                        onAdd={onAdd}
-                                        handleClick={handleClick}
-                                        btnClick={btnClick}
-                                    >
-                                        +
-                                    </AddToCartBtn>
-                                    {/* <button
-                                        onClick={(e) => {
-                                            if (!item.clickAllowed) {
-                                                e.preventDefault();
-                                            } else {
-                                                onAdd(item);
-                                                handleClick();
-                                            }
-                                        }}
-                                        className={btn}
-                                    >
-                                        +
-                                    </button> */}
+                                    <div className={tooltip.tooltip_parent}>
+                                        <AddToCartBtn
+                                            src="cart"
+                                            product={item}
+                                            onAdd={onAdd}
+                                            handleClick={handleClick}
+                                            btnClick={btnClick}
+                                        >
+                                            +
+                                        </AddToCartBtn>
+                                    </div>
                                     <p>{item.quantity}</p>
                                     <RemoveFromCartBtn
                                         product={item}
@@ -108,19 +94,9 @@ function Cart(props) {
                                     >
                                         -
                                     </RemoveFromCartBtn>
-
-                                    {/* <button
-                                        onClick={(e) => {
-                                            onMinus(item);
-                                            handleClick();
-                                        }}
-                                        className={`${styles.button} ${styles.qty_minus}`}
-                                    >
-                                        -
-                                    </button> */}
                                 </div>
                                 <p>{item.description}</p>
-                                <p>{subtotal}</p>
+                                <p className={styles.subtotal}>{subtotal}</p>
                             </div>
                         );
                     })}

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as styles from "../scss/productModal.module.scss";
+import * as tooltip from "../scss/tooltip.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import AddToCartBtn from "./AddToCartBtn";
 import RemoveFromCartBtn from "./RemoveFromCartBtn";
@@ -69,15 +70,17 @@ function ProductModal(props) {
                                 </p>
                                 <p>{item.description}</p>
                                 <div className={styles.qty_container}>
-                                    <AddToCartBtn
-                                        src="modal"
-                                        product={item}
-                                        onAdd={onAdd}
-                                        handleClick={handleClick}
-                                        btnClick={btnClick}
-                                    >
-                                        +
-                                    </AddToCartBtn>
+                                    <div className={tooltip.tooltip_parent}>
+                                        <AddToCartBtn
+                                            src="modal"
+                                            product={item}
+                                            onAdd={onAdd}
+                                            handleClick={handleClick}
+                                            btnClick={btnClick}
+                                        >
+                                            +
+                                        </AddToCartBtn>
+                                    </div>
                                     <p>{item.quantity}</p>
                                     <RemoveFromCartBtn
                                         product={item}
