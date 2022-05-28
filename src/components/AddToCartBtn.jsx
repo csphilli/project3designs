@@ -12,7 +12,6 @@ function AddToCartBtn(props) {
     const [clickAllowed, setClickAllowed] = useState(true);
 
     useEffect(() => {
-        console.log(product);
         switch (product.metadata.product_type) {
             case "physical": {
                 if (
