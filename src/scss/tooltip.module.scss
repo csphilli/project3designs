@@ -7,8 +7,8 @@
 .tooltip::before,
 .tooltip::after {
     --scale: 0;
-    --font-color: rgb(16, 16, 16);
-    --background-color: #cdcdcd;
+    --font-color: rgb(0, 0, 0);
+    --background-color: #bababa;
     --arrow-size: 1rem;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
@@ -32,7 +32,7 @@
     color: var(--font-color);
     background-color: var(--background-color);
     border-radius: 0.2rem;
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
 
 .tooltip:hover::before,
@@ -47,5 +47,6 @@
     aspect-ratio: 1.6;
     background-color: var(--background-color);
     clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
-    box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    // box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
 }
