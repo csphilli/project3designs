@@ -123,7 +123,6 @@ function Products() {
         return {
             ...product,
             quantity: 0,
-            // clickAllowed: true,
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
             inventory: 102,

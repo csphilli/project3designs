@@ -53,9 +53,16 @@ function Checkout(props) {
         : styles.checkout_button_prevent;
 
     return (
-        <button className={btnStyle} onClick={redirectToCheckout}>
-            <p>Proceed to Checkout</p>
-        </button>
+        <form className={btnStyle} onSubmit={redirectToCheckout}>
+            <input
+                className={styles.inputBtn}
+                type="submit"
+                value="Proceed to Checkout"
+            />
+        </form>
+        // <button className={btnStyle} onClick={redirectToCheckout}>
+        //     <p>Proceed to Checkout</p>
+        // </button>
     );
 }
 
