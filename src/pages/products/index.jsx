@@ -126,7 +126,7 @@ function Products() {
             // clickAllowed: true,
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
-            inventory: 1,
+            inventory: 102,
         };
     };
 

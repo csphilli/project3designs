@@ -37,7 +37,10 @@ function Cart(props) {
         cartItems.reduce((acc, prod) => prod.quantity * prod.price + acc, 0)
     );
 
-    const totalQty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
+    const totalQty = () => {
+        const qty = cartItems.reduce((acc, prod) => prod.quantity + acc, 0);
+        return qty > 99 ? "99+" : qty;
+    };
 
     // return <div>testing</div>;
 
@@ -55,7 +58,7 @@ function Cart(props) {
                     <div className={styles.cart_icon_container}>
                         <BsCart className={styles.cart_icon} />
                         <div className={styles.total_qty_container}>
-                            <p className={styles.total_qty}>{totalQty}</p>
+                            <p className={styles.total_qty}>{totalQty()}</p>
                         </div>
                     </div>
                     <p className={styles.total}>Total: {totalPrice}</p>
