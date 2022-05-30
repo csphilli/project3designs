@@ -8,6 +8,7 @@ import * as styles from "../../scss/products.module.scss";
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(0);
+    const [inventory, setInventory] = useState([]);
 
     // In an event where something goes wrong with the production side of product sales, I need a fast way of removing the ability to buy stuff until I get it sorted out. Set this to false if I don't want to allow selling.
     const allowSelling = true;
@@ -141,6 +142,14 @@ function Products() {
         localStorage.removeItem("cartItems");
         handleClick();
     };
+
+    useEffect(() => {
+        setInventory(
+            fetch("/.netlify/functions/get_inventory")
+                .then((resp) => resp.json())
+                .then((data) => JSON.parse(data))
+        );
+    }, [inventory]);
 
     // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
     useEffect(() => {
