@@ -8,8 +8,9 @@ import * as styles from "../../scss/products.module.scss";
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(0);
-    // let [local, setLocal] = useState([]);
-    // const [cartItems, setCartItems] = useState([]);
+
+    // In an event where something goes wrong with the production side of product sales, I need a fast way of removing the ability to buy stuff until I get it sorted out. Set this to false if I don't want to allow selling.
+    const allowSelling = true;
 
     const query = useStaticQuery(graphql`
         query Products {
@@ -169,38 +170,52 @@ function Products() {
         updateFromLocal(products);
         setProducts(products);
     }, [query]);
-    return (
-        <div>
-            <HeadPageLayout pageId="products">
-                <div className={styles.container_grid}>
-                    <aside className={styles.cart}>
-                        <Cart
-                            formattedPrice={formattedPrice}
-                            onMinus={onMinus}
-                            onAdd={onAdd}
-                            products={products}
-                            handleClick={handleClick}
-                            btnClick={btnClick}
-                            emptyCart={emptyCart}
-                        />
-                    </aside>
-                    <main className={styles.products}>
-                        {products.map((product) => (
-                            <ProductCard
+    if (allowSelling === true) {
+        return (
+            <div>
+                <HeadPageLayout pageId="products">
+                    <div className={styles.container_grid}>
+                        <aside className={styles.cart}>
+                            <Cart
                                 formattedPrice={formattedPrice}
-                                handleClick={handleClick}
-                                btnClick={btnClick}
                                 onMinus={onMinus}
                                 onAdd={onAdd}
-                                key={product.product_list[0].id}
-                                product={product}
+                                products={products}
+                                handleClick={handleClick}
+                                btnClick={btnClick}
+                                emptyCart={emptyCart}
                             />
-                        ))}
-                    </main>
-                </div>
-            </HeadPageLayout>
-        </div>
-    );
+                        </aside>
+                        <main className={styles.products}>
+                            {products.map((product) => (
+                                <ProductCard
+                                    formattedPrice={formattedPrice}
+                                    handleClick={handleClick}
+                                    btnClick={btnClick}
+                                    onMinus={onMinus}
+                                    onAdd={onAdd}
+                                    key={product.product_list[0].id}
+                                    product={product}
+                                />
+                            ))}
+                        </main>
+                    </div>
+                </HeadPageLayout>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <HeadPageLayout pageId="products">
+                    <h3>
+                        Unfortunately we have temporarily restricted the sales
+                        of our products. We apologize for the inconvenience
+                        Please come back at a later time to check the status.
+                    </h3>
+                </HeadPageLayout>
+            </div>
+        );
+    }
 }
 
 export default Products;
