@@ -4,11 +4,16 @@ import HeadPageLayout from "../../components/HeadPageLayout";
 import ProductCard from "../../components/ProductCard";
 import Cart from "../../components/Cart";
 import * as styles from "../../scss/products.module.scss";
+import { supabase } from "../../lib/supabase";
+// import { get_inventory } from "../../lib/get_inventory";
 
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(0);
     const [inventory, setInventory] = useState([]);
+    // const supabaseURL = process.env.GATSBY_SUPABASE_URL;
+    // const supabaseKey = process.env.GATSBY_SUPABASE_KEY;
+    // const supabase = createClient(supabaseURL, supabaseKey);
 
     // In an event where something goes wrong with the production side of product sales, I need a fast way of removing the ability to buy stuff until I get it sorted out. Set this to false if I don't want to allow selling.
     const allowSelling = true;
@@ -120,6 +125,15 @@ function Products() {
         });
     };
 
+    const assignInventory = (prod) => {
+        const exist = inventory.find((item) => item.product_id === prod.id);
+        if (exist) {
+            return exist.inventory;
+        } else {
+            return 1;
+        }
+    };
+
     // Helper function to create product obljects and then add custom properties.
     const createProdObj = (product, unit_amt, ccy) => {
         return {
@@ -127,6 +141,7 @@ function Products() {
             quantity: 0,
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
+            inventory: assignInventory(product),
             inventory: 102,
         };
     };
@@ -143,18 +158,34 @@ function Products() {
         handleClick();
     };
 
-    useEffect(() => {
-        setInventory(
-            fetch("/.netlify/functions/get_inventory")
-                .then((resp) => resp.json())
-                .then((data) => JSON.parse(data))
-        );
-    }, [inventory]);
+    // useEffect(() => {
+    //     // const data = get_inventory();
+    //     async function get_inventory() {
+    //         try {
+    //             const { data: p3d_inventory } = await supabase
+    //                 .from("p3d_inventory")
+    //                 .select("*");
+    //             setInventory(p3d_inventory);
+    //         } catch (e) {
+    //             console.error("ERROR:", e);
+    //         }
+    //     }
+    //     get_inventory();
+    // }, []);
+
+    // console.log("inventor", inventory);
+
+    // useEffect(() => {
+    //     // setInventory(get_inventory());
+    //     console.log(get_inventory());
+    // }, []);
 
     // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
     useEffect(() => {
         const { allStripeProduct: productList, allStripePrice: prices } = query;
         let products = [];
+        // console.log("in products effect. Status of inventory", inventory);
+
         productList.nodes.forEach((obj) => {
             const exist = products.find(
                 (arr) => arr.p3d_id === obj.metadata.p3d_id
@@ -164,13 +195,13 @@ function Products() {
             );
             if (exist) {
                 exist.product_list.push(
-                    createProdObj(obj, unit_amount, currency)
+                    createProdObj(obj, unit_amount, currency, inventory)
                 );
             } else {
                 products.push({
                     p3d_id: obj.metadata.p3d_id,
                     product_list: new Array(
-                        createProdObj(obj, unit_amount, currency)
+                        createProdObj(obj, unit_amount, currency, inventory)
                     ),
                 });
             }
@@ -178,6 +209,7 @@ function Products() {
         sortProducts(products);
         updateFromLocal(products);
         setProducts(products);
+        // console.log(products);
     }, [query]);
     if (allowSelling === true) {
         return (

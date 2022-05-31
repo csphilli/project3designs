@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as styles from "../scss/checkout.module.scss";
+import { TEST_URL } from "../lib/constants";
 
 // const express = require("express");
 // const app = express();
@@ -48,12 +49,21 @@ function Checkout(props) {
         }
     };
 
+    const testing = async (event) => {
+        event.preventDefault();
+        const data = await fetch(
+            `${TEST_URL}.netlify/functions/add_product_to_db`
+        );
+        console.log(data);
+    };
+
     const btnStyle = !loading
         ? styles.checkout_button
         : styles.checkout_button_prevent;
 
     return (
-        <form className={btnStyle} onSubmit={redirectToCheckout}>
+        // <form className={btnStyle} onSubmit={redirectToCheckout}>
+        <form className={btnStyle} onSubmit={testing}>
             <input
                 className={styles.inputBtn}
                 type="submit"

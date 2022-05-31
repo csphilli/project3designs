@@ -2,21 +2,22 @@
 
 const fetch = require("node-fetch");
 exports.handler = async () => {
-    const data = await fetch(
-        "https://teupdewkszzkrezbvmfe.supabase.co/rest/v1/p3d_inventory?select=*",
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                apiKey: SUPABASE_KEY,
-                Authorization: SUPABASE_KEY,
-            },
-            // body: JSON.stringify(data),
-        }
-    );
+    // const data = await fetch(
+    //     "https://teupdewkszzkrezbvmfe.supabase.co/rest/v1/p3d_inventory?select=*",
+    //     {
+    //         method: "GET",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             apiKey: process.env.SUPABASE_KEY,
+    //             Authorization: `Bearer: ${process.env.SUPABASE_KEY}`,
+    //         },
+    //         // body: JSON.stringify(data),
+    //     }
+    // );
     return {
         statusCode: 200,
-        body: data,
+        body: "cool",
+        // body: JSON.stringify(data),
     };
 };
 /*
