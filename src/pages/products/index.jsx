@@ -142,7 +142,7 @@ function Products() {
             price: (Number(unit_amt) / 100).toFixed(2),
             currency: ccy,
             inventory: assignInventory(product),
-            inventory: 102,
+            // inventory: 102,
         };
     };
 
@@ -209,7 +209,6 @@ function Products() {
         sortProducts(products);
         updateFromLocal(products);
         setProducts(products);
-        // console.log(products);
     }, [query]);
     if (allowSelling === true) {
         return (
