@@ -1,5 +1,8 @@
+const fetch = require("node-fetch");
+
 exports.handler = async () => {
-    const api = await fetch(
+    let prods;
+    await fetch(
         `${process.env.GATSBY_SUPABASE_URL}/rest/v1/products?select=*`,
         {
             method: "GET",
@@ -11,11 +14,22 @@ exports.handler = async () => {
     )
         .then((resp) => {
             if (resp.ok) {
-                return api.json();
+                return resp.json();
             }
             throw new Error("Couldn't get products from Supabase");
         })
+        .then((products) => {
+            prods = products;
+            console.log(prods);
+        })
         .catch((e) => {
-            console.error(`ERROR: ${e}`);
+            return {
+                statusCode: 400,
+                body: JSON.stringify(`ERROR: ${e}`),
+            };
         });
+    return {
+        statusCode: 200,
+        body: JSON.stringify(prods),
+    };
 };
