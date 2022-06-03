@@ -59,12 +59,15 @@ function Products() {
         const tests = await fetch(`/.netlify/functions/get_products`, {
             method: "GET",
             "Content-type": "application/json",
-        }).then((resp) => console.log(resp.body));
+        })
+            .then((resp) => resp.json())
+            .then((items) => items);
+        console.log("tests", tests);
     };
 
     useEffect(() => {
         testProducts();
-    });
+    }, []);
 
     // Formats the product pricing. Default is eur.
     const formattedPrice = (value, ccy = "eur") => {
