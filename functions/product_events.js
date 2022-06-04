@@ -71,6 +71,8 @@ exports.handler = async (event) => {
             case "product.created": {
                 const product = JSON.parse(event.body).data;
                 console.log(product);
+                const { product_type, inventory, max_qty } = product.metadata;
+                console.log(product_type, inventory, max_qty);
 
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
