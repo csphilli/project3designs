@@ -85,17 +85,17 @@ exports.handler = async (event) => {
                 const inventory_id = await insertIntoInventory(
                     product.metadata.max_qty,
                     product.metadata.inventory,
-                    product.product_id
+                    product.id
                 );
 
                 // Inserting into products table when product.created webhook fires.
 
                 const { error } = await supabase.from("products").insert([
                     {
-                        product_id: product.product_id,
+                        product_id: product.id,
                         default_price: product.default_price,
                         name: product.name,
-                        desc: product.desc,
+                        desc: product.description,
                         category_id: category_id,
                         inventory_id: inventory_id,
                         image_url: product.images[0],
@@ -107,7 +107,7 @@ exports.handler = async (event) => {
                 ]);
                 if (error) {
                     throw new Error(
-                        `Could not insert new row in 'products' for ${product.product_id}: ${error}`
+                        `Could not insert new row in 'products' for ${product.id}: ${error}`
                     );
                 }
                 break;
