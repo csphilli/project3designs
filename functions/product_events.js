@@ -70,23 +70,20 @@ exports.handler = async (event) => {
             // case "setup_intent.created": {
             case "product.created": {
                 const product = JSON.parse(event.body).data.object;
-                console.log(product);
-                const { product_type, inventory, max_qty } = product.metadata;
-                console.log(product_type, inventory, max_qty);
 
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
-                    categories.indexOf(product.metadata[0].product_type) + 1;
+                    categories.indexOf(product.metadata.product_type) + 1;
                 if (category_id === 0) {
                     throw new Error(
-                        `Category '${product.metadata[0].product_type}' doesn't exist in categories array`
+                        `Category '${product.metadata.product_type}' doesn't exist in categories array`
                     );
                 }
 
                 // inserting into inventory table
                 const inventory_id = await insertIntoInventory(
-                    product.metadata[0].max_qty,
-                    product.metadata[0].inventory,
+                    product.metadata.max_qty,
+                    product.metadata.inventory,
                     product.product_id
                 );
 
