@@ -70,6 +70,12 @@ exports.handler = async (event) => {
             // case "setup_intent.created": {
             case "product.created": {
                 const product = JSON.parse(event.body).data.object;
+                console.log(
+                    "ID",
+                    product.product_id,
+                    "PRICE",
+                    product.default_price
+                );
 
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
@@ -113,27 +119,27 @@ exports.handler = async (event) => {
             }
             // This will be product.updated
             // Will only allow changes on the following columns. If there is a change to the other column, it will instead be a new product being created. Can't change the product_id, category_id, inventory_id, likes, or like_lvl.
-            case "product.updated": {
-                // case "placeholder2": {
-                const product = JSON.parse(event.body).data.object;
-                const { error } = await supabase
-                    .from("products")
-                    .update({
-                        default_price: product.default_price,
-                        name: product.name,
-                        desc: product.desc,
-                        image_url: product.images[0],
-                        project_url: product.url,
-                        active: product.active,
-                    })
-                    .eq("product_id", product.product_id);
-                if (error) {
-                    throw new Error(
-                        `Could not update row for ${product.product_id}: ${error}`
-                    );
-                }
-                break;
-            }
+            // case "product.updated": {
+            //     // case "placeholder2": {
+            //     const product = JSON.parse(event.body).data.object;
+            //     const { error } = await supabase
+            //         .from("products")
+            //         .update({
+            //             default_price: product.default_price,
+            //             name: product.name,
+            //             desc: product.desc,
+            //             image_url: product.images[0],
+            //             project_url: product.url,
+            //             active: product.active,
+            //         })
+            //         .eq("product_id", product.product_id);
+            //     if (error) {
+            //         throw new Error(
+            //             `Could not update row for ${product.product_id}: ${error}`
+            //         );
+            //     }
+            //     break;
+            // }
             case "product.deleted": {
                 // case "setup_intent.created": {
                 const product = JSON.parse(event.body).data.object;
