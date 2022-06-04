@@ -59,7 +59,7 @@ exports.handler = async (event) => {
         const stripeEvent = stripe.webhooks.constructEvent(
             event.body,
             event.headers["stripe-signature"],
-            process.env.GATSBY_PRODUCT_EVENTS_WEBHOOK_SECRET
+            process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
 
         switch (stripeEvent.type) {
