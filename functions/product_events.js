@@ -5,6 +5,7 @@ const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK);
 
 // const createClient = require("supabase-js");
 const { createClient } = require("@supabase/supabase-js");
+const { default: ProductCard } = require("../src/components/ProductCard");
 
 const getSupabaseClient = (url, key) => {
     return createClient(url, key);
@@ -62,7 +63,7 @@ exports.handler = async (event) => {
             process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
         console.log("TYPE", stripeEvent.type);
-        console.log(JSON.parse(event.body));
+        console.log(JSON.parse(event.body).metadata);
 
         switch (stripeEvent.type) {
             // This will be product.created
@@ -71,17 +72,17 @@ exports.handler = async (event) => {
                 const product = JSON.parse(event.body).data;
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
-                    categories.indexOf(product.metadata.product_type) + 1;
+                    categories.indexOf(product.metadata[0].product_type) + 1;
                 if (category_id === 0) {
                     throw new Error(
-                        `Category '${product.metadata.product_type}' doesn't exist in categories array`
+                        `Category '${product.metadata[0].product_type}' doesn't exist in categories array`
                     );
                 }
 
                 // inserting into inventory table
                 const inventory_id = await insertIntoInventory(
-                    product.metadata.max_qty,
-                    product.metadata.inventory,
+                    product.metadata[0].max_qty,
+                    product.metadata[0].inventory,
                     product.product_id
                 );
 
@@ -118,11 +119,11 @@ exports.handler = async (event) => {
                     .from("products")
                     .update({
                         default_price: product.default_price,
-                        name: "testing update",
+                        name: product.name,
                         desc: product.desc,
-                        image_url: "www.project3designs.com",
+                        image_url: product.images[0],
                         project_url: product.url,
-                        active: false,
+                        active: product.active,
                     })
                     .eq("product_id", product.product_id);
                 if (error) {
