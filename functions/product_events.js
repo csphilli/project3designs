@@ -69,7 +69,7 @@ exports.handler = async (event) => {
             // This will be product.created
             // case "setup_intent.created": {
             case "product.created": {
-                const product = JSON.parse(event.body).data;
+                const product = JSON.parse(event.body).data.object;
                 console.log(product);
                 const { product_type, inventory, max_qty } = product.metadata;
                 console.log(product_type, inventory, max_qty);
