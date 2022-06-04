@@ -61,6 +61,7 @@ exports.handler = async (event) => {
             event.headers["stripe-signature"],
             process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
+        console.log("TYPE", stripeEvent.type);
 
         switch (stripeEvent.type) {
             // This will be product.created
