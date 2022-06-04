@@ -63,7 +63,7 @@ exports.handler = async (event) => {
         );
         console.log("TYPE", stripeEvent.type);
 
-        console.log(JSON.parse(event.body.metadata));
+        // console.log(JSON.parse(event.body.metadata));
 
         switch (stripeEvent.type) {
             // This will be product.created
