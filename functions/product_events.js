@@ -65,12 +65,11 @@ exports.handler = async (event) => {
 
         // console.log(JSON.parse(event.body.metadata));
 
+        const product = JSON.parse(event.body).data.object;
         switch (stripeEvent.type) {
             // This will be product.created
             // case "setup_intent.created": {
             case "product.created": {
-                const product = JSON.parse(event.body).data.object;
-
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
                     categories.indexOf(product.metadata.product_type) + 1;
@@ -113,7 +112,7 @@ exports.handler = async (event) => {
             }
             // Will only allow changes on the following columns. If there is a change to the other column, it will instead be a new product being created. Can't change the product_id, category_id, inventory_id, likes, or like_lvl.
             case "product.updated": {
-                const product = JSON.parse(event.body).data.object;
+                // const product = JSON.parse(event.body).data.object;
                 const { error } = await supabase
                     .from("products")
                     .update({
@@ -134,7 +133,7 @@ exports.handler = async (event) => {
             }
             case "product.deleted": {
                 // case "setup_intent.created": {
-                const product = JSON.parse(event.body).data.object;
+                // const product = JSON.parse(event.body).data.object;
                 const { error } = await supabase
                     .from("products")
                     .delete()
