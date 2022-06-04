@@ -119,15 +119,15 @@ exports.handler = async (event) => {
                     .update({
                         default_price: product.default_price,
                         name: product.name,
-                        desc: product.desc,
+                        desc: product.description,
                         image_url: product.images[0],
-                        project_url: product.url,
+                        project_url: product.metadata.project_url,
                         active: product.active,
                     })
-                    .eq("product_id", product.product_id);
+                    .eq("product_id", product.id);
                 if (error) {
                     throw new Error(
-                        `Could not update row for ${product.product_id}: ${error}`
+                        `Could not update row for ${product.id}: ${error}`
                     );
                 }
                 break;
@@ -138,10 +138,10 @@ exports.handler = async (event) => {
                 const { error } = await supabase
                     .from("products")
                     .delete()
-                    .eq("product_id", product.product_id);
+                    .eq("product_id", product.id);
                 if (error) {
                     throw new Error(
-                        `Could not delete product: ${product.product_id}: ${error}`
+                        `Could not delete product: ${product.id}: ${error}`
                     );
                 }
                 break;
