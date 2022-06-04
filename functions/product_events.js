@@ -115,7 +115,7 @@ exports.handler = async (event) => {
             // Will only allow changes on the following columns. If there is a change to the other column, it will instead be a new product being created. Can't change the product_id, category_id, inventory_id, likes, or like_lvl.
             case "product.updated": {
                 // case "placeholder2": {
-                const product = JSON.parse(event.body).data;
+                const product = JSON.parse(event.body).data.object;
                 const { error } = await supabase
                     .from("products")
                     .update({
@@ -136,7 +136,7 @@ exports.handler = async (event) => {
             }
             case "product.deleted": {
                 // case "setup_intent.created": {
-                const product = JSON.parse(event.body).data;
+                const product = JSON.parse(event.body).data.object;
                 const { error } = await supabase
                     .from("products")
                     .delete()
