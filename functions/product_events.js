@@ -69,7 +69,7 @@ exports.handler = async (event) => {
             // This will be product.created
             // case "setup_intent.created": {
             case "product.created": {
-                const { product } = JSON.parse(event.body).data.object;
+                const product = JSON.parse(event.body).data.object;
                 console.log(product);
 
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
