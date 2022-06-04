@@ -126,7 +126,6 @@ exports.handler = async (event) => {
                     })
                     .eq("product_id", product.id);
                 if (error) {
-                    console.error(error);
                     throw new Error(
                         `Could not update row for ${product.id}: ${error}`
                     );
@@ -141,6 +140,7 @@ exports.handler = async (event) => {
                     .delete()
                     .eq("product_id", product.id);
                 if (error) {
+                    console.error(error);
                     throw new Error(
                         `Could not delete product: ${product.id}: ${error}`
                     );
