@@ -62,6 +62,7 @@ exports.handler = async (event) => {
             process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
         console.log("TYPE", stripeEvent.type);
+        console.log(JSON.parse(event.body));
 
         switch (stripeEvent.type) {
             // This will be product.created
