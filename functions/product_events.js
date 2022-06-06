@@ -101,6 +101,7 @@ exports.handler = async (event) => {
                         project_url: product.metadata.project_url,
                         active: product.active,
                         p3_id: product.metadata.p3_id,
+                        currency: product.currency,
                         likes: 0,
                         like_level: 0,
                     },
@@ -123,6 +124,7 @@ exports.handler = async (event) => {
                     .update({
                         default_price: product.default_price,
                         unit_amount: price_data.unit_amount,
+                        currency: price_data.currency,
                         name: product.name,
                         desc: product.description,
                         image_url: product.images[0],
