@@ -55,19 +55,9 @@ function Products() {
         }
     `);
 
-    const testProducts = async () => {
-        const tests = await fetch(`/.netlify/functions/get_products`, {
-            method: "GET",
-            "Content-type": "application/json",
-        })
-            .then((resp) => resp.json())
-            .then((items) => items);
-        console.log("tests", tests);
-    };
-
-    useEffect(() => {
-        testProducts();
-    }, []);
+    // useEffect(() => {
+    //     fetchProducts();
+    // }, []);
 
     // Formats the product pricing. Default is eur.
     const formattedPrice = (value, ccy = "eur") => {
@@ -133,11 +123,11 @@ function Products() {
         }
     };
 
-    const sortProducts = (products) => {
-        products.forEach((obj) => {
-            obj.product_list.sort((b, a) => b.price - a.price);
-        });
-    };
+    // const sortProducts = (products) => {
+    //     products.forEach((obj) => {
+    //         obj.product_list.sort((b, a) => b.price - a.price);
+    //     });
+    // };
 
     const assignInventory = (prod) => {
         const exist = inventory.find((item) => item.product_id === prod.id);
@@ -149,13 +139,21 @@ function Products() {
     };
 
     // Helper function to create product obljects and then add custom properties.
-    const createProdObj = (product, unit_amt, ccy) => {
+    // const createProdObj = (product, unit_amt, ccy) => {
+    //     return {
+    //         ...product,
+    //         quantity: 0,
+    //         price: (Number(unit_amt) / 100).toFixed(2),
+    //         currency: ccy,
+    //         inventory: assignInventory(product),
+    //         // inventory: 102,
+    //     };
+    // };
+    const createProdObj = (obj) => {
         return {
-            ...product,
+            ...obj,
             quantity: 0,
-            price: (Number(unit_amt) / 100).toFixed(2),
-            currency: ccy,
-            inventory: assignInventory(product),
+            price: (Number(obj.unit_amount) / 100).toFixed(2),
             // inventory: 102,
         };
     };
@@ -195,35 +193,62 @@ function Products() {
     // }, []);
 
     // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
+
+    const fetchProducts = async () => {
+        const products = await fetch(`/.netlify/functions/get_products`, {
+            method: "GET",
+            "Content-type": "application/json",
+        }).then((resp) => resp.json());
+
+        return products;
+    };
+
     useEffect(() => {
-        const { allStripeProduct: productList, allStripePrice: prices } = query;
-        let products = [];
+        // const { allStripeProduct: productList, allStripePrice: prices } = query;
+        let prodList = [];
+        fetchProducts().then((arr) => {
+            arr.forEach((item) => {
+                const exists = prodList.find(
+                    (prod) => prod.p3_id === item.p3_id
+                );
+                exists
+                    ? exists.product_list.push(createProdObj(item))
+                    : prodList.push({
+                          p3_id: item.p3_id,
+                          product_list: new Array(createProdObj(item)),
+                      });
+            });
+            setProducts(prodList);
+        });
+
         // console.log("in products effect. Status of inventory", inventory);
 
-        productList.nodes.forEach((obj) => {
-            const exist = products.find(
-                (arr) => arr.p3d_id === obj.metadata.p3d_id
-            );
-            const { currency, unit_amount } = prices.nodes.find(
-                (item) => item.id === obj.default_price
-            );
-            if (exist) {
-                exist.product_list.push(
-                    createProdObj(obj, unit_amount, currency, inventory)
-                );
-            } else {
-                products.push({
-                    p3d_id: obj.metadata.p3d_id,
-                    product_list: new Array(
-                        createProdObj(obj, unit_amount, currency, inventory)
-                    ),
-                });
-            }
-        });
-        sortProducts(products);
+        // productList.nodes.forEach((obj) => {
+        //     const exist = products.find(
+        //         (arr) => arr.p3d_id === obj.metadata.p3d_id
+        //     );
+        //     const { currency, unit_amount } = prices.nodes.find(
+        //         (item) => item.id === obj.default_price
+        //     );
+        //     if (exist) {
+        //         exist.product_list.push(
+        //             createProdObj(obj, unit_amount, currency, inventory)
+        //         );
+        //     } else {
+        //         products.push({
+        //             p3d_id: obj.metadata.p3d_id,
+        //             product_list: new Array(
+        //                 createProdObj(obj, unit_amount, currency, inventory)
+        //             ),
+        //         });
+        //     }
+        // });
+
+        // sortProducts(products);
         updateFromLocal(products);
-        setProducts(products);
-    }, [query]);
+        // setProducts(prodList);
+        console.log(products);
+    }, []);
     if (allowSelling === true) {
         return (
             <div>

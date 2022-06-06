@@ -34,7 +34,7 @@ const supabase = getSupabaseClient(
 // ];
 
 // To cut down on DB lookup times, the categories here represent the exact category names in the product_catetory table as well as, and most importantly, the exact order they are in.
-const categories = ["digital", "physical"];
+// const categories = ["digital", "physical"];
 
 const insertIntoInventory = async (max_qty, inv_amount, prod_id) => {
     const { data, error } = await supabase
@@ -71,13 +71,13 @@ exports.handler = async (event) => {
                 // Change to tax category later. Better description and actually comes from STripe.
 
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
-                const category_id =
-                    categories.indexOf(product.metadata.product_type) + 1;
-                if (category_id === 0) {
-                    throw new Error(
-                        `Category '${product.metadata.product_type}' doesn't exist in categories array`
-                    );
-                }
+                // const category_id =
+                //     categories.indexOf(product.metadata.product_type) + 1;
+                // if (category_id === 0) {
+                //     throw new Error(
+                //         `Category '${product.metadata.product_type}' doesn't exist in categories array`
+                //     );
+                // }
 
                 // inserting into inventory table
                 const inventory_id = await insertIntoInventory(
@@ -95,7 +95,7 @@ exports.handler = async (event) => {
                         unit_amount: 0,
                         name: product.name,
                         desc: product.description,
-                        category_id: category_id,
+                        // category_id: category_id,
                         inventory_id: inventory_id,
                         image_url: product.images[0],
                         project_url: product.metadata.project_url,
@@ -104,6 +104,8 @@ exports.handler = async (event) => {
                         currency: product.currency,
                         likes: 0,
                         like_level: 0,
+                        tax_code: product.tax_code,
+                        tax_code_name: product.tax_code_name,
                     },
                 ]);
                 if (error) {
@@ -131,6 +133,8 @@ exports.handler = async (event) => {
                         project_url: product.metadata.project_url,
                         p3_id: product.metadata.p3_id,
                         active: product.active,
+                        tax_code: product.tax_code,
+                        tax_code_name: product.tax_code_name,
                     })
                     .eq("product_id", product.id);
                 if (error) {

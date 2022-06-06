@@ -85,18 +85,18 @@ function ProductCard(props) {
             </div>
         );
     } else {
-        const { price, currency, name, description } = product.product_list[0];
-        const { slug } = product.product_list[0].metadata;
-        const img = getImage(
-            product.product_list[0].localFiles[0].childImageSharp
-                .gatsbyImageData
-        );
+        const { price, currency, name, description, project_url, image_url } =
+            product.product_list[0];
+        // const { slug } = product.product_list[0].metadata;
+        const img = getImage(image_url);
+        // product.product_list[0].localFiles[0].childImageSharp
+        //     .gatsbyImageData
         return (
             <div>
                 <div className={styles.product_card}>
                     <div>
                         <a
-                            href={`/projects/${slug}`}
+                            href={`/projects/${project_url}`}
                             target="_blank"
                             rel="noreferrer"
                         >
