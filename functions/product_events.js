@@ -66,10 +66,9 @@ exports.handler = async (event) => {
 
         const product = JSON.parse(event.body).data.object;
 
-        const tax_obj = await stripe.taxCodes.retrieve(product.tax_code);
-        console.log(tax_obj);
-
-        console.log("TAX_CODE_NAME:", tax_obj.tax_code_name);
+        const { name: tax_code_name } = await stripe.taxCodes.retrieve(
+            product.tax_code
+        );
 
         switch (stripeEvent.type) {
             // This will be product.created
@@ -112,7 +111,7 @@ exports.handler = async (event) => {
                         likes: 0,
                         like_level: 0,
                         tax_code: product.tax_code,
-                        tax_code_name: product.tax_code_name,
+                        tax_code_name: tax_code_name,
                     },
                 ]);
                 if (error) {
@@ -141,7 +140,7 @@ exports.handler = async (event) => {
                         p3_id: product.metadata.p3_id,
                         active: product.active,
                         tax_code: product.tax_code,
-                        tax_code_name: product.tax_code_name,
+                        tax_code_name: tax_code_name,
                     })
                     .eq("product_id", product.id);
                 if (error) {
