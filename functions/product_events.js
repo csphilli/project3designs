@@ -121,9 +121,7 @@ exports.handler = async (event) => {
                     product.default_price
                 );
 
-                console.log("UNIT_AMOUNT:", unit_amount);
-
-                const { data, error } = await supabase
+                const { error } = await supabase
                     .from("products")
                     .update({
                         default_price: product.default_price,
@@ -141,7 +139,6 @@ exports.handler = async (event) => {
                     );
                 }
                 // Add the price amount to the products table since it only comes over as an ID initially.
-                console.log("updated:", data);
                 // const price_id = await stripe.prices.retrieve(
                 //     data.default_price
                 // );
