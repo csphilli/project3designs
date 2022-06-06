@@ -68,6 +68,8 @@ exports.handler = async (event) => {
             // This will be product.created
             // case "setup_intent.created": {
             case "product.created": {
+                // Change to tax category later. Better description and actually comes from STripe.
+
                 // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
                 const category_id =
                     categories.indexOf(product.metadata.product_type) + 1;
