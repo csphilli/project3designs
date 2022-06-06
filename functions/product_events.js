@@ -121,7 +121,7 @@ exports.handler = async (event) => {
                     product.default_price
                 );
 
-                const price = price.data.unit_amount;
+                const price = price_data.unit_amount;
                 console.log("PRICE", price);
 
                 const { error } = await supabase
