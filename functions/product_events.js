@@ -1,5 +1,4 @@
-// "use strict";
-// const fetch = require("node-fetch");
+"use strict";
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK);
 
@@ -17,22 +16,22 @@ const supabase = getSupabaseClient(
 // const endpointSecret =
 //     "whsec_0286817c32a272cf74a6260d4ebcf58cfa2dc19c850cb0c4ff8d24f734d9999b";
 
-const incProducts = [
-    {
-        product_id: "prod_elite",
-        default_price: "price_923sdfl4jdf",
-        name: "birdhouse v1",
-        desc: "a charming little birdhouse",
-        images: ["www.youtube.com"],
-        url: "www.localhost8888/products",
-        active: true,
-        metadata: {
-            max_qty: 3,
-            inventory: 1,
-            product_type: "digital",
-        },
-    },
-];
+// const incProducts = [
+//     {
+//         product_id: "prod_elite",
+//         default_price: "price_923sdfl4jdf",
+//         name: "birdhouse v1",
+//         desc: "a charming little birdhouse",
+//         images: ["www.youtube.com"],
+//         url: "www.localhost8888/products",
+//         active: true,
+//         metadata: {
+//             max_qty: 3,
+//             inventory: 1,
+//             product_type: "digital",
+//         },
+//     },
+// ];
 
 // To cut down on DB lookup times, the categories here represent the exact category names in the product_catetory table as well as, and most importantly, the exact order they are in.
 const categories = ["digital", "physical"];
@@ -62,9 +61,6 @@ exports.handler = async (event) => {
             process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
         console.log("TYPE", stripeEvent.type);
-
-        console.log("ID:", stripeEvent.id);
-
         // console.log(JSON.parse(event.body.metadata));
 
         const product = JSON.parse(event.body).data.object;
@@ -102,6 +98,7 @@ exports.handler = async (event) => {
                         image_url: product.images[0],
                         project_url: product.metadata.project_url,
                         active: product.active,
+                        p3_id: product.metadata.p3_id,
                         likes: 0,
                         like_level: 0,
                     },
@@ -113,16 +110,11 @@ exports.handler = async (event) => {
                 }
                 break;
             }
-            // Will only allow changes on the following columns. If there is a change to the other column, it will instead be a new product being created. Can't change the product_id, category_id, inventory_id, likes, or like_lvl.
             case "product.updated": {
                 // Write updated information to DB
-                // const product = JSON.parse(event.body).data.object;
                 const price_data = await stripe.prices.retrieve(
                     product.default_price
                 );
-
-                const price = price_data.unit_amount;
-                console.log("PRICE", price);
 
                 const { error } = await supabase
                     .from("products")
@@ -133,6 +125,7 @@ exports.handler = async (event) => {
                         desc: product.description,
                         image_url: product.images[0],
                         project_url: product.metadata.project_url,
+                        p3_id: product.metadata.p3_id,
                         active: product.active,
                     })
                     .eq("product_id", product.id);
@@ -141,11 +134,6 @@ exports.handler = async (event) => {
                         `Could not update row for ${product.id}: ${error}`
                     );
                 }
-                // Add the price amount to the products table since it only comes over as an ID initially.
-                // const price_id = await stripe.prices.retrieve(
-                //     data.default_price
-                // );
-
                 break;
             }
             case "product.deleted": {
