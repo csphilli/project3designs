@@ -64,6 +64,8 @@ exports.handler = async (event) => {
         // console.log(JSON.parse(event.body.metadata));
 
         const product = JSON.parse(event.body).data.object;
+        console.log("TAX_CODE_NAME:", product.tax_code_name);
+
         switch (stripeEvent.type) {
             // This will be product.created
             // case "setup_intent.created": {
