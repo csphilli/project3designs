@@ -115,13 +115,14 @@ exports.handler = async (event) => {
             case "product.updated": {
                 // Write updated information to DB
                 // const product = JSON.parse(event.body).data.object;
+                const unit_amount = await stripe.prices.retrieve(
+                    product.default_price
+                ).unit_amount;
                 const { data, error } = await supabase
                     .from("products")
                     .update({
                         default_price: product.default_price,
-                        unit_amount: await stripe.prices.retrieve(
-                            data.default_price
-                        ).unit_amount,
+                        unit_amount: unit_amount,
                         name: product.name,
                         desc: product.description,
                         image_url: product.images[0],
