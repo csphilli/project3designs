@@ -63,6 +63,8 @@ exports.handler = async (event) => {
         );
         console.log("TYPE", stripeEvent.type);
 
+        console.log("ID:", stripeEvent.id);
+
         // console.log(JSON.parse(event.body.metadata));
 
         const product = JSON.parse(event.body).data.object;
@@ -118,7 +120,6 @@ exports.handler = async (event) => {
                 const price_data = await stripe.prices.retrieve(
                     product.default_price
                 );
-                const unit_amount = price_data.unit_amount;
 
                 console.log("UNIT_AMOUNT:", unit_amount);
 
@@ -126,7 +127,7 @@ exports.handler = async (event) => {
                     .from("products")
                     .update({
                         default_price: product.default_price,
-                        unit_amount: unit_amount,
+                        unit_amount: price_data.unit_amount,
                         name: product.name,
                         desc: product.description,
                         image_url: product.images[0],
