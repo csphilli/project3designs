@@ -88,10 +88,11 @@ exports.handler = async (event) => {
 
                 // Inserting into products table when product.created webhook fires.
 
-                const { data, error } = await supabase.from("products").insert([
+                const { error } = await supabase.from("products").insert([
                     {
                         product_id: product.id,
                         default_price: product.default_price,
+                        unit_amount: 0,
                         name: product.name,
                         desc: product.description,
                         category_id: category_id,
@@ -103,7 +104,6 @@ exports.handler = async (event) => {
                         like_level: 0,
                     },
                 ]);
-                console.log("created:", data);
                 if (error) {
                     throw new Error(
                         `Could not insert new row in 'products' for ${product.id}: ${error}`
@@ -119,6 +119,9 @@ exports.handler = async (event) => {
                     .from("products")
                     .update({
                         default_price: product.default_price,
+                        unit_amount: await stripe.prices.retrieve(
+                            data.default_price
+                        ).unit_amount,
                         name: product.name,
                         desc: product.description,
                         image_url: product.images[0],
