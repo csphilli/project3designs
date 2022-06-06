@@ -112,8 +112,9 @@ exports.handler = async (event) => {
             }
             // Will only allow changes on the following columns. If there is a change to the other column, it will instead be a new product being created. Can't change the product_id, category_id, inventory_id, likes, or like_lvl.
             case "product.updated": {
+                // Write updated information to DB
                 // const product = JSON.parse(event.body).data.object;
-                const { error } = await supabase
+                const { data, error } = await supabase
                     .from("products")
                     .update({
                         default_price: product.default_price,
@@ -129,6 +130,12 @@ exports.handler = async (event) => {
                         `Could not update row for ${product.id}: ${error}`
                     );
                 }
+                // Add the price amount to the products table since it only comes over as an ID initially.
+                const price_id = await stripe.prices.retrieve(
+                    data.default_price
+                );
+                console.log(price_id);
+
                 break;
             }
             case "product.deleted": {
