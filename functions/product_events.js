@@ -65,9 +65,13 @@ exports.handler = async (event) => {
         // console.log(JSON.parse(event.body.metadata));
 
         const product = JSON.parse(event.body).data.object;
+
+        const { tax_code_name } = await stripe.taxCodes.retrieve(
+            product.tax_code
+        );
         console.log("PRODUCT", product);
 
-        console.log("TAX_CODE_NAME:", product.tax_code_name);
+        console.log("TAX_CODE_NAME:", tax_code_name);
 
         switch (stripeEvent.type) {
             // This will be product.created
