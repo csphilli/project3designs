@@ -61,9 +61,12 @@ exports.handler = async (event) => {
             process.env.GATSBY_STRIPE_PRODUCT_EVENTS_WEBHOOK_SECRET
         );
         console.log("TYPE", stripeEvent.type);
+
         // console.log(JSON.parse(event.body.metadata));
 
         const product = JSON.parse(event.body).data.object;
+        console.log("PRODUCT", product);
+
         console.log("TAX_CODE_NAME:", product.tax_code_name);
 
         switch (stripeEvent.type) {
