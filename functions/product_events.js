@@ -2,7 +2,6 @@
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK);
 
-// const createClient = require("supabase-js");
 const { createClient } = require("@supabase/supabase-js");
 
 const getSupabaseClient = (url, key) => {
@@ -13,46 +12,6 @@ const supabase = getSupabaseClient(
     process.env.GATSBY_SUPABASE_KEY
 );
 
-// const endpointSecret =
-//     "whsec_0286817c32a272cf74a6260d4ebcf58cfa2dc19c850cb0c4ff8d24f734d9999b";
-
-// const incProducts = [
-//     {
-//         product_id: "prod_elite",
-//         default_price: "price_923sdfl4jdf",
-//         name: "birdhouse v1",
-//         desc: "a charming little birdhouse",
-//         images: ["www.youtube.com"],
-//         url: "www.localhost8888/products",
-//         active: true,
-//         metadata: {
-//             max_qty: 3,
-//             inventory: 1,
-//             product_type: "digital",
-//         },
-//     },
-// ];
-
-// To cut down on DB lookup times, the categories here represent the exact category names in the product_catetory table as well as, and most importantly, the exact order they are in.
-// const categories = ["digital", "physical"];
-
-// const insertIntoInventory = async (max_qty, inv_amount, prod_id) => {
-//     const { data, error } = await supabase
-//         .from("product_inventory")
-//         .insert([
-//             { max_qty: max_qty, inventory: inv_amount, product_id: prod_id },
-//         ]);
-//     if (error) {
-//         return {
-//             statusCode: 500,
-//             body: JSON.stringify(
-//                 `Unable to insert inventory for product '${prod_id} for error ${error}'`
-//             ),
-//         };
-//     }
-//     return data[0].id;
-// };
-
 exports.handler = async (event) => {
     try {
         const stripeEvent = stripe.webhooks.constructEvent(
@@ -62,8 +21,6 @@ exports.handler = async (event) => {
         );
         console.log("TYPE", stripeEvent.type);
 
-        // console.log(JSON.parse(event.body.metadata));
-
         const product = JSON.parse(event.body).data.object;
 
         const { name: tax_code_name } = await stripe.taxCodes.retrieve(
@@ -71,29 +28,7 @@ exports.handler = async (event) => {
         );
 
         switch (stripeEvent.type) {
-            // This will be product.created
-            // case "setup_intent.created": {
             case "product.created": {
-                // Change to tax category later. Better description and actually comes from STripe.
-
-                // Getting the category ID here is a simple array indexOf function against the categories const above. It returns the value +1 since the DB id is not index 0. Requires a small bit of maintenance since it's housed here instead of checking the DB but improves performance significantly.
-                // const category_id =
-                //     categories.indexOf(product.metadata.product_type) + 1;
-                // if (category_id === 0) {
-                //     throw new Error(
-                //         `Category '${product.metadata.product_type}' doesn't exist in categories array`
-                //     );
-                // }
-
-                // inserting into inventory table
-                // const inventory_id = await insertIntoInventory(
-                //     product.metadata.max_qty,
-                //     product.metadata.inventory,
-                //     product.id
-                // );
-
-                // Inserting into products table when product.created webhook fires.
-
                 const { error } = await supabase.from("products").insert([
                     {
                         product_id: product.id,
@@ -122,7 +57,6 @@ exports.handler = async (event) => {
                 break;
             }
             case "product.updated": {
-                // Write updated information to DB
                 const price_data = await stripe.prices.retrieve(
                     product.default_price
                 );
@@ -153,8 +87,6 @@ exports.handler = async (event) => {
                 break;
             }
             case "product.deleted": {
-                // case "setup_intent.created": {
-                // const product = JSON.parse(event.body).data.object;
                 const { error } = await supabase
                     .from("products")
                     .delete()
