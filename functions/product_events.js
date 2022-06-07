@@ -111,6 +111,7 @@ exports.handler = async (event) => {
                         like_level: 0,
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
+                        max_qty: product.metadata.max_qty,
                     },
                 ]);
                 if (error) {
@@ -141,6 +142,7 @@ exports.handler = async (event) => {
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
                         inventory: product.metadata.inventory,
+                        max_qty: product.metadata.max_qty,
                     })
                     .eq("product_id", product.id);
                 if (error) {
