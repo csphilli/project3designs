@@ -18,12 +18,12 @@ function ProductCard(props) {
     };
 
     if (product.product_list.length > 1) {
-        const { name } = product.product_list[0];
-        const { slug } = product.product_list[0].metadata;
-        const img = getImage(
-            product.product_list[0].localFiles[0].childImageSharp
-                .gatsbyImageData
-        );
+        const { name, project_url } = product.product_list[0];
+        // const { project_url } = product.product_list[0].metadata;
+        // const img = getImage(
+        //     product.product_list[0].localFiles[0].childImageSharp
+        //         .gatsbyImageData
+        // );
 
         // return html with modal
         return (
@@ -31,15 +31,15 @@ function ProductCard(props) {
                 <div className={styles.product_card}>
                     <div>
                         <a
-                            href={`/projects/${slug}`}
+                            href={`/projects/${project_url}`}
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <GatsbyImage
+                            {/* <GatsbyImage
                                 className={styles.image_container}
-                                image={img}
+                                image={image_url}
                                 alt="picture of the product"
-                            />
+                            /> */}
                         </a>
                     </div>
                     <div>
@@ -85,7 +85,7 @@ function ProductCard(props) {
             </div>
         );
     } else {
-        const { price, currency, name, description, project_url, image_url } =
+        const { price, currency, name, desc, project_url, image_url } =
             product.product_list[0];
         // const { slug } = product.product_list[0].metadata;
         const img = getImage(image_url);
@@ -100,11 +100,11 @@ function ProductCard(props) {
                             target="_blank"
                             rel="noreferrer"
                         >
-                            <GatsbyImage
-                                image={img}
+                            {/* <GatsbyImage
+                                image={image_url}
                                 className={styles.image_container}
                                 alt="picture of product"
-                            />
+                            /> */}
                         </a>
                     </div>
                     <div>
@@ -120,7 +120,7 @@ function ProductCard(props) {
                                 >
                                     <BsFillInfoCircleFill />
                                     <p className={styles.purchase_info_id}>
-                                        product-id: {description}
+                                        product-id: {desc}
                                     </p>
                                 </div>
                             </div>

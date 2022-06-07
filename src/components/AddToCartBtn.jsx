@@ -12,20 +12,19 @@ function AddToCartBtn(props) {
     const [clickAllowed, setClickAllowed] = useState(true);
 
     useEffect(() => {
-        switch (product.metadata.product_type) {
-            case "physical": {
+        switch (product.tax_code_name) {
+            case "General - Tangible Goods": {
                 if (
                     product.inventory < 1 ||
                     product.quantity === product.inventory ||
-                    product.quantity >= product.metadata.max_qty
+                    product.quantity >= product.max_qty
                 )
                     setClickAllowed(false);
                 else setClickAllowed(true);
                 break;
             }
-            case "plan": {
-                if (product.quantity >= product.metadata.max_qty)
-                    setClickAllowed(false);
+            case "e-book": {
+                if (product.quantity >= product.max_qty) setClickAllowed(false);
                 else setClickAllowed(true);
                 break;
             }
@@ -41,13 +40,11 @@ function AddToCartBtn(props) {
             case "General - Tangible Goods": {
                 if (prod.inventory < 1 || prod.quantity === prod.inventory)
                     return TOOLTIPS.SOLD_OUT;
-                else if (prod.quantity >= prod.metadata.max_qty)
-                    return TOOLTIPS.MAX_QTY;
+                else if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
                 break;
             }
             case "e-book": {
-                if (prod.quantity >= prod.metadata.max_qty)
-                    return TOOLTIPS.MAX_QTY;
+                if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
                 break;
             }
             default: {

@@ -15,9 +15,9 @@ function ProductModal(props) {
         toggleModal,
         btnClick,
     } = props;
-    const img = getImage(
-        product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
-    );
+    // const img = getImage(
+    //     product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
+    // );
 
     useEffect(() => {
         const close = (e) => {
@@ -44,11 +44,11 @@ function ProductModal(props) {
                         X
                     </button>
                 </div>
-                <GatsbyImage
+                {/* <GatsbyImage
                     className={styles.content_img}
                     image={img}
                     alt="picture of product"
-                />
+                /> */}
                 <h4 className={styles.modal_title}>
                     {product.product_list[0].name}
                 </h4>
@@ -68,7 +68,7 @@ function ProductModal(props) {
                                 <p className={styles.modal_price}>
                                     {formattedPrice(item.price)}
                                 </p>
-                                <p>{item.description}</p>
+                                <p>{item.desc}</p>
                                 <div className={styles.qty_container}>
                                     <div className={tooltip.tooltip_parent}>
                                         <AddToCartBtn
