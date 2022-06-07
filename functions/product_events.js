@@ -101,7 +101,7 @@ exports.handler = async (event) => {
                         unit_amount: 0,
                         name: product.name,
                         desc: product.description,
-                        inventory: product.inventory,
+                        inventory: product.metadata.inventory,
                         image_url: product.images[0],
                         project_url: product.metadata.project_url,
                         active: product.active,
@@ -140,7 +140,7 @@ exports.handler = async (event) => {
                         active: product.active,
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
-                        inventory: product.inventory,
+                        inventory: product.metadata.inventory,
                     })
                     .eq("product_id", product.id);
                 if (error) {
