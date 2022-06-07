@@ -37,15 +37,15 @@ function AddToCartBtn(props) {
     }, [btnClick]);
 
     const getTooltipText = (prod) => {
-        switch (prod.metadata.product_type) {
-            case "physical": {
+        switch (prod.tax_code_name) {
+            case "General - Tangible Goods": {
                 if (prod.inventory < 1 || prod.quantity === prod.inventory)
                     return TOOLTIPS.SOLD_OUT;
                 else if (prod.quantity >= prod.metadata.max_qty)
                     return TOOLTIPS.MAX_QTY;
                 break;
             }
-            case "plan": {
+            case "e-book": {
                 if (prod.quantity >= prod.metadata.max_qty)
                     return TOOLTIPS.MAX_QTY;
                 break;

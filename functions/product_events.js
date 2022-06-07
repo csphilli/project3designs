@@ -36,22 +36,22 @@ const supabase = getSupabaseClient(
 // To cut down on DB lookup times, the categories here represent the exact category names in the product_catetory table as well as, and most importantly, the exact order they are in.
 // const categories = ["digital", "physical"];
 
-const insertIntoInventory = async (max_qty, inv_amount, prod_id) => {
-    const { data, error } = await supabase
-        .from("product_inventory")
-        .insert([
-            { max_qty: max_qty, inventory: inv_amount, product_id: prod_id },
-        ]);
-    if (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify(
-                `Unable to insert inventory for product '${prod_id} for error ${error}'`
-            ),
-        };
-    }
-    return data[0].id;
-};
+// const insertIntoInventory = async (max_qty, inv_amount, prod_id) => {
+//     const { data, error } = await supabase
+//         .from("product_inventory")
+//         .insert([
+//             { max_qty: max_qty, inventory: inv_amount, product_id: prod_id },
+//         ]);
+//     if (error) {
+//         return {
+//             statusCode: 500,
+//             body: JSON.stringify(
+//                 `Unable to insert inventory for product '${prod_id} for error ${error}'`
+//             ),
+//         };
+//     }
+//     return data[0].id;
+// };
 
 exports.handler = async (event) => {
     try {
@@ -86,11 +86,11 @@ exports.handler = async (event) => {
                 // }
 
                 // inserting into inventory table
-                const inventory_id = await insertIntoInventory(
-                    product.metadata.max_qty,
-                    product.metadata.inventory,
-                    product.id
-                );
+                // const inventory_id = await insertIntoInventory(
+                //     product.metadata.max_qty,
+                //     product.metadata.inventory,
+                //     product.id
+                // );
 
                 // Inserting into products table when product.created webhook fires.
 
@@ -101,8 +101,7 @@ exports.handler = async (event) => {
                         unit_amount: 0,
                         name: product.name,
                         desc: product.description,
-                        // category_id: category_id,
-                        inventory_id: inventory_id,
+                        inventory: product.inventory,
                         image_url: product.images[0],
                         project_url: product.metadata.project_url,
                         active: product.active,
@@ -141,6 +140,7 @@ exports.handler = async (event) => {
                         active: product.active,
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
+                        inventory: product.inventory,
                     })
                     .eq("product_id", product.id);
                 if (error) {
