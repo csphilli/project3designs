@@ -1,9 +1,5 @@
 export const NavData = [
     {
-        name: "home",
-        link: "/",
-    },
-    {
         name: "projects",
         link: "/projects",
     },

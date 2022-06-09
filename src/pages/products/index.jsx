@@ -123,6 +123,7 @@ function Products() {
         }
     };
 
+    // Will be a switch case statement later
     // const sortProducts = (products) => {
     //     products.forEach((obj) => {
     //         obj.product_list.sort((b, a) => b.price - a.price);
@@ -139,22 +140,12 @@ function Products() {
     };
 
     // Helper function to create product obljects and then add custom properties.
-    // const createProdObj = (product, unit_amt, ccy) => {
-    //     return {
-    //         ...product,
-    //         quantity: 0,
-    //         price: (Number(unit_amt) / 100).toFixed(2),
-    //         currency: ccy,
-    //         inventory: assignInventory(product),
-    //         // inventory: 102,
-    //     };
-    // };
+
     const createProdObj = (obj) => {
         return {
             ...obj,
             quantity: 0,
             price: (Number(obj.unit_amount) / 100).toFixed(2),
-            // inventory: 102,
         };
     };
 
@@ -204,7 +195,6 @@ function Products() {
     };
 
     useEffect(() => {
-        // const { allStripeProduct: productList, allStripePrice: prices } = query;
         let prodList = [];
         fetchProducts().then((arr) => {
             arr.forEach((item) => {
@@ -221,33 +211,7 @@ function Products() {
             setProducts(prodList);
         });
 
-        // console.log("in products effect. Status of inventory", inventory);
-
-        // productList.nodes.forEach((obj) => {
-        //     const exist = products.find(
-        //         (arr) => arr.p3d_id === obj.metadata.p3d_id
-        //     );
-        //     const { currency, unit_amount } = prices.nodes.find(
-        //         (item) => item.id === obj.default_price
-        //     );
-        //     if (exist) {
-        //         exist.product_list.push(
-        //             createProdObj(obj, unit_amount, currency, inventory)
-        //         );
-        //     } else {
-        //         products.push({
-        //             p3d_id: obj.metadata.p3d_id,
-        //             product_list: new Array(
-        //                 createProdObj(obj, unit_amount, currency, inventory)
-        //             ),
-        //         });
-        //     }
-        // });
-
-        // sortProducts(products);
-        updateFromLocal(products);
-        // setProducts(prodList);
-        console.log(products);
+        // updateFromLocal(products);
     }, []);
     if (allowSelling === true) {
         return (
