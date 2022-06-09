@@ -18,42 +18,42 @@ function Products() {
     // In an event where something goes wrong with the production side of product sales, I need a fast way of removing the ability to buy stuff until I get it sorted out. Set this to false if I don't want to allow selling.
     const allowSelling = true;
 
-    const query = useStaticQuery(graphql`
-        query Products {
-            allStripeProduct(
-                filter: { active: { eq: true } }
-                sort: { order: DESC, fields: created }
-            ) {
-                nodes {
-                    default_price
-                    description
-                    id
-                    metadata {
-                        p3d_id
-                        slug
-                        max_qty
-                        product_type
-                    }
-                    name
-                    localFiles {
-                        childImageSharp {
-                            gatsbyImageData(aspectRatio: 1.6)
-                        }
-                    }
-                }
-            }
-            allStripePrice {
-                nodes {
-                    id
-                    unit_amount
-                    currency
-                    product {
-                        id
-                    }
-                }
-            }
-        }
-    `);
+    // const query = useStaticQuery(graphql`
+    //     query Products {
+    //         allStripeProduct(
+    //             filter: { active: { eq: true } }
+    //             sort: { order: DESC, fields: created }
+    //         ) {
+    //             nodes {
+    //                 default_price
+    //                 description
+    //                 id
+    //                 metadata {
+    //                     p3d_id
+    //                     slug
+    //                     max_qty
+    //                     product_type
+    //                 }
+    //                 name
+    //                 localFiles {
+    //                     childImageSharp {
+    //                         gatsbyImageData(aspectRatio: 1.6)
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         allStripePrice {
+    //             nodes {
+    //                 id
+    //                 unit_amount
+    //                 currency
+    //                 product {
+    //                     id
+    //                 }
+    //             }
+    //         }
+    //     }
+    // `);
 
     // useEffect(() => {
     //     fetchProducts();

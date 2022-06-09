@@ -18,7 +18,7 @@ function ProductCard(props) {
     };
 
     if (product.product_list.length > 1) {
-        const { name, project_url } = product.product_list[0];
+        const { name, project_url, image_url } = product.product_list[0];
         // const { project_url } = product.product_list[0].metadata;
         // const img = getImage(
         //     product.product_list[0].localFiles[0].childImageSharp
@@ -40,6 +40,11 @@ function ProductCard(props) {
                                 image={image_url}
                                 alt="picture of the product"
                             /> */}
+                            <img
+                                className={styles.image_container}
+                                src={image_url}
+                                alt="product"
+                            />
                         </a>
                     </div>
                     <div>
@@ -88,7 +93,7 @@ function ProductCard(props) {
         const { price, currency, name, desc, project_url, image_url } =
             product.product_list[0];
         // const { slug } = product.product_list[0].metadata;
-        const img = getImage(image_url);
+        // const img = getImage(image_url);
         // product.product_list[0].localFiles[0].childImageSharp
         //     .gatsbyImageData
         return (
@@ -105,6 +110,11 @@ function ProductCard(props) {
                                 className={styles.image_container}
                                 alt="picture of product"
                             /> */}
+                            <img
+                                className={styles.image_container}
+                                src={image_url}
+                                alt="product"
+                            />
                         </a>
                     </div>
                     <div>

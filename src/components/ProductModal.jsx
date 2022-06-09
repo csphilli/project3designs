@@ -49,6 +49,11 @@ function ProductModal(props) {
                     image={img}
                     alt="picture of product"
                 /> */}
+                <img
+                    className={styles.content_img}
+                    src={product.product_list[0].image_url}
+                    alt="product"
+                />
                 <h4 className={styles.modal_title}>
                     {product.product_list[0].name}
                 </h4>

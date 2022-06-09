@@ -102,7 +102,7 @@ function Cart(props) {
                                         -
                                     </RemoveFromCartBtn>
                                 </div>
-                                <p>{item.description}</p>
+                                <p>{item.desc}</p>
                                 <p className={styles.subtotal}>{subtotal}</p>
                             </div>
                         );
