@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
 import * as styles from "../scss/navbar.module.scss";
-import { NavData } from "./NavData";
 import { BsCart } from "react-icons/bs";
 
 function Navbar({ pageId }) {
