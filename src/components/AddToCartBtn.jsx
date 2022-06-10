@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "../scss/addToCartBtn.module.scss";
 import * as tooltip from "../scss/tooltip.module.scss";
-
-const TOOLTIPS = {
-    MAX_QTY: "Max Quantity",
-    SOLD_OUT: "Sold Out",
-};
+import { getTooltipText } from "../lib/index";
 
 function AddToCartBtn(props) {
     const { product, children, onAdd, handleClick, btnClick, src } = props;
@@ -34,24 +30,6 @@ function AddToCartBtn(props) {
             }
         }
     }, [btnClick]);
-
-    const getTooltipText = (prod) => {
-        switch (prod.tax_code_name) {
-            case "General - Tangible Goods": {
-                if (prod.inventory < 1 || prod.quantity === prod.inventory)
-                    return TOOLTIPS.SOLD_OUT;
-                else if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
-                break;
-            }
-            case "e-book": {
-                if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
-                break;
-            }
-            default: {
-                return "Invalid Tooltip";
-            }
-        }
-    };
 
     let btnStyle;
 

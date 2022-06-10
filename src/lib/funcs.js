@@ -1,3 +1,8 @@
+const TOOLTIPS = {
+    MAX_QTY: "Max Quantity",
+    SOLD_OUT: "Sold Out",
+};
+
 // Helper function to create product obljects and then add custom properties. Src: products/index.jsx file
 export const createProdObj = (obj) => {
     return {
@@ -11,7 +16,7 @@ export const createProdObj = (obj) => {
 export const onAdd = (item) => {
     if (isClickAllowed(item) === true) {
         item.quantity++;
-        saveToLocal(item.id, item);
+        // saveToLocal(item.id, item);
     }
 };
 
@@ -19,7 +24,7 @@ export const onAdd = (item) => {
 export const onMinus = (item) => {
     if (item.quantity >= 1) {
         item.quantity--;
-        saveToLocal(item.id, item);
+        // saveToLocal(item.id, item);
     }
 };
 
@@ -82,3 +87,22 @@ export const updateFromLocal = (products) => {
 //         obj.product_list.sort((b, a) => b.price - a.price);
 //     });
 // };
+
+// Used to assign text to the tooltip texts.
+export const getTooltipText = (prod) => {
+    switch (prod.tax_code_name) {
+        case "General - Tangible Goods": {
+            if (prod.inventory < 1 || prod.quantity === prod.inventory)
+                return TOOLTIPS.SOLD_OUT;
+            else if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
+            break;
+        }
+        case "e-book": {
+            if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
+            break;
+        }
+        default: {
+            return "Invalid Tooltip";
+        }
+    }
+};

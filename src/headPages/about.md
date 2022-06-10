@@ -3,8 +3,6 @@ page_id: about
 page_category: head
 meta_title: Project3 Studio | About
 meta_description: Learn more about Project3 Studio
-hero_h2: Here's the TLDR
-hero_p: Grew up in rural Wisconsin, moved to NYC in 2008 to pursue finance, had three sons, two of which required medical care of which I could only afford to get in Finland since they are dual citizens. Moved there, bought a summer cottage. Built a sauna, storage shed, out-house, terrace, and fence to name a few. Had to sell it but have been passionate about DIY ever since. I want to teach what I've learned over a decade's worth of time.
 ---
 
 #### About

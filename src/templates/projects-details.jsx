@@ -25,6 +25,8 @@ export default function ProjectDetails({ data }) {
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData
     );
+    console.log(base);
+
     return (
         <PageLayout pageData={base}>
             {/* <IndexHeader pageData={pageData} /> */}

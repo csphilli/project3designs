@@ -3,6 +3,7 @@ import IndexHeader from "./IndexHeader";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
+// Used for non-header pages
 function PageLayout({ children, pageData }) {
     return (
         <article>

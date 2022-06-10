@@ -33,13 +33,15 @@ function HeadPageLayout({ pageId, children }) {
     if (!pageData) {
         console.error("Error, cannot find page id in layout component");
     }
+    console.log(pageData);
+
     return (
         <div className="logo-container">
             <IndexHeader pageData={pageData} />
             <PageBannerIcon pageId={pageData.frontmatter.page_id} />
             <div className="page-container">
                 <Navbar pageId={pageData.frontmatter.page_id} />
-                <HeroSection pageData={pageData} />
+                {/* <HeroSection pageData={pageData} /> */}
                 <div>{children}</div>
                 <Footer />
             </div>

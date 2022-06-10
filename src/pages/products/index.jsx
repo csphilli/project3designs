@@ -16,11 +16,11 @@ import {
 
 function Products() {
     const [products, setProducts] = useState([]);
-    let [btnClick, setBtnClick] = useState(0);
+    let [btnClick, setBtnClick] = useState(true);
 
     // Cart items are populated based on product quantities. Since useEffect can't monitor changes in array child elements, I have to use a button click state to monitor changes. Each time any button (onAdd, onMinus, emptyCart) fires, it updates the products and triggers a refresh of the cart list.
     const handleClick = () => {
-        setBtnClick((_btnClick) => _btnClick + 1);
+        setBtnClick((_btnClick) => !_btnClick);
     };
 
     // As it says. The cart is populated by products with quantity props > 0. To empty the cart, all those are set back to 0, clickAllowed toggled to true and the localStorage is removed. clickAllowed is a property that the add to cart buttons check whether or not more quantity can be added to the cart. It is vital to have max_qty as metadata in the Stripe dashboard for the specific product.
