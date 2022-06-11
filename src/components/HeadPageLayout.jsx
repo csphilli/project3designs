@@ -33,7 +33,6 @@ function HeadPageLayout({ pageId, children }) {
     if (!pageData) {
         console.error("Error, cannot find page id in layout component");
     }
-    console.log(pageData);
 
     return (
         <div className="logo-container">

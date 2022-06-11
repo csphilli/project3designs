@@ -52,13 +52,13 @@ function Navbar({ pageId }) {
                     >
                         products
                     </Link>
-                    LOGIN
                     <Link
                         className={pageId === "cart" ? styles.active : "none"}
                         to="/cart"
                     >
                         <BsCart />
                     </Link>
+                    LOGIN
                 </div>
             </div>
         </nav>

@@ -53,6 +53,7 @@ function Products() {
                       });
             });
             setProducts(prodList);
+            // console.log(prodList);
         });
 
         // updateFromLocal(products);
@@ -62,7 +63,7 @@ function Products() {
             <div>
                 <HeadPageLayout pageId="products">
                     <div className={styles.container_grid}>
-                        <aside className={styles.cart}>
+                        {/* <aside className={styles.cart}>
                             <Cart
                                 formattedPrice={formattedPrice}
                                 onMinus={onMinus}
@@ -72,7 +73,7 @@ function Products() {
                                 btnClick={btnClick}
                                 emptyCart={emptyCart}
                             />
-                        </aside>
+                        </aside> */}
                         <main className={styles.products}>
                             {products.map((product) => (
                                 <ProductCard

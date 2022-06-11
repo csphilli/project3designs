@@ -4,16 +4,17 @@ import * as tooltip from "../scss/tooltip.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import AddToCartBtn from "./AddToCartBtn";
 import RemoveFromCartBtn from "./RemoveFromCartBtn";
+import { formattedPrice } from "../lib";
 
 function ProductModal(props) {
     const {
         product,
-        handleClick,
-        onAdd,
-        onMinus,
-        formattedPrice,
+        // handleClick,
+        // onAdd,
+        // onMinus,
+        // formattedPrice,
         toggleModal,
-        btnClick,
+        // btnClick,
     } = props;
     // const img = getImage(
     //     product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
@@ -33,72 +34,19 @@ function ProductModal(props) {
     return (
         <aside className={styles.modal} role="dialog" aria-modal="true">
             <div className={styles.modal_content}>
-                <div className={styles.menu_bar}>
-                    <p className={styles.menu_bar_text}>
-                        Select specific variation
-                    </p>
-                    <button
-                        className={styles.close_modal_btn}
-                        onClick={toggleModal}
-                    >
-                        X
-                    </button>
+                <div className={styles.image_container}>
+                    <img
+                        src={product.product_list[0].image_url}
+                        alt="pic of product"
+                    />
                 </div>
-                {/* <GatsbyImage
-                    className={styles.content_img}
-                    image={img}
-                    alt="picture of product"
-                /> */}
-                <img
-                    className={styles.content_img}
-                    src={product.product_list[0].image_url}
-                    alt="product"
-                />
-                <h4 className={styles.modal_title}>
-                    {product.product_list[0].name}
-                </h4>
-                <p>
-                    There are multiple choices for this specific product. The
-                    product-id details the differences.
-                </p>
-                <div className={styles.cart_items_table}>
-                    <div className={styles.cart_items_table_header}>
-                        <p className={styles.heading}>Price</p>
-                        <p className={styles.heading}>Product-Id</p>
-                        <p className={styles.heading}>In Cart</p>
-                    </div>
-                    {product.product_list.map((item) => {
-                        return (
-                            <div key={item.id} className={styles.list_item}>
-                                <p className={styles.modal_price}>
-                                    {formattedPrice(item.price)}
-                                </p>
-                                <p>{item.desc}</p>
-                                <div className={styles.qty_container}>
-                                    <div className={tooltip.tooltip_parent}>
-                                        <AddToCartBtn
-                                            src="modal"
-                                            product={item}
-                                            onAdd={onAdd}
-                                            handleClick={handleClick}
-                                            btnClick={btnClick}
-                                        >
-                                            +
-                                        </AddToCartBtn>
-                                    </div>
-                                    <p>{item.quantity}</p>
-                                    <RemoveFromCartBtn
-                                        product={item}
-                                        onMinus={onMinus}
-                                        handleClick={handleClick}
-                                        btnClick={btnClick}
-                                    >
-                                        -
-                                    </RemoveFromCartBtn>
-                                </div>
-                            </div>
-                        );
-                    })}
+                <div className={styles.text_container}>
+                    <h3 className={styles.product_name}>
+                        {product.product_list[0].name}
+                    </h3>
+                    <p className={styles.description}>
+                        {product.product_list[0].desc}
+                    </p>
                 </div>
             </div>
         </aside>
