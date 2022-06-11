@@ -9,31 +9,31 @@ import { formattedPrice } from "../lib";
 function ProductModal(props) {
     const {
         product,
+        // toggleModal,
+        // showModal,
         // handleClick,
         // onAdd,
         // onMinus,
         // formattedPrice,
-        toggleModal,
+        setShowModal,
         // btnClick,
     } = props;
     // const img = getImage(
     //     product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
     // );
 
-    useEffect(() => {
-        const close = (e) => {
-            if (e.key === "Escape") {
-                toggleModal();
-                document.activeElement.blur();
-            }
-        };
-        window.addEventListener("keydown", close);
-        return () => window.removeEventListener("keydown", close);
-    }, [toggleModal]);
+    const handleProductSubmit = () => {
+        console.log("product submitted");
+    };
 
     return (
-        <aside className={styles.modal} role="dialog" aria-modal="true">
-            <div className={styles.modal_content}>
+        // <>
+        <div
+            className={styles.modal_backdrop}
+            onClick={() => setShowModal(false)}
+        >
+            {/* <div className={styles.modal_backdrop}></div> */}
+            <div className={styles.modal}>
                 <div className={styles.image_container}>
                     <img
                         src={product.product_list[0].image_url}
@@ -47,9 +47,19 @@ function ProductModal(props) {
                     <p className={styles.description}>
                         {product.product_list[0].desc}
                     </p>
+                    <form onSubmit={handleProductSubmit}>
+                        <label htmlFor="size">Size:</label>
+                        <select name="size" id="size">
+                            <option value="select">Select</option>
+                            {product.product_list.map((item) => {
+                                <option value={item.size}>{item.size}</option>;
+                            })}
+                        </select>
+                    </form>
                 </div>
             </div>
-        </aside>
+        </div>
+        // </>
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
 import * as tooltip from "../scss/tooltip.module.scss";
 import { BsCartPlus, BsFillInfoCircleFill, BsThreeDots } from "react-icons/bs";
@@ -11,11 +11,29 @@ function ProductCard(props) {
     const { product, handleClick, btnClick, onAdd, onMinus } = props;
     const [showModal, setShowModal] = useState(false);
 
-    const toggleModal = () => {
-        setShowModal(!showModal);
+    // const toggleModal = () => {
+    //     setShowModal(!showModal);
+    //     if (showModal) document.body.style.overflow = "unset";
+    //     if (!showModal) document.body.style.overflow = "hidden";
+    // };
+
+    useEffect(() => {
         if (showModal) document.body.style.overflow = "unset";
         if (!showModal) document.body.style.overflow = "hidden";
-    };
+    }, [showModal]);
+
+    useEffect(() => {
+        const close = (e) => {
+            if (e.key === "Escape") {
+                // setShowModal(false);
+                setShowModal(false);
+                document.activeElement.blur();
+            }
+        };
+        window.addEventListener("keydown", close);
+        return () => window.removeEventListener("keydown", close);
+        // }, [setShowModal]);
+    }, [showModal]);
 
     // if (product.product_list.length > 1) {
     //     const { name, project_url, image_url } = product.product_list[0];
@@ -94,23 +112,26 @@ function ProductCard(props) {
     const { price, currency, name, desc, project_url, image_url } =
         product.product_list[0];
     return (
-        <div className={styles.product_card} onClick={toggleModal}>
+        <div className={styles.product_card} onClick={() => setShowModal(true)}>
+            {/* <div className={styles.product_card} onClick={() => toggleModal()}> */}
             <div className={styles.image_container}>
                 <img src={image_url} alt="picture of product" />
             </div>
             <h3 className={styles.title}>{name}</h3>
             <p className={styles.price}>{formattedPrice(price, currency)}</p>
-            {showModal ? (
+            {showModal && (
                 <ProductModal
-                    toggleModal={toggleModal}
+                    setShowModal={setShowModal}
+                    // showModal={showModal}
                     product={product}
                     // btnClick={btnClick}
                     // handleClick={handleClick}
                     // onAdd={onAdd}
                     // onMinus={onMinus}
                     // formattedPrice={formattedPrice}
+                    // toggleModal={toggleModal}
                 />
-            ) : null}
+            )}
         </div>
     );
     // }
