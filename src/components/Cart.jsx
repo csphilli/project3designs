@@ -6,11 +6,12 @@ import AddToCartBtn from "./AddToCartBtn";
 import RemoveFromCartBtn from "./RemoveFromCartBtn";
 import Checkout from "./Checkout";
 
-/* TODO
- * The cart needs to have a value for expires at. This will show if a checkout session hasn't been completed.
- * If any quantities have been changed, kill the stripe checkout session. I can rely on the btnClick state to trigger an expire, setExpire state with true and false. If true (session not completed), use that to "show" the expires at field. I want it near the "power by" so there'll need to be some additional css involved. Similar to whether or not to show the modal.
- * Show countdown timer for expiration.
- */
+/* Todo
+1) Entirely separate page for cart.
+2)  If item is added to cart and user is not logged in, alert the user that cart changes are only being saved locally
+3)  If user logs in and cart session exists, load cart and updated session expiration time.
+
+*/
 
 function Cart(props) {
     const {

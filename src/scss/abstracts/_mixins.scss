@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @mixin scaledFont(
     $minFontSize: 16px,
     $maxFontSize: 32px,
@@ -11,4 +13,40 @@
     flex-direction: $direction;
     justify-content: $justify;
     align-items: $align;
+}
+
+@mixin sweetBorder {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 1rem;
+    bottom: 0;
+    left: -0.125rem;
+    right: -0.125rem;
+    border-left: 1px solid #2d2d2d;
+    border-bottom: 1px solid #2d2d2d;
+    border-right: 1px solid #2d2d2d;
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+@mixin sweetBorderOnHover {
+    cursor: pointer;
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: -0.125rem;
+    right: -0.125rem;
+    border-left: 1px solid #2b2b2b;
+    border-bottom: 1px solid #2b2b2b;
+    border-right: 1px solid #2b2b2b;
+    border-bottom-left-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
+    border-color: #2b2b2b;
+    opacity: 1;
+    transition: 0.5s;
 }

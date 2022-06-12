@@ -22,17 +22,6 @@ function ProductCard(props) {
             setSoldOut(true);
     }, []);
 
-    useEffect(() => {
-        const close = (e) => {
-            if (e.key === "Escape") {
-                toggleModal();
-                document.activeElement.blur();
-            }
-        };
-        window.addEventListener("keydown", close);
-        return () => window.removeEventListener("keydown", close);
-    }, []);
-
     const { price, currency, name, image_url } = product.product_list[0];
     return (
         <>
