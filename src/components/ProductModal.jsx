@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import * as tooltip from "../scss/tooltip.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -7,24 +7,19 @@ import RemoveFromCartBtn from "./RemoveFromCartBtn";
 import { formattedPrice } from "../lib";
 
 function ProductModal(props) {
-    const {
-        product,
-        // onClose,
-        toggleModal,
-        // showModal,
-        // handleClick,
-        // onAdd,
-        // onMinus,
-        // formattedPrice,
-        // setShowModal,
-        // btnClick,
-    } = props;
-    // const img = getImage(
-    //     product.product_list[0].localFiles[0].childImageSharp.gatsbyImageData
-    // );
+    const { product, toggleModal } = props;
+    const [maxQty, setMaxQty] = useState(0);
 
     const handleProductSubmit = () => {
         console.log("product submitted");
+    };
+
+    const handleChange = (e) => {
+        const prod = product.product_list.find(
+            (obj) => obj.id === Number(e.target.value)
+        );
+        setMaxQty(prod.max_qty);
+        console.log(maxQty);
     };
 
     return (
@@ -32,12 +27,9 @@ function ProductModal(props) {
             <div
                 className={styles.modal_backdrop}
                 onClick={() => {
-                    // console.log("modal status", showModal);
-                    // setShowModal(false);
                     toggleModal();
                 }}
             />
-            {/* <div className={styles.modal_backdrop}></div> */}
             <div className={styles.modal}>
                 <div className={styles.image_container}>
                     <img
@@ -54,16 +46,33 @@ function ProductModal(props) {
                     </p>
                     <form onSubmit={handleProductSubmit}>
                         <label htmlFor="size">Size:</label>
-                        <select name="size" id="size">
+                        <select
+                            value="select"
+                            id="test"
+                            onChange={handleChange}
+                        >
                             <option value="select">Select</option>
                             {product.product_list.map((item) => (
-                                <option key={item.id} value={item.size}>
+                                <option key={item.id} value={item.id}>
                                     {item.size}
                                 </option>
                             ))}
                         </select>
+                        <label htmlFor="quantity">Quantity:</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            min="1"
+                            max={maxQty}
+                        ></input>
                     </form>
-                    <button onClick={() => toggleModal()}>X</button>
+                    <button
+                        className={styles.modal_close_btn}
+                        onClick={() => toggleModal()}
+                    >
+                        X
+                    </button>
                 </div>
             </div>
         </>

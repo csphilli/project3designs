@@ -38,3 +38,19 @@
     width: 100%;
     padding: scaled(0.5, 2, 320, 1400);
 }
+
+.modal_close_btn {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    border: none;
+    outline: 0;
+    background: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.modal_close_btn:hover,
+.modal_close_btn:focus {
+    cursor: pointer;
+}
