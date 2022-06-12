@@ -79,6 +79,7 @@ exports.handler = async (event) => {
                         inventory: product.metadata.inventory,
                         max_qty: product.metadata.max_qty,
                         size: product.metadata.size,
+                        updated: new Date(),
                     })
                     .eq("product_id", product.id);
                 if (error) {

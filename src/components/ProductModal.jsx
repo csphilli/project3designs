@@ -9,13 +9,14 @@ import { formattedPrice } from "../lib";
 function ProductModal(props) {
     const {
         product,
-        // toggleModal,
+        // onClose,
+        toggleModal,
         // showModal,
         // handleClick,
         // onAdd,
         // onMinus,
         // formattedPrice,
-        setShowModal,
+        // setShowModal,
         // btnClick,
     } = props;
     // const img = getImage(
@@ -27,11 +28,15 @@ function ProductModal(props) {
     };
 
     return (
-        // <>
-        <div
-            className={styles.modal_backdrop}
-            onClick={() => setShowModal(false)}
-        >
+        <>
+            <div
+                className={styles.modal_backdrop}
+                onClick={() => {
+                    // console.log("modal status", showModal);
+                    // setShowModal(false);
+                    toggleModal();
+                }}
+            />
             {/* <div className={styles.modal_backdrop}></div> */}
             <div className={styles.modal}>
                 <div className={styles.image_container}>
@@ -51,15 +56,17 @@ function ProductModal(props) {
                         <label htmlFor="size">Size:</label>
                         <select name="size" id="size">
                             <option value="select">Select</option>
-                            {product.product_list.map((item) => {
-                                <option value={item.size}>{item.size}</option>;
-                            })}
+                            {product.product_list.map((item) => (
+                                <option key={item.id} value={item.size}>
+                                    {item.size}
+                                </option>
+                            ))}
                         </select>
                     </form>
+                    <button onClick={() => toggleModal()}>X</button>
                 </div>
             </div>
-        </div>
-        // </>
+        </>
     );
 }
 
