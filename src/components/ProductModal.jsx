@@ -8,19 +8,18 @@ import { formattedPrice } from "../lib";
 
 function ProductModal(props) {
     const { product, toggleModal } = props;
-    const [maxQty, setMaxQty] = useState(0);
+    const [selection, setSelection] = useState(product.product_list[0].id);
+    const [maxQty, setMaxQty] = useState(product.product_list[0].max_qty);
 
     const handleProductSubmit = () => {
         console.log("product submitted");
     };
 
-    const handleChange = (e) => {
-        const prod = product.product_list.find(
-            (obj) => obj.id === Number(e.target.value)
+    useEffect(() => {
+        setMaxQty(
+            product.product_list.find((obj) => selection === obj.id)?.max_qty
         );
-        setMaxQty(prod.max_qty);
-        console.log(maxQty);
-    };
+    }, [selection]);
 
     return (
         <>
@@ -47,11 +46,12 @@ function ProductModal(props) {
                     <form onSubmit={handleProductSubmit}>
                         <label htmlFor="size">Size:</label>
                         <select
-                            value="select"
+                            value={selection}
                             id="test"
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                setSelection(Number(e.target.value));
+                            }}
                         >
-                            <option value="select">Select</option>
                             {product.product_list.map((item) => (
                                 <option key={item.id} value={item.id}>
                                     {item.size}
@@ -59,13 +59,7 @@ function ProductModal(props) {
                             ))}
                         </select>
                         <label htmlFor="quantity">Quantity:</label>
-                        <input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            min="1"
-                            max={maxQty}
-                        ></input>
+                        <input type="number" min="1" max={maxQty}></input>
                     </form>
                     <button
                         className={styles.modal_close_btn}

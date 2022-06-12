@@ -9,7 +9,7 @@ function ProductCard(props) {
     const [soldOut, setSoldOut] = useState(false);
 
     const toggleModal = () => {
-        setShowModal(!showModal);
+        setShowModal((latest) => !latest);
         if (showModal) document.body.style.overflow = "unset";
         if (!showModal) document.body.style.overflow = "hidden";
     };
@@ -25,13 +25,13 @@ function ProductCard(props) {
     useEffect(() => {
         const close = (e) => {
             if (e.key === "Escape") {
-                setShowModal(false);
+                toggleModal();
                 document.activeElement.blur();
             }
         };
         window.addEventListener("keydown", close);
         return () => window.removeEventListener("keydown", close);
-    }, [showModal]);
+    }, []);
 
     const { price, currency, name, image_url } = product.product_list[0];
     return (
