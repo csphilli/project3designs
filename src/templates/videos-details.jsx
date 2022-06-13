@@ -2,7 +2,6 @@ import React from "react";
 import PageLayout from "../components/PageLayout";
 import * as styles from "../scss/video-details.module.scss";
 import { graphql } from "gatsby";
-import IndexHeader from "../components/IndexHeader";
 import Logo from "../components/Logo";
 import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
 import Video from "../components/Video";
@@ -19,7 +18,6 @@ export default function ProjectDetails({ data }) {
     const { html } = data.markdownRemark;
     return (
         <PageLayout pageData={base}>
-            {/* <IndexHeader pageData={pageData} /> */}
             <div className={styles.heading_container}>
                 <div className={styles.title_banner_container}>
                     <h2 className={styles.title}>{base.title}</h2>

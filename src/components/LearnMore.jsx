@@ -17,38 +17,39 @@ function LearnMore() {
         text: "Courses",
         link: "/products",
     };
-    const data = useStaticQuery(graphql`
-        query LearnMoreQuery {
-            markdownRemark(frontmatter: { page_id: { eq: "learn-more" } }) {
-                frontmatter {
-                    card_img_1 {
-                        childImageSharp {
-                            gatsbyImageData(aspectRatio: 1.6, width: 600)
-                        }
-                    }
-                    card_img_2 {
-                        childImageSharp {
-                            gatsbyImageData(aspectRatio: 1.6, width: 600)
-                        }
-                    }
-                }
-                html
-            }
-        }
-    `);
-    const img1 = getImage(
-        data.markdownRemark.frontmatter.card_img_1.childImageSharp
-            .gatsbyImageData
-    );
-    const img2 = getImage(
-        data.markdownRemark.frontmatter.card_img_2.childImageSharp
-            .gatsbyImageData
-    );
+    // const data = useStaticQuery(graphql`
+    //     query LearnMoreQuery {
+    //         markdownRemark(frontmatter: { page_id: { eq: "learn-more" } }) {
+    //             frontmatter {
+    //                 card_img_1 {
+    //                     childImageSharp {
+    //                         gatsbyImageData(aspectRatio: 1.6, width: 600)
+    //                     }
+    //                 }
+    //                 card_img_2 {
+    //                     childImageSharp {
+    //                         gatsbyImageData(aspectRatio: 1.6, width: 600)
+    //                     }
+    //                 }
+    //             }
+    //             html
+    //         }
+    //     }
+    // `);
+    // const img1 = getImage(
+    //     data.markdownRemark.frontmatter.card_img_1.childImageSharp
+    //         .gatsbyImageData
+    // );
+    // const img2 = getImage(
+    //     data.markdownRemark.frontmatter.card_img_2.childImageSharp
+    //         .gatsbyImageData
+    // );
 
-    const { html } = data.markdownRemark;
+    // const { html } = data.markdownRemark;
     return (
         <div>
-            <div className={styles.html_container}>
+            Dummy Text
+            {/* <div className={styles.html_container}>
                 <div
                     // className={styles.html}
                     dangerouslySetInnerHTML={{ __html: html }}
@@ -141,7 +142,7 @@ function LearnMore() {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

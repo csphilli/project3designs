@@ -1,12 +1,14 @@
 import React from "react";
 import HeadPageLayout from "../components/HeadPageLayout";
 import LearnMore from "../components/LearnMore";
+import Seo from "../components/Seo";
 import * as styles from "../scss/hero.module.scss";
 
 export default function Home() {
     return (
         <div>
             <HeadPageLayout pageId="home">
+                <Seo title="Home" />
                 <section className={styles.heroContainer}>
                     <h2>
                         Have you seen something amazing made by someone else,
@@ -18,7 +20,7 @@ export default function Home() {
                         your own hands!
                     </p>
                 </section>
-                <LearnMore />
+                {/* <LearnMore /> */}
             </HeadPageLayout>
         </div>
     );

@@ -11,8 +11,6 @@ function Navbar({ pageId }) {
                     <h1>Awesome(sauce)</h1>
                 </Link>
             </div>
-
-            {/* <h1 className={styles.logoText}>Awesome(sauce)</h1> */}
             <div className={styles.navRight}>
                 <div className={styles.links}>
                     {/* {NavData.map((item, index) => {

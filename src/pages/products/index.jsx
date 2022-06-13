@@ -9,10 +9,8 @@ import {
     onMinus,
     fetchProducts,
     formattedPrice,
-    isClickAllowed,
-    saveToLocal,
-    updateFromLocal,
 } from "../../lib/index";
+import Seo from "../../components/Seo";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -62,6 +60,7 @@ function Products() {
         return (
             <div>
                 <HeadPageLayout pageId="products">
+                    <Seo title="Products" />
                     <div className={styles.container_grid}>
                         {/* <aside className={styles.cart}>
                             <Cart

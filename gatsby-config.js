@@ -9,6 +9,21 @@ require("dotenv").config({
 
 module.exports = {
     /* Your site config here */
+    siteMetadata: {
+        title: "Project3 WoodWorking - Custom woodworking and tutorials",
+        description:
+            "Woodworker based in Finland, I design and build custom luxury pieces either through commission or own ambition as well as providing tutorials through writing and video",
+        author: "Christopher Phillips",
+        keywords: [
+            "Project3 Woodworking",
+            "woodworking",
+            "luxury woodworking",
+            "building",
+            "custom woodworking",
+            "woodworking tutorials",
+        ],
+        siteUrl: "https://www.project3woodworking.com",
+    },
     plugins: [
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-image`,
@@ -17,13 +32,13 @@ module.exports = {
         `gatsby-remark-images`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-sass`,
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `headPages`,
-                path: `${__dirname}/src/headPages/`,
-            },
-        },
+        // {
+        //     resolve: `gatsby-source-filesystem`,
+        //     options: {
+        //         name: `headPages`,
+        //         path: `${__dirname}/src/headPages/`,
+        //     },
+        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -53,13 +68,13 @@ module.exports = {
                 },
             },
         },
-        {
-            resolve: `gatsby-source-stripe`,
-            options: {
-                objects: ["Product", "Price"],
-                secretKey: process.env.GATSBY_STRIPE_SK,
-                downloadFiles: true,
-            },
-        },
+        // {
+        //     resolve: `gatsby-source-stripe`,
+        //     options: {
+        //         objects: ["Product", "Price"],
+        //         secretKey: process.env.GATSBY_STRIPE_SK,
+        //         downloadFiles: true,
+        //     },
+        // },
     ],
 };

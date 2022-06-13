@@ -3,7 +3,6 @@ import PageLayout from "../components/PageLayout";
 import * as styles from "../scss/project-details.module.scss";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import IndexHeader from "../components/IndexHeader";
 import Logo from "../components/Logo";
 import {
     BsCalendarWeek,

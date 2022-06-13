@@ -1,11 +1,13 @@
 import React from "react";
 import HeadPageLayout from "../components/HeadPageLayout";
+import Seo from "../components/Seo";
 import * as styles from "../scss/hero.module.scss";
 
 function NoDice() {
     return (
         <div>
             <HeadPageLayout pageId="fourOfour">
+                <Seo title="404 Page Not Found" />
                 <section className={styles.heroContainer}>
                     <h2>404: Page Not Found</h2>
                     <p>

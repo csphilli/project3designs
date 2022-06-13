@@ -2,10 +2,12 @@ import React from "react";
 import HeadPageLayout from "../../components/HeadPageLayout";
 import ContentGrid from "../../components/ContentGrid";
 import * as styles from "../../scss/hero.module.scss";
+import Seo from "../../components/Seo";
 
 function Projects() {
     return (
         <HeadPageLayout pageId="projects">
+            <Seo title="Projects" />
             <section className={styles.heroContainer}>
                 <h2>
                     Every project provides an opportunity for you to hone your
