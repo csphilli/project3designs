@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
-import * as tooltip from "../scss/tooltip.module.scss";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import AddToCartBtn from "./AddToCartBtn";
-import RemoveFromCartBtn from "./RemoveFromCartBtn";
 import { formattedPrice } from "../lib";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 function ProductModal(props) {
     const { product, toggleModal } = props;
@@ -37,7 +32,7 @@ function ProductModal(props) {
         const prod = product.product_list.find((obj) => selection === obj.id);
         setMaxQty(prod.max_qty);
         setPrice(prod.price);
-    }, [selection]);
+    }, [selection, product.product_list]);
 
     return (
         <>

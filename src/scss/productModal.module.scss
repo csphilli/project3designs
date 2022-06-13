@@ -76,6 +76,23 @@
 
         .submit_button {
             margin-top: scaled(1, 2, 320, 1400);
+            height: scaled(1.5, 3, 320, 1400);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            background-color: #b4b4b4;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .submit_button:hover,
+        .submit_button:focus {
+            cursor: pointer;
+            background-color: #dbdbdb;
+        }
+
+        .quantity_selector:hover,
+        .quantity_selector:focus,
+        .selector_menu:hover,
+        .selector_menu:focus {
+            cursor: pointer;
         }
     }
 }
@@ -95,11 +112,19 @@
     transition: 0.3s ease-in-out;
 }
 
-.modal_close_btn::before {
-    @include sweetBorder;
-}
-
-.modal_close_btn:hover::before,
-.modal_close_btn:focus::before {
-    @include sweetBorderOnHover;
+.modal_close_btn:hover,
+.modal_close_btn:focus {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    outline: 0;
+    background: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: $borderRadius;
+    transition: 0.3s ease-in-out;
 }
