@@ -5,9 +5,7 @@ const path = require("path");
 exports.createPages = async ({ graphql, actions }) => {
     const { data } = await graphql(`
         query MyQuery {
-            allMarkdownRemark(
-                filter: { frontmatter: { page_category: { eq: "sub" } } }
-            ) {
+            allMarkdownRemark {
                 nodes {
                     frontmatter {
                         page_root

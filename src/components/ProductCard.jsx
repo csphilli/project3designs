@@ -3,6 +3,10 @@ import * as styles from "../scss/productCard.module.scss";
 import ProductModal from "./ProductModal";
 import { formattedPrice } from "../lib";
 
+/* TODO
+1) Images coming from Stripe image_url meta aren't sizing all to the same size.
+*/
+
 function ProductCard(props) {
     const { product } = props;
     const [showModal, setShowModal] = useState(false);

@@ -7,11 +7,11 @@ import "../scss/global.scss";
 import "../scss/typography.scss";
 import PageBannerIcon from "./PageBannerIcon";
 
-function HeadPageLayout({ pageId, children }) {
-    const [showBanner, setShowBanner] = useState(false);
+function Layout({ pageId, children }) {
+    const [showBanner, setShowBanner] = useState(true);
 
     useEffect(() => {
-        pageId !== "none" ? setShowBanner(true) : setShowBanner(false);
+        pageId === "none" ? setShowBanner(false) : setShowBanner(true);
     }, [pageId]);
 
     return (
@@ -27,4 +27,4 @@ function HeadPageLayout({ pageId, children }) {
     );
 }
 
-export default HeadPageLayout;
+export default Layout;

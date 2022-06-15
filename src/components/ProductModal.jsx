@@ -1,38 +1,82 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
-import { formattedPrice } from "../lib";
+import { formattedPrice, getTooltipText, onAdd } from "../lib";
 
 function ProductModal(props) {
     const { product, toggleModal } = props;
-    const [selection, setSelection] = useState(product.product_list[0].id);
-    const [maxQty, setMaxQty] = useState(product.product_list[0].max_qty);
-    const [price, setPrice] = useState(product.product_list[0].price);
 
-    const handleProductSubmit = async (e) => {
+    const [selection, setSelection] = useState(product.product_list[0]);
+    const [maxQty, setMaxQty] = useState(
+        selection.inventory < selection.max_qty
+            ? selection.inventory
+            : selection.max_qty
+    );
+    const [soldOut, setSoldOut] = useState(
+        selection.inventory === 0 ? true : false
+    );
+
+    useEffect(() => {});
+    // useEffect(() => {
+    //     // const prod = product.product_list.find((obj) => selection === obj.id);
+    //     // console.log(prod);
+
+    //     // setPrice(prod.price);
+    //     setSoldOut(
+    //         selection.inventory === 0 ||
+    //             selection.quantity === selection.inventory ||
+    //             selection.quantity === selection.max_qty
+    //             ? true
+    //             : false
+    //     );
+    //     // console.log(`SoldOut: ${soldOut}`);
+    // }, [selection, product]);
+
+    // const handleMaxQty = () => {
+    //     const max =
+    //         selection.inventory < selection.max_qty
+    //             ? selection.inventory
+    //             : selection.max_qty;
+    //     setMaxQty(max - selection.quantity);
+    // };
+
+    const handleProductChange = (e) => {
+        e.preventDefault();
+        setSelection(
+            product.product_list.find(
+                (item) => item.id === Number(e.target.value)
+            )
+        );
+        // setSoldOut(
+        //     selection.inventory === 0 || selection.can_purchase === 0
+        //         ? true
+        //         : false
+        // );
+    };
+
+    const handleProductSubmit = (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
         const data = {
-            id: form.get("product_id"),
-            quantity: form.get("quantity"),
+            id: Number(form.get("product_id")),
+            quantity: Number(form.get("quantity")),
         };
-        console.log(data);
+        selection.quantity = data.quantity;
+        selection.can_purchase -= data.quantity;
+        // setSoldOut(
+        //     selection.inventory === 0 || selection.can_purchase === 0
+        //         ? true
+        //         : false
+        // );
 
         /* TODO
-        1) Form data should be sent to useContext provider area 
+        2) Implement custom up/down arrows for quantity selector
+        3) Implement custom down arrow inside selection box.
+        5) Add cart icon on modal when there's a product in the cart.
+
         */
-
-        // console.log("selection", selection);
-        // console.log("quantity");
-
-        // const formData = new FormData(e.currentTarget);
-        // console.log(formData);
     };
 
-    useEffect(() => {
-        const prod = product.product_list.find((obj) => selection === obj.id);
-        setMaxQty(prod.max_qty);
-        setPrice(prod.price);
-    }, [selection, product.product_list]);
+    console.log(`Rendered`);
 
     return (
         <>
@@ -50,19 +94,14 @@ function ProductModal(props) {
                     X
                 </button>
                 <div className={styles.image_container}>
-                    <img
-                        src={product.product_list[0].image_url}
-                        alt="pic of product"
-                    />
+                    <img src={selection.image_url} alt="pic of product" />
                 </div>
                 <div className={styles.text_container}>
-                    <h3 className={styles.product_name}>
-                        {product.product_list[0].name}
-                    </h3>
-                    <p className={styles.price}>{formattedPrice(price)}</p>
-                    <p className={styles.description}>
-                        {product.product_list[0].desc}
+                    <h3 className={styles.product_name}>{selection.name}</h3>
+                    <p className={styles.price}>
+                        {formattedPrice(selection.price)}
                     </p>
+                    <p className={styles.description}>{selection.desc}</p>
 
                     <form
                         className={styles.modal_form}
@@ -74,10 +113,8 @@ function ProductModal(props) {
                         <select
                             className={styles.selector_menu}
                             name="product_id"
-                            value={selection}
-                            onChange={(e) => {
-                                setSelection(Number(e.target.value));
-                            }}
+                            defaultValue={selection.size}
+                            onChange={handleProductChange}
                         >
                             {product.product_list.map((item) => (
                                 <option key={item.id} value={item.id}>
@@ -85,23 +122,39 @@ function ProductModal(props) {
                                 </option>
                             ))}
                         </select>
+
                         <label
                             className={styles.quantity_title}
                             htmlFor="quantity"
                         >
                             Quantity:
                         </label>
-                        <input
-                            type="number"
-                            className={styles.quantity_selector}
-                            name="quantity"
-                            min="1"
-                            max={maxQty}
-                            defaultValue="1"
-                        ></input>
-                        <button className={styles.submit_button} type="submit">
-                            Add to Cart
-                        </button>
+                        {soldOut ? (
+                            <p className={styles.sold_out}>
+                                {getTooltipText(
+                                    product.product_list.find(
+                                        (item) => item.id === selection.id
+                                    )
+                                )}
+                            </p>
+                        ) : (
+                            <div className={styles.add_to_cart_container}>
+                                <input
+                                    type="number"
+                                    className={styles.quantity_selector}
+                                    name="quantity"
+                                    min="1"
+                                    max={selection.can_purchase}
+                                    defaultValue="1"
+                                ></input>
+                                <button
+                                    className={styles.submit_button}
+                                    type="submit"
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
+                        )}
                     </form>
                 </div>
             </div>

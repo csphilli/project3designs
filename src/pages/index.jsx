@@ -1,5 +1,5 @@
 import React from "react";
-import HeadPageLayout from "../components/HeadPageLayout";
+import Layout from "../components/Layout";
 import LearnMore from "../components/LearnMore";
 import Seo from "../components/Seo";
 import * as styles from "../scss/hero.module.scss";
@@ -7,7 +7,7 @@ import * as styles from "../scss/hero.module.scss";
 export default function Home() {
     return (
         <div>
-            <HeadPageLayout pageId="home">
+            <Layout pageId="home">
                 <Seo title="Home" />
                 <section className={styles.heroContainer}>
                     <h2>
@@ -21,7 +21,7 @@ export default function Home() {
                     </p>
                 </section>
                 {/* <LearnMore /> */}
-            </HeadPageLayout>
+            </Layout>
         </div>
     );
 }

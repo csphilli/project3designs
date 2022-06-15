@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import HeadPageLayout from "../../components/HeadPageLayout";
+import Layout from "../../components/Layout";
 import ProductCard from "../../components/ProductCard";
 import Cart from "../../components/Cart";
 import * as styles from "../../scss/products.module.scss";
@@ -51,6 +51,7 @@ function Products() {
                       });
             });
             setProducts(prodList);
+
             // console.log(prodList);
         });
 
@@ -59,7 +60,7 @@ function Products() {
     if (allowSelling === true) {
         return (
             <div>
-                <HeadPageLayout pageId="products">
+                <Layout pageId="products">
                     <Seo title="Products" />
                     <div className={styles.container_grid}>
                         {/* <aside className={styles.cart}>
@@ -87,19 +88,19 @@ function Products() {
                             ))}
                         </main>
                     </div>
-                </HeadPageLayout>
+                </Layout>
             </div>
         );
     } else {
         return (
             <div>
-                <HeadPageLayout pageId="products">
+                <Layout pageId="products">
                     <h3>
                         Unfortunately we have temporarily restricted the sales
                         of our products. We apologize for the inconvenience
                         Please come back at a later time to check the status.
                     </h3>
-                </HeadPageLayout>
+                </Layout>
             </div>
         );
     }

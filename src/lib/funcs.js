@@ -1,5 +1,5 @@
 const TOOLTIPS = {
-    MAX_QTY: "Max Quantity",
+    MAX_QTY: "Max Quantity in Cart",
     SOLD_OUT: "Sold Out",
 };
 
@@ -9,13 +9,15 @@ export const createProdObj = (obj) => {
         ...obj,
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
+        can_purchase: obj.inventory < obj.max_qty ? obj.inventory : obj.max_qty,
     };
 };
 
 // Simple function to handle adding items to cart. Src: products/index.jsx file
-export const onAdd = (item) => {
+export const onAdd = (item, quantity) => {
     if (isClickAllowed(item) === true) {
-        item.quantity++;
+        item.quantity += quantity;
+        // item.quantity++;
         // saveToLocal(item.id, item);
     }
 };
@@ -92,7 +94,8 @@ export const updateFromLocal = (products) => {
 export const getTooltipText = (prod) => {
     switch (prod.tax_code_name) {
         case "General - Tangible Goods": {
-            if (prod.inventory < 1 || prod.quantity === prod.inventory)
+            // if (prod.inventory < 1 || prod.quantity === prod.inventory)
+            if (prod.inventory === 0 || prod.quantity === prod.inventory)
                 return TOOLTIPS.SOLD_OUT;
             else if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
             break;

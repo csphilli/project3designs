@@ -1,12 +1,12 @@
 import React from "react";
-import HeadPageLayout from "../../components/HeadPageLayout";
+import Layout from "../../components/Layout";
 import ContentGrid from "../../components/ContentGrid";
 import * as styles from "../../scss/hero.module.scss";
 import Seo from "../../components/Seo";
 
 function Projects() {
     return (
-        <HeadPageLayout pageId="projects">
+        <Layout pageId="projects">
             <Seo title="Projects" />
             <section className={styles.heroContainer}>
                 <h2>
@@ -23,7 +23,7 @@ function Projects() {
             <main>
                 <ContentGrid pageId="projects" />
             </main>
-        </HeadPageLayout>
+        </Layout>
     );
 }
 

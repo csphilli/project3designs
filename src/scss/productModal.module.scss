@@ -82,8 +82,7 @@
             font-family: "Montserrat", sans-serif;
         }
 
-        .submit_button:hover,
-        .submit_button:focus {
+        .submit_button:hover {
             cursor: pointer;
             background-color: #dbdbdb;
         }
@@ -127,4 +126,16 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
     border-radius: $borderRadius;
     transition: 0.3s ease-in-out;
+}
+
+.sold_out {
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.add_to_cart_container {
+    display: flex;
+    flex-direction: column;
 }

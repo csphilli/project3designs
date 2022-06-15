@@ -1,14 +1,11 @@
 ---
-page_category: sub
-page_root: videos
 title: How to load videos
+description: meta description 1
+page_root: videos
 slug: video-demo-1
 date: 2022-05-8T10:15:10+00:00
 author_name: Christopher Phillips
 post_thumb: ../images/thumbnails/two.jpg
-post_thumb_alt: Image about thumbnail
-meta_title: meta title 1
-meta_description: meta description 1
 videoID: TbZbJ4-2euE
 videoTitle: "FT ATOI"
 ---

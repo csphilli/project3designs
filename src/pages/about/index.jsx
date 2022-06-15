@@ -1,12 +1,12 @@
 import React from "react";
-import HeadPageLayout from "../../components/HeadPageLayout";
+import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import * as styles from "../../scss/hero.module.scss";
 
 function About() {
     return (
         <div>
-            <HeadPageLayout pageId="about">
+            <Layout pageId="about">
                 <Seo title="About" />
                 <section className={styles.heroContainer}>
                     <h2>Here's the TLDR</h2>
@@ -22,7 +22,7 @@ function About() {
                         time.
                     </p>
                 </section>
-            </HeadPageLayout>
+            </Layout>
         </div>
     );
 }
