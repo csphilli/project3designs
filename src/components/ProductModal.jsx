@@ -1,82 +1,67 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
-import { formattedPrice, getTooltipText, onAdd } from "../lib";
-
-function ProductModal(props) {
-    const { product, toggleModal } = props;
-
-    const [selection, setSelection] = useState(product.product_list[0]);
-    const [maxQty, setMaxQty] = useState(
-        selection.inventory < selection.max_qty
-            ? selection.inventory
-            : selection.max_qty
-    );
-    const [soldOut, setSoldOut] = useState(
-        selection.inventory === 0 ? true : false
-    );
-
-    useEffect(() => {});
-    // useEffect(() => {
-    //     // const prod = product.product_list.find((obj) => selection === obj.id);
-    //     // console.log(prod);
-
-    //     // setPrice(prod.price);
-    //     setSoldOut(
-    //         selection.inventory === 0 ||
-    //             selection.quantity === selection.inventory ||
-    //             selection.quantity === selection.max_qty
-    //             ? true
-    //             : false
-    //     );
-    //     // console.log(`SoldOut: ${soldOut}`);
-    // }, [selection, product]);
-
-    // const handleMaxQty = () => {
-    //     const max =
-    //         selection.inventory < selection.max_qty
-    //             ? selection.inventory
-    //             : selection.max_qty;
-    //     setMaxQty(max - selection.quantity);
-    // };
-
-    const handleProductChange = (e) => {
-        e.preventDefault();
-        setSelection(
-            product.product_list.find(
-                (item) => item.id === Number(e.target.value)
-            )
-        );
-        // setSoldOut(
-        //     selection.inventory === 0 || selection.can_purchase === 0
-        //         ? true
-        //         : false
-        // );
-    };
-
-    const handleProductSubmit = (e) => {
-        e.preventDefault();
-        const form = new FormData(e.target);
-        const data = {
-            id: Number(form.get("product_id")),
-            quantity: Number(form.get("quantity")),
-        };
-        selection.quantity = data.quantity;
-        selection.can_purchase -= data.quantity;
-        // setSoldOut(
-        //     selection.inventory === 0 || selection.can_purchase === 0
-        //         ? true
-        //         : false
-        // );
-
-        /* TODO
+import { formattedPrice, getTooltipText } from "../lib";
+/* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.
         5) Add cart icon on modal when there's a product in the cart.
+        6) Instead of cart button completely disappearing, updated it with a not allowed cursor instead.
 
-        */
+*/
+function ProductModal(props) {
+    const { product, toggleModal, orderItems, setOrderItems } = props;
+
+    const [selection, setSelection] = useState(product.product_list[0]);
+
+    const [maxQty, setMaxQty] = useState(() => {
+        const max =
+            selection.inventory < selection.max_qty
+                ? selection.inventory
+                : selection.max_qty;
+        return max - selection.quantity;
+    });
+    const [soldOut, setSoldOut] = useState(
+        selection.sold_out === true || selection.inventory === 0 ? true : false
+    );
+
+    useEffect(() => {
+        setMaxQty(() => {
+            const max =
+                selection.inventory < selection.max_qty
+                    ? selection.inventory
+                    : selection.max_qty;
+            console.log(`Max Qty Running. Value: ${max - selection.quantity}`);
+            return max - selection.quantity;
+        });
+
+        setSoldOut(selection.sold_out ? true : false);
+    }, [selection]);
+
+    const handleAdd = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        const data = {
+            product_id: form.get("product_id"),
+            quantity: Number(form.get("quantity")),
+        };
+
+        selection.quantity += data.quantity;
+        if (selection.quantity === maxQty) {
+            selection.sold_out = true;
+            setSoldOut(true);
+        } else {
+            selection.sold_out = false;
+            setSoldOut(false);
+        }
     };
 
-    console.log(`Rendered`);
+    const handleChange = (e) => {
+        setSelection(
+            product.product_list.find(
+                (item) => item.product_id === e.target.value
+            )
+        );
+    };
 
     return (
         <>
@@ -103,10 +88,7 @@ function ProductModal(props) {
                     </p>
                     <p className={styles.description}>{selection.desc}</p>
 
-                    <form
-                        className={styles.modal_form}
-                        onSubmit={handleProductSubmit}
-                    >
+                    <form className={styles.modal_form} onSubmit={handleAdd}>
                         <label className={styles.selector_title} htmlFor="size">
                             Size:
                         </label>
@@ -114,10 +96,10 @@ function ProductModal(props) {
                             className={styles.selector_menu}
                             name="product_id"
                             defaultValue={selection.size}
-                            onChange={handleProductChange}
+                            onChange={handleChange}
                         >
                             {product.product_list.map((item) => (
-                                <option key={item.id} value={item.id}>
+                                <option key={item.id} value={item.product_id}>
                                     {item.size}
                                 </option>
                             ))}
@@ -144,7 +126,7 @@ function ProductModal(props) {
                                     className={styles.quantity_selector}
                                     name="quantity"
                                     min="1"
-                                    max={selection.can_purchase}
+                                    max={maxQty}
                                     defaultValue="1"
                                 ></input>
                                 <button

@@ -15,6 +15,7 @@ import Seo from "../../components/Seo";
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(true);
+    const [orderItems, setOrderItems] = useState([]);
 
     // Cart items are populated based on product quantities. Since useEffect can't monitor changes in array child elements, I have to use a button click state to monitor changes. Each time any button (onAdd, onMinus, emptyCart) fires, it updates the products and triggers a refresh of the cart list.
     const handleClick = () => {
@@ -78,12 +79,14 @@ function Products() {
                             {products.map((product) => (
                                 <ProductCard
                                     formattedPrice={formattedPrice}
-                                    handleClick={handleClick}
-                                    btnClick={btnClick}
-                                    onMinus={onMinus}
-                                    onAdd={onAdd}
+                                    // handleClick={handleClick}
+                                    // btnClick={btnClick}
+                                    // onMinus={onMinus}
+                                    // onAdd={onAdd}
                                     key={product.product_list[0].id}
                                     product={product}
+                                    orderItems={orderItems}
+                                    setOrderItems={setOrderItems}
                                 />
                             ))}
                         </main>

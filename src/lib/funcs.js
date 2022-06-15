@@ -9,7 +9,7 @@ export const createProdObj = (obj) => {
         ...obj,
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
-        can_purchase: obj.inventory < obj.max_qty ? obj.inventory : obj.max_qty,
+        sold_out: obj.inventory === 0 ? true : false,
     };
 };
 

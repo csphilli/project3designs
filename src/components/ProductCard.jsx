@@ -8,7 +8,7 @@ import { formattedPrice } from "../lib";
 */
 
 function ProductCard(props) {
-    const { product } = props;
+    const { product, orderItems, setOrderItems } = props;
     const [showModal, setShowModal] = useState(false);
     const [soldOut, setSoldOut] = useState(false);
 
@@ -44,7 +44,12 @@ function ProductCard(props) {
                 </div>
             </div>
             {showModal && (
-                <ProductModal product={product} toggleModal={toggleModal} />
+                <ProductModal
+                    product={product}
+                    orderItems={orderItems}
+                    setOrderItems={setOrderItems}
+                    toggleModal={toggleModal}
+                />
             )}
         </>
     );
