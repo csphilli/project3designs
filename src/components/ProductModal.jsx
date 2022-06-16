@@ -6,13 +6,12 @@ import { formattedPrice, getTooltipText } from "../lib";
         3) Implement custom down arrow inside selection box.
         5) Add cart icon on modal when there's a product in the cart.
         6) Instead of cart button completely disappearing, updated it with a not allowed cursor instead.
+        7) Instead of keeping track of maxQty according to selection.quantity, the form functionality should add to an order Item instead of product.quantity
 
 */
 function ProductModal(props) {
     const { product, toggleModal, orderItems, setOrderItems } = props;
-
     const [selection, setSelection] = useState(product.product_list[0]);
-
     const [maxQty, setMaxQty] = useState(() => {
         const max =
             selection.inventory < selection.max_qty
@@ -20,9 +19,6 @@ function ProductModal(props) {
                 : selection.max_qty;
         return max - selection.quantity;
     });
-    const [soldOut, setSoldOut] = useState(
-        selection.sold_out === true || selection.inventory === 0 ? true : false
-    );
 
     useEffect(() => {
         setMaxQty(() => {
@@ -30,11 +26,8 @@ function ProductModal(props) {
                 selection.inventory < selection.max_qty
                     ? selection.inventory
                     : selection.max_qty;
-            console.log(`Max Qty Running. Value: ${max - selection.quantity}`);
             return max - selection.quantity;
         });
-
-        setSoldOut(selection.sold_out ? true : false);
     }, [selection]);
 
     const handleAdd = (e) => {
@@ -44,15 +37,8 @@ function ProductModal(props) {
             product_id: form.get("product_id"),
             quantity: Number(form.get("quantity")),
         };
-
         selection.quantity += data.quantity;
-        if (selection.quantity === maxQty) {
-            selection.sold_out = true;
-            setSoldOut(true);
-        } else {
-            selection.sold_out = false;
-            setSoldOut(false);
-        }
+        setMaxQty((prevState) => prevState - data.quantity);
     };
 
     const handleChange = (e) => {
@@ -109,9 +95,9 @@ function ProductModal(props) {
                             className={styles.quantity_title}
                             htmlFor="quantity"
                         >
-                            Quantity:
+                            Available: {maxQty}
                         </label>
-                        {soldOut ? (
+                        {maxQty === 0 ? (
                             <p className={styles.sold_out}>
                                 {getTooltipText(
                                     product.product_list.find(
