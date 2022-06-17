@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { formattedPrice, getTooltipText } from "../lib";
 import { OrderItemsContext } from "./Layout";
+import { BsCart } from "react-icons/bs";
+import { Link } from "gatsby";
 /* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.
@@ -82,7 +84,6 @@ function ProductModal(props) {
                         {formattedPrice(selection.price)}
                     </p>
                     <p className={styles.description}>{selection.desc}</p>
-
                     <form className={styles.modal_form} onSubmit={handleAdd}>
                         <label className={styles.selector_title} htmlFor="size">
                             Size:
@@ -137,6 +138,17 @@ function ProductModal(props) {
                         </div>
                     </form>
                 </div>
+                {/* <div className={styles.cart_icon_container}> */}
+                {selection.quantity > 0 && (
+                    <Link to="/cart" className={styles.link_container}>
+                        <BsCart
+                            className={styles.cart_icon}
+                            data-qty={selection.quantity}
+                        />
+                    </Link>
+                )}
+
+                {/* </div> */}
             </div>
         </>
     );

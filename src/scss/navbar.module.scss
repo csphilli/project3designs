@@ -23,7 +23,7 @@
 .links a {
     position: relative;
     font-family: "Quattrocento Sans", sans-serif;
-    color: #2b2b2b;
+    color: $mainDarkColor;
     font-size: scaled(1.1, 1.2, 320, 530);
     padding: 0 scaled(0.25, 1, 320, 1400);
 }
