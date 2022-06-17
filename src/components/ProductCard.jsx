@@ -32,7 +32,11 @@ function ProductCard(props) {
         <>
             <div className={styles.product_card} onClick={() => toggleModal()}>
                 <div className={styles.image_container}>
-                    <img src={image_url} alt="picture of product" />
+                    <img
+                        className={styles.image}
+                        src={image_url}
+                        alt="picture of product"
+                    />
                 </div>
                 <div className={styles.text_container}>
                     <div>

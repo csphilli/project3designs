@@ -32,6 +32,15 @@
 
 .image_container {
     width: 100%;
+    display: grid;
+    place-items: center;
+
+    .image {
+        width: 100%;
+        height: scaled(15, 25, 320, 1400);
+        object-fit: cover;
+        object-position: center center;
+    }
 }
 
 .text_container {
@@ -138,4 +147,10 @@
 .add_to_cart_container {
     display: flex;
     flex-direction: column;
+}
+
+.add_to_cart_container_prevent {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
 }

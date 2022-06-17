@@ -86,11 +86,11 @@ export const updateFromLocal = (products) => {
 };
 
 // Will be a switch case statement later
-// export const sortProducts = (products) => {
-//     products.forEach((obj) => {
-//         obj.product_list.sort((b, a) => b.price - a.price);
-//     });
-// };
+export const sortProducts = (products) => {
+    products.forEach((obj) => {
+        obj.product_list.sort((b, a) => b.price - a.price);
+    });
+};
 
 // Used to assign text to the tooltip texts.
 export const getTooltipText = (prod) => {

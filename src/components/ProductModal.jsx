@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { formattedPrice, getTooltipText } from "../lib";
+import { OrderItemsContext } from "./Layout";
 /* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.
@@ -10,7 +11,7 @@ import { formattedPrice, getTooltipText } from "../lib";
 
 */
 function ProductModal(props) {
-    const { product, toggleModal, orderItems, setOrderItems } = props;
+    const { product, toggleModal } = props;
     const [selection, setSelection] = useState(product.product_list[0]);
     const [maxQty, setMaxQty] = useState(() => {
         const max =
@@ -19,6 +20,10 @@ function ProductModal(props) {
                 : selection.max_qty;
         return max - selection.quantity;
     });
+
+    // The cart Icon in the navBar uses the amount of items in the cart
+    const { order } = useContext(OrderItemsContext);
+    const [orderItems, setOrderItems] = order;
 
     useEffect(() => {
         setMaxQty(() => {
@@ -65,7 +70,11 @@ function ProductModal(props) {
                     X
                 </button>
                 <div className={styles.image_container}>
-                    <img src={selection.image_url} alt="pic of product" />
+                    <img
+                        className={styles.image}
+                        src={selection.image_url}
+                        alt="pic of product"
+                    />
                 </div>
                 <div className={styles.text_container}>
                     <h3 className={styles.product_name}>{selection.name}</h3>
@@ -90,39 +99,42 @@ function ProductModal(props) {
                                 </option>
                             ))}
                         </select>
-
                         <label
                             className={styles.quantity_title}
                             htmlFor="quantity"
                         >
-                            Available: {maxQty}
+                            Available:{" "}
+                            {maxQty
+                                ? maxQty
+                                : getTooltipText(
+                                      product.product_list.find(
+                                          (item) => item.id === selection.id
+                                      )
+                                  )}
                         </label>
-                        {maxQty === 0 ? (
-                            <p className={styles.sold_out}>
-                                {getTooltipText(
-                                    product.product_list.find(
-                                        (item) => item.id === selection.id
-                                    )
-                                )}
-                            </p>
-                        ) : (
-                            <div className={styles.add_to_cart_container}>
-                                <input
-                                    type="number"
-                                    className={styles.quantity_selector}
-                                    name="quantity"
-                                    min="1"
-                                    max={maxQty}
-                                    defaultValue="1"
-                                ></input>
-                                <button
-                                    className={styles.submit_button}
-                                    type="submit"
-                                >
-                                    Add to Cart
-                                </button>
-                            </div>
-                        )}
+
+                        <div
+                            className={
+                                maxQty === 0
+                                    ? styles.add_to_cart_container_prevent
+                                    : styles.add_to_cart_container
+                            }
+                        >
+                            <input
+                                type="number"
+                                className={styles.quantity_selector}
+                                name="quantity"
+                                min="1"
+                                max={maxQty}
+                                defaultValue="1"
+                            ></input>
+                            <button
+                                className={styles.submit_button}
+                                type="submit"
+                            >
+                                Add to Cart
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

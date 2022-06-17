@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "gatsby";
 import * as styles from "../scss/navbar.module.scss";
 import { BsCart } from "react-icons/bs";
+// import { OrderItemsContext } from "./Layout";
+
+/* TODO
+
+1) Create styling on the cart qty value as an attribute passed to CSS.
+2) Take nav pages from gatsy.config site metadata
+
+*/
 
 function Navbar({ pageId }) {
+    // const { order } = useContext(OrderItemsContext);
+    // const [orderItems] = order;
+
+    // const qty = orderItems
+    //     .filter((item) => item.qty > 0)
+    //     .reduce((acc, i) => acc + i.qty, 0);
+
     return (
         <nav className={styles.navBar}>
             <div className={styles.navLeft}>
@@ -54,6 +69,7 @@ function Navbar({ pageId }) {
                         className={pageId === "cart" ? styles.active : "none"}
                         to="/cart"
                     >
+                        {/* OrderItems: {qty} */}
                         <BsCart />
                     </Link>
                     LOGIN
