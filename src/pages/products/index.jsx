@@ -11,11 +11,13 @@ import {
     formattedPrice,
 } from "../../lib/index";
 import Seo from "../../components/Seo";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 function Products() {
     const [products, setProducts] = useState([]);
     let [btnClick, setBtnClick] = useState(true);
     const [orderItems, setOrderItems] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     // Cart items are populated based on product quantities. Since useEffect can't monitor changes in array child elements, I have to use a button click state to monitor changes. Each time any button (onAdd, onMinus, emptyCart) fires, it updates the products and triggers a refresh of the cart list.
     const handleClick = () => {
@@ -52,45 +54,26 @@ function Products() {
                       });
             });
             setProducts(prodList);
-
-            // console.log(prodList);
+            setLoading(false);
         });
-
-        // updateFromLocal(products);
     }, []);
     if (allowSelling === true) {
         return (
             <div>
                 <Layout pageId="products">
                     <Seo title="Products" />
-                    <div className={styles.container_grid}>
-                        {/* <aside className={styles.cart}>
-                            <Cart
+                    <main className={styles.products}>
+                        {loading && <LoadingSpinner />}
+                        {products.map((product) => (
+                            <ProductCard
                                 formattedPrice={formattedPrice}
-                                onMinus={onMinus}
-                                onAdd={onAdd}
-                                products={products}
-                                handleClick={handleClick}
-                                btnClick={btnClick}
-                                emptyCart={emptyCart}
+                                key={product.product_list[0].id}
+                                product={product}
+                                orderItems={orderItems}
+                                setOrderItems={setOrderItems}
                             />
-                        </aside> */}
-                        <main className={styles.products}>
-                            {products.map((product) => (
-                                <ProductCard
-                                    formattedPrice={formattedPrice}
-                                    // handleClick={handleClick}
-                                    // btnClick={btnClick}
-                                    // onMinus={onMinus}
-                                    // onAdd={onAdd}
-                                    key={product.product_list[0].id}
-                                    product={product}
-                                    orderItems={orderItems}
-                                    setOrderItems={setOrderItems}
-                                />
-                            ))}
-                        </main>
-                    </div>
+                        ))}
+                    </main>
                 </Layout>
             </div>
         );

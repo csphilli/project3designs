@@ -13,6 +13,7 @@ export const createProdObj = (obj) => {
     };
 };
 
+// DELETE
 // Simple function to handle adding items to cart. Src: products/index.jsx file
 export const onAdd = (item, quantity) => {
     if (isClickAllowed(item) === true) {
@@ -22,6 +23,7 @@ export const onAdd = (item, quantity) => {
     }
 };
 
+// DELETE
 // Simple function to handle removing items from cart. Src: products/index.jsx file
 export const onMinus = (item) => {
     if (item.quantity >= 1) {

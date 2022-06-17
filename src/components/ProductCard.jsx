@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
 import ProductModal from "./ProductModal";
 import { formattedPrice } from "../lib";
+import LoadingSpinner from "./LoadingSpinner";
 
 /* TODO
 1) Images coming from Stripe image_url meta aren't sizing all to the same size.

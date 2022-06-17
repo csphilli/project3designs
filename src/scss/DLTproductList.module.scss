@@ -1,5 +1,6 @@
 @use "../scss/abstracts/" as *;
 
+// Probably not needed. Suggest deleting when 100% certain
 .product_grid_container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
