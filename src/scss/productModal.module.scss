@@ -40,8 +40,9 @@
     right: 1rem;
     display: grid;
     place-items: center;
-    width: scaled(3, 5, 320, 1400);
-    aspect-ratio: 16/9;
+    width: scaled(4, 5, 320, 1400);
+    // aspect-ratio: 16/9;
+    padding: scaled(0.65, 1, 320, 1400) 0;
     background-color: #cacaca;
     border-radius: $borderRadius;
 
@@ -49,23 +50,26 @@
         position: relative;
         text-decoration-style: none;
         color: $mainDarkColor;
-        font-size: scaled(1, 1.5, 320, 1400);
-    }
-
-    .cart_icon::after {
-        position: absolute;
-        content: attr(data-qty);
-        top: 0;
-        right: 0;
-        height: 2rem;
-        width: 2rem;
-        background-color: red;
+        font-size: scaled(1.15, 1.5, 320, 1400);
     }
 }
 
-.link_container:hover {
+.link_container:hover,
+.link_container:focus {
     background-color: #a8a8a8;
     color: red;
+}
+
+.link_container::after {
+    position: absolute;
+    display: block;
+    content: attr(data-qty);
+    font-family: "Roboto", sans-serif;
+    font-size: scaled(0.75, 0.75, 320, 1400);
+    top: 0.2rem;
+    right: scaled(0.6, 1.1, 320, 1400);
+
+    color: $mainDarkColor;
 }
 
 .image_container {
@@ -123,7 +127,8 @@
 
         .submit_button {
             margin-top: scaled(1, 2, 320, 1400);
-            height: scaled(1.5, 3, 320, 1400);
+            // height: scaled(1.5, 3, 320, 1400);
+            padding: scaled(0.25, 0.75, 320, 1400) scaled(0.75, 1.5, 320, 1400);
             border: 1px solid rgba(0, 0, 0, 0.8);
             background-color: #00a7fa;
             color: #fff;

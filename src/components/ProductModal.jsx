@@ -140,11 +140,12 @@ function ProductModal(props) {
                 </div>
                 {/* <div className={styles.cart_icon_container}> */}
                 {selection.quantity > 0 && (
-                    <Link to="/cart" className={styles.link_container}>
-                        <BsCart
-                            className={styles.cart_icon}
-                            data-qty={selection.quantity}
-                        />
+                    <Link
+                        to="/cart"
+                        data-qty={selection.quantity}
+                        className={styles.link_container}
+                    >
+                        <BsCart className={styles.cart_icon} />
                     </Link>
                 )}
 
