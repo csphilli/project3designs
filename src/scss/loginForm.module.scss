@@ -95,33 +95,13 @@
                 color: $formDarkTint;
             }
         }
-        // .utility_container {
-        //     display: grid;
-        //     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-        //     place-items: center;
-        //     margin-bottom: 1.2rem;
 
-        //     .left_side {
-        //         display: flex;
-        //         align-items: center;
-        //         margin-bottom: 0.2rem;
-        //         input[type="checkbox"] {
-        //             width: 1.2em;
-        //             height: 1.2em;
-        //             margin-right: 0.5rem;
-        //         }
-
-        //         input[type="checkbox"]:hover,
-        //         input[type="checkbox"]:focus {
-        //             cursor: pointer;
-        //         }
-        //     }
-        // }
-
-        .btn_container {
+        .submit_button {
             background-color: $importantButtonColor;
-            font-family: "Montserrat", sans-serif;
-            font-size: scaled(1, 1.2, 320, 1400);
+            border: none;
+            outline: none;
+            width: 100%;
+
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,29 +115,18 @@
                 font-size: scaled(1, 1.2, 320, 1400);
                 margin-right: 0.5rem;
             }
+            & p {
+                font-family: "Montserrat", sans-serif;
+                font-size: scaled(1, 1.2, 320, 1400);
+            }
         }
 
-        .btn_container:hover,
-        .btn_container:focus {
+        .submit_button:hover,
+        .submit_button:focus {
             background-color: $importantButtonColorHover;
             cursor: pointer;
         }
     }
-    // .text_button {
-    //     color: $mainLightColor;
-    //     background-color: none;
-    //     background: none;
-    //     border: none;
-    //     outline: none;
-    //     font-family: "Roboto", sans-serif;
-    //     color: $mainLightColor;
-    // }
-
-    // .text_button:hover,
-    // .text_button:focus {
-    //     cursor: pointer;
-    //     color: #9f9f9f;
-    // }
     .sign_up_forgot_container {
         display: flex;
         flex-direction: column;
