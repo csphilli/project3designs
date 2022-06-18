@@ -20,14 +20,14 @@ function LoginForm() {
     return (
         <div className={styles.login_container}>
             <p className={styles.login_subject_text}>Sign in with</p>
-            <div className={styles.oauth_container}>
+            <button className={styles.oauth_container}>
                 <BsGoogle className={styles.icon} />
                 <p className={styles.oauth_text}>sign up with Google</p>
-            </div>
-            <div className={styles.oauth_container}>
+            </button>
+            <button className={styles.oauth_container}>
                 <BsFacebook className={styles.icon} />
                 <p className={styles.oauth_text}>sign up with Facebook</p>
-            </div>
+            </button>
             <div className={styles.divider_container}>
                 <p className={styles.divider_text}>or continue with</p>
             </div>

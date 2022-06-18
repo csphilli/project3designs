@@ -28,10 +28,6 @@
     padding: scaled(0.5, 2, 320, 1400);
     width: scaled(18, 70, 320, 1400);
     border-radius: $borderRadius;
-
-    // .cart_icon_container {
-    //     width: 100%;
-    //     border: 1px solid red;
 }
 
 .link_container {
@@ -41,10 +37,9 @@
     display: grid;
     place-items: center;
     width: scaled(4, 5, 320, 1400);
-    // aspect-ratio: 16/9;
     padding: scaled(0.65, 1, 320, 1400) 0;
     background-color: #cacaca;
-    border-radius: $borderRadius;
+    border-radius: $formElementRadius;
 
     .cart_icon {
         position: relative;
@@ -111,6 +106,7 @@
             border: 1px solid rgba(0, 0, 0, 0.8);
             background: none;
             height: scaled(1.5, 3, 320, 1400);
+            border-radius: $formElementRadius;
         }
 
         .quantity_title {
@@ -123,21 +119,22 @@
             border: 1px solid rgba(0, 0, 0, 0.8);
             background: none;
             height: scaled(1.5, 3, 320, 1400);
+            border-radius: $formElementRadius;
         }
 
         .submit_button {
             margin-top: scaled(1, 2, 320, 1400);
-            // height: scaled(1.5, 3, 320, 1400);
             padding: scaled(0.25, 0.75, 320, 1400) scaled(0.75, 1.5, 320, 1400);
-            border: 1px solid rgba(0, 0, 0, 0.8);
-            background-color: #00a7fa;
-            color: #fff;
+            border-radius: $formElementRadius;
+            border: none;
+            background-color: $importantButtonColor;
+            color: $mainLightColor;
             font-family: "Montserrat", sans-serif;
         }
 
         .submit_button:hover {
             cursor: pointer;
-            background-color: #0294dd;
+            background-color: $importantButtonColorHover;
         }
 
         .quantity_selector:hover,
