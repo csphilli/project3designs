@@ -138,7 +138,6 @@ function ProductModal(props) {
                         </div>
                     </form>
                 </div>
-                {/* <div className={styles.cart_icon_container}> */}
                 {selection.quantity > 0 && (
                     <Link
                         to="/cart"
@@ -148,8 +147,6 @@ function ProductModal(props) {
                         <BsCart className={styles.cart_icon} />
                     </Link>
                 )}
-
-                {/* </div> */}
             </div>
         </>
     );

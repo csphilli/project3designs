@@ -1,10 +1,12 @@
 $baseFontSize: 16px;
 $borderRadius: 0.5rem;
+$formElementRadius: 5px;
 $mainDarkColor: #2d2d2d;
+$formDarkTint: #6e6e6e;
 $mainLightColor: rgb(243, 243, 243);
 $boxShadow: 0px 1px 25px rgba(0, 0, 0, 0.1);
-$cart_plus_color: rgb(163, 226, 163);
-$cart_minus_color: rgb(216, 148, 148);
+$importantButtonColor: #00a7fa;
+$importantButtonColorHover: #0094dd;
 $checkout_button_color: linear-gradient(
     to right,
     rgb(27, 170, 253) 0%,

@@ -1,0 +1,61 @@
+@use "../scss/abstracts/" as *;
+
+.section_container {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(scaled(15, 25, 320, 1400), 1fr)
+    );
+    grid-template-areas:
+        "form"
+        "benefits";
+    border-radius: $borderRadius;
+}
+
+.main_container {
+    grid-area: form;
+    margin: scaled(1, 2, 320, 1400) scaled(1, 4, 320, 1400);
+    background-color: $mainDarkColor;
+    border-radius: $borderRadius;
+}
+
+.membership_info_container {
+    grid-area: benefits;
+    padding: scaled(1, 2, 320, 1400) scaled(1.5, 4, 320, 1400);
+    position: relative;
+
+    .title {
+        font-size: scaled(1.4, 2, 320, 1400);
+        font-weight: 600;
+        margin-bottom: scaled(1, 2, 320, 1400);
+    }
+
+    .subtitle {
+        font-family: "Montserrate", sans-serif;
+        font-weight: 300;
+        font-size: scaled(1, 1.2, 320, 1400);
+    }
+
+    .list {
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        font-size: scaled(1, 1.1, 320, 1400);
+        list-style-type: disc;
+    }
+}
+
+.membership_info_container::after {
+    content: "";
+    position: absolute;
+    width: 1px;
+    top: 4rem;
+    right: 0;
+    bottom: 4rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 750px) {
+    .section_container {
+        grid-template-areas: "benefits form";
+    }
+}

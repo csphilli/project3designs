@@ -1,0 +1,184 @@
+@use "../scss/abstracts/" as *;
+
+.login_container {
+    padding: scaled(1, 4, 320, 1400) scaled(1.5, 5, 320, 1400);
+
+    .login_subject_text {
+        color: $mainLightColor;
+        margin-bottom: 1.2rem;
+    }
+
+    .oauth_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #474747;
+        border-radius: $formElementRadius;
+        padding: scaled(0.5, 0.7, 320, 1400) 0;
+        margin-bottom: 0.5rem;
+
+        .icon {
+            color: $mainLightColor;
+            font-size: scaled(1, 1.5, 2, 320, 1400);
+        }
+
+        .oauth_text {
+            margin-left: 0.5rem;
+            color: $mainLightColor;
+            font-family: "Montserrat", sans-serif;
+            font-size: scaled(0.8, 1, 320, 1400);
+        }
+    }
+
+    .oauth_container:hover,
+    .oauth_container:focus {
+        background-color: #5c5c5c;
+        cursor: pointer;
+    }
+
+    .divider_container {
+        margin: scaled(1, 2, 320, 1400) 0;
+        position: relative;
+        display: grid;
+        place-items: center;
+
+        .divider_text {
+            margin: 0 auto;
+            background-color: $mainDarkColor;
+            padding: 0 scaled(0.5, 1, 320, 1400);
+            color: $formDarkTint;
+            z-index: 2;
+        }
+    }
+
+    .divider_container::before {
+        position: absolute;
+        content: "";
+        left: rem(5);
+        right: rem(5);
+        height: 1px;
+        top: 55%;
+        transform: translateY(-55%);
+        background-color: $formDarkTint;
+    }
+
+    form {
+        label {
+            display: inline-block;
+            color: $mainLightColor;
+        }
+        .input_container {
+            position: relative;
+            height: 2.2rem;
+            margin-bottom: 1.2rem;
+
+            input[type="password"],
+            input[type="email"] {
+                padding-left: 2.5rem;
+                color: $mainLightColor;
+                width: 100%;
+                height: 100%;
+                border: 1px solid $formDarkTint;
+                border-radius: $formElementRadius;
+                outline: none;
+                background-color: $mainDarkColor;
+                overflow: hidden;
+            }
+
+            .input_icon {
+                position: absolute;
+                top: 50%;
+                left: 0.5rem;
+                transform: translateY(-50%);
+                font-size: scaled(1, 1.5, 320, 1400);
+                stroke-width: 1;
+                color: $formDarkTint;
+            }
+        }
+        // .utility_container {
+        //     display: grid;
+        //     grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        //     place-items: center;
+        //     margin-bottom: 1.2rem;
+
+        //     .left_side {
+        //         display: flex;
+        //         align-items: center;
+        //         margin-bottom: 0.2rem;
+        //         input[type="checkbox"] {
+        //             width: 1.2em;
+        //             height: 1.2em;
+        //             margin-right: 0.5rem;
+        //         }
+
+        //         input[type="checkbox"]:hover,
+        //         input[type="checkbox"]:focus {
+        //             cursor: pointer;
+        //         }
+        //     }
+        // }
+
+        .btn_container {
+            background-color: $importantButtonColor;
+            font-family: "Montserrat", sans-serif;
+            font-size: scaled(1, 1.2, 320, 1400);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: scaled(0.5, 0.7, 320, 1400) 0;
+            color: $mainLightColor;
+            border-radius: $formElementRadius;
+            margin-bottom: 2rem;
+
+            .sign_in_icon {
+                stroke-width: 1;
+                font-size: scaled(1, 1.2, 320, 1400);
+                margin-right: 0.5rem;
+            }
+        }
+
+        .btn_container:hover,
+        .btn_container:focus {
+            background-color: $importantButtonColorHover;
+            cursor: pointer;
+        }
+    }
+    // .text_button {
+    //     color: $mainLightColor;
+    //     background-color: none;
+    //     background: none;
+    //     border: none;
+    //     outline: none;
+    //     font-family: "Roboto", sans-serif;
+    //     color: $mainLightColor;
+    // }
+
+    // .text_button:hover,
+    // .text_button:focus {
+    //     cursor: pointer;
+    //     color: #9f9f9f;
+    // }
+    .sign_up_forgot_container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: $mainLightColor;
+
+        .text_button {
+            background-color: none;
+            background: none;
+            border: none;
+            outline: none;
+            font-family: "Roboto", sans-serif;
+            color: $mainLightColor;
+            margin-bottom: 1.5rem;
+        }
+
+        .text_button:hover,
+        .text_button:focus {
+            color: #9f9f9f;
+            cursor: pointer;
+        }
+    }
+}

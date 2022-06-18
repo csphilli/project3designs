@@ -10,6 +10,7 @@ require("dotenv").config({
 module.exports = {
     /* Your site config here */
     siteMetadata: {
+        siteName: "Project3 Designs",
         title: "Project3 Designs - Custom woodworking and tutorials",
         description:
             "Woodworker based in Finland, I design and build custom luxury pieces either through commission or own ambition as well as providing tutorials with writing and video",
@@ -23,6 +24,13 @@ module.exports = {
             "woodworking tutorials",
         ],
         siteUrl: "https://www.project3designs.com",
+        navLinks: [
+            { id: "projects", path: "/projects" },
+            { id: "videos", path: "/videos" },
+            { id: "products", path: "/products" },
+            { id: "cart", path: "/cart" },
+            { id: "login", path: "/login" },
+        ],
     },
     plugins: [
         `gatsby-plugin-react-helmet`,
