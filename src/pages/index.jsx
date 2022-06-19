@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import LearnMore from "../components/LearnMore";
+// import LearnMore from "../components/LearnMore";
 import Seo from "../components/Seo";
 import * as styles from "../scss/hero.module.scss";
 

@@ -9,7 +9,7 @@ function LoginForm() {
     const [signUp, setSignUp] = useState(false);
     const [forgot, setForgot] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [btnStatus, setBtnStatus] = useState(styles.active);
+    // const [btnStatus, setBtnStatus] = useState(styles.active);
 
     // let submitBtnClass = styles.submit_button;
 
@@ -31,7 +31,7 @@ function LoginForm() {
 
     const handleSignIn = (e) => {
         e.preventDefault();
-        setBtnStatus(styles.inactive);
+        // setBtnStatus(styles.inactive);
         setLoading(true);
         console.log(`handling sign in...`);
         console.log(e.target);
@@ -84,12 +84,14 @@ function LoginForm() {
                         </div>
                         {/* <button id="test" className={styles.submit_button}> */}
                         <button id="test" className={styles.submit_button}>
-                            {loading && <LoadingSpinner />}
-                            {/* <div className={styles.btn_content_container}> */}
-                            <div className={btnStatus}>
-                                <FiLock className={styles.btn_icon} />
-                                <p>Sign In</p>
-                            </div>
+                            {loading ? (
+                                <LoadingSpinner type="button" />
+                            ) : (
+                                <>
+                                    <FiLock className={styles.btn_icon} />
+                                    <p>Sign In</p>
+                                </>
+                            )}
                         </button>
                     </form>
 

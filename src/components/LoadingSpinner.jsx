@@ -1,19 +1,34 @@
 import React from "react";
-import * as styles from "../scss/loadingSpinner.module.scss";
+import * as productLoading from "../scss/productLoadingSpinner.module.scss";
+import * as buttonLoading from "../scss/buttonLoadingSpinner.module.scss";
 
-function LoadingSpinner() {
+function LoadingSpinner({ type }) {
+    const getSpinnerStyle = (s) => {
+        switch (s) {
+            case "products": {
+                return productLoading.lds_roller;
+            }
+            case "button": {
+                return buttonLoading.lds_roller;
+            }
+            default: {
+                return buttonLoading.lds_roller;
+            }
+        }
+    };
+
+    console.log(`type: ${type}`);
+
     return (
-        <div className={styles.spinner_parent}>
-            <div className={styles.lds_roller}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+        <div className={getSpinnerStyle(type)}>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
     );
 }

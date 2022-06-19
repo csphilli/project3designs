@@ -1,22 +1,22 @@
 import React from "react";
-import * as styles from "../scss/learnMore.module.scss";
-import { useStaticQuery, graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { BiRuler, BiMoney, BiListOl, BiWrench, BiDollar } from "react-icons/bi";
-import { IoHammerOutline, IoRibbonOutline } from "react-icons/io5";
-import { BsFileEarmarkPdf } from "react-icons/bs";
-import { AiOutlineYoutube } from "react-icons/ai";
-import Button from "./LinkButton";
+// import * as styles from "../scss/learnMore.module.scss";
+// import { useStaticQuery, graphql } from "gatsby";
+// import { GatsbyImage, getImage } from "gatsby-plugin-image";
+// import { BiRuler, BiMoney, BiListOl, BiWrench, BiDollar } from "react-icons/bi";
+// import { IoHammerOutline, IoRibbonOutline } from "react-icons/io5";
+// import { BsFileEarmarkPdf } from "react-icons/bs";
+// import { AiOutlineYoutube } from "react-icons/ai";
+// import Button from "./LinkButton";
 
 function LearnMore() {
-    const buttonPlans = {
-        text: "Build Plans",
-        link: "/products",
-    };
-    const buttonCourses = {
-        text: "Courses",
-        link: "/products",
-    };
+    // const buttonPlans = {
+    //     text: "Build Plans",
+    //     link: "/products",
+    // };
+    // const buttonCourses = {
+    //     text: "Courses",
+    //     link: "/products",
+    // };
     // const data = useStaticQuery(graphql`
     //     query LearnMoreQuery {
     //         markdownRemark(frontmatter: { page_id: { eq: "learn-more" } }) {

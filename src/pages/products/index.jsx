@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../../components/Layout";
 import ProductCard from "../../components/ProductCard";
-import Cart from "../../components/Cart";
 import * as styles from "../../scss/products.module.scss";
 import {
     createProdObj,
-    onAdd,
-    onMinus,
     fetchProducts,
     formattedPrice,
     sortProducts,
@@ -64,16 +61,23 @@ function Products() {
             <div>
                 <Layout pageId="products">
                     <Seo title="Products" />
-                    <main className={styles.products}>
-                        {loading && <LoadingSpinner />}
-                        {products.map((product) => (
-                            <ProductCard
-                                formattedPrice={formattedPrice}
-                                key={product.product_list[0].id}
-                                product={product}
-                            />
-                        ))}
-                    </main>
+                    {loading ? (
+                        <div className={styles.loading_container}>
+                            <LoadingSpinner type="products" />
+                        </div>
+                    ) : (
+                        <>
+                            <main className={styles.products}>
+                                {products.map((product) => (
+                                    <ProductCard
+                                        formattedPrice={formattedPrice}
+                                        key={product.product_list[0].id}
+                                        product={product}
+                                    />
+                                ))}
+                            </main>
+                        </>
+                    )}
                 </Layout>
             </div>
         );

@@ -1,26 +1,6 @@
 @use "../scss/abstracts/" as *;
 
-// .container_grid {
-//     display: grid;
-//     gap: scaled(1, 1.2, 320, 1400);
-//     grid-template-columns: 1fr;
-//     overflow: hidden;
-//     grid-template-areas:
-//         // "cart"
-//         "products";
-// }
-
-// .cart {
-//     grid-area: cart;
-//     background-color: rgb(218, 218, 218);
-//     min-width: 19rem;
-//     align-self: start;
-//     border-radius: $borderRadius;
-// }
-
 .products {
-    // grid-area: products;
-    // position: relative;
     border-radius: $borderRadius;
     display: grid;
     grid-template-columns: repeat(
@@ -30,10 +10,9 @@
     padding: scaled(0.5, 0.75, 320, 1400) scaled(1, 1.5, 320, 1400);
     gap: scaled(1, 5, 320, 1400);
 }
-
-// @media (min-width: 650px) {
-//     .container_grid {
-//         grid-template-columns: 2.5fr 1fr;
-//         // grid-template-areas: "products cart";
-//     }
-// }
+.loading_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}

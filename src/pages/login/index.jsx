@@ -16,9 +16,9 @@ function Login() {
                     <aside className={styles.membership_info_container}>
                         <h2 className={styles.title}>Why become a member?</h2>
                         <p className={styles.subtitle}>
-                            It's super easy to join and there are some important
-                            reasons why you should. The non-exhaustive list
-                            includes
+                            It's super easy to join and there are some excellent
+                            reasons why you should consider doing so. The
+                            non-exhaustive list includes
                         </p>
                         <ul className={styles.list}>
                             <li>
