@@ -115,27 +115,33 @@
         }
 
         .submit_button {
+            // position: relative;
             background-color: $importantButtonColor;
             border: none;
             outline: none;
             width: 100%;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: scaled(0.5, 0.7, 320, 1400) 0;
             color: $mainLightColor;
             border-radius: $formElementRadius;
             margin-bottom: 2rem;
 
-            .sign_in_icon {
-                stroke-width: 1;
-                font-size: scaled(1, 1.2, 320, 1400);
-                margin-right: 0.5rem;
+            .active {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: scaled(0.5, 0.7, 320, 1400) 0;
+                .btn_icon {
+                    stroke-width: 1;
+                    font-size: scaled(1, 1.2, 320, 1400);
+                    margin-right: 0.5rem;
+                }
+                & p {
+                    font-family: "Montserrat", sans-serif;
+                    font-size: scaled(1, 1.2, 320, 1400);
+                }
             }
-            & p {
-                font-family: "Montserrat", sans-serif;
-                font-size: scaled(1, 1.2, 320, 1400);
+
+            .inactive {
+                visibility: hidden;
             }
         }
 

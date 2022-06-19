@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { BsGoogle, BsFacebook, BsPerson } from "react-icons/bs";
+import { BsGoogle, BsFacebook } from "react-icons/bs";
 import { FiMail, FiKey, FiLock, FiUser } from "react-icons/fi";
+import LoadingSpinner from "./LoadingSpinner";
 import * as styles from "../scss/loginForm.module.scss";
 
 function LoginForm() {
     const [signIn, setSignIn] = useState(true);
     const [signUp, setSignUp] = useState(false);
     const [forgot, setForgot] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [btnStatus, setBtnStatus] = useState(styles.active);
+
+    // let submitBtnClass = styles.submit_button;
 
     const toggleSignIn = () => {
         setSignIn(true);
@@ -26,7 +31,10 @@ function LoginForm() {
 
     const handleSignIn = (e) => {
         e.preventDefault();
+        setBtnStatus(styles.inactive);
+        setLoading(true);
         console.log(`handling sign in...`);
+        console.log(e.target);
     };
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -74,9 +82,14 @@ function LoginForm() {
                                 required
                             ></input>
                         </div>
-                        <button className={styles.submit_button}>
-                            <FiLock className={styles.sign_in_icon} />
-                            <p>Sign In</p>
+                        {/* <button id="test" className={styles.submit_button}> */}
+                        <button id="test" className={styles.submit_button}>
+                            {loading && <LoadingSpinner />}
+                            {/* <div className={styles.btn_content_container}> */}
+                            <div className={btnStatus}>
+                                <FiLock className={styles.btn_icon} />
+                                <p>Sign In</p>
+                            </div>
                         </button>
                     </form>
 
@@ -155,7 +168,7 @@ function LoginForm() {
                             data-sitekey={`${process.env.GATSBY_RECAPTCHA_KEY}`}
                         ></div>
                         <button className={styles.submit_button}>
-                            <FiLock className={styles.sign_in_icon} />
+                            <FiLock className={styles.btn_icon} />
                             <p>Sign Up</p>
                         </button>
                     </form>
@@ -191,7 +204,7 @@ function LoginForm() {
                             ></input>
                         </div>
                         <button className={styles.submit_button}>
-                            <FiLock className={styles.sign_in_icon} />
+                            <FiLock className={styles.btn_icon} />
                             <p>Reset Password</p>
                         </button>
                     </form>
