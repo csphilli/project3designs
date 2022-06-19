@@ -8,6 +8,20 @@
         margin-bottom: 1.2rem;
     }
 
+    .forgot_text {
+        font-family: "Montserrat", sans-serif;
+        color: $mainLightColor;
+        margin-bottom: scaled(1, 2, 320, 1400);
+    }
+
+    .disclosure_notice {
+        font-family: "Montserrat", sans-serif;
+        font-size: scaled(0.7, 0.9, 320, 1400);
+        font-style: italic;
+        color: $mainLightColor;
+        margin-bottom: 1.2rem;
+    }
+
     .oauth_container {
         display: flex;
         justify-content: center;
@@ -70,13 +84,15 @@
             display: inline-block;
             color: $mainLightColor;
         }
+
         .input_container {
             position: relative;
             height: 2.2rem;
             margin-bottom: 1.2rem;
 
             input[type="password"],
-            input[type="email"] {
+            input[type="email"],
+            input[type="text"] {
                 padding-left: 2.5rem;
                 color: $mainLightColor;
                 width: 100%;
@@ -87,7 +103,6 @@
                 background-color: $mainDarkColor;
                 overflow: hidden;
             }
-
             .input_icon {
                 position: absolute;
                 top: 50%;
@@ -137,18 +152,36 @@
         align-items: center;
         color: $mainLightColor;
 
-        .text_button {
+        .sign {
             background-color: none;
             background: none;
             border: none;
             outline: none;
             font-family: "Roboto", sans-serif;
+            font-size: scaled(0.9, 1.1, 320, 1400);
             color: $mainLightColor;
             margin-bottom: 1.5rem;
         }
 
-        .text_button:hover,
-        .text_button:focus {
+        .sign:hover,
+        .sign:focus {
+            color: #9f9f9f;
+            cursor: pointer;
+        }
+
+        .forgot {
+            background-color: none;
+            background: none;
+            border: none;
+            outline: none;
+            font-family: "Roboto", sans-serif;
+            font-size: scaled(0.7, 0.9, 320, 1400);
+            color: $mainLightColor;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot:hover,
+        .forgot:focus {
             color: #9f9f9f;
             cursor: pointer;
         }

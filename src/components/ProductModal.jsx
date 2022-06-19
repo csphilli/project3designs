@@ -7,8 +7,6 @@ import { Link } from "gatsby";
 /* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.
-        5) Add cart icon on modal when there's a product in the cart.
-        6) Instead of cart button completely disappearing, updated it with a not allowed cursor instead.
         7) Instead of keeping track of maxQty according to selection.quantity, the form functionality should add to an order Item instead of product.quantity
 
 */

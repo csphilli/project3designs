@@ -7,7 +7,7 @@ import "../scss/global.scss";
 import "../scss/typography.scss";
 import PageBannerIcon from "./PageBannerIcon";
 
-export const OrderItemsContext = createContext();
+export const GeneralContext = createContext();
 
 function Layout({ pageId, children }) {
     const [showBanner, setShowBanner] = useState(true);
@@ -21,12 +21,12 @@ function Layout({ pageId, children }) {
         <div className="logo-container">
             {showBanner && <PageBannerIcon pageId={pageId} />}
             <div className="page-container">
-                <OrderItemsContext.Provider
+                <GeneralContext.Provider
                     value={{ order: [orderItems, setOrderItems] }}
                 >
                     <Navbar pageId={pageId} />
                     <div>{children}</div>
-                </OrderItemsContext.Provider>
+                </GeneralContext.Provider>
                 <Footer />
             </div>
             <Logo />

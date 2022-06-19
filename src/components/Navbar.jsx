@@ -3,6 +3,7 @@ import { Link } from "gatsby";
 import * as styles from "../scss/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
 import { BsCart } from "react-icons/bs";
+import NavLogo from "./NavLogo";
 
 // import { OrderItemsContext } from "./Layout";
 
@@ -45,7 +46,9 @@ function Navbar({ pageId }) {
         <nav className={styles.navBar}>
             <div className={styles.navLeft}>
                 <Link className={styles.logoText} to="/">
-                    <h1>{siteName}</h1>
+                    <h1>
+                        <NavLogo />
+                    </h1>
                 </Link>
             </div>
             <div className={styles.navRight}>

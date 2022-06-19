@@ -11,7 +11,7 @@ module.exports = {
     /* Your site config here */
     siteMetadata: {
         siteName: "Project3 Designs",
-        title: "Project3 Designs - Custom woodworking and tutorials",
+        title: "Project3 Designs - Custom Luxury Designs",
         description:
             "Woodworker based in Finland, I design and build custom luxury pieces either through commission or own ambition as well as providing tutorials with writing and video",
         author: "Christopher Phillips",
