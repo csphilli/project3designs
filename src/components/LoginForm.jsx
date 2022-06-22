@@ -1,32 +1,48 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { BsGoogle, BsFacebook } from "react-icons/bs";
 import { FiMail, FiKey, FiLock, FiUser } from "react-icons/fi";
 import LoadingSpinner from "./LoadingSpinner";
 import * as styles from "../scss/loginForm.module.scss";
+import ReCAPTCHA from "react-google-recaptcha";
+
+const ACTIONS = {
+    SIGNIN: "signIn",
+    SIGNUP: "signUp",
+    FORGOT: "forgot",
+};
+
+const reducer = (state, action) => {
+    switch (action.type) {
+        case ACTIONS.SIGNIN:
+            return { signIn: true, signUp: false, forgot: false };
+        case ACTIONS.SIGNUP:
+            return { signIn: false, signUp: true, forgot: false };
+        case ACTIONS.FORGOT:
+            return { signIn: false, signUp: false, forgot: true };
+        default:
+            return { signIn: true, signUp: false, forgot: false };
+    }
+};
 
 function LoginForm() {
-    const [signIn, setSignIn] = useState(true);
-    const [signUp, setSignUp] = useState(false);
-    const [forgot, setForgot] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [state, dispatch] = useReducer(reducer, {
+        signIn: true,
+        signUp: false,
+        forgot: false,
+    });
     // const [btnStatus, setBtnStatus] = useState(styles.active);
 
     // let submitBtnClass = styles.submit_button;
 
     const toggleSignIn = () => {
-        setSignIn(true);
-        setSignUp(false);
-        setForgot(false);
+        dispatch({ type: ACTIONS.SIGNIN });
     };
     const toggleSignUp = () => {
-        setSignIn(false);
-        setSignUp(true);
-        setForgot(false);
+        dispatch({ type: ACTIONS.SIGNUP });
     };
     const toggleForgot = () => {
-        setSignIn(false);
-        setSignUp(false);
-        setForgot(true);
+        dispatch({ type: ACTIONS.FORGOT });
     };
 
     const handleSignIn = (e) => {
@@ -47,7 +63,7 @@ function LoginForm() {
 
     return (
         <div>
-            {signIn && (
+            {state.signIn && (
                 <div className={styles.login_container}>
                     <p className={styles.login_subject_text}>Sign in...</p>
                     <button className={styles.oauth_container}>
@@ -108,7 +124,7 @@ function LoginForm() {
                     </div>
                 </div>
             )}
-            {signUp && (
+            {state.signUp && (
                 <div className={styles.login_container}>
                     <form onSubmit={handleSignUp}>
                         <label htmlFor="fname">First Name</label>
@@ -165,10 +181,15 @@ function LoginForm() {
                             By signing up you agree to be included in our
                             non-spammy email list
                         </p>
-                        <div
+                        {/* <div
                             class="g-recaptcha"
                             data-sitekey={`${process.env.GATSBY_RECAPTCHA_KEY}`}
-                        ></div>
+                        ></div> */}
+
+                        <ReCAPTCHA
+                            size="compact"
+                            sitekey={process.env.GATSBY_RECAPTCHA_KEY}
+                        />
                         <button className={styles.submit_button}>
                             <FiLock className={styles.btn_icon} />
                             <p>Sign Up</p>
@@ -188,7 +209,7 @@ function LoginForm() {
                     </div>
                 </div>
             )}
-            {forgot && (
+            {state.forgot && (
                 <div className={styles.login_container}>
                     <p className={styles.forgot_text}>
                         Don't worry! Just enter your email below, press the
