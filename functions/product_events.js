@@ -12,6 +12,12 @@ const supabase = getSupabaseClient(
     process.env.GATSBY_SUPABASE_KEY
 );
 
+const HOOKS = {
+    PRODUCT_CREATED: "product.created",
+    PRODUCT_UPDATED: "product.updated",
+    PRODUCT_DELETED: "product.deleted",
+};
+
 exports.handler = async (event) => {
     try {
         const stripeEvent = stripe.webhooks.constructEvent(
@@ -28,7 +34,8 @@ exports.handler = async (event) => {
         );
 
         switch (stripeEvent.type) {
-            case "product.created": {
+            // case "product.created": {
+            case HOOKS.PRODUCT_CREATED: {
                 const { error } = await supabase.from("products").insert([
                     {
                         product_id: product.id,
@@ -57,7 +64,8 @@ exports.handler = async (event) => {
                 }
                 break;
             }
-            case "product.updated": {
+            // case "product.updated": {
+            case HOOKS.PRODUCT_UPDATED: {
                 const price_data = await stripe.prices.retrieve(
                     product.default_price
                 );
@@ -89,7 +97,8 @@ exports.handler = async (event) => {
                 }
                 break;
             }
-            case "product.deleted": {
+            case HOOKS.PRODUCT_DELETED: {
+                // case "product.deleted": {
                 const { error } = await supabase
                     .from("products")
                     .delete()

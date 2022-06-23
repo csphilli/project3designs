@@ -32,6 +32,18 @@ export const onMinus = (item) => {
     }
 };
 
+export const myFetch = async (url, type, body) => {
+    const response = await fetch(url, {
+        method: type,
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: body,
+    }).then((resp) => resp.json());
+
+    return response;
+};
+
 // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
 
 export const fetchProducts = async () => {

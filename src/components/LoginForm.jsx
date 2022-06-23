@@ -1,11 +1,12 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer, useRef, useState } from "react";
 import { BsGoogle, BsFacebook } from "react-icons/bs";
 import { FiMail, FiKey, FiLock, FiUser } from "react-icons/fi";
 import LoadingSpinner from "./LoadingSpinner";
 import * as styles from "../scss/loginForm.module.scss";
 import ReCAPTCHA from "react-google-recaptcha";
+import { myFetch } from "../lib";
 
-const ACTIONS = {
+const TOGGLES = {
     SIGNIN: "signIn",
     SIGNUP: "signUp",
     FORGOT: "forgot",
@@ -13,11 +14,11 @@ const ACTIONS = {
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case ACTIONS.SIGNIN:
+        case TOGGLES.SIGNIN:
             return { signIn: true, signUp: false, forgot: false };
-        case ACTIONS.SIGNUP:
+        case TOGGLES.SIGNUP:
             return { signIn: false, signUp: true, forgot: false };
-        case ACTIONS.FORGOT:
+        case TOGGLES.FORGOT:
             return { signIn: false, signUp: false, forgot: true };
         default:
             return { signIn: true, signUp: false, forgot: false };
@@ -26,37 +27,65 @@ const reducer = (state, action) => {
 
 function LoginForm() {
     const [loading, setLoading] = useState(false);
+    const reRef = useRef();
     const [state, dispatch] = useReducer(reducer, {
         signIn: true,
         signUp: false,
         forgot: false,
     });
+
     // const [btnStatus, setBtnStatus] = useState(styles.active);
 
     // let submitBtnClass = styles.submit_button;
 
     const toggleSignIn = () => {
-        dispatch({ type: ACTIONS.SIGNIN });
+        dispatch({ type: TOGGLES.SIGNIN });
     };
     const toggleSignUp = () => {
-        dispatch({ type: ACTIONS.SIGNUP });
+        dispatch({ type: TOGGLES.SIGNUP });
     };
     const toggleForgot = () => {
-        dispatch({ type: ACTIONS.FORGOT });
+        dispatch({ type: TOGGLES.FORGOT });
     };
 
-    const handleSignIn = (e) => {
+    const handleSignIn = async (e) => {
         e.preventDefault();
         // setBtnStatus(styles.inactive);
         setLoading(true);
         console.log(`handling sign in...`);
         console.log(e.target);
     };
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
         console.log(`handling sign up...`);
+        setLoading(true);
+        const form = new FormData(e.target);
+        const token = await reRef.current.executeAsync();
+        console.log(`token: ${token}`);
+
+        myFetch(
+            "/.netlify/functions/userAuth/signUp",
+            "POST",
+            JSON.stringify({
+                fName: form.get("fname"),
+                lName: form.get("lname"),
+                uName: form.get("unmame"),
+                email: form.get("email"),
+                pw: form.get("password"),
+                token: token,
+            })
+        );
+        // const data = {
+        //     fName: form.get("fname"),
+        //     lName: form.get("lname"),
+        //     uName: form.get("unmame"),
+        //     email: form.get("email"),
+        //     pw: form.get("password"),
+        //     token: token,
+        // };
+        setLoading(false);
     };
-    const handleForgot = (e) => {
+    const handleForgot = async (e) => {
         e.preventDefault();
         console.log(`handling forgot...`);
     };
@@ -181,13 +210,9 @@ function LoginForm() {
                             By signing up you agree to be included in our
                             non-spammy email list
                         </p>
-                        {/* <div
-                            class="g-recaptcha"
-                            data-sitekey={`${process.env.GATSBY_RECAPTCHA_KEY}`}
-                        ></div> */}
-
                         <ReCAPTCHA
-                            size="compact"
+                            size="invisible"
+                            ref={reRef}
                             sitekey={process.env.GATSBY_RECAPTCHA_KEY}
                         />
                         <button className={styles.submit_button}>
@@ -226,6 +251,11 @@ function LoginForm() {
                                 required
                             ></input>
                         </div>
+                        <ReCAPTCHA
+                            size="invisible"
+                            ref={reRef}
+                            sitekey={process.env.GATSBY_RECAPTCHA_KEY}
+                        />
                         <button className={styles.submit_button}>
                             <FiLock className={styles.btn_icon} />
                             <p>Reset Password</p>
