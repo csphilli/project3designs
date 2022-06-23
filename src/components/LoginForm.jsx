@@ -64,7 +64,7 @@ function LoginForm() {
         console.log(`token: ${token}`);
 
         myFetch(
-            "/.netlify/functions/userAuth/signUp",
+            "/.netlify/functions/signUp",
             "POST",
             JSON.stringify({
                 fName: form.get("fname"),
