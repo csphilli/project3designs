@@ -17,8 +17,6 @@ function LoadingSpinner({ type }) {
         }
     };
 
-    console.log(`type: ${type}`);
-
     return (
         <div className={getSpinnerStyle(type)}>
             <div></div>

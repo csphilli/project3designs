@@ -6,37 +6,90 @@ import * as styles from "../scss/loginForm.module.scss";
 import ReCAPTCHA from "react-google-recaptcha";
 import { myFetch } from "../lib";
 
+/* TODO
+1) Need to have error array to display any errors return from various functions such as invalid username and/or pw, desired username taken, etc
+2) needs to be success states for sign up, pw reset sent
+3) Need link to privacy policy
+*/
+
 const TOGGLES = {
     SIGNIN: "signIn",
     SIGNUP: "signUp",
     FORGOT: "forgot",
+    SIGNUP_SUCCESS: "signUpSuccess",
+    RESET_SUCCESS: "resetSuccess",
 };
 
-const reducer = (state, action) => {
+const BUTTON_TEXT = {
+    SIGNIN: "Sign In",
+    SIGNUP: "Sign Up",
+    FORGOT: "Reset Password",
+};
+
+const defaultFormData = {
+    fName: "",
+    lName: "",
+    uName: "",
+    email: "",
+    pw: "",
+};
+
+const toggleReducer = (state, action) => {
     switch (action.type) {
         case TOGGLES.SIGNIN:
-            return { signIn: true, signUp: false, forgot: false };
+            return {
+                signIn: true,
+                signUp: false,
+                forgot: false,
+                signUpSuccess: false,
+                resetSuccess: false,
+            };
         case TOGGLES.SIGNUP:
-            return { signIn: false, signUp: true, forgot: false };
+            return {
+                signIn: false,
+                signUp: true,
+                forgot: false,
+                signUpSuccess: false,
+                resetSuccess: false,
+            };
         case TOGGLES.FORGOT:
-            return { signIn: false, signUp: false, forgot: true };
+            return {
+                signIn: false,
+                signUp: false,
+                forgot: true,
+                signUpSuccess: false,
+                resetSuccess: false,
+            };
+        case TOGGLES.SIGNUP_SUCCESS:
+            return {
+                signIn: false,
+                signUp: false,
+                forgot: false,
+                signUpSuccess: true,
+                resetSuccess: false,
+            };
         default:
-            return { signIn: true, signUp: false, forgot: false };
+            return {
+                signIn: true,
+                signUp: false,
+                forgot: false,
+                signUpSuccess: false,
+                resetSuccess: false,
+            };
     }
 };
 
 function LoginForm() {
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState("");
     const reRef = useRef();
-    const [state, dispatch] = useReducer(reducer, {
+    const [toggles, dispatch] = useReducer(toggleReducer, {
         signIn: true,
         signUp: false,
         forgot: false,
+        signUpSuccess: false,
+        resetSuccess: false,
     });
-
-    // const [btnStatus, setBtnStatus] = useState(styles.active);
-
-    // let submitBtnClass = styles.submit_button;
 
     const toggleSignIn = () => {
         dispatch({ type: TOGGLES.SIGNIN });
@@ -47,44 +100,70 @@ function LoginForm() {
     const toggleForgot = () => {
         dispatch({ type: TOGGLES.FORGOT });
     };
+    const toggleSignupSuccess = () => {
+        dispatch({ type: TOGGLES.SIGNUP_SUCCESS });
+    };
 
     const handleSignIn = async (e) => {
         e.preventDefault();
-        // setBtnStatus(styles.inactive);
         setLoading(true);
         console.log(`handling sign in...`);
         console.log(e.target);
     };
+
+    const setDefaults = (fname, lname, uname, email) => {
+        defaultFormData.fName = fname;
+        defaultFormData.lName = lname;
+        defaultFormData.uName = uname;
+        defaultFormData.email = email;
+    };
+
+    const clearDefaults = async () => {
+        defaultFormData.fName = "";
+        defaultFormData.lName = "";
+        defaultFormData.uName = "";
+        defaultFormData.email = "";
+    };
+
     const handleSignUp = async (e) => {
         e.preventDefault();
-        console.log(`handling sign up...`);
         setLoading(true);
+        setErrors("");
         const form = new FormData(e.target);
         const token = await reRef.current.executeAsync();
-        console.log(`token: ${token}`);
+        reRef.current.reset();
 
-        myFetch(
-            "/.netlify/functions/signUp",
-            "POST",
-            JSON.stringify({
-                fName: form.get("fname"),
-                lName: form.get("lname"),
-                uName: form.get("unmame"),
-                email: form.get("email"),
-                pw: form.get("password"),
-                token: token,
-            })
+        setDefaults(
+            form.get("fname"),
+            form.get("lname"),
+            form.get("uname"),
+            form.get("email")
         );
-        // const data = {
-        //     fName: form.get("fname"),
-        //     lName: form.get("lname"),
-        //     uName: form.get("unmame"),
-        //     email: form.get("email"),
-        //     pw: form.get("password"),
-        //     token: token,
-        // };
+
+        const response = await fetch("/.netlify/functions/signUp", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fName: defaultFormData.fName,
+                lName: defaultFormData.lName,
+                uName: defaultFormData.uName,
+                email: defaultFormData.email,
+                password: form.get("password"),
+                token: token,
+            }),
+        });
+        if (!response.ok) {
+            const error = await response.json();
+            setErrors(error);
+        } else if (response.ok) {
+            clearDefaults();
+            toggleSignupSuccess();
+        }
         setLoading(false);
     };
+
     const handleForgot = async (e) => {
         e.preventDefault();
         console.log(`handling forgot...`);
@@ -92,7 +171,7 @@ function LoginForm() {
 
     return (
         <div>
-            {state.signIn && (
+            {toggles.signIn && (
                 <div className={styles.login_container}>
                     <p className={styles.login_subject_text}>Sign in...</p>
                     <button className={styles.oauth_container}>
@@ -134,7 +213,7 @@ function LoginForm() {
                             ) : (
                                 <>
                                     <FiLock className={styles.btn_icon} />
-                                    <p>Sign In</p>
+                                    <p>{BUTTON_TEXT.SIGNIN}</p>
                                 </>
                             )}
                         </button>
@@ -153,9 +232,12 @@ function LoginForm() {
                     </div>
                 </div>
             )}
-            {state.signUp && (
+            {toggles.signUp && (
                 <div className={styles.login_container}>
-                    <form onSubmit={handleSignUp}>
+                    {errors.length > 0 && (
+                        <div className={styles.error_msg}>{errors}</div>
+                    )}
+                    <form id="signUpForm" onSubmit={handleSignUp}>
                         <label htmlFor="fname">First Name</label>
                         <div className={styles.input_container}>
                             <FiUser className={styles.input_icon} />
@@ -163,6 +245,7 @@ function LoginForm() {
                                 type="text"
                                 name="fname"
                                 id="fname"
+                                defaultValue={defaultFormData.fName}
                                 required
                             ></input>
                         </div>
@@ -203,21 +286,29 @@ function LoginForm() {
                                 type="password"
                                 name="password"
                                 id="password"
+                                pattern=".{6,}"
+                                title="Must be at least 6 characters"
                                 required
                             ></input>
                         </div>
-                        <p className={styles.disclosure_notice}>
+                        {/* <p className={styles.disclosure_notice}>
                             By signing up you agree to be included in our
                             non-spammy email list
-                        </p>
+                        </p> */}
                         <ReCAPTCHA
                             size="invisible"
                             ref={reRef}
                             sitekey={process.env.GATSBY_RECAPTCHA_KEY}
                         />
-                        <button className={styles.submit_button}>
-                            <FiLock className={styles.btn_icon} />
-                            <p>Sign Up</p>
+                        <button id="test" className={styles.submit_button}>
+                            {loading ? (
+                                <LoadingSpinner type="button" />
+                            ) : (
+                                <>
+                                    <FiLock className={styles.btn_icon} />
+                                    <p>{BUTTON_TEXT.SIGNUP}</p>
+                                </>
+                            )}
                         </button>
                     </form>
 
@@ -234,7 +325,20 @@ function LoginForm() {
                     </div>
                 </div>
             )}
-            {state.forgot && (
+            {toggles.signUpSuccess && (
+                <div className={styles.login_container}>
+                    <div className={styles.signup_success_container}>
+                        <h2 className={styles.success_title}>Success!</h2>
+                        <p>
+                            A confirmation email has been sent to the address
+                            you provided. To complete the setup, just click the
+                            link provided in that email.
+                        </p>
+                        <p>Thank you!</p>
+                    </div>
+                </div>
+            )}
+            {toggles.forgot && (
                 <div className={styles.login_container}>
                     <p className={styles.forgot_text}>
                         Don't worry! Just enter your email below, press the
@@ -256,9 +360,15 @@ function LoginForm() {
                             ref={reRef}
                             sitekey={process.env.GATSBY_RECAPTCHA_KEY}
                         />
-                        <button className={styles.submit_button}>
-                            <FiLock className={styles.btn_icon} />
-                            <p>Reset Password</p>
+                        <button id="test" className={styles.submit_button}>
+                            {loading ? (
+                                <LoadingSpinner type="button" />
+                            ) : (
+                                <>
+                                    <FiLock className={styles.btn_icon} />
+                                    <p>{BUTTON_TEXT.FORGOT}</p>
+                                </>
+                            )}
                         </button>
                     </form>
 

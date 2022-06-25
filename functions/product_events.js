@@ -7,6 +7,7 @@ const { createClient } = require("@supabase/supabase-js");
 const getSupabaseClient = (url, key) => {
     return createClient(url, key);
 };
+
 const supabase = getSupabaseClient(
     process.env.GATSBY_SUPABASE_URL,
     process.env.GATSBY_SUPABASE_KEY

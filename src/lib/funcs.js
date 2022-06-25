@@ -33,13 +33,15 @@ export const onMinus = (item) => {
 };
 
 export const myFetch = async (url, type, body) => {
+    console.log(`handling myFetch. url: ${url}, type: ${type}, body: ${body}`);
+
     const response = await fetch(url, {
         method: type,
         headers: {
             "Content-type": "application/json",
         },
-        body: body,
-    }).then((resp) => resp.json());
+        body: JSON.stringify(body),
+    });
 
     return response;
 };
