@@ -3,6 +3,7 @@ secret key variable GATSBY_RECAPTCHA_SECRET_KEY
 */
 
 const fetch = require("node-fetch");
+const jwt = require("jsonwebtoken");
 
 const VALIDATION_URL = "https://www.google.com/recaptcha/api/siteverify?";
 
@@ -26,15 +27,14 @@ const validateHuman = async (token) => {
         }
     );
     const data = await resp.json();
-
     return data.success;
 };
 
-const uniqueUname = async (uName) => {
+const uniqueCheck = async (columnName, value) => {
     let { data: profiles, error } = await supabase
         .from("profiles")
-        .select("username")
-        .eq("username", uName);
+        .select(columnName)
+        .eq(columnName, value);
 
     if (profiles && profiles.length > 0) {
         return false;
@@ -50,59 +50,53 @@ const uniqueUname = async (uName) => {
     return true;
 };
 
-// need to verify email and username are unique
-exports.handler = async (event) => {
+exports.handler = async (data) => {
     try {
-        const body = JSON.parse(event.body);
-
-        if (!validateHuman(body.token)) {
+        const body = JSON.parse(data.body);
+        const header = data.headers;
+        const token = header && header.authorization.split(" ")[1];
+        if (token === null) throw new Error("Invalid Form Token");
+        jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+        if (!validateHuman(body.recaptcha)) {
             throw new Error("Bot behavior detected");
         }
-
-        // checks if username is unique
-        const isUnameUnique = await uniqueUname(body.uName);
-
-        if (isUnameUnique) {
-            console.log(`username was unique`);
-
-            const { user, error } = await supabase.auth.signUp(
-                {
-                    email: body.email,
-                    password: body.password,
+        if (body.password !== body.password_again) {
+            throw new Error("Passwords do not match");
+        }
+        const uniqueUname = await uniqueCheck("username", body.uName);
+        if (!uniqueUname) {
+            throw new Error("That username has been taken");
+        }
+        const { user, session, error } = await supabase.auth.signUp(
+            {
+                email: body.email,
+                password: body.password,
+            },
+            {
+                data: {
+                    name: body.fName,
                 },
+            }
+        );
+        if (error) {
+            throw new Error(error.message);
+        }
+        if (user) {
+            const { id } = user;
+            const { data, error } = await supabase.from("profiles").insert([
                 {
-                    data: {
-                        name: body.fName,
-                    },
-                }
-            );
-            if (error) {
-                console.log(error.message);
-                throw new Error(error.message);
-            }
-            if (user) {
-                const { id } = user;
-                const { data, error } = await supabase.from("profiles").insert([
-                    {
-                        id: id,
-                        username: body.uName,
-                        first_name: body.fName,
-                        last_name: body.lName,
-                        mailing_list: false,
-                    },
-                ]);
-                if (error) {
-                    throw new Error(
-                        "That email is already associated with an account"
-                    );
-                }
-            }
-        } else {
-            throw new Error(`That username has been taken`);
+                    id: id,
+                    username: body.uName,
+                    first_name: body.fName,
+                    last_name: body.lName,
+                    mailing_list: false,
+                },
+            ]);
         }
 
         return {
             statusCode: 200,
+            // body: JSON.stringify({ token: session.access_token }),
         };
     } catch (error) {
         return {

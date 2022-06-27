@@ -4,7 +4,6 @@ import { FiMail, FiKey, FiLock, FiUser } from "react-icons/fi";
 import LoadingSpinner from "./LoadingSpinner";
 import * as styles from "../scss/loginForm.module.scss";
 import ReCAPTCHA from "react-google-recaptcha";
-import { myFetch } from "../lib";
 
 /* TODO
 1) Need to have error array to display any errors return from various functions such as invalid username and/or pw, desired username taken, etc
@@ -91,24 +90,64 @@ function LoginForm() {
         resetSuccess: false,
     });
 
+    const clearErrors = async () => {
+        setErrors("");
+    };
+
     const toggleSignIn = () => {
+        clearErrors();
         dispatch({ type: TOGGLES.SIGNIN });
     };
     const toggleSignUp = () => {
+        clearErrors();
         dispatch({ type: TOGGLES.SIGNUP });
     };
     const toggleForgot = () => {
+        clearErrors();
         dispatch({ type: TOGGLES.FORGOT });
     };
     const toggleSignupSuccess = () => {
+        clearErrors();
         dispatch({ type: TOGGLES.SIGNUP_SUCCESS });
     };
 
-    const handleSignIn = async (e) => {
-        e.preventDefault();
+    const handleSignIn = async (event) => {
+        event.preventDefault();
         setLoading(true);
-        console.log(`handling sign in...`);
-        console.log(e.target);
+        clearErrors();
+        const recaptcha = await reRef.current.executeAsync();
+        reRef.current.reset();
+
+        // const response = await fetch("/.netlify/functions/generateJWT", {
+        //     method: "GET",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // });
+        // const jwtData = await response.json();
+        // console.log(`TOKEN: ${jwtData}`);
+
+        const form = new FormData(event.target);
+
+        const resp = await fetch("/.netlify/functions/signIn", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.FORM_TOKEN}`,
+            },
+            body: JSON.stringify({
+                email: form.get("email"),
+                password: form.get("password"),
+                recaptcha: recaptcha,
+            }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) {
+            setErrors(data);
+        } else if (resp.ok) {
+            console.log(`Logged in OK. TOKEN: ${data}`);
+        }
+        setLoading(false);
     };
 
     const setDefaults = (fname, lname, uname, email) => {
@@ -128,9 +167,9 @@ function LoginForm() {
     const handleSignUp = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setErrors("");
+        clearErrors();
         const form = new FormData(e.target);
-        const token = await reRef.current.executeAsync();
+        const recaptcha = await reRef.current.executeAsync();
         reRef.current.reset();
 
         setDefaults(
@@ -140,10 +179,11 @@ function LoginForm() {
             form.get("email")
         );
 
-        const response = await fetch("/.netlify/functions/signUp", {
+        const resp = await fetch("/.netlify/functions/signUp", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.FORM_TOKEN}`,
             },
             body: JSON.stringify({
                 fName: defaultFormData.fName,
@@ -151,14 +191,18 @@ function LoginForm() {
                 uName: defaultFormData.uName,
                 email: defaultFormData.email,
                 password: form.get("password"),
-                token: token,
+                password_again: form.get("password_again"),
+                recaptcha: recaptcha,
             }),
         });
-        if (!response.ok) {
-            const error = await response.json();
-            setErrors(error);
-        } else if (response.ok) {
+        const data = await resp.json();
+        if (!resp.ok) {
+            setErrors(data);
+        } else if (resp.ok) {
             clearDefaults();
+            console.log(`SIGN UP. TOKEN: ${data.token}`);
+
+            // there will be a session token returned here.
             toggleSignupSuccess();
         }
         setLoading(false);
@@ -173,6 +217,9 @@ function LoginForm() {
         <div>
             {toggles.signIn && (
                 <div className={styles.login_container}>
+                    {errors.length > 0 && (
+                        <div className={styles.error_msg}>{errors}</div>
+                    )}
                     <p className={styles.login_subject_text}>Sign in...</p>
                     <button className={styles.oauth_container}>
                         <BsGoogle className={styles.icon} />
@@ -185,7 +232,7 @@ function LoginForm() {
                     <div className={styles.divider_container}>
                         <p className={styles.divider_text}>or with</p>
                     </div>
-                    <form onSubmit={handleSignIn}>
+                    <form onSubmit={handleSignIn} id="testing">
                         <label htmlFor="email">E-mail Address</label>
                         <div className={styles.input_container}>
                             <FiMail className={styles.input_icon} />
@@ -207,6 +254,11 @@ function LoginForm() {
                             ></input>
                         </div>
                         {/* <button id="test" className={styles.submit_button}> */}
+                        <ReCAPTCHA
+                            size="invisible"
+                            ref={reRef}
+                            sitekey={process.env.GATSBY_RECAPTCHA_KEY}
+                        />
                         <button id="test" className={styles.submit_button}>
                             {loading ? (
                                 <LoadingSpinner type="button" />
@@ -245,7 +297,6 @@ function LoginForm() {
                                 type="text"
                                 name="fname"
                                 id="fname"
-                                defaultValue={defaultFormData.fName}
                                 required
                             ></input>
                         </div>
@@ -288,6 +339,20 @@ function LoginForm() {
                                 id="password"
                                 pattern=".{6,}"
                                 title="Must be at least 6 characters"
+                                defaultValue=""
+                                required
+                            ></input>
+                        </div>
+                        <label htmlFor="password">Re-type Password</label>
+                        <div className={styles.input_container}>
+                            <FiKey className={styles.input_icon} />
+                            <input
+                                type="password"
+                                name="password_again"
+                                id="password_again"
+                                pattern=".{6,}"
+                                title="Must be at least 6 characters"
+                                defaultValue=""
                                 required
                             ></input>
                         </div>
