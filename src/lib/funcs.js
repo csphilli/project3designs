@@ -32,6 +32,7 @@ export const onMinus = (item) => {
     }
 };
 
+// DELETE?
 export const myFetch = async (url, type, body) => {
     console.log(`handling myFetch. url: ${url}, type: ${type}, body: ${body}`);
 
@@ -66,7 +67,7 @@ export const formattedPrice = (value, ccy = "eur") => {
     }).format(value);
 };
 
-// Used to check if buttons can be clicked.
+// DELETE Used to check if buttons can be clicked.
 export const isClickAllowed = (product) => {
     return (
         product.quantity < parseInt(product.max_qty) && product.inventory >= 1

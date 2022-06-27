@@ -195,12 +195,12 @@ function LoginForm() {
                 recaptcha: recaptcha,
             }),
         });
-        const data = await resp.json();
         if (!resp.ok) {
+            const data = await resp.json();
             setErrors(data);
         } else if (resp.ok) {
             clearDefaults();
-            console.log(`SIGN UP. TOKEN: ${data.token}`);
+            // console.log(`SIGN UP. TOKEN: ${data.token}`);
 
             // there will be a session token returned here.
             toggleSignupSuccess();

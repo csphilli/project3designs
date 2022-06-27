@@ -67,7 +67,7 @@ exports.handler = async (data) => {
         if (!uniqueUname) {
             throw new Error("That username has been taken");
         }
-        const { user, session, error } = await supabase.auth.signUp(
+        const { user, error } = await supabase.auth.signUp(
             {
                 email: body.email,
                 password: body.password,
@@ -83,15 +83,26 @@ exports.handler = async (data) => {
         }
         if (user) {
             const { id } = user;
-            const { data, error } = await supabase.from("profiles").insert([
+            const { error: errorData } = await supabase
+                .from("profiles")
+                .insert([
+                    {
+                        user_id: id,
+                        username: body.uName,
+                        first_name: body.fName,
+                        last_name: body.lName,
+                        mailing_list: false,
+                    },
+                ]);
+            if (errorData) throw new Error(error);
+            const { error: errorLogin } = await supabase.from("logins").insert([
                 {
-                    id: id,
-                    username: body.uName,
-                    first_name: body.fName,
-                    last_name: body.lName,
-                    mailing_list: false,
+                    user_id: id,
+                    email: body.email,
+                    next_allowed: Math.floor(new Date().getTime() / 1000),
                 },
             ]);
+            if (errorLogin) throw new Error(error);
         }
 
         return {

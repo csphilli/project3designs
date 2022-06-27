@@ -24,7 +24,7 @@ function Login() {
                             <li>
                                 <strong>
                                     5% lifetime discount on all purchases (on
-                                    top of additional discounts)
+                                    top of any additional discounts)
                                 </strong>
                             </li>
                             <li>Early product launch notice</li>
