@@ -3,6 +3,18 @@ const TOOLTIPS = {
     SOLD_OUT: "Sold Out",
 };
 
+// Used to generate a JWT
+export const generateJWT = async () => {
+    const response = await fetch("/.netlify/functions/generateJWT", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const jwtData = await response.json();
+    console.log(`TOKEN: ${jwtData}`);
+};
+
 // Helper function to create product obljects and then add custom properties. Src: products/index.jsx file
 export const createProdObj = (obj) => {
     return {
@@ -52,7 +64,10 @@ export const myFetch = async (url, type, body) => {
 export const fetchProducts = async () => {
     const products = await fetch(`/.netlify/functions/get_products`, {
         method: "GET",
-        "Content-type": "application/json",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${process.env.FORM_TOKEN}`,
+        },
     }).then((resp) => resp.json());
 
     return products;

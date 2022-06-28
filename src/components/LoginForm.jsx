@@ -118,15 +118,6 @@ function LoginForm() {
         const recaptcha = await reRef.current.executeAsync();
         reRef.current.reset();
 
-        // const response = await fetch("/.netlify/functions/generateJWT", {
-        //     method: "GET",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        // });
-        // const jwtData = await response.json();
-        // console.log(`TOKEN: ${jwtData}`);
-
         const form = new FormData(event.target);
 
         const resp = await fetch("/.netlify/functions/signIn", {

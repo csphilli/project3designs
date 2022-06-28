@@ -22,8 +22,9 @@ function ProductModal(props) {
     });
 
     // The cart Icon in the navBar uses the amount of items in the cart
-    const { order } = useContext(OrderItemsContext);
-    const [orderItems, setOrderItems] = order;
+    // const { order } = useContext(OrderItemsContext);
+
+    // const [orderItems, setOrderItems] = order;
 
     useEffect(() => {
         setMaxQty(() => {
@@ -138,6 +139,9 @@ function ProductModal(props) {
                 </div>
                 {selection.quantity > 0 && (
                     <Link
+                        onClick={() => {
+                            document.body.style.overflow = "unset";
+                        }}
                         to="/cart"
                         data-qty={selection.quantity}
                         className={styles.link_container}

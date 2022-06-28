@@ -1,3 +1,3 @@
 /* TODO
-    This function will receive a webhook trigger upon checkout.session.completed and will store details of the order a database.
+    This function will receive a webhook trigger upon checkout.session.completed and will store details of the order to a database.
 */

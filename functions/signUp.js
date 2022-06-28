@@ -53,16 +53,24 @@ const uniqueCheck = async (columnName, value) => {
 exports.handler = async (data) => {
     try {
         const body = JSON.parse(data.body);
+
+        // verifying if request is coming from P3D site
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
         if (token === null) throw new Error("Invalid Form Token");
         jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+
+        // Bot Check
         if (!validateHuman(body.recaptcha)) {
             throw new Error("Bot behavior detected");
         }
+
+        // Password check (so user knows what they typed)
         if (body.password !== body.password_again) {
             throw new Error("Passwords do not match");
         }
+
+        // Checking if username is unique
         const uniqueUname = await uniqueCheck("username", body.uName);
         if (!uniqueUname) {
             throw new Error("That username has been taken");
@@ -81,6 +89,8 @@ exports.handler = async (data) => {
         if (error) {
             throw new Error(error.message);
         }
+
+        // If no errors, adding user to profiles
         if (user) {
             const { id } = user;
             const { error: errorData } = await supabase
@@ -95,6 +105,8 @@ exports.handler = async (data) => {
                     },
                 ]);
             if (errorData) throw new Error(error);
+
+            // Inserting default data to logins table
             const { error: errorLogin } = await supabase.from("logins").insert([
                 {
                     user_id: id,
@@ -107,7 +119,6 @@ exports.handler = async (data) => {
 
         return {
             statusCode: 200,
-            // body: JSON.stringify({ token: session.access_token }),
         };
     } catch (error) {
         return {

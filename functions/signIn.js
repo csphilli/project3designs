@@ -1,10 +1,12 @@
 const fetch = require("node-fetch");
 const { createClient } = require("@supabase/supabase-js");
 const jwt = require("jsonwebtoken");
-const { FiMaximize } = require("react-icons/fi");
 
 const VALIDATION_URL = "https://www.google.com/recaptcha/api/siteverify?";
+// How many attempts before account lock
 const MAX_ATTEMPTS = 10;
+
+// How many attempts before time delayed login
 const TIME_ATTEMPTS = 5;
 
 const MESSAGES = {
@@ -78,7 +80,7 @@ const errorMessage = (ms, attempts) => {
         return `You have ${
             TIME_ATTEMPTS - attempts
         } attempts left before timed login penalty.`;
-    } else if (attempts > 4 && attempts !== MAX_ATTEMPTS) {
+    } else if (attempts > 4 && attempts < MAX_ATTEMPTS) {
         return `You must wait ${time}
          before your next login attempt. ${
              MAX_ATTEMPTS - attempts
@@ -92,16 +94,16 @@ exports.handler = async (data) => {
     try {
         const body = JSON.parse(data.body);
 
-        // Bot check
-        if (!validateHuman(body.recaptcha)) {
-            throw new Error(MESSAGES.BOT);
-        }
-
         // Verifying form data is from P3D site
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
         if (token === null) throw new Error(MESSAGES.INVALID_TOKEN);
         jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+
+        // Bot check
+        if (!validateHuman(body.recaptcha)) {
+            throw new Error(MESSAGES.BOT);
+        }
 
         // Check if account has been locked
         const currTime = Math.floor(new Date().getTime());

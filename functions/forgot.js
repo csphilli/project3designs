@@ -13,10 +13,18 @@ const supabase = getSupabaseClient(
 exports.handler = async (data) => {
     try {
         const body = JSON.parse(data.body);
+
+        // Verifying request is from P3D
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
         if (token === null) throw new Error("Invalid Form Token");
         jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+
+        // Bot check
+        if (!validateHuman(body.recaptcha)) {
+            throw new Error(MESSAGES.BOT);
+        }
+
         let { user, session, error } = await supabase.auth.signIn({
             email: body.email,
             password: body.password,
