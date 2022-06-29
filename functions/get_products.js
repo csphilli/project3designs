@@ -13,7 +13,7 @@ exports.handler = async (data) => {
     const header = data.headers;
     const token = header && header.authorization.split(" ")[1];
     if (token === null) throw new Error(MESSAGES.INVALID_TOKEN);
-    jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+    jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
     const { data: products, error } = await supabase
         .from("products")

@@ -4,7 +4,7 @@ exports.handler = async () => {
     try {
         const token = jwt.sign(
             { name: "Project3 Designs Webform" },
-            process.env.FORM_SIGNATURE_KEY
+            process.env.P3D_AUTH_TOKEN
         );
         if (!token) {
             throw new Error("Failed to generate token");

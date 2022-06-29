@@ -66,7 +66,7 @@ export const fetchProducts = async () => {
         method: "GET",
         headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${process.env.FORM_TOKEN}`,
+            Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
 

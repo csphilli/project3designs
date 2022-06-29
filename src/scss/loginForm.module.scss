@@ -8,6 +8,11 @@
         margin-bottom: 1.2rem;
     }
 
+    .title {
+        color: $mainLightTitleText;
+        font-size: scaled(1, 1.2, 320, 1400);
+    }
+
     .forgot_text {
         font-family: "Montserrat", sans-serif;
         color: $mainLightColor;

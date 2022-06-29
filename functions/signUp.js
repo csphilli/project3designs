@@ -58,7 +58,7 @@ exports.handler = async (data) => {
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
         if (token === null) throw new Error("Invalid Form Token");
-        jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
         // Bot Check
         if (!validateHuman(body.recaptcha)) {

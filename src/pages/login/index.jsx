@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import Layout from "../../components/Layout";
 import Seo from "../../components/Seo";
 import * as styles from "../../scss/loginPage.module.scss";
 // import { BsGoogle, BsFacebook } from "react-icons/bs";
 import LoginForm from "../../components/LoginForm";
+import { UserContext } from "../../lib/UserContext";
 // import * as typography from "../../scss/typography.module.scss";
 // import "../../scss/typography.scss";
 
 function Login() {
+    const msg = useContext(UserContext);
+    console.log(msg);
+
     return (
         <div>
             <Layout pageId="login">
                 <Seo title="Login" />
                 <section className={styles.section_container}>
+                    {msg && msg}
                     <aside className={styles.membership_info_container}>
                         <h2 className={styles.title}>Why become a member?</h2>
                         <p className={styles.subtitle}>

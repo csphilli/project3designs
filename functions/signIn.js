@@ -79,7 +79,7 @@ const errorMessage = (ms, attempts) => {
     if (attempts < 5) {
         return `You have ${
             TIME_ATTEMPTS - attempts
-        } attempts left before timed login penalty.`;
+        } attempt(s) left before timed login penalty.`;
     } else if (attempts > 4 && attempts < MAX_ATTEMPTS) {
         return `You must wait ${time}
          before your next login attempt. ${
@@ -98,7 +98,7 @@ exports.handler = async (data) => {
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
         if (token === null) throw new Error(MESSAGES.INVALID_TOKEN);
-        jwt.verify(token, process.env.FORM_SIGNATURE_KEY);
+        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
         // Bot check
         if (!validateHuman(body.recaptcha)) {
