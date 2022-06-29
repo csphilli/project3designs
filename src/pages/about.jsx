@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../../components/Layout";
-import Seo from "../../components/Seo";
-import * as styles from "../../scss/hero.module.scss";
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import * as styles from "../scss/hero.module.scss";
 
 function About() {
     return (

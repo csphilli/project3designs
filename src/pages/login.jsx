@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import Layout from "../../components/Layout";
-import Seo from "../../components/Seo";
-import * as styles from "../../scss/loginPage.module.scss";
+import Layout from "../components/Layout";
+import Seo from "../components/Seo";
+import * as styles from "../scss/loginPage.module.scss";
 // import { BsGoogle, BsFacebook } from "react-icons/bs";
-import LoginForm from "../../components/LoginForm";
-import { UserContext } from "../../lib/UserContext";
+import LoginForm from "../components/LoginForm";
+import { UserContext } from "../lib/UserContext";
+
 // import * as typography from "../../scss/typography.module.scss";
 // import "../../scss/typography.scss";
 

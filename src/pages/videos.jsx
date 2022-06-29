@@ -1,8 +1,8 @@
 import React from "react";
-import Layout from "../../components/Layout";
-import ContentGrid from "../../components/ContentGrid";
-import * as styles from "../../scss/hero.module.scss";
-import Seo from "../../components/Seo";
+import Layout from "../components/Layout";
+import ContentGrid from "../components/ContentGrid";
+import * as styles from "../scss/hero.module.scss";
+import Seo from "../components/Seo";
 
 function Videos() {
     return (

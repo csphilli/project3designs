@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import Layout from "../../components/Layout";
-import ProductCard from "../../components/ProductCard";
-import * as styles from "../../scss/products.module.scss";
+import Layout from "../components/Layout";
+import ProductCard from "../components/ProductCard";
+import * as styles from "../scss/products.module.scss";
 import {
     createProdObj,
     fetchProducts,
     formattedPrice,
     sortProducts,
-} from "../../lib/index";
-import Seo from "../../components/Seo";
-import LoadingSpinner from "../../components/LoadingSpinner";
+} from "../lib/index";
+import Seo from "../components/Seo";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function Products() {
     const [products, setProducts] = useState([]);
