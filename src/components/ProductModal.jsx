@@ -118,14 +118,6 @@ function ProductModal(props) {
                                     : styles.add_to_cart_container
                             }
                         >
-                            {/* <input
-                                type="number"
-                                className={styles.quantity_selector}
-                                name="quantity"
-                                min="1"
-                                max={maxQty}
-                                defaultValue="1"
-                            ></input> */}
                             <QtyButton max={maxQty} />
                             <button
                                 className={styles.submit_button}

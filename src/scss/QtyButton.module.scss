@@ -5,6 +5,9 @@
     align-items: center;
     justify-content: space-between;
     max-width: 7rem;
+    border: 1px solid black;
+    border-radius: $formElementRadius;
+    overflow: hidden;
     // font-family: "Roboto", sans-serif;
 }
 
@@ -12,16 +15,17 @@
     background: none;
     outline: none;
     font-family: "Roboto", sans-serif;
-    border: 1px solid black;
-    width: 2rem;
+    // border: 1px solid black;
+    border: none;
+    width: 3rem;
     aspect-ratio: 1/1;
-    border-radius: 0.2rem;
+    // border-radius: 0.2rem;
 }
 
 .mod_btn:hover,
 .mod_btn:focus {
     cursor: pointer;
-    background-color: $mainLightColor;
+    background-color: #c9c9c9;
 }
 
 .mod_btn:active {
