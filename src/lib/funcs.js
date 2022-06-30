@@ -59,6 +59,14 @@ export const myFetch = async (url, type, body) => {
     return response;
 };
 
+// Creates an object of key value pairs from a URL string.
+// const getRedirectObj = (redirectString) =>
+//     redirectString.split("&").reduce((acc, keyValuePair) => {
+//         const [key, value] = keyValuePair.split("=");
+//         acc[key] = value;
+//         return acc;
+//     }, {});
+
 // Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
 
 export const fetchProducts = async () => {

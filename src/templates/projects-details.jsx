@@ -1,5 +1,4 @@
 import React from "react";
-import Layout from "../components/Layout";
 import * as styles from "../scss/project-details.module.scss";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -24,10 +23,8 @@ export default function ProjectDetails({ data }) {
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData
     );
-    console.log(base);
-
     return (
-        <Layout pageId="none">
+        <div>
             <Seo title={base.title} />
             <article>
                 <div className={styles.heading_container}>
@@ -68,7 +65,7 @@ export default function ProjectDetails({ data }) {
                     </div>
                 </div>
             </article>
-        </Layout>
+        </div>
     );
 }
 

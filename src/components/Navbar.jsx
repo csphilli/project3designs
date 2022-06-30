@@ -15,7 +15,7 @@ import NavLogo from "./NavLogo";
 
 */
 
-function Navbar({ pageId }) {
+function Navbar({ path }) {
     const { site } = useStaticQuery(graphql`
         query navLinkQuery {
             site {
@@ -43,29 +43,27 @@ function Navbar({ pageId }) {
 
     return (
         <nav className={styles.navBar}>
-            <div className={styles.navLeft}>
-                <Link className={styles.logoText} to="/">
-                    <h1>
-                        <NavLogo />
-                    </h1>
-                </Link>
-            </div>
-            <div className={styles.navRight}>
-                <div className={styles.links}>
-                    {links.map((item, index) => {
-                        return (
-                            <Link
-                                key={index}
-                                className={
-                                    pageId === item.id ? styles.active : "none"
-                                }
-                                to={item.path}
-                            >
-                                {item.id === "cart" ? <BsCart /> : item.id}
-                            </Link>
-                        );
-                    })}
-                </div>
+            <Link className={styles.logoText} to="/">
+                <h1>
+                    <NavLogo />
+                </h1>
+            </Link>
+            <div className={styles.links}>
+                {links.map((item, index) => {
+                    return (
+                        <Link
+                            key={index}
+                            className={
+                                path === `${item.path}/`
+                                    ? styles.active
+                                    : "none"
+                            }
+                            to={item.path}
+                        >
+                            {item.id === "cart" ? <BsCart /> : item.id}
+                        </Link>
+                    );
+                })}
             </div>
         </nav>
     );

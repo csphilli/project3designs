@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productModal.module.scss";
 import { formattedPrice, getTooltipText } from "../lib";
-import { OrderItemsContext } from "./Layout";
 import { BsCart } from "react-icons/bs";
 import { Link } from "gatsby";
 /* TODO
@@ -82,11 +81,9 @@ function ProductModal(props) {
                     <p className={styles.price}>
                         {formattedPrice(selection.price)}
                     </p>
-                    <p className={styles.description}>{selection.desc}</p>
+                    <p>{selection.desc}</p>
                     <form className={styles.modal_form} onSubmit={handleAdd}>
-                        <label className={styles.selector_title} htmlFor="size">
-                            Size:
-                        </label>
+                        <label htmlFor="size">Size:</label>
                         <select
                             className={styles.selector_menu}
                             name="product_id"

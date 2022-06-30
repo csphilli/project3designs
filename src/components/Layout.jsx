@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Logo from "./Logo";
 import "../scss/reset.scss";
 import "../scss/global.scss";
 import "../scss/typography.scss";
-import PageBannerIcon from "./PageBannerIcon";
+// import PageBannerIcon from "./PageBannerIcon";
 import { UserContext } from "../lib/UserContext";
 
 // export const GeneralContext = createContext();
 
-function Layout({ pageId, children }) {
-    const [showBanner, setShowBanner] = useState(true);
+// function Layout({ pageId, children }) {
+function Layout({ path, children }) {
+    // const [showBanner, setShowBanner] = useState(true);
     // const [orderItems, setOrderItems] = useState([]);
     // const [user, setUser] = useState({});
 
@@ -25,22 +26,18 @@ function Layout({ pageId, children }) {
     // const [session, setSession] = useState();
     // const [user, setUser] = useState();
 
-    useEffect(() => {
-        pageId === "none" ? setShowBanner(false) : setShowBanner(true);
-    }, [pageId]);
-
     return (
-        <div className="logo-container">
-            {showBanner && <PageBannerIcon pageId={pageId} />}
-            <div className="page-container">
-                <UserContext.Provider value="test">
-                    <Navbar pageId={pageId} />
+        <UserContext.Provider value="test">
+            <div className="logo-container">
+                {/* {showBanner && <PageBannerIcon path={path} />} */}
+                <div className="page-container">
+                    <Navbar path={path} />
                     <div>{children}</div>
                     <Footer />
-                </UserContext.Provider>
+                </div>
+                <Logo />
             </div>
-            <Logo />
-        </div>
+        </UserContext.Provider>
     );
 }
 

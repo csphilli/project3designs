@@ -1,16 +1,9 @@
-import React, {
-    useEffect,
-    useReducer,
-    useRef,
-    useState,
-    useContext,
-} from "react";
+import React, { useReducer, useRef, useState } from "react";
 import { BsGoogle, BsFacebook } from "react-icons/bs";
 import { FiMail, FiKey, FiLock, FiUser } from "react-icons/fi";
 import LoadingSpinner from "./LoadingSpinner";
 import * as styles from "../scss/loginForm.module.scss";
 import ReCAPTCHA from "react-google-recaptcha";
-import { UserContext } from "../lib/UserContext";
 
 const EXAMPLE_URL =
     "#access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjU2NDA5NDgzLCJzdWIiOiJjMGY0NjZlZi01ODcxLTRjODYtODA5OC1jZjhjODE3YjQ1MTAiLCJlbWFpbCI6ImNzcGhpbGxpQGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsibmFtZSI6IkNocmlzdG9waGVyIn0sInJvbGUiOiJhdXRoZW50aWNhdGVkIn0.KNGUP59b_tJIgEIFMS8aY2mn0Nsermf99d3nw4bKNTQ&expires_in=3600&refresh_token=Ebiqh4dBryrL3JzZZjI4wA&token_type=bearer&type=recovery";
@@ -154,9 +147,6 @@ const toggleReducer = (state, action) => {
 };
 
 function LoginForm() {
-    const msg = useContext(UserContext);
-    console.log(msg);
-
     // const { user, setUser } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState("");
@@ -169,13 +159,6 @@ function LoginForm() {
         resetSuccess: false,
         updatePassword: false,
     });
-
-    const getRedirectObj = (redirectString) =>
-        redirectString.split("&").reduce((acc, keyValuePair) => {
-            const [key, value] = keyValuePair.split("=");
-            acc[key] = value;
-            return acc;
-        }, {});
 
     // useEffect(() => {
     // const url = window.location.href;
@@ -223,10 +206,7 @@ function LoginForm() {
         clearErrors();
         dispatch({ type: TOGGLES.FORGOT });
     };
-    const toggleUpdatePassword = () => {
-        clearErrors();
-        dispatch({ type: TOGGLES.UPDATE_PASSWORD });
-    };
+
     const toggleSignupSuccess = () => {
         clearErrors();
         dispatch({ type: TOGGLES.SIGNUP_SUCCESS });
@@ -381,13 +361,10 @@ function LoginForm() {
         <div>
             {toggles.signIn && (
                 <div className={styles.login_container}>
-                    {/* {user && <div>JSON.stringify(user)</div>} */}
-                    {msg && msg}
                     {errors.length > 0 && (
                         <div className={styles.error_msg}>{errors}</div>
                     )}
-                    {/* <p className={styles.login_subject_text}>Sign in...</p> */}
-                    <h4 className={styles.title}>Sign in...</h4>
+                    <h4 className={styles.title}>Sign in</h4>
                     <button className={styles.oauth_container}>
                         <BsGoogle className={styles.icon} />
                         <p className={styles.oauth_text}>with Google</p>
@@ -420,7 +397,6 @@ function LoginForm() {
                                 required
                             ></input>
                         </div>
-                        {/* <button id="test" className={styles.submit_button}> */}
                         <ReCAPTCHA
                             size="invisible"
                             ref={reRef}
@@ -564,7 +540,7 @@ function LoginForm() {
                     {errors.length > 0 && (
                         <div className={styles.error_msg}>{errors}</div>
                     )}
-                    <h4 className={styles.title}>It happens...</h4>
+                    <h4 className={styles.title}>It happens</h4>
                     <p className={styles.forgot_text}>
                         Don't worry. Just enter your email below, press the
                         button and the reset link will be in your email inbox.
@@ -602,72 +578,6 @@ function LoginForm() {
                         </button>
                         <button className={styles.sign} onClick={toggleSignIn}>
                             Sign in
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {toggles.updatePassword && (
-                <div className={styles.login_container}>
-                    {errors.length > 0 && (
-                        <div className={styles.error_msg}>{errors}</div>
-                    )}
-                    <h4 className={styles.title}>
-                        Now just submit a new password.
-                    </h4>
-                    <form onSubmit={handleUpdatePassword}>
-                        <label htmlFor="password">New Password</label>
-                        <div className={styles.input_container}>
-                            <FiKey className={styles.input_icon} />
-                            <input
-                                type="password"
-                                name="password"
-                                id="password"
-                                pattern=".{6,}"
-                                title="Must be at least 6 characters"
-                                defaultValue=""
-                                required
-                            ></input>
-                        </div>
-                        <label htmlFor="password">Re-type Password</label>
-                        <div className={styles.input_container}>
-                            <FiKey className={styles.input_icon} />
-                            <input
-                                type="password"
-                                name="password_again"
-                                id="password_again"
-                                pattern=".{6,}"
-                                title="Must be at least 6 characters"
-                                defaultValue=""
-                                required
-                            ></input>
-                        </div>
-                        <ReCAPTCHA
-                            size="invisible"
-                            ref={reRef}
-                            sitekey={process.env.GATSBY_RECAPTCHA_KEY}
-                        />
-                        <button id="test" className={styles.submit_button}>
-                            {loading ? (
-                                <LoadingSpinner type="button" />
-                            ) : (
-                                <>
-                                    <FiLock className={styles.btn_icon} />
-                                    <p>{BUTTON_TEXT.UPDATE_PW}</p>
-                                </>
-                            )}
-                        </button>
-                    </form>
-
-                    <div className={styles.sign_up_forgot_container}>
-                        <button className={styles.sign} onClick={toggleSignIn}>
-                            Already have an account? Sign in!
-                        </button>
-                        <button
-                            className={styles.forgot}
-                            onClick={toggleForgot}
-                        >
-                            Forgot password?
                         </button>
                     </div>
                 </div>

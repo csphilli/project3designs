@@ -54,7 +54,6 @@ function Seo({ description, lang, meta, image: metaImage, title, pathname }) {
                     name: "keywords",
                     content: site.siteMetadata.keywords.join(","),
                 },
-                ,
                 {
                     property: `og:title`,
                     content: title,
