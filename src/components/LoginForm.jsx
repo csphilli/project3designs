@@ -333,6 +333,7 @@ function LoginForm() {
         setLoading(false);
     };
 
+    // Move to profile page
     const handleUpdatePassword = async (e) => {
         e.preventDefault();
         setLoading(true);

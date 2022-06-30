@@ -3,6 +3,7 @@ import * as styles from "../scss/productModal.module.scss";
 import { formattedPrice, getTooltipText } from "../lib";
 import { BsCart } from "react-icons/bs";
 import { Link } from "gatsby";
+import QtyButton from "./inputs/QtyButton";
 /* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.
@@ -117,14 +118,15 @@ function ProductModal(props) {
                                     : styles.add_to_cart_container
                             }
                         >
-                            <input
+                            {/* <input
                                 type="number"
                                 className={styles.quantity_selector}
                                 name="quantity"
                                 min="1"
                                 max={maxQty}
                                 defaultValue="1"
-                            ></input>
+                            ></input> */}
+                            <QtyButton max={maxQty} />
                             <button
                                 className={styles.submit_button}
                                 type="submit"
