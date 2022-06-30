@@ -29,7 +29,6 @@ export default function ProjectDetails({ data }) {
             <article>
                 <div className={styles.heading_container}>
                     <div className={styles.title_banner_container}>
-                        <h2 className={styles.title}>{base.title}</h2>
                         <GatsbyImage
                             className={styles.banner_image}
                             image={banner_image}
@@ -57,8 +56,8 @@ export default function ProjectDetails({ data }) {
                             <p>{base.build_time}</p>
                         </div>
                     </div>
+                    <h2 className={styles.title}>{base.title}</h2>
                 </div>
-
                 <div className={styles.article_container}>
                     <div className={styles.article_content}>
                         <div dangerouslySetInnerHTML={{ __html: html }} />

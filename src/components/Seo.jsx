@@ -108,11 +108,13 @@ function Seo({ description, lang, meta, image: metaImage, title, pathname }) {
                 )
                 .concat(meta)}
         >
-            <script
-                src="https://www.google.com/recaptcha/api.js"
-                async
-                defer
-            ></script>
+            {title === "Login" ? (
+                <script
+                    src="https://www.google.com/recaptcha/api.js"
+                    async
+                    defer
+                ></script>
+            ) : null}
         </Helmet>
     );
 }
