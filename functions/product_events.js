@@ -2,6 +2,9 @@
 
 const stripe = require("stripe")(process.env.GATSBY_STRIPE_SK);
 
+// Used for testing
+const BASE_URL = "localhost:8888/projects/";
+
 const { createClient } = require("@supabase/supabase-js");
 
 const getSupabaseClient = (url, key) => {
@@ -46,7 +49,7 @@ exports.handler = async (event) => {
                         desc: product.description,
                         inventory: product.metadata.inventory,
                         image_url: product.metadata.image_url,
-                        project_url: product.metadata.project_url,
+                        project_url: `${BASE_URL}${product.metadata.project_url}`,
                         active: product.active,
                         p3_id: product.metadata.p3_id,
                         currency: product.currency,
@@ -80,7 +83,8 @@ exports.handler = async (event) => {
                         name: product.name,
                         desc: product.description,
                         image_url: product.metadata.image_url,
-                        project_url: product.metadata.project_url,
+                        project_url: `${BASE_URL}${product.metadata.project_url}`,
+                        // project_url: product.metadata.project_url,
                         p3_id: product.metadata.p3_id,
                         active: product.active,
                         tax_code: product.tax_code,

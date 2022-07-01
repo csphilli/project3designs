@@ -29,7 +29,6 @@ module.exports = {
             { id: "videos", path: "/videos" },
             { id: "products", path: "/products" },
             { id: "cart", path: "/cart" },
-            { id: "login", path: "/login" },
         ],
     },
     plugins: [

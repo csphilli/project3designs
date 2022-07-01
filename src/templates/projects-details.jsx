@@ -17,6 +17,13 @@ function readTime(text) {
 }
 
 export default function ProjectDetails({ data }) {
+    const [maxQty, setMaxQty] = useState(() => {
+        const max =
+            selection.inventory < selection.max_qty
+                ? selection.inventory
+                : selection.max_qty;
+        return max - selection.quantity;
+    });
     const base = data.markdownRemark.frontmatter;
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
@@ -57,6 +64,60 @@ export default function ProjectDetails({ data }) {
                         </div>
                     </div>
                     <h2 className={styles.title}>{base.title}</h2>
+                </div>
+                <div className={styles.purchase_container}>
+                    <div className={styles.physical_product_container}>
+                        <form
+                            className={styles.modal_form}
+                            onSubmit={handleAdd}
+                        >
+                            <label htmlFor="size">Size:</label>
+                            <select
+                                className={styles.selector_menu}
+                                name="product_id"
+                                defaultValue={selection.size}
+                                onChange={handleChange}
+                            >
+                                {product.product_list.map((item) => (
+                                    <option
+                                        key={item.id}
+                                        value={item.product_id}
+                                    >
+                                        {item.size}
+                                    </option>
+                                ))}
+                            </select>
+                            <label
+                                className={styles.quantity_title}
+                                htmlFor="quantity"
+                            >
+                                Available:{" "}
+                                {maxQty
+                                    ? maxQty
+                                    : getTooltipText(
+                                          product.product_list.find(
+                                              (item) => item.id === selection.id
+                                          )
+                                      )}
+                            </label>
+
+                            <div
+                                className={
+                                    maxQty === 0
+                                        ? styles.add_to_cart_container_prevent
+                                        : styles.add_to_cart_container
+                                }
+                            >
+                                <QtyButton max={maxQty} />
+                                <button
+                                    className={styles.submit_button}
+                                    type="submit"
+                                >
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div className={styles.article_container}>
                     <div className={styles.article_content}>
