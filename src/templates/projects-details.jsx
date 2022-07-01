@@ -17,13 +17,13 @@ function readTime(text) {
 }
 
 export default function ProjectDetails({ data }) {
-    const [maxQty, setMaxQty] = useState(() => {
-        const max =
-            selection.inventory < selection.max_qty
-                ? selection.inventory
-                : selection.max_qty;
-        return max - selection.quantity;
-    });
+    // const [maxQty, setMaxQty] = useState(() => {
+    //     const max =
+    //         selection.inventory < selection.max_qty
+    //             ? selection.inventory
+    //             : selection.max_qty;
+    //     return max - selection.quantity;
+    // });
     const base = data.markdownRemark.frontmatter;
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
@@ -67,7 +67,7 @@ export default function ProjectDetails({ data }) {
                 </div>
                 <div className={styles.purchase_container}>
                     <div className={styles.physical_product_container}>
-                        <form
+                        {/* <form
                             className={styles.modal_form}
                             onSubmit={handleAdd}
                         >
@@ -116,7 +116,7 @@ export default function ProjectDetails({ data }) {
                                     Add to Cart
                                 </button>
                             </div>
-                        </form>
+                        </form> */}
                     </div>
                 </div>
                 <div className={styles.article_container}>
