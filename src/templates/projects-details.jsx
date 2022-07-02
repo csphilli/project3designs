@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as styles from "../scss/project-details.module.scss";
 import { graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import QtyButton from "../components/inputs/QtyButton";
 import {
     BsCalendarWeek,
     BsPencilSquare,
@@ -9,6 +10,8 @@ import {
     BsHammer,
 } from "react-icons/bs";
 import Seo from "../components/Seo";
+import { createProdObj, getProduct, getTooltipText } from "../lib";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 function readTime(text) {
     const time = Math.ceil((text.split(" ").length + 1) / 130);
@@ -16,15 +19,46 @@ function readTime(text) {
     return `${time} minutes`;
 }
 
+const getMax = (inv, max_qty, qty) => {
+    const max = inv < max_qty ? inv : max_qty;
+    return max - qty;
+};
+
 export default function ProjectDetails({ data }) {
-    // const [maxQty, setMaxQty] = useState(() => {
-    //     const max =
-    //         selection.inventory < selection.max_qty
-    //             ? selection.inventory
-    //             : selection.max_qty;
-    //     return max - selection.quantity;
-    // });
     const base = data.markdownRemark.frontmatter;
+    const [selection, setSelection] = useState("");
+    const [products, setProducts] = useState([]);
+    const [maxQty, setMaxQty] = useState();
+    const [loading, setLoading] = useState(true);
+
+    const getProducts = async () => {
+        const res = await getProduct(base.slug);
+        res.data.forEach((item) => createProdObj(item));
+        setProducts(res.data);
+        setSelection(res.data[0]);
+    };
+
+    useEffect(() => {
+        getProducts();
+        setLoading(false);
+    }, []);
+
+    const updateQty = (e) => {
+        e.preventDefault();
+        const form = new FormData(e.target);
+        selection.quantity = form.get("quantity");
+    };
+
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        const item = products.find(
+            (item) => item.product_id === e.target.value
+        );
+        console.log(item);
+
+        // setMaxQty();
+    };
+
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
     const banner_image = getImage(
@@ -67,18 +101,18 @@ export default function ProjectDetails({ data }) {
                 </div>
                 <div className={styles.purchase_container}>
                     <div className={styles.physical_product_container}>
-                        {/* <form
+                        <form
                             className={styles.modal_form}
-                            onSubmit={handleAdd}
+                            onSubmit={updateQty}
                         >
                             <label htmlFor="size">Size:</label>
                             <select
                                 className={styles.selector_menu}
                                 name="product_id"
-                                defaultValue={selection.size}
+                                // defaultValue={selection.size}
                                 onChange={handleChange}
                             >
-                                {product.product_list.map((item) => (
+                                {products.map((item) => (
                                     <option
                                         key={item.id}
                                         value={item.product_id}
@@ -91,24 +125,11 @@ export default function ProjectDetails({ data }) {
                                 className={styles.quantity_title}
                                 htmlFor="quantity"
                             >
-                                Available:{" "}
-                                {maxQty
-                                    ? maxQty
-                                    : getTooltipText(
-                                          product.product_list.find(
-                                              (item) => item.id === selection.id
-                                          )
-                                      )}
+                                Available: {maxQty}
                             </label>
 
-                            <div
-                                className={
-                                    maxQty === 0
-                                        ? styles.add_to_cart_container_prevent
-                                        : styles.add_to_cart_container
-                                }
-                            >
-                                <QtyButton max={maxQty} />
+                            <div>
+                                {/* <QtyButton max={maxQty} /> */}
                                 <button
                                     className={styles.submit_button}
                                     type="submit"
@@ -116,9 +137,10 @@ export default function ProjectDetails({ data }) {
                                     Add to Cart
                                 </button>
                             </div>
-                        </form> */}
+                        </form>
                     </div>
                 </div>
+
                 <div className={styles.article_container}>
                     <div className={styles.article_content}>
                         <div dangerouslySetInnerHTML={{ __html: html }} />

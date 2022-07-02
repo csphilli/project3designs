@@ -57,7 +57,7 @@ exports.handler = async (event) => {
                         like_level: 0,
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
-                        max_qty: product.metadata.max_qty,
+                        sale_limit: product.metadata.sale_limit,
                         size: product.metadata.size,
                     },
                 ]);
@@ -90,7 +90,7 @@ exports.handler = async (event) => {
                         tax_code: product.tax_code,
                         tax_code_name: tax_code_name,
                         inventory: product.metadata.inventory,
-                        max_qty: product.metadata.max_qty,
+                        sale_limit: product.metadata.sale_limit,
                         size: product.metadata.size,
                         updated: new Date(),
                     })

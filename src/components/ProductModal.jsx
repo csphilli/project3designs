@@ -10,16 +10,25 @@ import QtyButton from "./inputs/QtyButton";
         7) Instead of keeping track of maxQty according to selection.quantity, the form functionality should add to an order Item instead of product.quantity
 
 */
+
+const getMax = (inv, max_qty, qty) => {
+    const max = inv < max_qty ? inv : max_qty;
+    return max - qty;
+};
+
 function ProductModal(props) {
     const { product, toggleModal } = props;
     const [selection, setSelection] = useState(product.product_list[0]);
-    const [maxQty, setMaxQty] = useState(() => {
-        const max =
-            selection.inventory < selection.max_qty
-                ? selection.inventory
-                : selection.max_qty;
-        return max - selection.quantity;
-    });
+    // const [maxQty, setMaxQty] = useState(() => {
+    //     const max =
+    //         selection.inventory < selection.max_qty
+    //             ? selection.inventory
+    //             : selection.max_qty;
+    //     return max - selection.quantity;
+    // });
+    const [maxQty, setMaxQty] = useState(() =>
+        getMax(selection.inventory, selection.max_qty, selection.qty)
+    );
 
     // The cart Icon in the navBar uses the amount of items in the cart
     // const { order } = useContext(OrderItemsContext);
@@ -27,24 +36,28 @@ function ProductModal(props) {
     // const [orderItems, setOrderItems] = order;
 
     useEffect(() => {
-        setMaxQty(() => {
-            const max =
-                selection.inventory < selection.max_qty
-                    ? selection.inventory
-                    : selection.max_qty;
-            return max - selection.quantity;
-        });
+        // setMaxQty(() => {
+        //     const max =
+        //         selection.inventory < selection.max_qty
+        //             ? selection.inventory
+        //             : selection.max_qty;
+        //     return max - selection.quantity;
+        // });
+        setMaxQty(() =>
+            getMax(selection.inventory, selection.max_qty, selection.qty)
+        );
     }, [selection]);
 
-    const handleAdd = (e) => {
+    const updateQty = (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
-        const data = {
-            product_id: form.get("product_id"),
-            quantity: Number(form.get("quantity")),
-        };
-        selection.quantity += data.quantity;
-        setMaxQty((prevState) => prevState - data.quantity);
+        // const data = {
+        //     product_id: form.get("product_id"),
+        //     quantity: Number(form.get("quantity")),
+        // };
+
+        selection.quantity = form.get("quantity");
+        setMaxQty((prevState) => prevState - selection.quantity);
     };
 
     const handleChange = (e) => {
@@ -83,7 +96,7 @@ function ProductModal(props) {
                         {formattedPrice(selection.price)}
                     </p>
                     <p>{selection.desc}</p>
-                    <form className={styles.modal_form} onSubmit={handleAdd}>
+                    <form className={styles.modal_form} onSubmit={updateQty}>
                         <label htmlFor="size">Size:</label>
                         <select
                             className={styles.selector_menu}
