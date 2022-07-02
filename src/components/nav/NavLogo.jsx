@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../scss/navLogo.module.scss";
+import * as styles from "../../scss/nav/navLogo.module.scss";
 
 function NavLogo() {
     return (

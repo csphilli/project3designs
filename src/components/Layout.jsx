@@ -1,7 +1,6 @@
 import React, { useState, useMemo } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./nav/Navbar";
 import Footer from "./Footer";
-import Logo from "./Logo";
 import "../scss/reset.scss";
 import "../scss/global.scss";
 import "../scss/typography.scss";
@@ -35,7 +34,6 @@ function Layout({ path, children }) {
                     <div>{children}</div>
                     <Footer />
                 </div>
-                <Logo />
             </div>
         </UserContext.Provider>
     );

@@ -22,7 +22,7 @@ export const createProdObj = (obj) => {
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
         sold_out: obj.inventory === 0 ? true : false,
-        maxQty: obj.inventory < obj.max_qty ? obj.inventory : obj.max_qty,
+        maxQty: obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit,
     };
 };
 
@@ -67,6 +67,13 @@ export const myFetch = async (url, type, body) => {
 //         acc[key] = value;
 //         return acc;
 //     }, {});
+
+// Calculates the estimated read time given the number of words divided by an average value of 130
+export const readTime = (text) => {
+    const time = Math.ceil((text.split(" ").length + 1) / 130);
+    if (time <= 1) return `${time} minute`;
+    return `${time} minutes`;
+};
 
 export const fetchProducts = async () => {
     const products = await fetch(`/.netlify/functions/getAllProducts`, {

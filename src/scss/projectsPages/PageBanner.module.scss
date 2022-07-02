@@ -1,4 +1,4 @@
-@use "../scss/abstracts/" as *;
+@use "../abstracts/" as *;
 
 .heading_container {
     position: relative;
@@ -34,44 +34,6 @@
     gap: scaled(0.3, 1.2, 320, 1400);
     padding: scaled(0.2, 0.5, 320, 1400) scaled(0.2, 2, 320, 1400);
     margin-bottom: scaled(1, 2, 320, 1400);
-
-    .author_name {
-        margin: 0;
-    }
-
-    .author_container,
-    .date_container,
-    .read_time_container,
-    .build_time_container {
-        display: flex;
-        align-items: center;
-        color: $mainLightColor;
-    }
-    .icon {
-        margin-right: 1rem;
-        width: 1.2rem;
-        height: auto;
-    }
-}
-
-.article_container {
-    max-width: 1000px;
-    margin: 0 auto;
-
-    .article_content {
-        h3,
-        h4,
-        h5 {
-            padding: scaled(1.2, 2, 320, 1400) 0;
-        }
-
-        p {
-            font-family: "Roboto", sans-serif;
-            font-weight: 400;
-            font-size: scaled(1.1, 1.2, 320, 1400);
-            padding: 0 scaled(0.5, 1.2, 320, 1400);
-        }
-    }
 }
 
 @media screen and (min-width: 660px) {
@@ -83,14 +45,5 @@
         box-shadow: $boxShadow;
         right: scaled(1, 2, 320, 1400);
         bottom: 2rem;
-
-        .author_container,
-        .date_container,
-        .read_time_container,
-        .build_time_container {
-            display: flex;
-            align-items: center;
-            color: $mainDarkColor;
-        }
     }
 }

@@ -8,18 +8,15 @@
     border: 1px solid black;
     border-radius: $formElementRadius;
     overflow: hidden;
-    // font-family: "Roboto", sans-serif;
 }
 
 .mod_btn {
     background: none;
     outline: none;
     font-family: "Roboto", sans-serif;
-    // border: 1px solid black;
     border: none;
     width: 3rem;
     aspect-ratio: 1/1;
-    // border-radius: 0.2rem;
 }
 
 .mod_btn:hover,

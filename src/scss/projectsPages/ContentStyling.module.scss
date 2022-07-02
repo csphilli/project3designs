@@ -1,0 +1,21 @@
+@use "../abstracts/" as *;
+
+.article_container {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    .article_content {
+        h3,
+        h4,
+        h5 {
+            padding: scaled(1.2, 2, 320, 1400) 0;
+        }
+
+        p {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: scaled(1.1, 1.2, 320, 1400);
+            padding: 0 scaled(0.5, 1.2, 320, 1400);
+        }
+    }
+}

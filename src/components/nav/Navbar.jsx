@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-import * as styles from "../scss/navbar.module.scss";
+import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
 import { BsCart } from "react-icons/bs";
 import NavLogo from "./NavLogo";
