@@ -22,6 +22,7 @@ export const createProdObj = (obj) => {
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
         sold_out: obj.inventory === 0 ? true : false,
+        maxQty: obj.inventory < obj.max_qty ? obj.inventory : obj.max_qty,
     };
 };
 
@@ -67,10 +68,8 @@ export const myFetch = async (url, type, body) => {
 //         return acc;
 //     }, {});
 
-// Loads in the products from the graphql query. Calls the sort algorithm, and then updates the quantities of the products from the localStorage to repopulate the shopping cart. Finally it sets the products state.
-
 export const fetchProducts = async () => {
-    const products = await fetch(`/.netlify/functions/get_products`, {
+    const products = await fetch(`/.netlify/functions/getAllProducts`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
@@ -79,6 +78,19 @@ export const fetchProducts = async () => {
     }).then((resp) => resp.json());
 
     return products;
+};
+
+export const getProduct = async (slug) => {
+    const res = await fetch(`/.netlify/functions/getProduct`, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
+        },
+        body: JSON.stringify({ search: slug }),
+    }).then((resp) => resp.json());
+
+    return res;
 };
 
 // Formats the product pricing. Default is eur.

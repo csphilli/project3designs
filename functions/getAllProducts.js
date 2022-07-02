@@ -9,6 +9,9 @@ const supabase = createClient(
 );
 
 exports.handler = async (data) => {
+    // const body = JSON.parse(data.body);
+    // const { search } = body;
+
     // Verifying form data is from P3D site
     const header = data.headers;
     const token = header && header.authorization.split(" ")[1];

@@ -55,6 +55,7 @@ function Products() {
             setLoading(false);
         });
     }, []);
+
     if (allowSelling === true) {
         return (
             <div>
