@@ -1,13 +1,11 @@
 @use "../abstracts/" as *;
 
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: scaled(1, 2, 320, 1400);
-
     .selection_container {
         display: flex;
         flex-direction: column;
+        margin-bottom: 1rem;
+
         .menu_container {
             font-family: "Roboto", sans-serif;
             width: 10rem;
@@ -20,38 +18,10 @@
         }
     }
 
-    // .form_btn {
-    //     font-family: "Montserrat", sans-serif;
-    //     width: 10rem;
-    //     height: 2.5rem;
-    //     margin-top: 0.7rem;
-    //     background-color: $importantButtonColor;
-    //     border: 1px solid rgba(0, 0, 0, 0.8);
-    //     outline: 0;
-    //     border-radius: $formElementRadius;
-    //     color: $mainLightColor;
-    // }
-
-    // .form_btn:hover,
-    // .form_btn:focus {
-    //     background-color: $importantButtonColorHover;
-    //     cursor: pointer;
-    // }
-
-    // .form_btn_prevent {
-    //     font-family: "Montserrat", sans-serif;
-    //     width: 10rem;
-    //     height: 2.5rem;
-    //     margin-top: 0.7rem;
-    //     background-color: rgb(202, 202, 202);
-    //     border: 1px solid rgba(0, 0, 0, 0.8);
-    //     outline: 0;
-    //     border-radius: $formElementRadius;
-    //     color: $mainLightColor;
-    // }
-
-    // .form_btn_prevent:hover,
-    // .form_btn_prevent:focus {
-    //     cursor: not-allowed;
-    // }
+    .qty_selection {
+        margin-bottom: 1rem;
+    }
+    .price {
+        font-size: 1.2rem;
+    }
 }

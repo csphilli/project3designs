@@ -127,6 +127,30 @@ export const saveToLocal = (products) => {
     localStorage.setItem("cartItems", JSON.stringify(local));
 };
 
+export const UpdateLocal = async (product_id, product) => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (local) {
+        const exists = local.find((item) => item.key === product_id);
+        if (exists && product.quantity > 0) {
+            local.forEach((item) => {
+                if (item.key === exists.key) {
+                    item.value = product;
+                }
+            });
+        } else if (exists && product.quantity === 0) {
+            local.pop(local.find((item) => item.product_id === exists.key));
+        } else {
+            local.push({ key: product_id, value: product });
+        }
+        localStorage.setItem("cartItems", JSON.stringify(local));
+    } else {
+        localStorage.setItem(
+            "cartItems",
+            JSON.stringify([{ key: product_id, value: product }])
+        );
+    }
+};
+
 // Updates the quantities that were saved to the local storage for repopulating the cart contents if a user leaves the page before checking out.
 export const updateFromLocal = (products) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));

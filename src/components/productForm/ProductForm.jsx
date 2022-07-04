@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
-import * as formStyles from "../../scss/formElements/verticalForm.module.scss";
+import * as styles from "../../scss/formElements/verticalForm.module.scss";
 import ProductCartIcon from "../cart/ProductCartIcon";
 import FormButton from "./FormButton";
+import { formattedPrice } from "../../lib";
+import { UpdateLocal } from "../../lib";
 
 const BUTTON_TEXT = {
     ADD: "Add to Cart",
@@ -15,6 +17,7 @@ function ProductForm(props) {
     const { products } = props;
     const [btnText, setBtnText] = useState("");
     const [maxQty, setMaxQty] = useState(products[0].maxQty);
+    const [price, setPrice] = useState(formattedPrice(products[0].price));
     const updateQty = (e) => {
         e.preventDefault();
         const form = new FormData(e.target);
@@ -23,6 +26,7 @@ function ProductForm(props) {
         );
         item.quantity = Number(form.get("quantity"));
         setBtnText(updateBtnText(item.maxQty, item.quantity));
+        UpdateLocal(item.product_id, item);
     };
 
     const handleChange = (e) => {
@@ -31,7 +35,7 @@ function ProductForm(props) {
         );
         setMaxQty(item.maxQty);
         setBtnText(updateBtnText(item.maxQty, item.quantity));
-        console.log(item);
+        setPrice(formattedPrice(item.price));
     };
 
     const updateBtnText = (itemMaxQty, itemQty) => {
@@ -51,15 +55,15 @@ function ProductForm(props) {
     }, []);
 
     return (
-        <form className={formStyles.container} onSubmit={updateQty}>
+        <form className={styles.container} onSubmit={updateQty}>
             <SelectField
-                className={formStyles.select_field}
                 html_for="product"
                 name="product_id"
                 options={products}
                 handler={handleChange}
             />
             <NumberInput html_for="quantity" maxQty={maxQty} />
+            <p className={styles.price}>{price}</p>
             <FormButton allow={allowBtnClick(maxQty)} text={btnText} />
         </form>
     );
