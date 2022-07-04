@@ -1,10 +1,12 @@
 import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import * as styles from "../../scss/projectsPages/pageBanner.module.scss";
+import * as formStyles from "../../scss/projectsPages/contentStyling.module.scss";
 import IconBulletList from "../lists/IconBulletList";
+import ProductForm from "../productForm/ProductForm";
 
 function PageBanner(props) {
-    const { data, bullets } = props;
+    const { data, bullets, products } = props;
     const base = data.markdownRemark.frontmatter;
     const banner_image = getImage(
         base.post_banner.childImageSharp.gatsbyImageData

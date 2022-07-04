@@ -7,6 +7,7 @@ import PageBanner from "../components/projectPage/PageBanner";
 import ProductForm from "../components/productForm/ProductForm";
 import Seo from "../components/Seo";
 import * as styles from "../scss/projectsPages/contentStyling.module.scss";
+import ProductCartIcon from "../components/cart/ProductCartIcon";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;

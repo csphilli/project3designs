@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
 import * as formStyles from "../../scss/formElements/verticalForm.module.scss";
+import ProductCartIcon from "../cart/ProductCartIcon";
 
 const BUTTON_TEXT = {
     ADD: "Add to Cart",
@@ -11,6 +12,7 @@ const BUTTON_TEXT = {
 function ProductForm(props) {
     const { products } = props;
     const [btnText, setBtnText] = useState("");
+    const [selection, setSelection] = useState(products[0]);
     const [maxQty, setMaxQty] = useState(products[0].maxQty);
     const updateQty = (e) => {
         e.preventDefault();
@@ -27,6 +29,7 @@ function ProductForm(props) {
             (item) => item.product_id === e.target.value
         );
         setMaxQty(item.maxQty);
+        console.log(selection);
     };
 
     const updateBtnText = (value) => {
@@ -47,7 +50,9 @@ function ProductForm(props) {
                 handler={handleChange}
             />
             <NumberInput html_for="quantity" maxQty={maxQty} />
-            <button type="submit">{btnText}</button>
+            <button className={formStyles.form_btn} type="submit">
+                {btnText}
+            </button>
         </form>
     );
 }

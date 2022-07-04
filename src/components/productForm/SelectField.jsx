@@ -8,7 +8,12 @@ function SelectField(props) {
             <label htmlFor={html_for}>
                 {html_for[0].toUpperCase() + html_for.slice(1) + ":"}
             </label>
-            <select id={name} name={name} onChange={handler}>
+            <select
+                className={formStyles.menu_container}
+                id={name}
+                name={name}
+                onChange={handler}
+            >
                 {options.map((item) => (
                     <option key={item.id} value={item.product_id}>
                         {item.size}

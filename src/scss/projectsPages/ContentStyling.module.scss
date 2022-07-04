@@ -1,19 +1,29 @@
 @use "../abstracts/" as *;
 
+.purchase_heading_container {
+    max-width: 1000px;
+    // border: 1px solid red;
+    margin: 0 auto;
+
+    h2 {
+        margin: 0;
+        padding: 0;
+    }
+}
+
 .purchase_container {
-    border: 1px solid red;
+    // border: 1px solid red;
     display: grid;
     grid-template-columns: repeat(
         auto-fit,
         minmax(scaled(15, 30, 320, 1400), 1fr)
     );
-    max-width: 1000px;
     margin: 0 auto;
 }
 
 .physical_product_container,
 .digital_products_container {
-    padding: scaled(1, 2, 320, 1400) scaled(1, 3, 320, 1400);
+    padding: scaled(1, 1.5, 320, 1400) scaled(1, 3, 320, 1400);
     max-width: 20rem;
 }
 
