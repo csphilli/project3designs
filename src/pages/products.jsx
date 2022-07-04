@@ -9,6 +9,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import ProductCard from "../components/ProductCard";
 import Seo from "../components/Seo";
 import * as styles from "../scss/products.module.scss";
+import { Link } from "gatsby";
 
 function Products() {
     const [products, setProducts] = useState([]);
@@ -65,17 +66,21 @@ function Products() {
                         <LoadingSpinner type="products" />
                     </div>
                 ) : (
-                    <>
-                        <main className={styles.products}>
-                            {products.map((product) => (
+                    <main className={styles.products}>
+                        {products.map((product) => (
+                            <Link
+                                to={`/projects/${product.product_list[0].slug}`}
+                                key={product.product_list[0].id}
+                                className={styles.product_card_link}
+                            >
                                 <ProductCard
                                     formattedPrice={formattedPrice}
                                     key={product.product_list[0].id}
                                     product={product}
                                 />
-                            ))}
-                        </main>
-                    </>
+                            </Link>
+                        ))}
+                    </main>
                 )}
             </div>
         );

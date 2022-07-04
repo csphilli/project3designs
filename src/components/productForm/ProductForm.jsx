@@ -3,6 +3,7 @@ import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
 import * as formStyles from "../../scss/formElements/verticalForm.module.scss";
 import ProductCartIcon from "../cart/ProductCartIcon";
+import FormButton from "./FormButton";
 
 const BUTTON_TEXT = {
     ADD: "Add to Cart",
@@ -13,7 +14,6 @@ const BUTTON_TEXT = {
 function ProductForm(props) {
     const { products } = props;
     const [btnText, setBtnText] = useState("");
-    const [btnStyle, setBtnStyle] = useState();
     const [maxQty, setMaxQty] = useState(products[0].maxQty);
     const updateQty = (e) => {
         e.preventDefault();
@@ -31,7 +31,6 @@ function ProductForm(props) {
         );
         setMaxQty(item.maxQty);
         setBtnText(updateBtnText(item.maxQty, item.quantity));
-        setBtnStyle(updateBtnStyle(item.maxQty));
         console.log(item);
     };
 
@@ -43,30 +42,25 @@ function ProductForm(props) {
             : BUTTON_TEXT.ADD;
     };
 
-    const updateBtnStyle = (itemMaxQty) => {
-        return itemMaxQty === 0
-            ? formStyles.form_btn_prevent
-            : formStyles.form_btn;
+    const allowBtnClick = (itemMaxQty) => {
+        return itemMaxQty === 0 ? false : true;
     };
 
     useEffect(() => {
-        setBtnText(updateBtnText(products[0].quantity));
-        setBtnStyle(updateBtnStyle(products[0].maxQty));
+        setBtnText(updateBtnText(products[0].maxQty));
     }, []);
 
     return (
         <form className={formStyles.container} onSubmit={updateQty}>
             <SelectField
                 className={formStyles.select_field}
-                html_for="size"
+                html_for="product"
                 name="product_id"
                 options={products}
                 handler={handleChange}
             />
             <NumberInput html_for="quantity" maxQty={maxQty} />
-            <button className={btnStyle} type="submit">
-                {btnText}
-            </button>
+            <FormButton allow={allowBtnClick(maxQty)} text={btnText} />
         </form>
     );
 }
