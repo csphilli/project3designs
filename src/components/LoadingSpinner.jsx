@@ -1,6 +1,6 @@
 import React from "react";
-import * as productLoading from "../scss/spinners/productLoading.module.scss";
 import * as buttonLoading from "../scss/spinners/buttonLoading.module.scss";
+import * as productLoading from "../scss/spinners/productLoading.module.scss";
 
 function LoadingSpinner({ type }) {
     const getSpinnerStyle = (s) => {

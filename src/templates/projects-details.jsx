@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import * as styles from "../scss/projectsPages/ContentStyling.module.scss";
-import { graphql } from "gatsby";
 import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
-import Seo from "../components/Seo";
+import { graphql } from "gatsby";
 import { createProdObj, getProduct, readTime } from "../lib";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PageBanner from "../components/projectPage/PageBanner";
 import ProductForm from "../components/productForm/ProductForm";
+import Seo from "../components/Seo";
+import * as styles from "../scss/projectsPages/contentStyling.module.scss";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
@@ -52,7 +52,7 @@ export default function ProjectDetails({ data }) {
                         <div className={styles.physical_product_container}>
                             <ProductForm products={products} />
                         </div>
-                        <div className="styles digital_products_container">
+                        <div className={styles.digital_products_container}>
                             I am a plan
                         </div>
                     </div>

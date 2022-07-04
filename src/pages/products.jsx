@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import ProductCard from "../components/ProductCard";
-import * as styles from "../scss/products.module.scss";
 import {
     createProdObj,
     fetchProducts,
     formattedPrice,
     sortProducts,
 } from "../lib/index";
-import Seo from "../components/Seo";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ProductCard from "../components/ProductCard";
+import Seo from "../components/Seo";
+import * as styles from "../scss/products.module.scss";
 
 function Products() {
     const [products, setProducts] = useState([]);

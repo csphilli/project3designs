@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
-import * as formStyles from "../../scss/formElements/VerticalForm.module.scss";
+import * as formStyles from "../../scss/formElements/verticalForm.module.scss";
 
 const BUTTON_TEXT = {
     ADD: "Add to Cart",

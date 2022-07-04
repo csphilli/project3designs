@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as styles from "../../scss/QtyButton.module.scss";
+import * as styles from "../../scss/qtyButton.module.scss";
 
 function QtyButton(props) {
     const { max } = props;
