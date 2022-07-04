@@ -87,14 +87,14 @@ export const fetchProducts = async () => {
     return products;
 };
 
-export const getProduct = async (slug) => {
+export const getProduct = async (p3_id) => {
     const res = await fetch(`/.netlify/functions/getProduct`, {
         method: "POST",
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
-        body: JSON.stringify({ search: slug }),
+        body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
 
     return res;

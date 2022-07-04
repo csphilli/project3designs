@@ -22,6 +22,8 @@ module.exports = {
             "building",
             "custom woodworking",
             "woodworking tutorials",
+            "custom luxury designs",
+            "made in Finland",
         ],
         siteUrl: "https://www.project3designs.com",
         navLinks: [

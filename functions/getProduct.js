@@ -21,12 +21,14 @@ exports.handler = async (data) => {
     const { data: products, error } = await supabase
         .from("products")
         .select("*")
-        .eq("slug", search)
+        .eq("p3_id", search)
         .eq("active", true)
         .order("updated", { ascending: false })
         .order("inventory", { ascending: false });
 
     if (error) {
+        console.log(error);
+
         return {
             statusCode: 400,
             body: JSON.stringify({

@@ -4,13 +4,13 @@ import { graphql } from "gatsby";
 import { createProdObj, getProduct, readTime } from "../lib";
 import LoadingSpinner from "../components/LoadingSpinner";
 import PageBanner from "../components/projectPage/PageBanner";
-import ProductForm from "../components/productForm/ProductForm";
 import Seo from "../components/Seo";
-import * as styles from "../scss/projectsPages/contentStyling.module.scss";
-import ProductCartIcon from "../components/cart/ProductCartIcon";
+import PurchaseComponent from "../components/projectPage/PurchaseComponent";
+import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
+
     const { html } = data.markdownRemark;
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ export default function ProjectDetails({ data }) {
 
     const getProducts = async () => {
         let prodList = [];
-        const res = await getProduct(base.slug);
+        const res = await getProduct(base.p3_id);
         res.data.forEach((item) => prodList.push(createProdObj(item)));
         setProducts(prodList);
         setLoading(false);
@@ -42,30 +42,22 @@ export default function ProjectDetails({ data }) {
     }, []);
 
     return (
-        <div>
+        <section className={styles.section_container}>
             <Seo title={base.title} />
-            <article>
+            <section className={styles.purchase_container}>
                 <PageBanner data={data} bullets={bullets} />
                 {loading ? (
                     <LoadingSpinner type="products" />
                 ) : (
-                    <div className={styles.purchase_container}>
-                        <div className={styles.physical_product_container}>
-                            <ProductForm products={products} />
-                        </div>
-                        <div className={styles.digital_products_container}>
-                            I am a plan
-                        </div>
-                    </div>
+                    <PurchaseComponent products={products} />
                 )}
-
-                <div className={styles.article_container}>
-                    <div className={styles.article_content}>
-                        <div dangerouslySetInnerHTML={{ __html: html }} />
-                    </div>
+            </section>
+            <article className={styles.article_container}>
+                <div className={styles.article_content}>
+                    <div dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
             </article>
-        </div>
+        </section>
     );
 }
 
@@ -77,15 +69,10 @@ export const query = graphql`
                 title
                 description
                 date(formatString: "MMMM DD, YYYY")
+                p3_id
                 slug
                 author_name
                 page_root
-                build_time
-                author_img {
-                    childImageSharp {
-                        gatsbyImageData(width: 75, aspectRatio: 1)
-                    }
-                }
                 post_banner {
                     childImageSharp {
                         gatsbyImageData(
@@ -93,6 +80,11 @@ export const query = graphql`
                             aspectRatio: 1.6
                             height: 300
                         )
+                    }
+                }
+                post_thumb {
+                    childImageSharp {
+                        gatsbyImageData
                     }
                 }
             }
