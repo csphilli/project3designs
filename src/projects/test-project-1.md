@@ -9,6 +9,7 @@ author_name: Christopher Phillips
 author_img: ../images/authors/author_1.jpg
 post_thumb: ../images/thumbnails/four.jpg
 post_banner: ../images/featured/one.jpg
+plan_image: ../images/
 ---
 
 ### How to make a website with Gatsby
