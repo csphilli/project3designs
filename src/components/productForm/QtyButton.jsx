@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "../../scss/qtyButton.module.scss";
+import { BiTrash } from "react-icons/bi";
+
+const MIN = 1;
 
 function QtyButton(props) {
     const { max } = props;
@@ -27,24 +30,33 @@ function QtyButton(props) {
     const minusQty = (e) => {
         e.preventDefault();
         setInputValue((prevValue) => {
-            if (prevValue - 1 >= 0) {
+            if (prevValue - 1 >= MIN) {
                 return prevValue - 1;
             }
             return prevValue;
         });
     };
 
+    /*
+
+    <div className={styles.mod_btn_container}>
+                    <BiTrash className={styles.mod_btn_icon} />
+                </div>
+
+                */
+
     return (
         <div className={styles.container}>
             <button onClick={minusQty} className={styles.mod_btn}>
                 -
             </button>
+
             <input
                 id="qty_selector"
                 type="number"
                 className={styles.qty}
                 name="quantity"
-                min="0"
+                min={MIN}
                 max={max}
                 value={inputValue}
                 onChange={onChangeHandler}
