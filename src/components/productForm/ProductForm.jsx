@@ -35,7 +35,6 @@ function ProductForm(props) {
 
     return (
         <form className={styles.container} onSubmit={updateQty}>
-            <div>quantity: {selection.quantity}</div>
             <SelectField
                 html_for="product"
                 name="product_id"
