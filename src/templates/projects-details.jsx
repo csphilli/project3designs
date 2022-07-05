@@ -49,10 +49,9 @@ export default function ProjectDetails({ data }) {
             <section className={styles.purchase_container}>
                 <PageBanner data={data} bullets={bullets} />
                 {loading ? (
-                    <LoadingSpinner
-                        className={styles.testing}
-                        type="products"
-                    />
+                    <div className={styles.spinner_container}>
+                        <LoadingSpinner type="products" />
+                    </div>
                 ) : (
                     <PurchaseComponent products={products} />
                 )}
