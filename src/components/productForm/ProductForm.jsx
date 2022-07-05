@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
 import * as styles from "../../scss/formElements/verticalForm.module.scss";
@@ -6,11 +6,7 @@ import ProductCartIcon from "../cart/ProductCartIcon";
 import { formattedPrice } from "../../lib";
 import { saveToLocal } from "../../lib";
 
-const BUTTON_TEXT = {
-    ADD: "Add to Cart",
-    UPDATE: "Update Cart",
-    SOLD_OUT: "Sold Out",
-};
+const BUTTON_TEXT = "Add to Cart";
 
 function ProductForm(props) {
     const { products } = props;
@@ -43,7 +39,9 @@ function ProductForm(props) {
             />
             <NumberInput html_for="quantity" maxQty={selection.maxQty} />
             <p className={styles.price}>{formattedPrice(selection.price)}</p>
-            <button type="submit">Add to Cart</button>
+            <button className={styles.form_btn} type="submit">
+                BUTTON_TEXT
+            </button>
         </form>
     );
 }
