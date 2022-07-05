@@ -7,6 +7,7 @@ import PageBanner from "../components/projectPage/PageBanner";
 import Seo from "../components/Seo";
 import PurchaseComponent from "../components/projectPage/PurchaseComponent";
 import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
+import { refreshQtyFromLocal } from "../lib";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
@@ -33,6 +34,7 @@ export default function ProjectDetails({ data }) {
         let prodList = [];
         const res = await getProduct(base.p3_id);
         res.data.forEach((item) => prodList.push(createProdObj(item)));
+        refreshQtyFromLocal(prodList);
         setProducts(prodList);
         setLoading(false);
     };

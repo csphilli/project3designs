@@ -110,24 +110,42 @@ export const formattedPrice = (value, ccy = "eur") => {
 };
 
 // DELETE Used to check if buttons can be clicked.
-export const isClickAllowed = (product) => {
-    return (
-        product.quantity < parseInt(product.max_qty) && product.inventory >= 1
-    );
-};
+// export const isClickAllowed = (product) => {
+//     return (
+//         product.quantity < parseInt(product.max_qty) && product.inventory >= 1
+//     );
+// };
 
 // Saves a key and value pair to local storage. Will update the quantity
-export const saveToLocal = (products) => {
-    let local = [];
-    products.forEach((list) =>
-        list.product_list.forEach((prod) => {
-            local.push({ key: prod.id, value: prod });
-        })
-    );
-    localStorage.setItem("cartItems", JSON.stringify(local));
+// export const saveToLocal = (products) => {
+//     let local = [];
+//     products.forEach((list) =>
+//         list.product_list.forEach((prod) => {
+//             local.push({ key: prod.id, value: prod });
+//         })
+//     );
+//     localStorage.setItem("cartItems", JSON.stringify(local));
+// };
+
+export const refreshQtyFromLocal = (prodList) => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (!local) return;
+    prodList.forEach((item1) => {
+        const exists = local.find((item2) => item2.key === item1.product_id);
+        if (!exists) return;
+        item1.quantity = exists.value.quantity;
+    });
 };
 
-export const UpdateLocal = async (product_id, product) => {
+export const getQtyFromLocal = (product_id) => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (!local) return 0;
+    const exists = local.find((item) => item.key === product_id);
+    if (!exists) return 0;
+    return exists.value.quantity;
+};
+
+export const saveToLocal = async (product_id, product) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (local) {
         const exists = local.find((item) => item.key === product_id);
