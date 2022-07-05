@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
-import * as styles from "../../scss/formElements/verticalForm.module.scss";
+import * as styles from "../../scss/formElements/productForm.module.scss";
 import ProductCartIcon from "../cart/ProductCartIcon";
 import { formattedPrice } from "../../lib";
 import { saveToLocal } from "../../lib";

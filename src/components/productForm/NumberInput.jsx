@@ -1,6 +1,6 @@
 import React from "react";
 import QtyButton from "./QtyButton";
-import * as styles from "../../scss/formElements/verticalForm.module.scss";
+import * as styles from "../../scss/formElements/productForm.module.scss";
 
 function NumberInput(props) {
     const { html_for, maxQty } = props;

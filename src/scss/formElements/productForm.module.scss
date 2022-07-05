@@ -26,4 +26,22 @@
     }
 }
 
+.form_btn {
+    font-family: "Montserrat", sans-serif;
+    width: 10rem;
+    height: 2.5rem;
+    margin-top: 0.7rem;
+    background-color: $importantButtonColor;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    outline: 0;
+    border-radius: $formElementRadius;
+    color: $mainLightColor;
+}
+
+.form_btn:hover,
+.form_btn:focus {
+    background-color: $importantButtonColorHover;
+    cursor: pointer;
+}
+
 //test
