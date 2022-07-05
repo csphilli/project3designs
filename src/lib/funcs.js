@@ -26,40 +26,6 @@ export const createProdObj = (obj) => {
     };
 };
 
-// DELETE
-// Simple function to handle adding items to cart. Src: products/index.jsx file
-export const onAdd = (item, quantity) => {
-    if (isClickAllowed(item) === true) {
-        item.quantity += quantity;
-        // item.quantity++;
-        // saveToLocal(item.id, item);
-    }
-};
-
-// DELETE
-// Simple function to handle removing items from cart. Src: products/index.jsx file
-export const onMinus = (item) => {
-    if (item.quantity >= 1) {
-        item.quantity--;
-        // saveToLocal(item.id, item);
-    }
-};
-
-// DELETE?
-export const myFetch = async (url, type, body) => {
-    console.log(`handling myFetch. url: ${url}, type: ${type}, body: ${body}`);
-
-    const response = await fetch(url, {
-        method: type,
-        headers: {
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-    });
-
-    return response;
-};
-
 // Creates an object of key value pairs from a URL string.
 // const getRedirectObj = (redirectString) =>
 //     redirectString.split("&").reduce((acc, keyValuePair) => {
@@ -83,7 +49,6 @@ export const fetchProducts = async () => {
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-
     return products;
 };
 
@@ -96,7 +61,6 @@ export const getProduct = async (p3_id) => {
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
-
     return res;
 };
 
@@ -109,24 +73,7 @@ export const formattedPrice = (value, ccy = "eur") => {
     }).format(value);
 };
 
-// DELETE Used to check if buttons can be clicked.
-// export const isClickAllowed = (product) => {
-//     return (
-//         product.quantity < parseInt(product.max_qty) && product.inventory >= 1
-//     );
-// };
-
-// Saves a key and value pair to local storage. Will update the quantity
-// export const saveToLocal = (products) => {
-//     let local = [];
-//     products.forEach((list) =>
-//         list.product_list.forEach((prod) => {
-//             local.push({ key: prod.id, value: prod });
-//         })
-//     );
-//     localStorage.setItem("cartItems", JSON.stringify(local));
-// };
-
+// When loading a new page that contains product cart info, refreshes quantities from localStorage
 export const refreshQtyFromLocal = (prodList) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (!local) return;
@@ -137,14 +84,7 @@ export const refreshQtyFromLocal = (prodList) => {
     });
 };
 
-export const getQtyFromLocal = (product_id) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (!local) return 0;
-    const exists = local.find((item) => item.key === product_id);
-    if (!exists) return 0;
-    return exists.value.quantity;
-};
-
+// Saves item to localStorage
 export const saveToLocal = async (product_id, product) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (local) {
@@ -166,21 +106,6 @@ export const saveToLocal = async (product_id, product) => {
             "cartItems",
             JSON.stringify([{ key: product_id, value: product }])
         );
-    }
-};
-
-// Updates the quantities that were saved to the local storage for repopulating the cart contents if a user leaves the page before checking out.
-export const updateFromLocal = (products) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (local) {
-        products.forEach((list) => {
-            list.product_list.forEach((item) => {
-                const prod = local.find((prod) => prod.key === item.id);
-                if (prod) {
-                    item.quantity = prod.value.quantity;
-                }
-            });
-        });
     }
 };
 
