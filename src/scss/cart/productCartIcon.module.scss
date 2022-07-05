@@ -1,1 +1,48 @@
 @use "../abstracts/" as *;
+
+.link_container {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: scaled(4, 5, 320, 1400);
+
+    padding: scaled(0.65, 1, 320, 1400) 0;
+    background-color: #cacaca;
+    border-radius: $formElementRadius;
+    margin-top: scaled(1.2, 1.5, 320, 1400);
+
+    .cart_icon {
+        position: relative;
+        text-decoration-style: none;
+        color: $mainDarkColor;
+        font-size: scaled(1.15, 1.5, 320, 1400);
+    }
+
+    .qty_value {
+        --pcent: 65%;
+        position: absolute;
+        font-family: "Roboto", sans-serif;
+        color: $mainDarkColor;
+        font-size: 0.8rem;
+        top: 0;
+        left: var(--pcent);
+        transform: translateX(--pcent);
+    }
+}
+
+.link_container:hover,
+.link_container:focus {
+    background-color: #a8a8a8;
+}
+
+// .link_container::after {
+//     position: absolute;
+//     display: block;
+//     content: attr(data-qty);
+//     font-family: "Roboto", sans-serif;
+//     font-size: scaled(0.75, 0.75, 320, 1400);
+//     top: 0.2rem;
+//     right: scaled(0.6, 1.1, 320, 1400);
+
+//     color: $mainDarkColor;
+// }

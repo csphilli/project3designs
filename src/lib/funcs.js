@@ -86,6 +86,8 @@ export const refreshQtyFromLocal = (prodList) => {
 
 // Saves item to localStorage
 export const saveToLocal = async (product_id, product) => {
+    console.log("Saving to Local");
+
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (local) {
         const exists = local.find((item) => item.key === product_id);

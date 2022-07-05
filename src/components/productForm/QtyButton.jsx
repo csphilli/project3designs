@@ -6,7 +6,7 @@ import { saveToLocal } from "../../lib";
 const MIN = 1;
 
 function QtyButton(props) {
-    const { product } = props;
+    const { product, setShowCartIcon } = props;
     const [inputValue, setInputValue] = useState(product.quantity);
     const [showDelete, setShowDelete] = useState(
         product.quantity === 1 ? true : false
@@ -26,6 +26,8 @@ function QtyButton(props) {
 
     const onAdd = (e) => {
         e.preventDefault();
+        console.log(`onAdd. cQty: ${product.quantity}`);
+
         if (product.quantity + 1 <= product.maxQty) {
             product.quantity += 1;
             setInputValue((prev) => prev + 1);
@@ -34,6 +36,7 @@ function QtyButton(props) {
     };
 
     const onMinus = (e) => {
+        console.log(`onMinus. cQty: ${product.quantity}`);
         e.preventDefault();
         if (product.quantity - 1 >= MIN) {
             product.quantity -= 1;
@@ -47,6 +50,7 @@ function QtyButton(props) {
         product.quantity = 0;
         setInputValue(0);
         saveToLocal(product.product_id, product);
+        setShowCartIcon(false);
     };
 
     return (
