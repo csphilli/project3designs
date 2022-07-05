@@ -18,7 +18,7 @@
     font-family: "Roboto", sans-serif;
     border: none;
     width: 3rem;
-    aspect-ratio: 1/1;
+    height: 3rem;
 }
 
 .mod_btn_container {
@@ -30,7 +30,7 @@
     display: grid;
     place-items: center;
     .mod_btn_icon {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 }
 //test

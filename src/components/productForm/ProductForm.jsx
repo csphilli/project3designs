@@ -6,14 +6,19 @@ import ProductCartIcon from "../cart/ProductCartIcon";
 import { formattedPrice } from "../../lib";
 import { saveToLocal } from "../../lib";
 
-const BUTTON_TEXT = "Add to Cart";
+const TEXT = {
+    CART: "Add to Cart",
+};
 
 function ProductForm(props) {
     const { products } = props;
     const [selection, setSelection] = useState(products[0]);
     const updateQty = (e) => {
         e.preventDefault();
+        console.log("updating cart");
+
         const form = new FormData(e.target);
+
         const item = products.find(
             (item) => item.product_id === form.get("product_id")
         );
@@ -37,10 +42,15 @@ function ProductForm(props) {
                 options={products}
                 handler={handleChange}
             />
-            <NumberInput html_for="quantity" maxQty={selection.maxQty} />
+            {/* <NumberInput html_for="quantity" maxQty={selection.maxQty} /> */}
+            <NumberInput
+                html_for="quantity"
+                product={selection}
+                updateQty={updateQty}
+            />
             <p className={styles.price}>{formattedPrice(selection.price)}</p>
             <button className={styles.form_btn} type="submit">
-                BUTTON_TEXT
+                {TEXT.CART}
             </button>
         </form>
     );

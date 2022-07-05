@@ -1,5 +1,5 @@
 import React from "react";
-import * as formStyles from "../../scss/formElements/verticalForm.module.scss";
+import * as formStyles from "../../scss/formElements/productForm.module.scss";
 
 function SelectField(props) {
     const { html_for, name, options, handler } = props;
