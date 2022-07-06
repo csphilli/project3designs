@@ -15,20 +15,6 @@ function Layout({ path, children }) {
     const [showCheckout, setShowCheckout] = useState(null);
     const [cartQty, setCartQty] = useState(null);
 
-    // const [showBanner, setShowBanner] = useState(true);
-    // const [orderItems, setOrderItems] = useState([]);
-    // const [user, setUser] = useState({});
-
-    // const value = useMemo(
-    //     () => ({
-    //         user,
-    //         setUser,
-    //     }),
-    //     [user, setUser]
-    // );
-    // const [session, setSession] = useState();
-    // const [user, setUser] = useState();
-
     const getCartQty = useCallback(() => {
         const local = JSON.parse(localStorage.getItem("cartItems"));
         if (local) {
@@ -38,9 +24,9 @@ function Layout({ path, children }) {
         } else setCartQty(0);
     }, []);
 
-    const checkCartIcon = useCallback(() => {
-        return selection.quantity > 0;
-    }, [selection]);
+    // const checkShowButton = useCallback(() => {
+    //     return selection.quantity > 0;
+    // }, [selection]);
 
     const onAdd = useCallback(
         (e) => {
@@ -49,11 +35,11 @@ function Layout({ path, children }) {
                 selection.quantity += 1;
                 setInputValue((prev) => prev + 1);
                 setCartQty((prev) => prev + 1);
+                setShowCheckout(true);
+                saveToLocal(selection.product_id, selection);
             }
-            setShowCheckout(checkCartIcon());
-            saveToLocal(selection.product_id, selection);
         },
-        [selection, checkCartIcon]
+        [selection]
     );
 
     const onMinus = useCallback(
@@ -63,8 +49,8 @@ function Layout({ path, children }) {
                 selection.quantity -= 1;
                 setInputValue((prev) => prev - 1);
                 setCartQty((prev) => prev - 1);
+                saveToLocal(selection.product_id, selection);
             }
-            saveToLocal(selection.product_id, selection);
         },
         [selection]
     );
@@ -92,7 +78,7 @@ function Layout({ path, children }) {
             onAdd,
             onMinus,
             onDelete,
-            checkCartIcon,
+            // checkShowButton,
             cartQty,
             setCartQty,
         }),
@@ -106,7 +92,7 @@ function Layout({ path, children }) {
             onAdd,
             onMinus,
             onDelete,
-            checkCartIcon,
+            // checkShowButton,
             cartQty,
             setCartQty,
         ]

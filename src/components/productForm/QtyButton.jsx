@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as styles from "../../scss/qtyButton.module.scss";
 import { BiTrash } from "react-icons/bi";
-import { saveToLocal } from "../../lib";
 import { CartContext } from "../../lib/CartContext";
 
 const MIN = 1;
@@ -22,7 +21,7 @@ function QtyButton(props) {
 
     useEffect(() => {
         checkDelete();
-    }, [checkDelete]);
+    }, []);
 
     const onChangeHandler = (event) => {
         setInputValue(event.target.value);

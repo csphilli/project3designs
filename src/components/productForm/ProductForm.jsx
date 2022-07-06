@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import SelectField from "./SelectField";
 import NumberInput from "./NumberInput";
 import * as styles from "../../scss/formElements/productForm.module.scss";
@@ -21,7 +21,6 @@ function ProductForm(props) {
         showCheckout,
         setShowCheckout,
         onAdd,
-        checkCartIcon,
     } = useContext(CartContext);
 
     useEffect(() => {
@@ -34,7 +33,7 @@ function ProductForm(props) {
         const item = products.find(
             (item) => item.product_id === e.target.value
         );
-        setShowCheckout(checkCartIcon());
+        setShowCheckout(item.quantity > 0 ? true : false);
         setInputValue(item.quantity);
         setSelection(item);
     };

@@ -6,16 +6,6 @@ import { BsCart } from "react-icons/bs";
 import NavLogo from "./NavLogo";
 import { CartContext } from "../../lib/CartContext";
 
-// import { OrderItemsContext } from "./Layout";
-
-/* TODO
-
-1) Create styling on the cart qty value as an attribute passed to CSS.
-2) Take nav pages from gatsy.config site metadata
-3) If user logged in, have "Hi, <name>" and if clicked, takes to member page
-
-*/
-
 function Navbar({ path }) {
     const { cartQty } = useContext(CartContext);
 
@@ -34,16 +24,6 @@ function Navbar({ path }) {
     `);
 
     const links = [...site.siteMetadata.navLinks];
-
-    // console.log(`links: ${links}`);
-
-    // const { order } = useContext(OrderItemsContext);
-    // const [orderItems] = order;
-
-    // const qty = orderItems
-    //     .filter((item) => item.qty > 0)
-    //     .reduce((acc, i) => acc + i.qty, 0);
-
     return (
         <nav className={styles.navBar}>
             <Link className={styles.logoText} to="/">
