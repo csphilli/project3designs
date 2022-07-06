@@ -7,7 +7,15 @@ function NumberInput(props) {
     return (
         <div className={styles.qty_selection}>
             <label htmlFor={html_for}>Available: {product.maxQty}</label>
-            <QtyButton product={product} setShowCartIcon={setShowCartIcon} />
+            <QtyButton
+                product={product}
+                setShowCartIcon={setShowCartIcon}
+                onAdd={props.onAdd}
+                onMinus={props.onMinus}
+                onDelete={props.onDelete}
+                inputValue={props.inputValue}
+                setInputValue={props.setInputValue}
+            />
         </div>
     );
 }

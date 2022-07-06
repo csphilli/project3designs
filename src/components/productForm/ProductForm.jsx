@@ -10,9 +10,12 @@ const TEXT = {
     SOLD_OUT: "Sold Out",
 };
 
+const MIN = 1;
+
 function ProductForm(props) {
     const { products } = props;
     const [selection, setSelection] = useState(products[0]);
+    const [inputValue, setInputValue] = useState(products[0].quantity);
     const [showCartIcon, setShowCartIcon] = useState(
         products[0].quantity > 0 ? true : false
     );
@@ -22,29 +25,54 @@ function ProductForm(props) {
 
     useEffect(() => {
         setShowCartIcon(checkCartIcon());
-    }, [selection]);
-
-    const addToCart = (e) => {
-        e.preventDefault();
-        const form = new FormData(e.target);
-        const item = products.find(
-            (item) => item.product_id === form.get("product_id")
-        );
-        item.quantity += 1;
-        setShowCartIcon(true);
-        saveToLocal(item.product_id, item);
-    };
+    }, [selection, inputValue]);
 
     const handleChange = (e) => {
         const item = products.find(
             (item) => item.product_id === e.target.value
         );
         setShowCartIcon(checkCartIcon());
+        setInputValue(item.quantity);
         setSelection(item);
+        console.log(selection);
     };
 
+    ///
+
+    const onAdd = (e) => {
+        e.preventDefault();
+        console.log(`onAdd. Qty: ${selection.quantity}`);
+
+        if (selection.quantity + 1 <= selection.maxQty) {
+            selection.quantity += 1;
+            setInputValue((prev) => prev + 1);
+        }
+        setShowCartIcon(checkCartIcon());
+        saveToLocal(selection.product_id, selection);
+    };
+
+    const onMinus = (e) => {
+        console.log(`onMinus. cQty: ${selection.quantity}`);
+        e.preventDefault();
+        if (selection.quantity - 1 >= MIN) {
+            selection.quantity -= 1;
+            setInputValue((prev) => prev - 1);
+        }
+        saveToLocal(selection.product_id, selection);
+    };
+
+    const onDelete = (e) => {
+        e.preventDefault();
+        selection.quantity = 0;
+        setInputValue(0);
+        saveToLocal(selection.product_id, selection);
+        setShowCartIcon(false);
+    };
+
+    ///
+
     return (
-        <form className={styles.container} onSubmit={addToCart}>
+        <form className={styles.container} onSubmit={onAdd}>
             <p className={styles.price}>{formattedPrice(selection.price)}</p>
             <SelectField
                 html_for="product"
@@ -58,8 +86,13 @@ function ProductForm(props) {
                         html_for="quantity"
                         product={selection}
                         setShowCartIcon={setShowCartIcon}
+                        onAdd={onAdd}
+                        onMinus={onMinus}
+                        onDelete={onDelete}
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
                     />
-                    <ProductCartIcon qty={selection.quantity} />
+                    <ProductCartIcon qty={inputValue} />
                 </>
             ) : selection.maxQty > 0 ? (
                 <button className={styles.form_btn} type="submit">

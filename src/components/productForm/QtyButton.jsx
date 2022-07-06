@@ -7,7 +7,6 @@ const MIN = 1;
 
 function QtyButton(props) {
     const { product, setShowCartIcon } = props;
-    const [inputValue, setInputValue] = useState(product.quantity);
     const [showDelete, setShowDelete] = useState(
         product.quantity === 1 ? true : false
     );
@@ -18,49 +17,23 @@ function QtyButton(props) {
 
     useEffect(() => {
         checkDelete();
-    }, [inputValue]);
+    }, [props.inputValue]);
 
     const onChangeHandler = (event) => {
-        setInputValue(event.target.value);
-    };
-
-    const onAdd = (e) => {
-        e.preventDefault();
-        console.log(`onAdd. cQty: ${product.quantity}`);
-
-        if (product.quantity + 1 <= product.maxQty) {
-            product.quantity += 1;
-            setInputValue((prev) => prev + 1);
-        }
-        saveToLocal(product.product_id, product);
-    };
-
-    const onMinus = (e) => {
-        console.log(`onMinus. cQty: ${product.quantity}`);
-        e.preventDefault();
-        if (product.quantity - 1 >= MIN) {
-            product.quantity -= 1;
-            setInputValue((prev) => prev - 1);
-        }
-        saveToLocal(product.product_id, product);
-    };
-
-    const onDelete = (e) => {
-        e.preventDefault();
-        product.quantity = 0;
-        setInputValue(0);
-        saveToLocal(product.product_id, product);
-        setShowCartIcon(false);
+        props.setInputValue(event.target.value);
     };
 
     return (
         <div className={styles.container}>
             {showDelete ? (
-                <button onClick={onDelete} className={styles.mod_btn_container}>
+                <button
+                    onClick={props.onDelete}
+                    className={styles.mod_btn_container}
+                >
                     <BiTrash className={styles.mod_btn_icon} />
                 </button>
             ) : (
-                <button onClick={onMinus} className={styles.mod_btn}>
+                <button onClick={props.onMinus} className={styles.mod_btn}>
                     -
                 </button>
             )}
@@ -71,10 +44,10 @@ function QtyButton(props) {
                 name="quantity"
                 min={MIN}
                 max={product.maxQty}
-                value={inputValue}
+                value={props.inputValue}
                 onChange={onChangeHandler}
             ></input>
-            <button onClick={onAdd} className={styles.mod_btn}>
+            <button onClick={props.onAdd} className={styles.mod_btn}>
                 +
             </button>
         </div>
