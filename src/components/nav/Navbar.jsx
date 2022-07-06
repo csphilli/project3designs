@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "gatsby";
 import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
 import { BsCart } from "react-icons/bs";
 import NavLogo from "./NavLogo";
+import { CartContext } from "../../lib/CartContext";
 
 // import { OrderItemsContext } from "./Layout";
 
@@ -16,6 +17,8 @@ import NavLogo from "./NavLogo";
 */
 
 function Navbar({ path }) {
+    const { cartQty } = useContext(CartContext);
+
     const { site } = useStaticQuery(graphql`
         query navLinkQuery {
             site {
@@ -60,7 +63,16 @@ function Navbar({ path }) {
                             }
                             to={item.path}
                         >
-                            {item.id === "cart" ? <BsCart /> : item.id}
+                            {item.id === "cart" ? (
+                                <div className={styles.cart_icon_container}>
+                                    <BsCart />
+                                    <span className={styles.qty}>
+                                        {cartQty > 0 ? cartQty : null}
+                                    </span>
+                                </div>
+                            ) : (
+                                item.id
+                            )}
                         </Link>
                     );
                 })}

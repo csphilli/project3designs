@@ -3,7 +3,10 @@ import ContentGrid from "../components/ContentGrid";
 import * as styles from "../scss/hero.module.scss";
 import Seo from "../components/Seo";
 
-function Projects() {
+function Projects(props) {
+    const { path } = props;
+    console.log(`PATH: ${path}`);
+
     return (
         <div>
             <Seo title="Projects" />

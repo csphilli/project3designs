@@ -1,8 +1,12 @@
 @use "../abstracts/" as *;
 
-.container {
+.form_container {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(scaled(15, 25, 320, 1400), 1fr)
+    );
     position: relative;
-    min-height: scaled(15, 17, 320, 1400);
 
     .selection_container {
         display: flex;
@@ -25,8 +29,15 @@
         margin-bottom: 1rem;
     }
     .price {
-        font-size: 1.2rem;
-        margin-bottom: 1.2rem;
+        font-size: scaled(1, 1.5, 320, 1400);
+        margin: 0;
+    }
+
+    .inventory {
+        font-family: "Roboto", sans-serif;
+        font-weight: bold;
+        color: rgb(169, 169, 169);
+        margin-bottom: scaled(1, 1.3, 320, 1400);
     }
 
     .sold_out_text {
@@ -38,6 +49,7 @@
 
 .form_btn {
     font-family: "Montserrat", sans-serif;
+    font-weight: 500;
     width: 10rem;
     height: 2.5rem;
     margin-top: 0.7rem;

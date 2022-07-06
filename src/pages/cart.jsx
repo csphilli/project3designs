@@ -1,13 +1,13 @@
 import React from "react";
 import Seo from "../components/Seo";
-import QtyButton from "../components/productForm/QtyButton";
+import * as styles from "../scss/cart/shoppingCart.module.scss";
 
 function Cart() {
     return (
-        <div>
+        <section className={styles.cart_container}>
             <Seo title="Cart" />
             <h2>I am the shopping cart page</h2>
-        </div>
+        </section>
     );
 }
 
