@@ -4,7 +4,7 @@ import NumberInput from "./NumberInput";
 import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
 import { Link } from "gatsby";
-import { CartContext } from "../../lib/CartContext";
+import { ProjectContext } from "../../lib/ProjectContext";
 
 const TEXT = {
     ADD_TO_CART: "Add to Cart",
@@ -24,7 +24,7 @@ function ProductForm(props) {
         showCheckout,
         setShowCheckout,
         onAdd,
-    } = useContext(CartContext);
+    } = useContext(ProjectContext);
 
     useEffect(() => {
         setSelection(products[0]);
@@ -80,7 +80,7 @@ function ProductForm(props) {
                 )}
             </form>
         );
-    }
+    } else return null;
 }
 
 export default ProductForm;

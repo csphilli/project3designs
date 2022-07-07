@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as styles from "../../scss/qtyButton.module.scss";
 import { BiTrash } from "react-icons/bi";
-import { CartContext } from "../../lib/CartContext";
+import { ProjectContext } from "../../lib/ProjectContext";
 
 const MIN = 1;
 
@@ -9,7 +9,7 @@ function QtyButton(props) {
     const { product } = props;
 
     const { inputValue, setInputValue, onAdd, onMinus, onDelete } =
-        useContext(CartContext);
+        useContext(ProjectContext);
 
     const [showDelete, setShowDelete] = useState(
         product.quantity === 1 ? true : false

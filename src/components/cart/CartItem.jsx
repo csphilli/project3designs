@@ -1,7 +1,7 @@
 import React from "react";
 import * as styles from "../../scss/cart/cartItem.module.scss";
 
-function CartItem() {
+function CartItem(props) {
     return (
         <div className={styles.form_container}>
             <div className={styles.product_section}>

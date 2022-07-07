@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import "../scss/reset.scss";
 import "../scss/global.scss";
 import "../scss/typography.scss";
-import { CartContext } from "../lib/CartContext";
+import { ProjectContext } from "../lib/ProjectContext";
 import { saveToLocal } from "../lib";
 
 const MIN_QTY = 1;
@@ -104,7 +104,7 @@ function Layout({ path, children }) {
     }, [getCartQty]);
 
     return (
-        <CartContext.Provider value={providerValues}>
+        <ProjectContext.Provider value={providerValues}>
             <div className="logo-container">
                 <div className="page-container">
                     <Navbar path={path} />
@@ -112,7 +112,7 @@ function Layout({ path, children }) {
                     <Footer />
                 </div>
             </div>
-        </CartContext.Provider>
+        </ProjectContext.Provider>
     );
 }
 

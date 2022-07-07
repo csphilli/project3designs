@@ -4,10 +4,10 @@ import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
 import { BsCart } from "react-icons/bs";
 import NavLogo from "./NavLogo";
-import { CartContext } from "../../lib/CartContext";
+import { ProjectContext } from "../../lib/ProjectContext";
 
 function Navbar({ path }) {
-    const { cartQty } = useContext(CartContext);
+    const { cartQty } = useContext(ProjectContext);
 
     const { site } = useStaticQuery(graphql`
         query navLinkQuery {

@@ -3,7 +3,6 @@ import Seo from "../components/Seo";
 import { loadLocal } from "../lib";
 import * as styles from "../scss/cart/shoppingCart.module.scss";
 import { BsShieldCheck } from "react-icons/bs";
-import ProductForm from "../components/productForm/ProductForm";
 
 function Cart(props) {
     const cartItems = loadLocal();
