@@ -40,6 +40,7 @@ function QtyButton(props) {
             )}
             <input
                 id="qty_selector"
+                html_for="quantity"
                 type="number"
                 className={styles.qty}
                 name="quantity"

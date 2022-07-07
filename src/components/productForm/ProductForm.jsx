@@ -15,8 +15,6 @@ const TEXT = {
 function ProductForm(props) {
     const { products, style } = props;
 
-    console.log(products);
-
     const {
         selection,
         setSelection,

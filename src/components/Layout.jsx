@@ -61,9 +61,9 @@ function Layout({ path, children }) {
             e.preventDefault();
             selection.quantity = 0;
             setInputValue(0);
-            saveToLocal(selection.product_id, selection);
             setCartQty((prev) => prev - 1);
             setShowCheckout(false);
+            saveToLocal(selection.product_id, selection);
         },
         [selection]
     );

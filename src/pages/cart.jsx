@@ -3,7 +3,7 @@ import Seo from "../components/Seo";
 import { loadLocal } from "../lib";
 import * as styles from "../scss/cart/shoppingCart.module.scss";
 import { BsShieldCheck } from "react-icons/bs";
-
+import CartItem from "../components/cart/CartItem";
 function Cart(props) {
     const cartItems = loadLocal();
 
@@ -30,6 +30,7 @@ function Cart(props) {
                     <h3>Quantity</h3>
                     <h3>Total Price</h3>
                 </fieldset>
+                <CartItem />
                 <div className={styles.items_container}></div>
             </form>
         );
