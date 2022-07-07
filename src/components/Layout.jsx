@@ -5,7 +5,7 @@ import "../scss/reset.scss";
 import "../scss/global.scss";
 import "../scss/typography.scss";
 import { ProjectContext } from "../lib/ProjectContext";
-import { saveToLocal } from "../lib";
+// import { saveToLocal } from "../lib";
 
 const MIN_QTY = 1;
 
@@ -28,45 +28,45 @@ function Layout({ path, children }) {
     //     return selection.quantity > 0;
     // }, [selection]);
 
-    const onAdd = useCallback(
-        (e) => {
-            e.preventDefault();
-            if (selection.quantity + 1 <= selection.maxQty) {
-                selection.quantity += 1;
-                setInputValue((prev) => prev + 1);
-                setCartQty((prev) => prev + 1);
-                setShowCheckout(true);
-                saveToLocal(selection.product_id, selection);
-            }
-        },
-        [selection]
-    );
+    // const onAdd = useCallback(
+    //     (e) => {
+    //         e.preventDefault();
+    //         if (selection.quantity + 1 <= selection.maxQty) {
+    //             selection.quantity += 1;
+    //             setInputValue((prev) => prev + 1);
+    //             setCartQty((prev) => prev + 1);
+    //             setShowCheckout(true);
+    //             saveToLocal(selection.product_id, selection);
+    //         }
+    //     },
+    //     [selection]
+    // );
 
-    const onMinus = useCallback(
-        (e) => {
-            e.preventDefault();
-            if (selection.quantity - 1 >= MIN_QTY) {
-                selection.quantity -= 1;
-                setInputValue((prev) => prev - 1);
-                setCartQty((prev) => prev - 1);
-                saveToLocal(selection.product_id, selection);
-            }
-        },
-        [selection]
-    );
+    // const onMinus = useCallback(
+    //     (e) => {
+    //         e.preventDefault();
+    //         if (selection.quantity - 1 >= MIN_QTY) {
+    //             selection.quantity -= 1;
+    //             setInputValue((prev) => prev - 1);
+    //             setCartQty((prev) => prev - 1);
+    //             saveToLocal(selection.product_id, selection);
+    //         }
+    //     },
+    //     [selection]
+    // );
 
     // Add a confirm deletion modal
-    const onDelete = useCallback(
-        (e) => {
-            e.preventDefault();
-            selection.quantity = 0;
-            setInputValue(0);
-            setCartQty((prev) => prev - 1);
-            setShowCheckout(false);
-            saveToLocal(selection.product_id, selection);
-        },
-        [selection]
-    );
+    // const onDelete = useCallback(
+    //     (e) => {
+    //         e.preventDefault();
+    //         selection.quantity = 0;
+    //         setInputValue(0);
+    //         setCartQty((prev) => prev - 1);
+    //         setShowCheckout(false);
+    //         saveToLocal(selection.product_id, selection);
+    //     },
+    //     [selection]
+    // );
 
     const providerValues = useMemo(
         () => ({
@@ -76,9 +76,9 @@ function Layout({ path, children }) {
             setInputValue,
             showCheckout,
             setShowCheckout,
-            onAdd,
-            onMinus,
-            onDelete,
+            // onAdd,
+            // onMinus,
+            // onDelete,
             // checkShowButton,
             cartQty,
             setCartQty,
@@ -90,9 +90,9 @@ function Layout({ path, children }) {
             setInputValue,
             showCheckout,
             setShowCheckout,
-            onAdd,
-            onMinus,
-            onDelete,
+            // onAdd,
+            // onMinus,
+            // onDelete,
             // checkShowButton,
             cartQty,
             setCartQty,

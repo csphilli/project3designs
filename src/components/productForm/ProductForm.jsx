@@ -1,10 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import SelectField from "./SelectField";
-import NumberInput from "./NumberInput";
 import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
 import { Link } from "gatsby";
 import { ProjectContext } from "../../lib/ProjectContext";
+import { saveToLocal } from "../../lib";
+import QtyButton from "./QtyButton";
 
 const TEXT = {
     ADD_TO_CART: "Add to Cart",
@@ -13,35 +14,42 @@ const TEXT = {
 };
 
 function ProductForm(props) {
-    const { products, style } = props;
+    const { products } = props;
 
     const {
         selection,
         setSelection,
-        setInputValue,
         showCheckout,
         setShowCheckout,
-        onAdd,
+        setCartQty,
     } = useContext(ProjectContext);
 
     useEffect(() => {
         setSelection(products[0]);
-        setInputValue(products[0].quantity);
         setShowCheckout(products[0].quantity > 0 ? true : false);
-    }, [setInputValue, setSelection, setShowCheckout]);
+    }, [setSelection, setShowCheckout]);
 
     const handleChange = (e) => {
         const item = products.find(
             (item) => item.product_id === e.target.value
         );
         setShowCheckout(item.quantity > 0 ? true : false);
-        setInputValue(item.quantity);
         setSelection(item);
+    };
+
+    const addToCart = (e) => {
+        e.preventDefault();
+        if (selection.quantity + 1 <= selection.maxQty) {
+            selection.quantity += 1;
+            setCartQty((prev) => prev + 1);
+            setShowCheckout(true);
+            saveToLocal(selection.product_id, selection);
+        }
     };
 
     if (selection) {
         return (
-            <form className={styles.form_container} onSubmit={onAdd}>
+            <form className={styles.form_container} onSubmit={addToCart}>
                 <p className={styles.price}>
                     {formattedPrice(selection.price)}
                 </p>
@@ -56,10 +64,10 @@ function ProductForm(props) {
                 />
                 {showCheckout ? (
                     <>
-                        <NumberInput
-                            html_for="quantity"
+                        <QtyButton
                             product={selection}
-                            style={style}
+                            src="project"
+                            html_for="quantity"
                         />
                         <Link to="/cart">
                             <button className={styles.form_btn}>
