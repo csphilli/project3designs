@@ -73,6 +73,12 @@ export const formattedPrice = (value, ccy = "eur") => {
     }).format(value);
 };
 
+export const loadLocal = () => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (!local) return null;
+    return local.map((item) => item.value);
+};
+
 // When loading a new page that contains product cart info, refreshes quantities from localStorage
 export const refreshQtyFromLocal = (prodList) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));

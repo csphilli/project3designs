@@ -55,6 +55,7 @@ function Layout({ path, children }) {
         [selection]
     );
 
+    // Add a confirm deletion modal
     const onDelete = useCallback(
         (e) => {
             e.preventDefault();

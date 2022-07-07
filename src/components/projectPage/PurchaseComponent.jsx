@@ -9,7 +9,7 @@ function PurchaseComponent(props) {
         <div className={styles.component_container}>
             <div className={styles.physical_product_container}>
                 <h2>Available for Purchase</h2>
-                <ProductForm products={products} />
+                <ProductForm style="project" products={products} />
             </div>
             <div className={styles.product_info}>
                 <h2>Product Details</h2>

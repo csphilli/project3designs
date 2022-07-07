@@ -21,7 +21,7 @@ function QtyButton(props) {
 
     useEffect(() => {
         checkDelete();
-    }, []);
+    }, [checkDelete]);
 
     const onChangeHandler = (event) => {
         setInputValue(event.target.value);

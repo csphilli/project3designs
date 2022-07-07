@@ -13,7 +13,10 @@ const TEXT = {
 };
 
 function ProductForm(props) {
-    const { products } = props;
+    const { products, style } = props;
+
+    console.log(products);
+
     const {
         selection,
         setSelection,
@@ -55,7 +58,11 @@ function ProductForm(props) {
                 />
                 {showCheckout ? (
                     <>
-                        <NumberInput html_for="quantity" product={selection} />
+                        <NumberInput
+                            html_for="quantity"
+                            product={selection}
+                            style={style}
+                        />
                         <Link to="/cart">
                             <button className={styles.form_btn}>
                                 {TEXT.CHECKOUT}
@@ -73,8 +80,6 @@ function ProductForm(props) {
                 )}
             </form>
         );
-    } else {
-        return null;
     }
 }
 

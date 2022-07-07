@@ -7,7 +7,7 @@ import { formattedPrice } from "../lib";
 */
 
 function ProductCard(props) {
-    const { product, orderItems, setOrderItems } = props;
+    const { product } = props;
     const [soldOut, setSoldOut] = useState(false);
     useEffect(() => {
         if (
