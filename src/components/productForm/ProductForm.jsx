@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import SelectField from "./SelectField";
 import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
@@ -10,19 +10,15 @@ import QtyButton from "./QtyButton";
 const TEXT = {
     ADD_TO_CART: "Add to Cart",
     SOLD_OUT: "Sold Out",
-    CHECKOUT: "Checkout",
+    CHECKOUT: "View Cart",
 };
 
 function ProductForm(props) {
     const { products } = props;
+    const [selection, setSelection] = useState(null);
+    const [showCheckout, setShowCheckout] = useState(null);
 
-    const {
-        selection,
-        setSelection,
-        showCheckout,
-        setShowCheckout,
-        setCartQty,
-    } = useContext(ProjectContext);
+    const { setCartQty } = useContext(ProjectContext);
 
     useEffect(() => {
         setSelection(products[0]);
@@ -50,25 +46,32 @@ function ProductForm(props) {
     if (selection) {
         return (
             <form className={styles.form_container} onSubmit={addToCart}>
-                <p className={styles.price}>
-                    {formattedPrice(selection.price)}
-                </p>
-                <p className={styles.inventory}>
-                    <em>Inventory: {selection.maxQty}</em>
-                </p>
-                <SelectField
-                    html_for="product"
-                    name="product_id"
-                    options={products}
-                    handler={handleChange}
-                />
+                <div className={styles.heading_container}>
+                    <p className={styles.price}>
+                        {formattedPrice(selection.price)}
+                    </p>
+                    <p className={styles.inventory}>
+                        <em>Inventory: {selection.maxQty}</em>
+                    </p>
+                </div>
+                <div className={styles.input_container}>
+                    <SelectField
+                        html_for="product"
+                        name="product_id"
+                        options={products}
+                        handler={handleChange}
+                    />
+                </div>
                 {showCheckout ? (
                     <>
-                        <QtyButton
-                            product={selection}
-                            src="project"
-                            html_for="quantity"
-                        />
+                        <div className={styles.input_container}>
+                            <QtyButton
+                                product={selection}
+                                setShowCheckout={setShowCheckout}
+                                src="project"
+                                html_for="quantity"
+                            />
+                        </div>
                         <Link to="/cart">
                             <button className={styles.form_btn}>
                                 {TEXT.CHECKOUT}

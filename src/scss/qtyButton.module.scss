@@ -1,8 +1,6 @@
 @use "../scss/abstracts/" as *;
 
 .qty_selection {
-    margin-bottom: 1rem;
-
     .container {
         display: flex;
         align-items: center;
@@ -36,7 +34,7 @@
             font-size: 1.2rem;
         }
     }
-    //te
+
     .mod_btn:hover,
     .mod_btn:focus,
     .mod_btn_container:hover,
@@ -71,31 +69,3 @@
         background-color: transparent;
     }
 }
-/*
-
- <div
-        className={styles.mod_btn_container}
-        onClick={onDelete(product.product_id)}
-    >
-        <BiTrash className={styles.mod_btn_icon} />
-    </div>;
-
-    export const refreshQtyFromLocal = (prodList) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (!local) return;
-    prodList.forEach((item1) => {
-        const exists = local.find((item2) => item2.key === item1.product_id);
-        if (!exists) return;
-        item1.quantity = exists.value.quantity;
-    });
-};
-
-export const getQtyFromLocal = (product_id) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (!local) return 0;
-    const exists = local.find((item) => item.key === product_id);
-    if (!exists) return 0;
-    return exists.value.quantity;
-};
-
-    */

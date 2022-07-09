@@ -51,7 +51,6 @@ function Products() {
                             <Link
                                 to={`/projects/${product.product_list[0].slug}`}
                                 key={product.product_list[0].id}
-                                className={styles.product_card_link}
                             >
                                 <ProductCard
                                     formattedPrice={formattedPrice}

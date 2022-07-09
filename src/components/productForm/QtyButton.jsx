@@ -7,10 +7,11 @@ import { saveToLocal } from "../../lib";
 const MIN = 1;
 
 function QtyButton(props) {
-    const { product, src } = props;
-
-    const [value, setValue] = useState();
-    const [showIcon, setShowIcon] = useState();
+    const { product, src, setShowCheckout } = props;
+    const [value, setValue] = useState(product.quantity);
+    const [showIcon, setShowIcon] = useState(
+        product.quantity === 1 ? true : false
+    );
 
     const checkIcon = (qty) => {
         return qty === 1;
@@ -21,7 +22,7 @@ function QtyButton(props) {
         setShowIcon(checkIcon(product.quantity));
     }, [product]);
 
-    const { setCartQty, setShowCheckout } = useContext(ProjectContext);
+    const { setCartQty } = useContext(ProjectContext);
 
     const onAdd = (e) => {
         e.preventDefault();
@@ -30,7 +31,7 @@ function QtyButton(props) {
             setValue((prev) => prev + 1);
             setCartQty((prev) => prev + 1);
             setShowIcon(checkIcon(product.quantity));
-            setShowCheckout(true);
+            if (src === "project") setShowCheckout(true);
             saveToLocal(product.product_id, product);
         }
     };
@@ -53,7 +54,7 @@ function QtyButton(props) {
             product.quantity = 0;
             setCartQty((prev) => prev - 1);
             setShowIcon(checkIcon(product.quantity));
-            setShowCheckout(false);
+            if (src === "project") setShowCheckout(false);
             saveToLocal(product.product_id, product);
         }
     };
@@ -78,12 +79,11 @@ function QtyButton(props) {
                     id="quantity"
                     html_for="quantity"
                     type="number"
-                    className={styles.qty}
                     name="quantity"
                     min={MIN}
                     max={product.maxQty}
                     value={value}
-                    onChange={() => console.log("doing fuck all")}
+                    readOnly
                 ></input>
                 <button onClick={onAdd} className={styles.mod_btn}>
                     +

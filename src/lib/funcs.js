@@ -90,6 +90,14 @@ export const refreshQtyFromLocal = (prodList) => {
     });
 };
 
+// Gets the total count items in cart for navbar cart icon
+export const getCartQty = () => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (local) {
+        return local.reduce((total, item) => total + item.value.quantity, 0);
+    } else return 0;
+};
+
 // Saves item to localStorage
 export const saveToLocal = async (product_id, product) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));

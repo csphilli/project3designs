@@ -8,10 +8,17 @@
     );
     position: relative;
 
+    .heading_container {
+        margin-bottom: scaled(1, 1.3, 320, 1400);
+    }
+
+    .input_container {
+        margin-bottom: scaled(1, 1.2, 320, 1400);
+    }
+
     .selection_container {
         display: flex;
         flex-direction: column;
-        margin-bottom: 1rem;
 
         .menu_container {
             font-family: "Roboto", sans-serif;
@@ -34,7 +41,6 @@
         font-family: "Roboto", sans-serif;
         font-weight: bold;
         color: rgb(169, 169, 169);
-        margin-bottom: scaled(1, 1.3, 320, 1400);
     }
 
     .sold_out_text {
@@ -62,5 +68,3 @@
     background-color: $importantButtonColorHover;
     cursor: pointer;
 }
-
-//test
