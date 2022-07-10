@@ -12,6 +12,10 @@ function Navbar({ path }) {
     const { cartQty } = useContext(ProjectContext);
     const [toggleNav, setToggleNav] = useState(false);
 
+    const handleMenuClick = () => {
+        setToggleNav((prevState) => !prevState);
+    };
+
     const { site } = useStaticQuery(graphql`
         query navLinkQuery {
             site {
@@ -28,16 +32,18 @@ function Navbar({ path }) {
 
     const links = [...site.siteMetadata.navLinks];
     return (
-        <nav className={styles.navBar}>
+        <nav role="navigation" className={styles.navBar}>
             <Link className={styles.logoText} to="/">
                 <h1>
                     <NavLogo />
                 </h1>
             </Link>
-            <HiOutlineMenu
-                className={styles.menu_icon}
-                onClick={() => setToggleNav((prevState) => !prevState)}
-            />
+            {!toggleNav && (
+                <HiOutlineMenu
+                    className={styles.menu_icon}
+                    onClick={handleMenuClick}
+                />
+            )}
             {toggleNav && (
                 <MobileNavMenu links={links} setToggleNav={setToggleNav} />
             )}
