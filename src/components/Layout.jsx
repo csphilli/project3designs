@@ -28,7 +28,7 @@ function Layout({ path, children }) {
     return (
         <ProjectContext.Provider value={providerValues}>
             <div className="page-container">
-                {/* <Navbar path={path} /> */}
+                <Navbar path={path} />
                 <div>{(path, children)}</div>
                 <Footer />
             </div>

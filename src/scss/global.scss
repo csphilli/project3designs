@@ -8,12 +8,7 @@ html {
 
 body {
     position: relative;
-    background: radial-gradient(
-        101.71% 201.14% at 93.92% 93.13%,
-        #e0e0e0 0%,
-        #ffffff 100%
-    );
-    // font-family: "Roboto", sans-serif;
+    background: $bodyGradient;
     font-weight: 400;
     line-height: 1.5;
     color: #000000;

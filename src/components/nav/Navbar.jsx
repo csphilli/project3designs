@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "gatsby";
 import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
 import { BsCart } from "react-icons/bs";
+import { HiOutlineMenu } from "react-icons/hi";
 import NavLogo from "./NavLogo";
 import { ProjectContext } from "../../lib/ProjectContext";
+import MobileNavMenu from "./MobileNavMenu";
 
 function Navbar({ path }) {
     const { cartQty } = useContext(ProjectContext);
+    const [toggleNav, setToggleNav] = useState(false);
 
     const { site } = useStaticQuery(graphql`
         query navLinkQuery {
@@ -31,6 +34,13 @@ function Navbar({ path }) {
                     <NavLogo />
                 </h1>
             </Link>
+            <HiOutlineMenu
+                className={styles.menu_icon}
+                onClick={() => setToggleNav((prevState) => !prevState)}
+            />
+            {toggleNav && (
+                <MobileNavMenu links={links} setToggleNav={setToggleNav} />
+            )}
             <div className={styles.links}>
                 {links.map((item, index) => {
                     return (
