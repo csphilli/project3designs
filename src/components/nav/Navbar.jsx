@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "gatsby";
 import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
-import { BsCart, BsPlusLg } from "react-icons/bs";
+import { BsCart } from "react-icons/bs";
 import { CgClose } from "react-icons/cg";
 import { HiOutlineMenu } from "react-icons/hi";
 import NavLogo from "./NavLogo";
@@ -10,10 +10,10 @@ import { ProjectContext } from "../../lib/ProjectContext";
 
 function Navbar({ path }) {
     const { cartQty } = useContext(ProjectContext);
-    const [toggleNav, setToggleNav] = useState(false);
+    const [showNav, setShowNav] = useState(false);
 
     const handleMenuClick = () => {
-        setToggleNav((prevState) => !prevState);
+        setShowNav((prevState) => !prevState);
     };
 
     const { site } = useStaticQuery(graphql`
@@ -38,25 +38,31 @@ function Navbar({ path }) {
                     <NavLogo />
                 </h1>
             </Link>
-            {toggleNav ? (
-                <HiOutlineMenu
-                    className={styles.menu_icon}
-                    onClick={handleMenuClick}
-                />
-            ) : (
-                <CgClose className={styles.x_icon} onClick={handleMenuClick} />
-            )}
-            <div className={styles.links}>
+
+            <div onClick={handleMenuClick}>
+                {showNav ? (
+                    <CgClose className={styles.menu_icon} />
+                ) : (
+                    <HiOutlineMenu className={styles.menu_icon} />
+                )}
+            </div>
+
+            <div
+                className={
+                    showNav
+                        ? styles.links
+                        : ` ${styles.links_inactive} ${styles.links}`
+                }
+            >
                 {links.map((item, index) => {
                     return (
                         <Link
                             key={index}
                             className={
-                                path === `${item.path}/`
-                                    ? styles.active
-                                    : "none"
+                                path === `${item.path}/` ? styles.active : null
                             }
                             to={item.path}
+                            onClick={handleMenuClick}
                         >
                             {item.id === "cart" ? (
                                 <div className={styles.cart_icon_container}>

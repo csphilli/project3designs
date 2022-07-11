@@ -27,10 +27,12 @@ function Layout({ path, children }) {
 
     return (
         <ProjectContext.Provider value={providerValues}>
-            <div className="page-container">
+            <div className="outer_page_container">
                 <Navbar path={path} />
-                <div>{(path, children)}</div>
-                <Footer />
+                <div className="page_container">
+                    <div>{(path, children)}</div>
+                    <Footer />
+                </div>
             </div>
         </ProjectContext.Provider>
     );

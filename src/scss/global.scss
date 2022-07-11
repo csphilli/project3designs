@@ -14,13 +14,20 @@ body {
     color: #000000;
 }
 
-.page-container {
+.outer_page_container {
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    // padding: 0 0.5rem;
-    padding: 0 scaled(0.5, 1.7, 320, 1400);
-    min-width: 320px;
+    overflow: hidden;
+
+    .page_container {
+        position: relative;
+        max-width: 1300px;
+        margin: 0 auto;
+        // padding: 0 0.5rem;
+        padding: 0 scaled(0.5, 1.7, 320, 1400);
+        min-width: 320px;
+    }
 }
 
 footer p {

@@ -5,25 +5,15 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: scaled(2, 5, 320, 1400);
-    position: relative;
+    margin: 0 auto;
 
     .menu_icon {
         font-size: 2rem;
-        position: absolute;
-        z-index: 3;
-        top: 3rem;
-        right: 0;
+        color: $mainDarkColor;
     }
 
-    .x_icon {
-        // stroke-width: 0.1;
-        font-size: 2rem;
-        position: absolute;
-        z-index: 3;
-        top: 3rem;
-        right: 0;
-        // transform: rotate(45deg);
-        color: $mainLightColor;
+    .menu_icon:hover {
+        cursor: pointer;
     }
 
     .links {
@@ -31,31 +21,29 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        // justify-content: space-between;
         gap: scaled(1, 2, 320, 1400);
         position: absolute;
-        top: 0;
-        right: 0;
-        width: 60vw;
-        height: 100vh;
+        top: 7.5rem;
+        left: 0;
+        width: 100vw;
         background-color: #363636;
         z-index: 2;
-        transform: translateX(100%);
+        padding: 2rem 0;
+        transition: 300ms ease-in-out;
+        opacity: 1;
     }
 
-    // .links {
-    //     display: none;
-    //     justify-content: space-between;
-    //     gap: scaled(1, 2, 320, 1400);
-    // }
+    .links_inactive {
+        left: -100%;
+        opacity: 0;
+    }
 
     .links a {
         position: relative;
         font-family: "Quattrocento Sans", sans-serif;
-        // color: $mainDarkColor;
         color: $mainLightColor;
-        font-size: scaled(1.5, 1.2, 320, 530);
-        padding: 0 scaled(0.25, 1, 320, 1400);
+        font-size: scaled(1.2, 1.2, 320, 530);
+        padding: 0.25rem 1rem;
 
         .cart_icon_container {
             position: relative;
@@ -65,7 +53,6 @@
             place-items: center;
 
             .qty {
-                // --space: -0.5rem;
                 position: absolute;
                 top: -0.7rem;
                 right: -0.6rem;
@@ -76,44 +63,80 @@
         }
     }
 
-    // .links a::before {
-    //     @include sweetBorder;
-    // }
+    .links a::before {
+        @include sweetBorder;
+    }
 
-    // .active::after {
-    //     content: "";
-    //     position: absolute;
-    //     display: block;
-    //     top: 0;
-    //     bottom: 0;
-    //     left: -0.125rem;
-    //     right: -0.125rem;
-    //     border-left: 1px solid #2d2d2d;
-    //     border-bottom: 1px solid #2d2d2d;
-    //     border-right: 1px solid #2d2d2d;
-    //     border-bottom-left-radius: $borderRadius;
-    //     border-bottom-right-radius: $borderRadius;
-    //     transition: 1s;
-    // }
+    .active::after {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        bottom: 0;
+        left: -0.125rem;
+        right: -0.125rem;
+        border-left: 1px solid $mainLightColor;
+        border-bottom: 1px solid $mainLightColor;
+        border-right: 1px solid $mainLightColor;
+        border-bottom-left-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
+        transition: 1s;
+    }
 
-    // .links a:hover::before {
-    //     @include sweetBorderOnHover;
-    // }
+    .links a:hover::before {
+        @include sweetBorderOnHover;
+    }
 }
 
 @media screen and (min-width: 550px) {
     .navBar {
         margin-top: scaled(1, 1.5, 320, 1400);
+        margin-bottom: scaled(2, 5, 320, 1400);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 scaled(1, 2, 320, 1400);
         .links {
+            top: 0;
             display: flex;
+            flex-direction: row;
+            background: none;
+            position: relative;
+            width: auto;
+            z-index: 2;
+        }
+
+        .links_inactive {
+            left: 0;
+            opacity: 1;
+        }
+
+        .links a {
+            color: $mainDarkColor;
         }
 
         .menu_icon {
             display: none;
         }
-    }
 
-    .links a {
-        font-size: scaled(1.1, 1.2, 530, 1400);
+        .active::after {
+            content: "";
+            position: absolute;
+            display: block;
+            top: 0;
+            bottom: 0;
+            left: -0.125rem;
+            right: -0.125rem;
+            border-left: 1px solid #2d2d2d;
+            border-bottom: 1px solid #2d2d2d;
+            border-right: 1px solid #2d2d2d;
+            border-bottom-left-radius: $borderRadius;
+            border-bottom-right-radius: $borderRadius;
+            transition: 1s;
+        }
+        .links a {
+            font-size: scaled(1.1, 1.2, 530, 1400);
+        }
     }
 }
