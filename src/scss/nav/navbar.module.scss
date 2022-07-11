@@ -9,19 +9,52 @@
 
     .menu_icon {
         font-size: 2rem;
+        position: absolute;
+        z-index: 3;
+        top: 3rem;
+        right: 0;
+    }
+
+    .x_icon {
+        // stroke-width: 0.1;
+        font-size: 2rem;
+        position: absolute;
+        z-index: 3;
+        top: 3rem;
+        right: 0;
+        // transform: rotate(45deg);
+        color: $mainLightColor;
     }
 
     .links {
-        display: none;
-        justify-content: space-between;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        // justify-content: space-between;
         gap: scaled(1, 2, 320, 1400);
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 60vw;
+        height: 100vh;
+        background-color: #363636;
+        z-index: 2;
+        transform: translateX(100%);
     }
+
+    // .links {
+    //     display: none;
+    //     justify-content: space-between;
+    //     gap: scaled(1, 2, 320, 1400);
+    // }
 
     .links a {
         position: relative;
         font-family: "Quattrocento Sans", sans-serif;
-        color: $mainDarkColor;
-        font-size: scaled(1.1, 1.2, 320, 530);
+        // color: $mainDarkColor;
+        color: $mainLightColor;
+        font-size: scaled(1.5, 1.2, 320, 530);
         padding: 0 scaled(0.25, 1, 320, 1400);
 
         .cart_icon_container {
@@ -32,10 +65,10 @@
             place-items: center;
 
             .qty {
-                --space: -0.5rem;
+                // --space: -0.5rem;
                 position: absolute;
-                top: var(--space);
-                right: var(--space);
+                top: -0.7rem;
+                right: -0.6rem;
                 font-family: "Roboto", sans-serif;
                 font-size: 0.9rem;
                 font-weight: 400;
@@ -43,29 +76,29 @@
         }
     }
 
-    .links a::before {
-        @include sweetBorder;
-    }
+    // .links a::before {
+    //     @include sweetBorder;
+    // }
 
-    .active::after {
-        content: "";
-        position: absolute;
-        display: block;
-        top: 0;
-        bottom: 0;
-        left: -0.125rem;
-        right: -0.125rem;
-        border-left: 1px solid #2d2d2d;
-        border-bottom: 1px solid #2d2d2d;
-        border-right: 1px solid #2d2d2d;
-        border-bottom-left-radius: $borderRadius;
-        border-bottom-right-radius: $borderRadius;
-        transition: 1s;
-    }
+    // .active::after {
+    //     content: "";
+    //     position: absolute;
+    //     display: block;
+    //     top: 0;
+    //     bottom: 0;
+    //     left: -0.125rem;
+    //     right: -0.125rem;
+    //     border-left: 1px solid #2d2d2d;
+    //     border-bottom: 1px solid #2d2d2d;
+    //     border-right: 1px solid #2d2d2d;
+    //     border-bottom-left-radius: $borderRadius;
+    //     border-bottom-right-radius: $borderRadius;
+    //     transition: 1s;
+    // }
 
-    .links a:hover::before {
-        @include sweetBorderOnHover;
-    }
+    // .links a:hover::before {
+    //     @include sweetBorderOnHover;
+    // }
 }
 
 @media screen and (min-width: 550px) {
