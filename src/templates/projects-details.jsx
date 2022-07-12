@@ -8,6 +8,7 @@ import Seo from "../components/Seo";
 import PurchaseComponent from "../components/projectPage/PurchaseComponent";
 import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
 import { refreshQtyFromLocal } from "../lib";
+import Carousel from "../components/Carousel";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
@@ -56,6 +57,9 @@ export default function ProjectDetails({ data }) {
                     <PurchaseComponent products={products} />
                 )}
             </section>
+            <div className={styles.image_carousel}>
+                <Carousel slug={base.slug} />
+            </div>
             <article className={styles.article_container}>
                 <div className={styles.article_content}>
                     <div dangerouslySetInnerHTML={{ __html: html }} />
