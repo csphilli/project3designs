@@ -15,14 +15,6 @@ exports.handler = async ({ body }) => {
      *   physical products should create and send an email to a fulfillment address so that I know what I have to pack/ship. This is a proprietory address only for fulfillment!
      */
 
-    // const session = await stripe.checkout.sessions.retrieve(
-    //     'cs_test_a160i7EVUXFSrv61a4hICjdJfmnUzKUt0VKAFYmNyFzJtr2vRSOebDOETO'
-    //   );
-
-    // const session = await stripe.checkout.sessions.expire(
-    //     'cs_test_a160i7EVUXFSrv61a4hICjdJfmnUzKUt0VKAFYmNyFzJtr2vRSOebDOETO'
-    //   );
-
     try {
         const items = JSON.parse(body);
 
