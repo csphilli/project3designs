@@ -8,7 +8,7 @@ require("dotenv").config({
 });
 
 module.exports = {
-    /* Your site config here */
+    /* site config */
     siteMetadata: {
         siteName: "Project3 Designs",
         title: "Project3 Designs - Custom Luxury Designs",
@@ -41,13 +41,6 @@ module.exports = {
         `gatsby-remark-images`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-sass`,
-        // {
-        //     resolve: `gatsby-source-filesystem`,
-        //     options: {
-        //         name: `headPages`,
-        //         path: `${__dirname}/src/headPages/`,
-        //     },
-        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -77,13 +70,5 @@ module.exports = {
                 },
             },
         },
-        // {
-        //     resolve: `gatsby-source-stripe`,
-        //     options: {
-        //         objects: ["Product", "Price"],
-        //         secretKey: process.env.GATSBY_STRIPE_SK,
-        //         downloadFiles: true,
-        //     },
-        // },
     ],
 };
