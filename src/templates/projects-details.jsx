@@ -45,7 +45,7 @@ export default function ProjectDetails({ data }) {
 
     return (
         <section className={styles.section_container}>
-            <Seo title={base.title} />
+            <Seo title={base.title} description={base.description} />
             <section className={styles.purchase_container}>
                 <PageBanner data={data} bullets={bullets} />
                 {loading ? (
