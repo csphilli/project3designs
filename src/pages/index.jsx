@@ -9,29 +9,27 @@ export default function Home() {
             <section className={styles.heroContainer}>
                 <h2>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Cras et lobortis lacus. Donec at tempus orci. Vivamus
-                    tristique, justo sed gravida blandit, ligula lectus
-                    sollicitudin nisi, ut congue neque felis sed augue. Interdum
-                    et malesuada fames ac ante ipsum primis in faucibus.
-                    Maecenas a eros commodo, tincidunt nunc ultrices, feugiat
-                    nisl. Vestibulum nulla ipsum, dictum sit amet iaculis nec,
-                    vehicula sit amet libero. Integer porta tristique enim.
-                    Proin porttitor tristique consectetur. Sed pulvinar, sapien
-                    vitae porttitor tincidunt, ipsum justo tempor tortor, a
-                    bibendum nunc nibh at libero. Donec efficitur lacus
-                    condimentum erat posuere, eu scelerisque urna scelerisque.
-                    Sed accumsan sapien eget lacus euismod pulvinar. Maecenas
-                    ornare nibh eu suscipit aliquet. Nulla et leo dignissim,
-                    pharetra lacus eget, tempor tortor.
+                    Donec accumsan lacus sem, et rutrum neque eleifend id.
+                    Aliquam aliquam vel purus in vulputate. Praesent lacinia
+                    elit et blandit tempus. Aliquam sed ultrices augue. Proin
+                    posuere posuere imperdiet. Cras id odio libero. Suspendisse
+                    porttitor odio sem, sed blandit mi consequat in. Etiam sit
+                    amet convallis leo, non ullamcorper risus. Aliquam aliquam
+                    lacus non ligula feugiat, in pharetra turpis malesuada.
+                    Fusce ut neque augue. Ut metus turpis, finibus ut neque ut,
+                    feugiat hendrerit dolor.
                 </h2>
                 <p>
-                    Orci varius natoque penatibus et magnis dis parturient
-                    montes, nascetur ridiculus mus. Nulla non mauris id nibh
-                    mollis posuere. Fusce in dictum metus. Vestibulum quis
-                    volutpat arcu. Nulla non dui vitae dolor placerat vulputate
-                    id in ex. Sed id augue volutpat, mattis enim eget, laoreet
-                    est. Mauris interdum placerat tellus non eleifend. In
-                    tristique dictum lorem eget tempor.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec accumsan lacus sem, et rutrum neque eleifend id.
+                    Aliquam aliquam vel purus in vulputate. Praesent lacinia
+                    elit et blandit tempus. Aliquam sed ultrices augue. Proin
+                    posuere posuere imperdiet. Cras id odio libero. Suspendisse
+                    porttitor odio sem, sed blandit mi consequat in. Etiam sit
+                    amet convallis leo, non ullamcorper risus. Aliquam aliquam
+                    lacus non ligula feugiat, in pharetra turpis malesuada.
+                    Fusce ut neque augue. Ut metus turpis, finibus ut neque ut,
+                    feugiat hendrerit dolor.
                 </p>
             </section>
         </div>
