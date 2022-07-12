@@ -1,0 +1,76 @@
+@use "../scss/abstracts/" as *;
+
+.sign_up_container {
+    padding: scaled(1, 4, 320, 1400) scaled(1.5, 5, 320, 1400);
+
+    .sign_up_subject_text {
+        color: $mainLightColor;
+        margin-bottom: 1.2rem;
+    }
+
+    form {
+        label {
+            display: inline-block;
+            color: $mainLightColor;
+        }
+        .input_container {
+            position: relative;
+            height: 2.2rem;
+            margin-bottom: 1.2rem;
+
+            input[type="password"],
+            input[type="email"] {
+                padding-left: 2.5rem;
+                color: $mainLightColor;
+                width: 100%;
+                height: 100%;
+                border: 1px solid $formDarkTint;
+                border-radius: $formElementRadius;
+                outline: none;
+                background-color: $mainDarkColor;
+                overflow: hidden;
+            }
+
+            .input_icon {
+                position: absolute;
+                top: 50%;
+                left: 0.5rem;
+                transform: translateY(-50%);
+                font-size: scaled(1, 1.5, 320, 1400);
+                stroke-width: 1;
+                color: $formDarkTint;
+            }
+        }
+
+        .submit_button {
+            background-color: $importantButtonColor;
+            border: none;
+            outline: none;
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: scaled(0.5, 0.7, 320, 1400) 0;
+            color: $mainLightColor;
+            border-radius: $formElementRadius;
+            margin-bottom: 2rem;
+
+            .sign_in_icon {
+                stroke-width: 1;
+                font-size: scaled(1, 1.2, 320, 1400);
+                margin-right: 0.5rem;
+            }
+            & p {
+                font-family: "Montserrat", sans-serif;
+                font-size: scaled(1, 1.2, 320, 1400);
+            }
+        }
+
+        .submit_button:hover,
+        .submit_button:focus {
+            background-color: $importantButtonColorHover;
+            cursor: pointer;
+        }
+    }
+}

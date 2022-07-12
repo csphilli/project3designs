@@ -9,6 +9,30 @@ require("dotenv").config({
 
 module.exports = {
     /* Your site config here */
+    siteMetadata: {
+        siteName: "Project3 Designs",
+        title: "Project3 Designs - Custom Luxury Designs",
+        description:
+            "Woodworker based in Finland, I design and build custom luxury pieces either through commission or own ambition as well as providing tutorials with writing and video",
+        author: "Christopher Phillips",
+        keywords: [
+            "Project3 Designs",
+            "woodworking",
+            "luxury woodworking",
+            "building",
+            "custom woodworking",
+            "woodworking tutorials",
+            "custom luxury designs",
+            "made in Finland",
+        ],
+        siteUrl: "https://www.project3designs.com",
+        navLinks: [
+            { id: "projects", path: "/projects" },
+            { id: "videos", path: "/videos" },
+            { id: "products", path: "/products" },
+            { id: "cart", path: "/cart" },
+        ],
+    },
     plugins: [
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-image`,
@@ -17,13 +41,13 @@ module.exports = {
         `gatsby-remark-images`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-sass`,
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `headPages`,
-                path: `${__dirname}/src/headPages/`,
-            },
-        },
+        // {
+        //     resolve: `gatsby-source-filesystem`,
+        //     options: {
+        //         name: `headPages`,
+        //         path: `${__dirname}/src/headPages/`,
+        //     },
+        // },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -53,13 +77,13 @@ module.exports = {
                 },
             },
         },
-        {
-            resolve: `gatsby-source-stripe`,
-            options: {
-                objects: ["Product", "Price"],
-                secretKey: process.env.GATSBY_STRIPE_SK,
-                downloadFiles: true,
-            },
-        },
+        // {
+        //     resolve: `gatsby-source-stripe`,
+        //     options: {
+        //         objects: ["Product", "Price"],
+        //         secretKey: process.env.GATSBY_STRIPE_SK,
+        //         downloadFiles: true,
+        //     },
+        // },
     ],
 };

@@ -1,9 +1,6 @@
 import React from "react";
-import PageLayout from "../components/PageLayout";
 import * as styles from "../scss/video-details.module.scss";
 import { graphql } from "gatsby";
-import IndexHeader from "../components/IndexHeader";
-import Logo from "../components/Logo";
 import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
 import Video from "../components/Video";
 
@@ -18,8 +15,7 @@ export default function ProjectDetails({ data }) {
     const time = readTime(data.markdownRemark.html);
     const { html } = data.markdownRemark;
     return (
-        <PageLayout pageData={base}>
-            {/* <IndexHeader pageData={pageData} /> */}
+        <article>
             <div className={styles.heading_container}>
                 <div className={styles.title_banner_container}>
                     <h2 className={styles.title}>{base.title}</h2>
@@ -50,8 +46,7 @@ export default function ProjectDetails({ data }) {
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
             </div>
-            <Logo pageId={base.page_root} />
-        </PageLayout>
+        </article>
     );
 }
 
@@ -61,12 +56,16 @@ export const query = graphql`
             html
             frontmatter {
                 title
-                date(formatString: "MMMM DD, YYYY")
-                meta_title
-                meta_description
-                slug
-                author_name
+                description
                 page_root
+                slug
+                date(formatString: "MMMM DD, YYYY")
+                author_name
+                post_thumb {
+                    childImageSharp {
+                        gatsbyImageData
+                    }
+                }
                 videoID
                 videoTitle
             }

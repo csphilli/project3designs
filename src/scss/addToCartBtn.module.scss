@@ -1,0 +1,118 @@
+@use "../scss/abstracts/" as *;
+
+.card_btn_container {
+    position: relative; // needed for tootlip
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: scaled(0.5, 1, 320, 1400) scaled(1, 1.5, 320, 1400);
+    height: 2.5rem;
+    border-radius: $borderRadius;
+    background-image: linear-gradient(
+        to right,
+        rgba(50, 218, 255, 1) 0%,
+        rgba(55, 51, 255, 1) 100%
+    );
+    color: white;
+    transition: 0.5s;
+    background-size: 150% auto;
+    font-family: "Montserrat", sans-serif;
+}
+
+.card_btn_container:hover,
+.card_btn_container:focus {
+    background-position: 75% 70%;
+    cursor: pointer;
+}
+
+.card_btn_container_prevent {
+    position: relative; // needed for tooltip
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: scaled(0.5, 1, 320, 1400) scaled(1, 1.5, 320, 1400);
+    height: 2.5rem;
+    border-radius: $borderRadius;
+    background-image: linear-gradient(
+        to right,
+        rgb(183, 183, 183) 0%,
+        rgb(141, 141, 141) 100%
+    );
+    color: #2d2d2d;
+    transition: 0.5s;
+    font-family: "Montserrat", sans-serif;
+}
+
+.card_btn_prevent:hover,
+.card_btn_prevent:focus {
+    cursor: not-allowed;
+}
+
+.card_btn_container:active {
+    transform: scale(0.97);
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.cart_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 1.3rem;
+    width: 1.2rem;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+    color: black;
+}
+
+.cart_button:hover,
+.cart_button:focus {
+    cursor: pointer;
+}
+
+.cart_button_prevent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 1.3rem;
+    width: 1.2rem;
+    border-radius: 0.2rem;
+    color: black;
+    fill: rgb(202, 202, 202);
+    cursor: not-allowed;
+}
+
+.cart_qty_plus {
+    background: rgb(115, 197, 153);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.cart_qty_minus {
+    background: rgb(197, 133, 115);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.cart_qty_plus_prevent {
+    border: 1px solid rgba(133, 133, 133, 0.4);
+    color: rgb(180, 180, 180);
+    fill: rgb(202, 202, 202);
+    cursor: not-allowed;
+}
+
+.cart_qty_plus:active,
+.cart_qty_minus:active {
+    transform: scale(0.9);
+    box-shadow: none;
+    transition: 0.1s ease-in-out;
+}
+
+.cart_qty_minus:hover,
+.cart_qty_plus:hover,
+.cart_qty_minus:focus,
+.cart_qty_plus:focus {
+    cursor: pointer;
+}

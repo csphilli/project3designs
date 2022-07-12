@@ -1,0 +1,54 @@
+@use "../scss/abstracts/" as *;
+
+.cart_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 1.3rem;
+    width: 1.2rem;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 0.2rem;
+    color: black;
+}
+
+.cart_button:hover,
+.cart_button:focus {
+    cursor: pointer;
+}
+
+.cart_button_prevent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 1.3rem;
+    width: 1.2rem;
+    border-radius: 0.2rem;
+    color: black;
+    fill: rgb(202, 202, 202);
+    cursor: not-allowed;
+}
+
+.cart_qty_minus {
+    background: rgb(197, 133, 115);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.cart_qty_minus_prevent {
+    border: 1px solid rgba(133, 133, 133, 0.4);
+    color: rgb(180, 180, 180);
+    fill: rgb(202, 202, 202);
+    cursor: not-allowed;
+}
+
+.cart_qty_minus:active {
+    transform: scale(0.9);
+    box-shadow: none;
+    transition: 0.1s ease-in-out;
+}
+
+.cart_qty_minus:hover,
+.cart_qty_minus:focus {
+    cursor: pointer;
+}

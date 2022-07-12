@@ -15,7 +15,9 @@ p,
 figure,
 blockquote,
 dl,
-dd {
+dd,
+input,
+label {
     margin: 0;
 }
 
@@ -63,6 +65,17 @@ select {
 
 html {
     font-size: 100%;
+}
+
+label {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

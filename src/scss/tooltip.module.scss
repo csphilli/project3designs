@@ -1,0 +1,51 @@
+@use "../scss/abstracts/" as *;
+
+.tooltip_parent {
+    position: relative;
+}
+
+.tooltip::before,
+.tooltip::after {
+    --scale: 0;
+    --font-color: rgb(0, 0, 0);
+    --background-color: #bababa;
+    --arrow-size: 1rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    position: absolute;
+    top: -0.1rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(var(--translate-y, 0))
+        scale(var(--scale));
+    transition: 80ms transform ease-in-out;
+    transform-origin: bottom center;
+}
+
+.tooltip::before {
+    --translate-y: calc(-100% - var(--arrow-size));
+    content: attr(data-tooltip);
+    font-size: scaled(0.7, 0.9, 320, 1400);
+    width: max-content;
+    font-style: italic;
+    padding: 0.3rem 0.6rem;
+    text-align: center;
+    color: var(--font-color);
+    background-color: var(--background-color);
+    border-radius: 0.2rem;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.tooltip:hover::before,
+.tooltip:hover::after {
+    --scale: 1;
+}
+
+.tooltip::after {
+    --translate-y: calc(-1 * var(--arrow-size) - 1px);
+    content: "";
+    width: var(--arrow-size);
+    aspect-ratio: 1.6;
+    background-color: var(--background-color);
+    clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}

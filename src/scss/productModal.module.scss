@@ -1,177 +1,197 @@
 @use "../scss/abstracts/" as *;
 
-.modal {
+.modal_backdrop {
     position: fixed;
-    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
+    z-index: 10;
     margin: 0 auto;
-    // overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal_content {
-    display: flex;
-    flex-direction: column;
+.modal {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    z-index: 15;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(scaled(15, 25, 320, 1400), 1fr)
+    );
     gap: scaled(1, 1.5, 320, 1400);
     background-color: #f4f4f4;
     box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.2);
-    margin: 5% auto;
-    padding: 1rem 1.5rem;
-    width: scaled(18, 40, 320, 1400);
+    padding: scaled(0.5, 2, 320, 1400);
+    width: scaled(18, 70, 320, 1400);
     border-radius: $borderRadius;
 }
 
-.modal_info_line_item {
+.link_container {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
     display: grid;
-    grid-template-columns: 1.2rem repeat(auto-fit, minmax(30px, 1fr));
-    align-items: center;
-    // flex-direction: column;
+    place-items: center;
+    width: scaled(4, 5, 320, 1400);
+    padding: scaled(0.65, 1, 320, 1400) 0;
+    background-color: #cacaca;
+    border-radius: $formElementRadius;
 
-    & > * {
+    .cart_icon {
+        position: relative;
+        text-decoration-style: none;
+        color: $mainDarkColor;
+        font-size: scaled(1.15, 1.5, 320, 1400);
+    }
+}
+
+.link_container:hover,
+.link_container:focus {
+    background-color: #a8a8a8;
+    color: red;
+}
+
+.link_container::after {
+    position: absolute;
+    display: block;
+    content: attr(data-qty);
+    font-family: "Roboto", sans-serif;
+    font-size: scaled(0.75, 0.75, 320, 1400);
+    top: 0.2rem;
+    right: scaled(0.6, 1.1, 320, 1400);
+
+    color: $mainDarkColor;
+}
+
+.image_container {
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    .image {
+        width: 100%;
+        height: scaled(15, 25, 320, 1400);
+        object-fit: cover;
+        object-position: center center;
+    }
+}
+
+.text_container {
+    width: 100%;
+    padding: scaled(0.5, 2, 320, 1400);
+
+    .product_name {
+        margin-bottom: scaled(0.5, 0.75, 320, 1400);
+        font-size: scaled(1.5, 3, 320, 1400);
+    }
+
+    .price {
+        font-size: scaled(1, 1.2, 320, 1400);
+        margin-bottom: scaled(1, 2, 320, 1400);
+    }
+
+    .modal_form {
+        font-family: "Roboto", sans-serif;
+        width: scaled(10, 15, 320, 1400);
         display: flex;
-        align-items: center;
-        margin-left: 1rem;
+        flex-direction: column;
+        margin-top: scaled(1, 2, 320, 1400);
+
+        .selector_menu {
+            padding-left: scaled(0.5, 1, 320, 1400);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            background: none;
+            height: scaled(1.5, 3, 320, 1400);
+            border-radius: $formElementRadius;
+        }
+
+        .quantity_title {
+            margin-top: scaled(1, 2, 320, 1400);
+        }
+        .quantity_selector {
+            position: relative;
+            padding-left: scaled(0.5, 1, 320, 1400);
+            width: scaled(3, 5, 320, 1400);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            background: none;
+            height: scaled(1.5, 3, 320, 1400);
+            border-radius: $formElementRadius;
+        }
+
+        .submit_button {
+            margin-top: scaled(1, 2, 320, 1400);
+            padding: scaled(0.25, 0.75, 320, 1400) scaled(0.75, 1.5, 320, 1400);
+            border-radius: $formElementRadius;
+            border: none;
+            background-color: $importantButtonColor;
+            color: $mainLightColor;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .submit_button:hover {
+            cursor: pointer;
+            background-color: $importantButtonColorHover;
+        }
+
+        .quantity_selector:hover,
+        .quantity_selector:focus,
+        .selector_menu:hover,
+        .selector_menu:focus {
+            cursor: pointer;
+        }
     }
 }
 
-.modal_info_line_item p {
-    margin-left: 1rem;
-}
-
-.menu_bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .menu_bar_text {
-        font-family: "Roboto", sans-serif;
-        font-size: scaled(0.8, 1.2, 320, 1400);
-        text-transform: uppercase;
-    }
-
-    .close_modal_btn {
-        height: 2rem;
-        width: 2rem;
-        background-color: #2d2d2d;
-        border-radius: 50%;
-        border: none;
-        font-family: "Roboto", sans-serif;
-        font-size: 1.2rem;
-        color: white;
-    }
-
-    .close_modal_btn:hover,
-    .close_modal_btn:focus {
-        cursor: pointer;
-    }
-}
-
-.content_img {
-    height: scaled(10, 15, 320, 1400);
-    aspect-ratio: 1.6;
-}
-
-// .cart_items_table {
-//     display: flex;
-//     flex-direction: column;
-// }
-
-.cart_items_table_header {
-    display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
-    background-color: #2d2d2d;
-    color: white;
-    padding: 0.5rem 0;
+.modal_close_btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     border: none;
+    outline: 0;
+    background: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid transparent;
+    border-radius: $borderRadius;
+    transition: 0.3s ease-in-out;
 }
 
-.heading:first-child {
-    margin-left: 0.2rem;
+.modal_close_btn:hover,
+.modal_close_btn:focus {
+    cursor: pointer;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    outline: 0;
+    background: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    border-radius: $borderRadius;
+    transition: 0.3s ease-in-out;
 }
 
-.heading:last-child {
-    margin-right: 0.2rem;
+.sold_out {
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
 }
 
-.list_item {
-    display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
-    align-items: center;
-    // padding: 0.2rem 0;
-    padding: scaled(0.25, 0.5, 320, 1400) scaled(0.3, 0.7, 320, 1400);
-}
-
-.list_item:nth-child(even) {
-    background-color: rgb(206, 206, 206);
-}
-
-.qty_container {
+.add_to_cart_container {
     display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    margin-left: 0.2rem;
+    flex-direction: column;
+}
 
-    .button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        height: 1.3rem;
-        width: 1.2rem;
-        box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
-        border-radius: 0.2rem;
-        color: black;
-    }
-
-    .button:hover,
-    .button:focus {
-        cursor: pointer;
-    }
-
-    .button_prevent {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.4);
-        height: 1.3rem;
-        width: 1.2rem;
-        border-radius: 0.2rem;
-        color: black;
-        fill: rgb(202, 202, 202);
-        cursor: not-allowed;
-    }
-
-    .qty_plus {
-        background: rgb(115, 197, 153);
-        border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
-    .qty_minus {
-        background: rgb(197, 133, 115);
-        border: 1px solid rgba(0, 0, 0, 0.4);
-    }
-
-    .qty_plus_prevent {
-        border: 1px solid rgba(133, 133, 133, 0.4);
-        color: rgb(180, 180, 180);
-        fill: rgb(202, 202, 202);
-        cursor: not-allowed;
-    }
-
-    .qty_plus:active,
-    .qty_minus:active {
-        transform: scale(0.9);
-        box-shadow: none;
-        transition: 0.1s ease-in-out;
-    }
-
-    .qty_minus:hover,
-    .qty_plus:hover,
-    .qty_minus:focus,
-    .qty_plus:focus {
-        cursor: pointer;
-    }
+.add_to_cart_container_prevent {
+    display: flex;
+    flex-direction: column;
+    visibility: hidden;
 }

@@ -1,11 +1,17 @@
+$bodyGradient: radial-gradient(
+    101.71% 201.14% at 93.92% 93.13%,
+    #e0e0e0 0%,
+    #ffffff 100%
+);
 $baseFontSize: 16px;
 $borderRadius: 0.5rem;
+$formElementRadius: 5px;
 $mainDarkColor: #2d2d2d;
+$formDarkTint: #6e6e6e;
+$mainLightColor: #eeeeee;
+$mainLightTitleText: #ffffff;
 $boxShadow: 0px 1px 25px rgba(0, 0, 0, 0.1);
-$cart_plus_color: rgb(163, 226, 163);
-$cart_minus_color: rgb(216, 148, 148);
-$checkout_button_color: linear-gradient(
-    to right,
-    rgb(27, 170, 253) 0%,
-    rgba(55, 51, 255, 1) 100%
-);
+$importantButtonColor: #00a7fa;
+$importantButtonColorHover: #0094dd;
+$maxWidth: 1000px;
+$maxContentWidth: 35rem;

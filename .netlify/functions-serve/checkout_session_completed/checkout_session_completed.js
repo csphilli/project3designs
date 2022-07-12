@@ -1,0 +1,1 @@
+module.exports = require('./src/functions/checkout_session_completed.js')

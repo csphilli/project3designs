@@ -1,70 +1,67 @@
-import React from "react";
-import PageLayout from "../components/PageLayout";
-import * as styles from "../scss/project-details.module.scss";
+import React, { useState, useEffect } from "react";
+import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
 import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import IndexHeader from "../components/IndexHeader";
-import Logo from "../components/Logo";
-import {
-    BsCalendarWeek,
-    BsPencilSquare,
-    BsClock,
-    BsHammer,
-} from "react-icons/bs";
-
-function readTime(text) {
-    const time = Math.ceil((text.split(" ").length + 1) / 130);
-    if (time <= 1) return `${time} minute`;
-    return `${time} minutes`;
-}
+import { createProdObj, getProduct, readTime } from "../lib";
+import LoadingSpinner from "../components/LoadingSpinner";
+import PageBanner from "../components/projectPage/PageBanner";
+import Seo from "../components/Seo";
+import PurchaseComponent from "../components/projectPage/PurchaseComponent";
+import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
+import { refreshQtyFromLocal } from "../lib";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
-    const time = readTime(data.markdownRemark.html);
+
     const { html } = data.markdownRemark;
-    const banner_image = getImage(
-        base.post_banner.childImageSharp.gatsbyImageData
-    );
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const bullets = [
+        {
+            text: base.date,
+            icon: <BsCalendarWeek />,
+        },
+        {
+            text: base.author_name,
+            icon: <BsPencilSquare />,
+        },
+        {
+            text: readTime(data.markdownRemark.html),
+            icon: <BsClock />,
+        },
+    ];
+
+    const getProducts = async () => {
+        let prodList = [];
+        const res = await getProduct(base.p3_id);
+        res.data.forEach((item) => prodList.push(createProdObj(item)));
+        refreshQtyFromLocal(prodList);
+        setProducts(prodList);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        getProducts();
+    }, []);
+
     return (
-        <PageLayout pageData={base}>
-            {/* <IndexHeader pageData={pageData} /> */}
-            <div className={styles.heading_container}>
-                <div className={styles.title_banner_container}>
-                    <h2 className={styles.title}>{base.title}</h2>
-                    <GatsbyImage
-                        className={styles.banner_image}
-                        image={banner_image}
-                        alt={base.post_banner_alt}
-                    />
-                </div>
-                <div className={styles.publishing_container}>
-                    <div className={styles.date_container}>
-                        <BsCalendarWeek className={styles.icon} />
-                        <p>{base.date}</p>
+        <section className={styles.section_container}>
+            <Seo title={base.title} />
+            <section className={styles.purchase_container}>
+                <PageBanner data={data} bullets={bullets} />
+                {loading ? (
+                    <div className={styles.spinner_container}>
+                        <LoadingSpinner type="products" />
                     </div>
-                    <div className={styles.author_container}>
-                        <BsPencilSquare className={styles.icon} />
-                        <p className={styles.author_name}>{base.author_name}</p>
-                    </div>
-
-                    <div className={styles.read_time_container}>
-                        <BsClock className={styles.icon} />
-                        <p>{time}</p>
-                    </div>
-                    <div className={styles.build_time_container}>
-                        <BsHammer className={styles.icon} />
-                        <p>{base.build_time}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className={styles.article_container}>
+                ) : (
+                    <PurchaseComponent products={products} />
+                )}
+            </section>
+            <article className={styles.article_container}>
                 <div className={styles.article_content}>
                     <div dangerouslySetInnerHTML={{ __html: html }} />
                 </div>
-            </div>
-            <Logo pageId={base.page_root} />
-        </PageLayout>
+            </article>
+        </section>
     );
 }
 
@@ -74,20 +71,12 @@ export const query = graphql`
             html
             frontmatter {
                 title
+                description
                 date(formatString: "MMMM DD, YYYY")
-                meta_title
-                meta_description
-                post_banner_alt
+                p3_id
                 slug
                 author_name
-                author_title
                 page_root
-                build_time
-                author_img {
-                    childImageSharp {
-                        gatsbyImageData(width: 75, aspectRatio: 1)
-                    }
-                }
                 post_banner {
                     childImageSharp {
                         gatsbyImageData(
@@ -95,6 +84,11 @@ export const query = graphql`
                             aspectRatio: 1.6
                             height: 300
                         )
+                    }
+                }
+                post_thumb {
+                    childImageSharp {
+                        gatsbyImageData
                     }
                 }
             }

@@ -20,3 +20,11 @@
     $pref: calc($yInt * 1rem + ($slope * 100 * 1vw));
     @return (clamp($minFont * 1rem, $pref, $maxFont * 1rem));
 }
+
+@function divide($numerator, $denominator) {
+    @return calc($numerator / $denominator) * 1px;
+}
+
+@function mult($first, $second) {
+    @return calc($first * $second) * 1px;
+}
