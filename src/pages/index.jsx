@@ -8,13 +8,28 @@ export default function Home() {
             <Seo title="Home" />
             <section className={styles.heroContainer}>
                 <h2>
-                    Have you seen something amazing made by someone else,
-                    thought about buying it, but then were met with sticker
-                    shock?
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec accumsan lacus sem, et rutrum neque eleifend id.
+                    Aliquam aliquam vel purus in vulputate. Praesent lacinia
+                    elit et blandit tempus. Aliquam sed ultrices augue. Proin
+                    posuere posuere imperdiet. Cras id odio libero. Suspendisse
+                    porttitor odio sem, sed blandit mi consequat in. Etiam sit
+                    amet convallis leo, non ullamcorper risus. Aliquam aliquam
+                    lacus non ligula feugiat, in pharetra turpis malesuada.
+                    Fusce ut neque augue. Ut metus turpis, finibus ut neque ut,
+                    feugiat hendrerit dolor.
                 </h2>
                 <p>
-                    Avoid that feeling of despair by taking matters into your
-                    own hands!
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Donec accumsan lacus sem, et rutrum neque eleifend id.
+                    Aliquam aliquam vel purus in vulputate. Praesent lacinia
+                    elit et blandit tempus. Aliquam sed ultrices augue. Proin
+                    posuere posuere imperdiet. Cras id odio libero. Suspendisse
+                    porttitor odio sem, sed blandit mi consequat in. Etiam sit
+                    amet convallis leo, non ullamcorper risus. Aliquam aliquam
+                    lacus non ligula feugiat, in pharetra turpis malesuada.
+                    Fusce ut neque augue. Ut metus turpis, finibus ut neque ut,
+                    feugiat hendrerit dolor.
                 </p>
             </section>
         </div>
