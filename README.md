@@ -2,7 +2,7 @@
 
 Personal e-commerce website using as few 3rd party libraries as possible.
 
-Work in progress.
+Work in progress. The pre-production branch will likely have the most up to date commits since I'm reserving the main branch for fully-tested and working as intended code.
 
 ## Stack
 
@@ -18,7 +18,6 @@ Work in progress.
 
 ## MPV still requires
 
--   Customize Stripe checkout page
 -   Verify html semantics and update where needed
 -   Check accessibility
 -   Ensure SEO component is outputting desired information for each page
