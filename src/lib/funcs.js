@@ -41,6 +41,7 @@ export const readTime = (text) => {
     return `${time} minutes`;
 };
 
+// Gets all products
 export const fetchProducts = async () => {
     const products = await fetch(`/.netlify/functions/getAllProducts`, {
         method: "GET",
@@ -52,6 +53,7 @@ export const fetchProducts = async () => {
     return products;
 };
 
+// Gets products grouped by p3_id. Post request so that I can specify queury parameters
 export const getProduct = async (p3_id) => {
     const res = await fetch(`/.netlify/functions/getProduct`, {
         method: "POST",
@@ -73,13 +75,14 @@ export const formattedPrice = (value, ccy = "eur") => {
     }).format(value);
 };
 
+// Loads an existing shopping cart
 export const loadLocal = () => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (!local) return null;
     return local.map((item) => item.value);
 };
 
-// When loading a new page that contains product cart info, refreshes quantities from localStorage
+// When loading a post page that contains product cart info, refreshes quantities from localStorage
 export const refreshQtyFromLocal = (prodList) => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (!local) return;
@@ -100,7 +103,7 @@ export const getCartQty = () => {
 
 // Saves item to localStorage
 export const saveToLocal = async (product_id, product) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
+    let local = JSON.parse(localStorage.getItem("cartItems"));
     if (local) {
         const exists = local.find((item) => item.key === product_id);
         if (exists && product.quantity > 0) {
@@ -110,7 +113,7 @@ export const saveToLocal = async (product_id, product) => {
                 }
             });
         } else if (exists && product.quantity === 0) {
-            local.pop(local.find((item) => item.product_id === exists.key));
+            local = local.filter((item) => item.key !== exists.key);
         } else {
             local.push({ key: product_id, value: product });
         }
@@ -130,7 +133,7 @@ export const sortProducts = (products) => {
     });
 };
 
-// Used to assign text to the tooltip texts.
+// DLT? Used to assign text to the tooltip texts.
 export const getTooltipText = (prod) => {
     switch (prod.tax_code_name) {
         case "General - Tangible Goods": {
