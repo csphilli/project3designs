@@ -11,10 +11,19 @@
     background-color: $mainDarkColor;
 
     .title_banner_container {
-        .banner_image {
+        .image_container {
             height: scaled(10, 20, 320, 1400);
-            width: auto;
+            width: 100%;
             margin-bottom: scaled(2, 3, 320, 1400);
+            .banner_image {
+                height: 100%;
+                width: 100%;
+                margin-bottom: scaled(2, 3, 320, 1400);
+                object-position: center;
+                // height: scaled(10, 20, 320, 1400);
+                // width: auto;
+                // margin-bottom: scaled(2, 3, 320, 1400);
+            }
         }
     }
 

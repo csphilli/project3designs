@@ -12,11 +12,13 @@ function PageBanner(props) {
     return (
         <div className={styles.heading_container}>
             <div className={styles.title_banner_container}>
-                <GatsbyImage
-                    className={styles.banner_image}
-                    image={banner_image}
-                    alt="image illustrating banner"
-                />
+                <div className={styles.image_container}>
+                    <GatsbyImage
+                        className={styles.banner_image}
+                        image={banner_image}
+                        alt="image illustrating banner"
+                    />
+                </div>
             </div>
             <div className={styles.publishing_container}>
                 {bullets.map((obj, index) => (
