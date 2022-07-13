@@ -21,7 +21,10 @@ exports.createPages = async ({ graphql, actions }) => {
             component: path.resolve(
                 `./src/templates/${node.frontmatter.page_root}-details.jsx`
             ),
-            context: { slug: node.frontmatter.slug },
+            context: {
+                slug: node.frontmatter.slug,
+                dir: `${node.frontmatter.slug}/images/carousel`,
+            },
         });
     });
 };
