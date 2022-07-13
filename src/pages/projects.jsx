@@ -3,13 +3,15 @@ import ContentGrid from "../components/ContentGrid";
 import * as styles from "../scss/hero.module.scss";
 import Seo from "../components/Seo";
 
+const TEXT =
+    "Come and check out our beautiful collection of woodworking projects.";
+
 function Projects(props) {
-    const { path } = props;
-    console.log(`PATH: ${path}`);
+    // const { path } = props;
 
     return (
         <div>
-            <Seo title="Projects" />
+            <Seo title="Projects" description={TEXT} />
             <section className={styles.heroContainer}>
                 <h2>
                     Every project provides an opportunity for you to hone your
