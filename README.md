@@ -37,4 +37,4 @@ Work in progress. The pre-production branch will likely have the most up to date
 -   User auth
 -   Content driven from headless CMS
 -   Proprietary P3D system for managing products
--   MDX? Current build speeds atrociously slow
+-   MDX? Current MDX build speeds atrociously slow. Wait for fix
