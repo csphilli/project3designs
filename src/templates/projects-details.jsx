@@ -48,7 +48,9 @@ export default function ProjectDetails({ data }) {
         <section className={styles.section_container}>
             <Seo title={base.title} description={base.description} />
             <section className={styles.purchase_container}>
-                <PageBanner data={data} bullets={bullets} />
+                <div className={styles.banner_container}>
+                    <PageBanner data={data} bullets={bullets} />
+                </div>
                 {loading ? (
                     <div className={styles.spinner_container}>
                         <LoadingSpinner type="products" />
@@ -58,7 +60,7 @@ export default function ProjectDetails({ data }) {
                 )}
             </section>
             <div className={styles.image_carousel}>
-                <Carousel slug={base.slug} />
+                <Carousel images={data.allFile.nodes} />
             </div>
             <article className={styles.article_container}>
                 <div className={styles.article_content}>
@@ -70,7 +72,7 @@ export default function ProjectDetails({ data }) {
 }
 
 export const query = graphql`
-    query ProjectDetails($slug: String) {
+    query ProjectDetails($slug: String, $dir: String) {
         markdownRemark(frontmatter: { slug: { eq: $slug } }) {
             html
             frontmatter {
@@ -94,6 +96,13 @@ export const query = graphql`
                     childImageSharp {
                         gatsbyImageData
                     }
+                }
+            }
+        }
+        allFile(filter: { relativeDirectory: { eq: $dir } }) {
+            nodes {
+                childImageSharp {
+                    gatsbyImageData
                 }
             }
         }
