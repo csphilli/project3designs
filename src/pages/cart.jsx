@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import Seo from "../components/Seo";
 import { loadLocal, formattedPrice } from "../lib";
 import * as styles from "../scss/cart/shoppingCart.module.scss";
-import { BsShieldCheck } from "react-icons/bs";
 import CartItem from "../components/cart/CartItem";
 import { ProjectContext } from "../lib/ProjectContext";
-function Cart(props) {
+function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const { cartQty } = useContext(ProjectContext);
 
