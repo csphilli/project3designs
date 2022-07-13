@@ -19,13 +19,11 @@ Work in progress. The pre-production branch will likely have the most up to date
 ## MPV still requires
 
 -   Verify html semantics and update where needed
--   Check accessibility
--   Ensure SEO component is outputting desired information for each page
+-   Check Aria accessibility
 -   Privacy/Cookie policy
 -   Create a sample design template
 -   Implement analytics
 -   Create some valid projects
--   Image carousel component
 -   Post purchase pipeline
 
 ### Post launch
