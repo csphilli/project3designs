@@ -10,7 +10,7 @@ Work in progress. The pre-production branch will likely have the most up to date
 
 -   Gatsby JS
 -   React
--   SASS
+-   SCSS
 
 **Back End**
 
