@@ -27,6 +27,10 @@ exports.handler = async (data) => {
             .order("updated", { ascending: false })
             .order("inventory", { ascending: false });
 
+        if (error) {
+            throw new Error(error);
+        }
+
         return {
             statusCode: 200,
             // body: JSON.stringify(products),
