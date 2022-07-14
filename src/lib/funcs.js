@@ -6,11 +6,12 @@ const TOOLTIPS = {
 const NETLIFY = {
     SINGLE: "/.netlify/functions/getProduct",
     ALL: "/.netlify/functions/getAllProducts",
+    JWT: "/.netlify/functions/generateJWT",
 };
 
 // Used to generate a JWT
 export const generateJWT = async () => {
-    const response = await fetch("/.netlify/functions/generateJWT", {
+    const response = await fetch(NETLIFY.JWT, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
