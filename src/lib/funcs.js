@@ -51,6 +51,7 @@ export const fetchProducts = async () => {
         },
     }).then((resp) => resp.json());
     console.log(Object.keys(res));
+    console.log(res.message);
 
     return res;
 };
@@ -66,6 +67,7 @@ export const getProduct = async (p3_id) => {
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
     console.log(Object.keys(res));
+    console.log(res.message);
 
     return res;
 };
