@@ -12,10 +12,10 @@ exports.handler = async (data) => {
     try {
         console.log("Getting all products");
 
-        const header = data.headers;
-        const token = header && header.authorization.split(" ")[1];
-        if (token === null) throw new Error("Missing P3D Auth Token");
-        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+        // const header = data.headers;
+        // const token = header && header.authorization.split(" ")[1];
+        // if (token === null) throw new Error("Missing P3D Auth Token");
+        // jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
         const { data: products, error } = await supabase
             .from("products")
