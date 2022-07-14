@@ -12,7 +12,6 @@ import Carousel from "../components/Carousel";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
-    console.log(data.allFile.nodes);
 
     const { html } = data.markdownRemark;
     const [products, setProducts] = useState([]);
