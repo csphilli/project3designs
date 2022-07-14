@@ -16,10 +16,16 @@ exports.handler = async (data) => {
         const { search } = body;
 
         // Verifying form data is from P3D site
-        const header = data.headers;
-        const token = header && header.authorization.split(" ")[1];
+        const header = await data.headers;
+        console.log("Header", header);
+
+        const token = header.authorization.split(" ")[1];
+        console.log("TOken:", token);
+
         if (token === null) throw new Error("Missing P3D Auth Token");
         jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+
+        // console.log("JWT res:", res);
 
         const { data: products, error } = await supabase
             .from("products")
