@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import Seo from "../components/Seo";
 import { loadLocal, formattedPrice } from "../lib";
-import * as styles from "../scss/cart/shoppingCart.module.scss";
 import CartItem from "../components/cart/CartItem";
 import { ProjectContext } from "../lib/ProjectContext";
+import * as styles from "../scss/cart/shoppingCart.module.scss";
 function Cart() {
     const [cartItems, setCartItems] = useState([]);
     const { cartQty } = useContext(ProjectContext) || 0;

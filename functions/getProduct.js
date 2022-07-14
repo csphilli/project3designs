@@ -10,6 +10,8 @@ const supabase = createClient(
 
 exports.handler = async (data) => {
     try {
+        console.log("getting singular product");
+
         const body = JSON.parse(data.body);
         const { search } = body;
 
@@ -19,6 +21,8 @@ exports.handler = async (data) => {
         if (token === null) throw new Error("Missing P3D Auth Token");
         jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
+        console.log("Passed verification");
+
         const { data: products, error } = await supabase
             .from("products")
             .select("*")
@@ -27,9 +31,7 @@ exports.handler = async (data) => {
             .order("updated", { ascending: false })
             .order("inventory", { ascending: false });
 
-        if (error) {
-            throw new Error(error);
-        }
+        if (error) throw new Error(error);
 
         return {
             statusCode: 200,
