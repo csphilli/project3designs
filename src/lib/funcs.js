@@ -50,7 +50,7 @@ export const fetchProducts = async () => {
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-    console.log(`RES: ${res}`);
+    console.log(res.body);
     return res;
 };
 
@@ -64,7 +64,7 @@ export const getProduct = async (p3_id) => {
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
-    console.log(`RES: ${res}`);
+    console.log(res.body);
 
     return res;
 };
