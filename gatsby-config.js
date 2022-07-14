@@ -41,6 +41,7 @@ module.exports = {
         `gatsby-remark-images`,
         `gatsby-plugin-sharp`,
         `gatsby-plugin-sass`,
+        `gatsby-plugin-netlify`,
         {
             resolve: `gatsby-source-filesystem`,
             options: {
