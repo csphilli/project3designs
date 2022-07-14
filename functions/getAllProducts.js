@@ -8,14 +8,35 @@ const supabase = createClient(
     process.env.GATSBY_SUPABASE_KEY
 );
 
+const ERRORS = {
+    MISSING: "Missing P3D Auth Token",
+};
+
+const authorizeToken = async (data) => {
+    try {
+        const headers = await data.headers;
+        const token = headers?.authorization.split(" ")[1];
+        if (token === null) throw new Error(ERRORS.MISSING);
+        jwt.verify(token, process.env.GATSBY_P3D_SIGNATURE_KEY);
+        return {
+            statusCode: 200,
+        };
+    } catch (error) {
+        return {
+            statusCode: 400,
+            body: {
+                status: 400,
+                message: `${error}`,
+            },
+        };
+    }
+};
+
 exports.handler = async (data) => {
     try {
-        console.log("Getting all products");
-
-        // const header = data.headers;
-        // const token = header && header.authorization.split(" ")[1];
-        // if (token === null) throw new Error("Missing P3D Auth Token");
-        // jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+        // Verifies request coming from P3D
+        const res = await authorizeToken(data);
+        if (res.statusCode !== 200) throw new Error(res.body.message);
 
         const { data: products, error } = await supabase
             .from("products")
@@ -24,17 +45,17 @@ exports.handler = async (data) => {
             .order("updated", { ascending: false })
             .order("inventory", { ascending: false });
 
-        // console.log(data);
         if (error) throw new Error(error);
 
         return {
             statusCode: 200,
-            body: JSON.stringify(products),
+            // body: JSON.stringify(products),
+            body: JSON.stringify({ status: 200, data: products }),
         };
     } catch (error) {
         return {
-            statusCode: 404,
-            body: JSON.stringify(error),
+            statusCode: 400,
+            body: JSON.stringify({ status: 400, message: `${error}` }),
         };
     }
     // Verifying form data is from P3D site

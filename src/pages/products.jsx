@@ -17,24 +17,25 @@ function Products() {
 
     const allowSelling = true;
 
-    useEffect(() => {
+    const fetchProducts = async () => {
         let prodList = [];
-        getProducts().then((arr) => {
-            arr.forEach((item) => {
-                const exists = prodList.find(
-                    (prod) => prod.p3_id === item.p3_id
-                );
-                exists
-                    ? exists.product_list.push(createProdObj(item))
-                    : prodList.push({
-                          p3_id: item.p3_id,
-                          product_list: new Array(createProdObj(item)),
-                      });
-            });
-            sortProducts(prodList);
-            setProducts(prodList);
-            setLoading(false);
+        const res = await getProducts();
+        res.data.forEach((item) => {
+            const exists = prodList.find((prod) => prod.p3_id === item.p3_id);
+            exists
+                ? exists.product_list.push(createProdObj(item))
+                : prodList.push({
+                      p3_id: item.p3_id,
+                      product_list: new Array(createProdObj(item)),
+                  });
         });
+        sortProducts(prodList);
+        setProducts(prodList);
+        setLoading(false);
+    };
+
+    useEffect(() => {
+        fetchProducts();
     }, []);
 
     if (allowSelling === true) {

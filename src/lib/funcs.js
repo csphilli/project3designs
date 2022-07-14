@@ -56,9 +56,9 @@ export const getProducts = async () => {
             authorization: `Bearer ${process.env.GATSBY_P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-    // console.log(Object.keys(res));
-    // console.log(`logging message ALL products: ${res.message}`);
-
+    if (res.status !== 200) {
+        console.log(res.message);
+    }
     return res;
 };
 
@@ -75,12 +75,6 @@ export const getProduct = async (p3_id) => {
     if (res.status !== 200) {
         console.log(res.message);
     }
-    // console.log(Object.keys(res));
-
-    // console.log(res.status);
-    // console.log(res.message);
-    // console.log(`logging message SINGLE product: `);
-
     return res;
 };
 
