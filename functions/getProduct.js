@@ -10,16 +10,12 @@ const supabase = createClient(
 
 const authorizeToken = async (data) => {
     try {
-        console.log("DATA", data);
-
         const headers = await data.headers;
         const token = headers?.authorization.split(" ")[1];
 
         if (token === null) throw new Error("Missing P3D Auth Token");
-        console.log("TOKEN", token);
-        console.log("SIG KEY:", process.env.P3D_SIGNATURE_KEY);
 
-        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+        jwt.verify(token, process.env.GATSBY_P3D_SIGNATURE_KEY);
         // jwt.verify("wtf", process.env.P3D_SIGNATURE_KEY);
         // if (!verify) throw new Error("Something wrong with verification");
         // jwt.verify("wtf", process.env.P3D_SIGNATURE_KEY);

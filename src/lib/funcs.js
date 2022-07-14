@@ -53,7 +53,7 @@ export const getProducts = async () => {
         method: "GET",
         headers: {
             "Content-type": "application/json",
-            authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
+            authorization: `Bearer ${process.env.GATSBY_P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
     // console.log(Object.keys(res));
@@ -68,7 +68,7 @@ export const getProduct = async (p3_id) => {
         method: "POST",
         headers: {
             "Content-type": "application/json",
-            authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
+            authorization: `Bearer ${process.env.GATSBY_P3D_AUTH_TOKEN}`,
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
