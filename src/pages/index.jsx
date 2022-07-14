@@ -4,7 +4,7 @@ import * as styles from "../scss/hero.module.scss";
 
 export default function Home() {
     return (
-        <div>
+        <main>
             <Seo title="Home" />
             <section className={styles.heroContainer}>
                 <h2>
@@ -32,6 +32,6 @@ export default function Home() {
                     feugiat hendrerit dolor.
                 </p>
             </section>
-        </div>
+        </main>
     );
 }

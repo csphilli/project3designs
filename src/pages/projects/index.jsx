@@ -1,16 +1,14 @@
 import React from "react";
-import ContentGrid from "../components/ContentGrid";
-import * as styles from "../scss/hero.module.scss";
-import Seo from "../components/Seo";
+import ContentGrid from "../../components/ContentGrid";
+import * as styles from "../../scss/hero.module.scss";
+import Seo from "../../components/Seo";
 
 const TEXT =
     "Come and check out our beautiful collection of woodworking projects.";
 
-function Projects(props) {
-    // const { path } = props;
-
+function Projects() {
     return (
-        <div>
+        <main>
             <Seo title="Projects" description={TEXT} />
             <section className={styles.heroContainer}>
                 <h2>
@@ -24,10 +22,10 @@ function Projects(props) {
                     pride in having done it yourself!
                 </p>
             </section>
-            <main>
+            <section>
                 <ContentGrid pageId="projects" />
-            </main>
-        </div>
+            </section>
+        </main>
     );
 }
 

@@ -6,7 +6,7 @@ import CartItem from "../components/cart/CartItem";
 import { ProjectContext } from "../lib/ProjectContext";
 function Cart() {
     const [cartItems, setCartItems] = useState([]);
-    const { cartQty } = useContext(ProjectContext);
+    const { cartQty } = useContext(ProjectContext) || 0;
 
     useEffect(() => {
         setCartItems(loadLocal());
@@ -14,13 +14,13 @@ function Cart() {
 
     if (cartItems && cartItems.length < 1) {
         return (
-            <section className={styles.empty_cart_container}>
+            <main className={styles.empty_cart_container}>
                 <h2 className={styles.title}>Your cart is empty</h2>
-            </section>
+            </main>
         );
     } else if (cartItems)
         return (
-            <div className={styles.cart_container}>
+            <main className={styles.cart_container}>
                 <Seo title="Cart" />
                 <form name="shoppingList" className={styles.cart_form}>
                     <div className={styles.btn_container}>
@@ -53,7 +53,7 @@ function Cart() {
                         ))}
                     </div>
                 </form>
-                <div className={styles.total_section}>
+                <summary className={styles.total_section}>
                     <div className={styles.value}>
                         <h3 className={`${styles.light_tint} ${styles.desc}`}>
                             Tax:
@@ -78,8 +78,8 @@ function Cart() {
                             )}
                         </p>
                     </div>
-                </div>
-            </div>
+                </summary>
+            </main>
         );
     else return null;
 }

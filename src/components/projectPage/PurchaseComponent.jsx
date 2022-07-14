@@ -7,11 +7,11 @@ function PurchaseComponent(props) {
 
     return (
         <div className={styles.component_container}>
-            <div className={styles.physical_product_container}>
+            <section className={styles.physical_product_container}>
                 <h2>Available for Purchase</h2>
                 <ProductForm style="project" products={products} />
-            </div>
-            <div className={styles.product_info}>
+            </section>
+            <aside className={styles.product_info}>
                 <h2>Product Details</h2>
                 <p>
                     Some projects we make can be obtained exclusively through
@@ -30,7 +30,7 @@ function PurchaseComponent(props) {
                     A product's size is the largest rectangular shape that can
                     fit around the product
                 </p>
-            </div>
+            </aside>
         </div>
     );
 }

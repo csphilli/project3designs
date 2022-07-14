@@ -7,12 +7,25 @@
     margin-bottom: scaled(2, 5, 320, 1400);
     margin: 0 auto;
 
-    .menu_icon {
-        font-size: 2rem;
-        color: $mainDarkColor;
+    .menu_button {
+        display: grid;
+        place-items: center;
+        padding: 0;
+        width: 2.25rem;
+        height: 2.25rem;
+        margin-right: scaled(0.5, 1.5, 320, 1400);
+        border: none;
+        outline: none;
+
+        .menu_icon {
+            width: 100%;
+            height: 100%;
+            color: $mainDarkColor;
+        }
     }
 
-    .menu_icon:hover {
+    .menu_button:hover,
+    .menu_button:focus {
         cursor: pointer;
     }
 
@@ -116,7 +129,7 @@
             color: $mainDarkColor;
         }
 
-        .menu_icon {
+        .menu_button {
             display: none;
         }
 

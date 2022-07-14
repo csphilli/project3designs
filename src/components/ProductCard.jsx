@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import * as styles from "../scss/productCard.module.scss";
 import { formattedPrice } from "../lib";
 
-/* TODO
-1) Images coming from Stripe image_url meta aren't sizing all to the same size.
-*/
-
 function ProductCard(props) {
     const { product } = props;
     const [soldOut, setSoldOut] = useState(false);
@@ -27,6 +23,11 @@ function ProductCard(props) {
                     src={image_url}
                     alt="picture of product"
                 />
+                {/* <GatsbyImage
+                    image={getImage(image_url)}
+                    alt="Product"
+                    className={styles.image}
+                /> */}
             </div>
             <div className={styles.text_container}>
                 <div>

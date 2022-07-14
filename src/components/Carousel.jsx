@@ -26,6 +26,7 @@ function Carousel(props) {
                         <SplideSlide key={index}>
                             <GatsbyImage
                                 key={index}
+                                src={image}
                                 image={image}
                                 className={styles.image}
                                 alt={`Slide image ${index}`}

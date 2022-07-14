@@ -33,20 +33,20 @@ function Navbar({ path }) {
     const links = [...site.siteMetadata.navLinks];
     return (
         <nav role="navigation" className={styles.navBar}>
-            <Link className={styles.logoText} to="/">
-                <h1>
-                    <NavLogo />
-                </h1>
-            </Link>
-
-            <div onClick={handleMenuClick}>
+            <header>
+                <Link className={styles.logoText} to="/">
+                    <h1>
+                        <NavLogo />
+                    </h1>
+                </Link>
+            </header>
+            <button onClick={handleMenuClick} className={styles.menu_button}>
                 {showNav ? (
                     <CgClose className={styles.menu_icon} />
                 ) : (
                     <HiOutlineMenu className={styles.menu_icon} />
                 )}
-            </div>
-
+            </button>
             <div
                 className={
                     showNav

@@ -23,7 +23,7 @@ exports.createPages = async ({ graphql, actions }) => {
             ),
             context: {
                 slug: node.frontmatter.slug,
-                dir: `${node.frontmatter.slug}/images/carousel`,
+                dir: `posts/${node.frontmatter.slug}/images/carousel`,
             },
         });
     });

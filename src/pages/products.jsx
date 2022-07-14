@@ -39,14 +39,14 @@ function Products() {
 
     if (allowSelling === true) {
         return (
-            <div>
+            <main>
                 <Seo title="Products" />
                 {loading ? (
                     <div className={styles.loading_container}>
                         <LoadingSpinner type="products" />
                     </div>
                 ) : (
-                    <main className={styles.products}>
+                    <section className={styles.products}>
                         {products.map((product) => (
                             <Link
                                 to={`/projects/${product.product_list[0].slug}`}
@@ -59,9 +59,9 @@ function Products() {
                                 />
                             </Link>
                         ))}
-                    </main>
+                    </section>
                 )}
-            </div>
+            </main>
         );
     } else {
         return (

@@ -5,7 +5,7 @@ import Seo from "../components/Seo";
 
 function Videos() {
     return (
-        <div>
+        <main>
             <Seo title="Videos" />
             <section className={styles.heroContainer}>
                 <h2>
@@ -20,7 +20,7 @@ function Videos() {
             <main>
                 <ContentGrid pageId="videos" />
             </main>
-        </div>
+        </main>
     );
 }
 
