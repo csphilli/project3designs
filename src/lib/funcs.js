@@ -50,8 +50,8 @@ export const fetchProducts = async () => {
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-    console.log(Object.keys(res));
-    console.log(`logging message ALL products: ${res.message}`);
+    // console.log(Object.keys(res));
+    // console.log(`logging message ALL products: ${res.message}`);
 
     return res;
 };
@@ -66,8 +66,8 @@ export const getProduct = async (p3_id) => {
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
-    console.log(Object.keys(res));
-    console.log(`logging message SINGLE product: ${res.message}`);
+    // console.log(Object.keys(res));
+    // console.log(`logging message SINGLE product: ${res.message}`);
 
     return res;
 };
