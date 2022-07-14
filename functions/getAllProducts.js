@@ -14,7 +14,7 @@ exports.handler = async (data) => {
 
         const header = data.headers;
         const token = header && header.authorization.split(" ")[1];
-        if (token === null) throw new Error(MESSAGES.INVALID_TOKEN);
+        if (token === null) throw new Error("Missing P3D Auth Token");
         jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
         console.log("Passed JWT verification");

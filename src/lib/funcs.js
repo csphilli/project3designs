@@ -43,14 +43,15 @@ export const readTime = (text) => {
 
 // Gets all products
 export const fetchProducts = async () => {
-    const products = await fetch(`/.netlify/functions/getAllProducts`, {
+    const res = await fetch(`/.netlify/functions/getAllProducts`, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-    return products;
+    console.log(`RES: ${res}`);
+    return res;
 };
 
 // Gets products grouped by p3_id. Post request so that I can specify queury parameters
@@ -63,6 +64,8 @@ export const getProduct = async (p3_id) => {
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
+    console.log(`RES: ${res}`);
+
     return res;
 };
 
