@@ -1,1 +1,0 @@
-module.exports = require('./src/functions/add_product_to_db.js')

@@ -1,0 +1,32 @@
+@use "../abstracts/" as *;
+
+.bulletContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .text {
+        color: $mainLightColor;
+    }
+
+    .icon {
+        display: flex;
+        font-size: scaled(1, 1.2, 320, 1400);
+        align-items: center;
+        color: $mainLightColor;
+        margin-right: 0.7rem;
+        width: 1.2rem;
+        height: auto;
+    }
+}
+
+@media screen and (min-width: 660px) {
+    .bulletContainer {
+        .text {
+            color: $mainDarkColor;
+        }
+        .icon {
+            color: $mainDarkColor;
+        }
+    }
+}

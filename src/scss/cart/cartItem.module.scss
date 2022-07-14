@@ -1,0 +1,73 @@
+@use "../abstracts/" as *;
+
+.item_container {
+    display: flex;
+    flex-direction: column;
+    padding: scaled(1, 1.5, 320, 1400) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    .product_section {
+        display: flex;
+        margin-bottom: 2rem;
+
+        .image {
+            max-width: 8rem;
+            aspect-ratio: 1/1;
+            margin-right: 1rem;
+        }
+
+        .product_text_container {
+            display: flex;
+            flex-direction: column;
+
+            .product_name {
+                font-family: "Roboto", sans-serif;
+                font-size: scaled(1, 1.2, 320, 1400);
+                font-weight: 400;
+            }
+        }
+    }
+
+    .subheading_container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        .desc {
+            min-width: 4rem;
+            font-family: "Oswald", sans-serif;
+            color: $mainDarkColor;
+        }
+    }
+
+    .subheading_container:last-child {
+        margin: 0;
+    }
+}
+
+.item_container:last-child {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+}
+
+@media screen and (min-width: 650px) {
+    .item_container {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: center;
+
+        .product_section {
+            margin-bottom: 0;
+            .image {
+                max-width: 5rem;
+            }
+        }
+
+        .subheading_container {
+            margin: 0;
+            .desc {
+                display: none;
+            }
+        }
+    }
+}

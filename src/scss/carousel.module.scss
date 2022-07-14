@@ -1,0 +1,12 @@
+@use "./abstracts/" as *;
+
+.slider_container {
+    overflow: hidden;
+    border-radius: $formElementRadius;
+
+    .image {
+        height: 100%;
+        width: 100%;
+        border-radius: $formElementRadius;
+    }
+}

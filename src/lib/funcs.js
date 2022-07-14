@@ -22,42 +22,8 @@ export const createProdObj = (obj) => {
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
         sold_out: obj.inventory === 0 ? true : false,
-        maxQty: obj.inventory < obj.max_qty ? obj.inventory : obj.max_qty,
+        maxQty: obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit,
     };
-};
-
-// DELETE
-// Simple function to handle adding items to cart. Src: products/index.jsx file
-export const onAdd = (item, quantity) => {
-    if (isClickAllowed(item) === true) {
-        item.quantity += quantity;
-        // item.quantity++;
-        // saveToLocal(item.id, item);
-    }
-};
-
-// DELETE
-// Simple function to handle removing items from cart. Src: products/index.jsx file
-export const onMinus = (item) => {
-    if (item.quantity >= 1) {
-        item.quantity--;
-        // saveToLocal(item.id, item);
-    }
-};
-
-// DELETE?
-export const myFetch = async (url, type, body) => {
-    console.log(`handling myFetch. url: ${url}, type: ${type}, body: ${body}`);
-
-    const response = await fetch(url, {
-        method: type,
-        headers: {
-            "Content-type": "application/json",
-        },
-        body: JSON.stringify(body),
-    });
-
-    return response;
 };
 
 // Creates an object of key value pairs from a URL string.
@@ -68,6 +34,14 @@ export const myFetch = async (url, type, body) => {
 //         return acc;
 //     }, {});
 
+// Calculates the estimated read time given the number of words divided by an average value of 130
+export const readTime = (text) => {
+    const time = Math.ceil((text.split(" ").length + 1) / 130);
+    if (time <= 1) return `${time} minute`;
+    return `${time} minutes`;
+};
+
+// Gets all products
 export const fetchProducts = async () => {
     const products = await fetch(`/.netlify/functions/getAllProducts`, {
         method: "GET",
@@ -76,20 +50,19 @@ export const fetchProducts = async () => {
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
     }).then((resp) => resp.json());
-
     return products;
 };
 
-export const getProduct = async (slug) => {
+// Gets products grouped by p3_id. Post request so that I can specify queury parameters
+export const getProduct = async (p3_id) => {
     const res = await fetch(`/.netlify/functions/getProduct`, {
         method: "POST",
         headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${process.env.P3D_AUTH_TOKEN}`,
         },
-        body: JSON.stringify({ search: slug }),
+        body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
-
     return res;
 };
 
@@ -102,36 +75,54 @@ export const formattedPrice = (value, ccy = "eur") => {
     }).format(value);
 };
 
-// DELETE Used to check if buttons can be clicked.
-export const isClickAllowed = (product) => {
-    return (
-        product.quantity < parseInt(product.max_qty) && product.inventory >= 1
-    );
+// Loads an existing shopping cart
+export const loadLocal = () => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (!local) return null;
+    return local.map((item) => item.value);
 };
 
-// Saves a key and value pair to local storage. Will update the quantity
-export const saveToLocal = (products) => {
-    let local = [];
-    products.forEach((list) =>
-        list.product_list.forEach((prod) => {
-            local.push({ key: prod.id, value: prod });
-        })
-    );
-    localStorage.setItem("cartItems", JSON.stringify(local));
+// When loading a post page that contains product cart info, refreshes quantities from localStorage
+export const refreshQtyFromLocal = (prodList) => {
+    const local = JSON.parse(localStorage.getItem("cartItems"));
+    if (!local) return;
+    prodList.forEach((item1) => {
+        const exists = local.find((item2) => item2.key === item1.product_id);
+        if (!exists) return;
+        item1.quantity = exists.value.quantity;
+    });
 };
 
-// Updates the quantities that were saved to the local storage for repopulating the cart contents if a user leaves the page before checking out.
-export const updateFromLocal = (products) => {
+// Gets the total count items in cart for navbar cart icon
+export const getCartQty = () => {
     const local = JSON.parse(localStorage.getItem("cartItems"));
     if (local) {
-        products.forEach((list) => {
-            list.product_list.forEach((item) => {
-                const prod = local.find((prod) => prod.key === item.id);
-                if (prod) {
-                    item.quantity = prod.value.quantity;
+        return local.reduce((total, item) => total + item.value.quantity, 0);
+    } else return 0;
+};
+
+// Saves item to localStorage
+export const saveToLocal = async (product_id, product) => {
+    let local = JSON.parse(localStorage.getItem("cartItems"));
+    if (local) {
+        const exists = local.find((item) => item.key === product_id);
+        if (exists && product.quantity > 0) {
+            local.forEach((item) => {
+                if (item.key === exists.key) {
+                    item.value = product;
                 }
             });
-        });
+        } else if (exists && product.quantity === 0) {
+            local = local.filter((item) => item.key !== exists.key);
+        } else {
+            local.push({ key: product_id, value: product });
+        }
+        localStorage.setItem("cartItems", JSON.stringify(local));
+    } else {
+        localStorage.setItem(
+            "cartItems",
+            JSON.stringify([{ key: product_id, value: product }])
+        );
     }
 };
 
@@ -142,7 +133,7 @@ export const sortProducts = (products) => {
     });
 };
 
-// Used to assign text to the tooltip texts.
+// DLT? Used to assign text to the tooltip texts.
 export const getTooltipText = (prod) => {
     switch (prod.tax_code_name) {
         case "General - Tangible Goods": {

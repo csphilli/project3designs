@@ -4,7 +4,7 @@ import * as styles from "../scss/hero.module.scss";
 
 function About() {
     return (
-        <div>
+        <main>
             <Seo title="About" />
             <section className={styles.heroContainer}>
                 <h2>Here's the TLDR</h2>
@@ -19,7 +19,7 @@ function About() {
                     decade's worth of time.
                 </p>
             </section>
-        </div>
+        </main>
     );
 }
 

@@ -3,7 +3,7 @@ import * as styles from "../scss/productModal.module.scss";
 import { formattedPrice, getTooltipText } from "../lib";
 import { BsCart } from "react-icons/bs";
 import { Link } from "gatsby";
-import QtyButton from "./inputs/QtyButton";
+import QtyButton from "./productForm/QtyButton";
 /* TODO
         2) Implement custom up/down arrows for quantity selector
         3) Implement custom down arrow inside selection box.

@@ -3,6 +3,8 @@ import { useStaticQuery, graphql, Link } from "gatsby";
 import * as styles from "../scss/contentGrid.module.scss";
 import Card from "./Card";
 
+// implement sorting. Will have to remove sort date in query.
+
 function ContentGrid({ pageId }) {
     const query = useStaticQuery(graphql`
         query MyQuery {

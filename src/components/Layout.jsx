@@ -1,43 +1,40 @@
-import React, { useState, useMemo } from "react";
-import Navbar from "./Navbar";
+import React, { useState, useMemo, useEffect } from "react";
+import Navbar from "./nav/Navbar";
 import Footer from "./Footer";
-import Logo from "./Logo";
 import "../scss/reset.scss";
 import "../scss/global.scss";
 import "../scss/typography.scss";
-// import PageBannerIcon from "./PageBannerIcon";
-import { UserContext } from "../lib/UserContext";
+import { ProjectContext } from "../lib/ProjectContext";
+import { getCartQty } from "../lib";
 
-// export const GeneralContext = createContext();
-
-// function Layout({ pageId, children }) {
 function Layout({ path, children }) {
-    // const [showBanner, setShowBanner] = useState(true);
-    // const [orderItems, setOrderItems] = useState([]);
-    // const [user, setUser] = useState({});
+    const [cartQty, setCartQty] = useState(null);
+    useEffect(() => {
+        setCartQty(getCartQty());
+    }, []);
 
-    // const value = useMemo(
-    //     () => ({
-    //         user,
-    //         setUser,
-    //     }),
-    //     [user, setUser]
-    // );
-    // const [session, setSession] = useState();
-    // const [user, setUser] = useState();
+    const providerValues = useMemo(
+        () => ({
+            cartQty,
+            setCartQty,
+        }),
+        [cartQty, setCartQty]
+    );
+
+    useEffect(() => {
+        getCartQty();
+    }, []);
 
     return (
-        <UserContext.Provider value="test">
-            <div className="logo-container">
-                {/* {showBanner && <PageBannerIcon path={path} />} */}
-                <div className="page-container">
-                    <Navbar path={path} />
-                    <div>{children}</div>
+        <ProjectContext.Provider value={providerValues}>
+            <div className="outer_page_container">
+                <Navbar path={path} />
+                <div className="page_container">
+                    <div>{(path, children)}</div>
                     <Footer />
                 </div>
-                <Logo />
             </div>
-        </UserContext.Provider>
+        </ProjectContext.Provider>
     );
 }
 

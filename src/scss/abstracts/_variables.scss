@@ -1,3 +1,8 @@
+$bodyGradient: radial-gradient(
+    101.71% 201.14% at 93.92% 93.13%,
+    #e0e0e0 0%,
+    #ffffff 100%
+);
 $baseFontSize: 16px;
 $borderRadius: 0.5rem;
 $formElementRadius: 5px;
@@ -8,8 +13,5 @@ $mainLightTitleText: #ffffff;
 $boxShadow: 0px 1px 25px rgba(0, 0, 0, 0.1);
 $importantButtonColor: #00a7fa;
 $importantButtonColorHover: #0094dd;
-$checkout_button_color: linear-gradient(
-    to right,
-    rgb(27, 170, 253) 0%,
-    rgba(55, 51, 255, 1) 100%
-);
+$maxWidth: 1000px;
+$maxContentWidth: 35rem;

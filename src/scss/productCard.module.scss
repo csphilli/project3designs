@@ -40,7 +40,7 @@
     }
 
     .sold_out {
-        // color: $mainLightColor;
+        color: $mainDarkColor;
         text-transform: uppercase;
         font-style: italic;
         font-weight: bold;
@@ -48,6 +48,8 @@
 
     .price {
         // color: $mainLightColor;
+        color: $mainDarkColor;
+
         font-size: scaled(1, 1.2, 320, 1400);
     }
 }
