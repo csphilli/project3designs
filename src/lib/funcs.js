@@ -71,8 +71,14 @@ export const getProduct = async (p3_id) => {
         },
         body: JSON.stringify({ search: p3_id }),
     }).then((resp) => resp.json());
+    if (res.status !== 200) {
+        console.log(res.message);
+    }
     // console.log(Object.keys(res));
-    console.log(`logging message SINGLE product: ${res.message}`);
+
+    // console.log(res.status);
+    // console.log(res.message);
+    // console.log(`logging message SINGLE product: `);
 
     return res;
 };
