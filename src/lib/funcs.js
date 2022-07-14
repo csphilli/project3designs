@@ -3,6 +3,11 @@ const TOOLTIPS = {
     SOLD_OUT: "Sold Out",
 };
 
+const NETLIFY = {
+    SINGLE: "/.netlify/functions/getProduct",
+    ALL: "/.netlify/functions/getAllProducts",
+};
+
 // Used to generate a JWT
 export const generateJWT = async () => {
     const response = await fetch("/.netlify/functions/generateJWT", {
@@ -42,8 +47,8 @@ export const readTime = (text) => {
 };
 
 // Gets all products
-export const fetchProducts = async () => {
-    const res = await fetch(`/.netlify/functions/getAllProducts`, {
+export const getProducts = async () => {
+    const res = await fetch(NETLIFY.ALL, {
         method: "GET",
         headers: {
             "Content-type": "application/json",
@@ -58,7 +63,7 @@ export const fetchProducts = async () => {
 
 // Gets products grouped by p3_id. Post request so that I can specify queury parameters
 export const getProduct = async (p3_id) => {
-    const res = await fetch(`/.netlify/functions/getProduct`, {
+    const res = await fetch(NETLIFY.SINGLE, {
         method: "POST",
         headers: {
             "Content-type": "application/json",

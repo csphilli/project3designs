@@ -8,6 +8,22 @@ const supabase = createClient(
     process.env.GATSBY_SUPABASE_KEY
 );
 
+const authorizeToken = async (data) => {
+    try {
+        const headers = await data.headers;
+        const token = headers?.authorization.split(" ")[1];
+        if (token === null) throw new Error("Missing P3D Auth Token");
+        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+        return {
+            statusCode: 200,
+        };
+    } catch (error) {
+        return {
+            statusCode: 400,
+        };
+    }
+};
+
 exports.handler = async (data) => {
     try {
         console.log("getting singular product");
@@ -15,15 +31,18 @@ exports.handler = async (data) => {
         const body = JSON.parse(data.body);
         const { search } = body;
 
+        const { statusCode } = await authorizeToken(data);
+
+        if (statusCode !== 200) throw new Error("Failed JWT Validation");
         // Verifying form data is from P3D site
-        const header = await data.headers;
-        console.log("Header", header);
+        // const header = data.headers;
+        // console.log("Header", header);
 
-        const token = header.authorization.split(" ")[1];
-        console.log("TOken:", token);
+        // const token = header.authorization.split(" ")[1];
+        // console.log("TOken:", token);
 
-        if (token === null) throw new Error("Missing P3D Auth Token");
-        jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
+        // if (token === null) throw new Error("Missing P3D Auth Token");
+        // jwt.verify(token, process.env.P3D_SIGNATURE_KEY);
 
         // console.log("JWT res:", res);
 

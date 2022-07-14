@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
     createProdObj,
-    fetchProducts,
+    getProducts,
     formattedPrice,
     sortProducts,
 } from "../lib/index";
@@ -19,7 +19,7 @@ function Products() {
 
     useEffect(() => {
         let prodList = [];
-        fetchProducts().then((arr) => {
+        getProducts().then((arr) => {
             arr.forEach((item) => {
                 const exists = prodList.find(
                     (prod) => prod.p3_id === item.p3_id
