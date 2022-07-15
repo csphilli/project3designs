@@ -72,6 +72,7 @@ function Navbar({ path }) {
                             }
                             to={item.path}
                             onClick={handleMenuClick}
+                            aria-current={`${item.id}`}
                         >
                             {item.id === "cart" ? (
                                 <div className={styles.cart_icon_container}>
