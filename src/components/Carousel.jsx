@@ -18,6 +18,7 @@ function Carousel(props) {
                     speed: 1000,
                     height: "30rem",
                     width: "100%",
+                    lazyLoad: true,
                 }}
             >
                 {images.map((item, index) => {

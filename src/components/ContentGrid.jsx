@@ -16,7 +16,11 @@ function ContentGrid({ pageId }) {
                         title
                         post_thumb {
                             childImageSharp {
-                                gatsbyImageData(aspectRatio: 1.6, width: 600)
+                                gatsbyImageData(
+                                    aspectRatio: 1.6
+                                    width: 600
+                                    placeholder: BLURRED
+                                )
                             }
                         }
                         slug
