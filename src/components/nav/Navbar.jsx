@@ -38,6 +38,7 @@ function Navbar({ path }) {
                     className={styles.logoText}
                     to="/"
                     aria-current="Home page"
+                    aria-label="home page"
                 >
                     <h1>
                         <NavLogo />
