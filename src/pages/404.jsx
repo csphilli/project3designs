@@ -5,7 +5,7 @@ import * as styles from "../scss/hero.module.scss";
 function NoDice() {
     return (
         <main>
-            <Seo title="404 Page Not Found" />
+            <Seo title="404 | Page Not Found" />
             <section className={styles.heroContainer}>
                 <h2>404: Page Not Found</h2>
                 <p>

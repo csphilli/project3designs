@@ -67,11 +67,16 @@ function QtyButton(props) {
                     <button
                         onClick={onDelete}
                         className={styles.mod_btn_container}
+                        aria-label="Delete product"
                     >
                         <BiTrash className={styles.mod_btn_icon} />
                     </button>
                 ) : (
-                    <button onClick={onMinus} className={styles.mod_btn}>
+                    <button
+                        onClick={onMinus}
+                        className={styles.mod_btn}
+                        aria-label="Reduce Quantity"
+                    >
                         -
                     </button>
                 )}
@@ -85,7 +90,11 @@ function QtyButton(props) {
                     value={value}
                     readOnly
                 ></input>
-                <button onClick={onAdd} className={styles.mod_btn}>
+                <button
+                    onClick={onAdd}
+                    className={styles.mod_btn}
+                    aria-label="Increase Quantity"
+                >
                     +
                 </button>
             </div>

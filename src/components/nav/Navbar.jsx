@@ -40,7 +40,11 @@ function Navbar({ path }) {
                     </h1>
                 </Link>
             </header>
-            <button onClick={handleMenuClick} className={styles.menu_button}>
+            <button
+                onClick={handleMenuClick}
+                className={styles.menu_button}
+                aria-label="Show or hide mobile navigation menu"
+            >
                 {showNav ? (
                     <CgClose className={styles.menu_icon} />
                 ) : (

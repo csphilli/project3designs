@@ -79,7 +79,11 @@ function ProductForm(props) {
                         </Link>
                     </>
                 ) : selection.maxQty > 0 ? (
-                    <button className={styles.form_btn} type="submit">
+                    <button
+                        className={styles.form_btn}
+                        type="submit"
+                        aria-label="Add to cart"
+                    >
                         {TEXT.ADD_TO_CART}
                     </button>
                 ) : (
