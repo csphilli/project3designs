@@ -34,12 +34,7 @@ function Navbar({ path }) {
     return (
         <nav role="navigation" className={styles.navBar}>
             <header>
-                <Link
-                    className={styles.logoText}
-                    to="/"
-                    aria-current="Home page"
-                    aria-label="home page"
-                >
+                <Link className={styles.logoText} to="/" aria-label="home">
                     <h1>
                         <NavLogo />
                     </h1>
@@ -72,7 +67,7 @@ function Navbar({ path }) {
                             }
                             to={item.path}
                             onClick={handleMenuClick}
-                            aria-current={`${item.id}`}
+                            aria-label={`${item.id}`}
                         >
                             {item.id === "cart" ? (
                                 <div className={styles.cart_icon_container}>
