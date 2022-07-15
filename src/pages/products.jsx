@@ -69,8 +69,8 @@ function Products() {
             <div>
                 <h3>
                     Unfortunately we have temporarily restricted the sales of
-                    our products. We apologize for the inconvenience Please come
-                    back at a later time to check the status.
+                    our products. We apologize for the inconvenience. Please
+                    come back at a later time to check the status.
                 </h3>
             </div>
         );
