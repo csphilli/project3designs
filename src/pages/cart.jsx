@@ -31,7 +31,7 @@ function Cart() {
                             }}
                             className={styles.form_btn}
                         >
-                            Checkout
+                            {`Checkout (${cartQty})`}
                         </button>
                     </div>
                     <div className={styles.heading_container}>

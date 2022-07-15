@@ -28,6 +28,7 @@ module.exports = {
         siteUrl: "https://www.project3designs.com",
         navLinks: [
             { id: "projects", path: "/projects" },
+            { id: "gallery", path: "/gallery" },
             { id: "videos", path: "/videos" },
             { id: "products", path: "/products" },
             { id: "cart", path: "/cart" },
@@ -47,6 +48,13 @@ module.exports = {
             options: {
                 name: `projects`,
                 path: `${__dirname}/src/pages/projects/`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `gallery`,
+                path: `${__dirname}/src/pages/gallery/images/`,
             },
         },
         {
