@@ -13,4 +13,11 @@
 .gallery_image {
     max-width: 25rem;
     aspect-ratio: 1/1;
+    transition: 300ms ease-in-out;
+}
+
+.gallery_image:hover,
+.gallery_image:focus {
+    transform: scale(1.01);
+    transition: 300ms ease-in-out;
 }

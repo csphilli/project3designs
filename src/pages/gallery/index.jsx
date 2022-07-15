@@ -4,7 +4,7 @@ import { graphql, useStaticQuery, Link } from "gatsby";
 import * as hero from "../../scss/hero.module.scss";
 import * as styles from "../../scss/gallery.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { GalleryInfo } from "./gallery";
+import { GalleryInfo } from "../../lib/gallery";
 
 function Gallery() {
     const [data, setData] = useState([]);
@@ -32,6 +32,11 @@ function Gallery() {
             <Seo
                 title="Gallery"
                 description="Carefully curated images of our projects"
+                image={{
+                    src: "/images/p3dMetaImage.jpg",
+                    width: 500,
+                    height: 500,
+                }}
             />
             <section className={hero.heroContainer}>
                 <h2>Welcome to the Gallery!</h2>
