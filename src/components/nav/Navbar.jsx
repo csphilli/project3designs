@@ -34,7 +34,11 @@ function Navbar({ path }) {
     return (
         <nav role="navigation" className={styles.navBar}>
             <header>
-                <Link className={styles.logoText} to="/">
+                <Link
+                    className={styles.logoText}
+                    to="/"
+                    aria-current="Home page"
+                >
                     <h1>
                         <NavLogo />
                     </h1>
