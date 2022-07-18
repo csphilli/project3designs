@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useMemo } from "react";
 import { getProducts } from "../../lib";
 
 export const ProductContext = createContext(null);
@@ -21,8 +21,16 @@ export const ProductProvider = (props) => {
         }
     }, []);
 
+    const productProviderValues = useMemo(
+        () => ({
+            products,
+            loading,
+        }),
+        [products, loading]
+    );
+
     return (
-        <ProductContext.Provider value={[products]}>
+        <ProductContext.Provider value={productProviderValues}>
             {props.children}
         </ProductContext.Provider>
     );
