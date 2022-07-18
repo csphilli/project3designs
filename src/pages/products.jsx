@@ -1,42 +1,39 @@
-import React, { useState, useEffect } from "react";
-import {
-    createProdObj,
-    getProducts,
-    formattedPrice,
-    sortProducts,
-} from "../lib/index";
+import React, { useState, useEffect, useContext } from "react";
+import { formattedPrice, sortProducts } from "../lib/index";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ProductCard from "../components/ProductCard";
 import Seo from "../components/Seo";
 import * as styles from "../scss/products.module.scss";
 import { Link } from "gatsby";
+import { ProductContext } from "../components/providers/ProductProvider";
 
 function Products() {
+    const { products: cProducts } = useContext(ProductContext);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const allowSelling = true;
 
-    const fetchProducts = async () => {
-        let prodList = [];
-        const res = await getProducts();
-        res.data.forEach((item) => {
-            const exists = prodList.find((prod) => prod.p3_id === item.p3_id);
-            exists
-                ? exists.product_list.push(createProdObj(item))
-                : prodList.push({
-                      p3_id: item.p3_id,
-                      product_list: new Array(createProdObj(item)),
-                  });
+    const groupProducts = () => {
+        let list = [];
+        cProducts.forEach((item) => {
+            const exists = list.find((obj) => obj.p3_id === item.p3_id);
+            if (exists) {
+                exists.product_list.push(item);
+            } else
+                list.push({
+                    p3_id: item.p3_id,
+                    product_list: new Array(item),
+                });
         });
-        sortProducts(prodList);
-        setProducts(prodList);
+        sortProducts(list);
+        setProducts(list);
         setLoading(false);
     };
 
     useEffect(() => {
-        fetchProducts();
-    }, []);
+        groupProducts();
+    }, [cProducts]);
 
     if (allowSelling === true) {
         return (
@@ -66,13 +63,14 @@ function Products() {
         );
     } else {
         return (
-            <div>
+            <main>
+                <Seo title="Products" description="Sales suspended" />
                 <h3>
                     Unfortunately we have temporarily restricted the sales of
                     our products. We apologize for the inconvenience. Please
                     come back at a later time to check the status.
                 </h3>
-            </div>
+            </main>
         );
     }
 }

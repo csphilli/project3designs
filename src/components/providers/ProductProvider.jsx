@@ -1,32 +1,37 @@
 import React, { createContext, useState, useEffect, useMemo } from "react";
-import { getProducts } from "../../lib";
+import { createProdObj, getProducts } from "../../lib";
 
 export const ProductContext = createContext(null);
 export const ProductProvider = (props) => {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const fetchProducts = async () => {
+        const data = await getProducts();
+        const prods = data.data.map((item) => createProdObj(item));
+        setProducts(prods);
+    };
+
+    // const updateQuantity = (p3_id, prod_id, qty) => {
+    //     const exists = products.find((item) => item.p3_id === p3_id);
+    //     if (exists) {
+    //         const prod = exists.find((item) => item.product_id === prod_id);
+    //         if (prod) {
+    //             prod;
+    //         }
+    //     }
+    // };
 
     useEffect(() => {
-        let active = true;
-        fetchProds();
-        return () => {
-            active = false;
-        };
+        console.log("product provider ran");
 
-        async function fetchProds() {
-            const list = await getProducts();
-            if (!active) return;
-            setProducts(list.data);
-            setLoading(false);
-        }
+        fetchProducts();
     }, []);
 
     const productProviderValues = useMemo(
         () => ({
             products,
-            loading,
         }),
-        [products, loading]
+        [products]
     );
 
     return (

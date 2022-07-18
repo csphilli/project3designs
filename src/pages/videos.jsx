@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import ContentGrid from "../components/ContentGrid";
 import * as styles from "../scss/hero.module.scss";
 import Seo from "../components/Seo";
+import { ProductContext } from "../components/providers/ProductProvider";
 
 function Videos() {
+    const { products } = useContext(ProductContext);
+
+    useEffect(() => {
+        products && console.log("video", products);
+    }, [products]);
+
     return (
         <main>
             <Seo title="Videos" />
