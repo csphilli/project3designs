@@ -1,21 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BsCalendarWeek, BsPencilSquare, BsClock } from "react-icons/bs";
 import { graphql } from "gatsby";
-import { createProdObj, getProduct, readTime } from "../lib";
-import LoadingSpinner from "../components/LoadingSpinner";
+import { readTime } from "../lib";
 import PageBanner from "../components/projectPage/PageBanner";
 import Seo from "../components/Seo";
 import PurchaseComponent from "../components/projectPage/PurchaseComponent";
 import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
-import { refreshQtyFromLocal } from "../lib";
 import Carousel from "../components/Carousel";
 
 export default function ProjectDetails({ data }) {
     const base = data.markdownRemark.frontmatter;
-
     const { html } = data.markdownRemark;
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
     const bullets = [
         {
             text: base.date,
@@ -31,19 +26,6 @@ export default function ProjectDetails({ data }) {
         },
     ];
 
-    const getProducts = async () => {
-        let prodList = [];
-        const res = await getProduct(base.p3_id);
-        res.data.forEach((item) => prodList.push(createProdObj(item)));
-        refreshQtyFromLocal(prodList);
-        setProducts(prodList);
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        getProducts();
-    }, []);
-
     return (
         <section className={styles.section_container}>
             <Seo title={base.title} description={base.description} />
@@ -51,13 +33,7 @@ export default function ProjectDetails({ data }) {
                 <div className={styles.banner_container}>
                     <PageBanner data={data} bullets={bullets} />
                 </div>
-                {loading ? (
-                    <div className={styles.spinner_container}>
-                        <LoadingSpinner type="products" />
-                    </div>
-                ) : (
-                    <PurchaseComponent products={products} />
-                )}
+                <PurchaseComponent p3_id={base.p3_id} />
             </section>
             <div className={styles.image_carousel}>
                 <Carousel images={data.allFile.nodes} />

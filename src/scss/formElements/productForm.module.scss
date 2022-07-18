@@ -1,5 +1,11 @@
 @use "../abstracts/" as *;
 
+.loading_container {
+    display: grid;
+    place-items: center;
+    height: 90%;
+}
+
 .form_container {
     display: grid;
     grid-template-columns: repeat(
@@ -37,10 +43,23 @@
         margin: 0;
     }
 
-    .inventory {
+    .inventory_container {
+        display: flex;
+        font-style: italic;
         font-family: "Roboto", sans-serif;
         font-weight: bold;
         color: rgb(169, 169, 169);
+
+        .inventory_icon {
+            margin-left: 0.5rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            margin-top: 0.1rem;
+        }
+        p:last-child {
+            margin-left: 0.5rem;
+        }
     }
 
     .sold_out_text {

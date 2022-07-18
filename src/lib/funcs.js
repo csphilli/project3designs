@@ -23,12 +23,15 @@ export const generateJWT = async () => {
 
 // Helper function to create product obljects and then add custom properties. Src: products/index.jsx file
 export const createProdObj = (obj) => {
+    const limit =
+        obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit;
     return {
         ...obj,
         quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
         sold_out: obj.inventory === 0 ? true : false,
-        maxQty: obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit,
+        sale_limit: limit,
+        // maxQty:
     };
 };
 
