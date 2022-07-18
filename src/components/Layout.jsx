@@ -6,6 +6,7 @@ import "../scss/global.scss";
 import "../scss/typography.scss";
 import { ProjectContext } from "../lib/ProjectContext";
 import { getCartQty } from "../lib";
+import { ProductProvider } from "./providers/ProductProvider";
 
 function Layout({ path, children }) {
     const [cartQty, setCartQty] = useState(null);
@@ -26,15 +27,17 @@ function Layout({ path, children }) {
     }, []);
 
     return (
-        <ProjectContext.Provider value={providerValues}>
-            <div className="outer_page_container">
-                <Navbar path={path} />
-                <div className="page_container">
-                    <div>{(path, children)}</div>
-                    <Footer />
+        <ProductProvider>
+            <ProjectContext.Provider value={providerValues}>
+                <div className="outer_page_container">
+                    <Navbar path={path} />
+                    <div className="page_container">
+                        <div>{(path, children)}</div>
+                        <Footer />
+                    </div>
                 </div>
-            </div>
-        </ProjectContext.Provider>
+            </ProjectContext.Provider>
+        </ProductProvider>
     );
 }
 

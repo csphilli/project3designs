@@ -24,7 +24,7 @@ function Seo({ description, lang, meta, image: metaImage, title, pathname }) {
             ? `${site.siteMetadata.siteUrl}${metaImage.src}`
             : null;
 
-    console.log(image);
+    // console.log(image);
 
     const canonical = pathname
         ? `${site.siteMetadata.siteUrl}${pathname}`
