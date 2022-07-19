@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React from "react";
 import Navbar from "./nav/Navbar";
 import Footer from "./Footer";
 import "../scss/reset.scss";

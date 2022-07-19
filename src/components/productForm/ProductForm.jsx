@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useState, useCallback } from "react";
 import SelectField from "./SelectField";
 import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
@@ -23,39 +23,40 @@ function ProductForm(props) {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState(null);
     const [selection, setSelection] = useState(null);
-    const filterProducts = () => {
-        let list = cProducts
-            .filter((item) => item.p3_id === p3_id)
-            .map((item) => {
-                const exists = cartItems?.find(
-                    (obj) => obj.product_id === item.product_id
-                );
-                if (exists) {
-                    return { ...item, quantity: exists.quantity };
-                } else return item;
-            });
-        setProducts(list);
-        setSelection(list[0]);
-        setLoading(false);
-    };
+    const [value, setValue] = useState(0);
+
+    const currQty = useCallback(
+        (prod_id) => {
+            const qty = cartItems.find(
+                (item) => item.product_id === prod_id
+            )?.quantity;
+            return qty ? qty : 0;
+        },
+        [cartItems]
+    );
 
     useEffect(() => {
-        filterProducts();
-    }, [cProducts]);
+        let list = cProducts.filter((item) => item.p3_id === p3_id);
+        if (list.length > 0) {
+            setProducts(list);
+            setSelection(list[0]);
+            setValue(currQty(list[0].product_id));
+            setLoading(false);
+        }
+    }, [cProducts, currQty, p3_id]);
 
     const handleChange = (e) => {
         const item = products.find(
             (item) => item.product_id === e.target.value
         );
         setSelection(item);
+        setValue(currQty(item.product_id));
     };
 
     const addToCart = (e) => {
         e.preventDefault();
-        if (selection.quantity + 1 <= selection.sale_limit) {
-            onAdd(selection);
-            selection.quantity += 1;
-        }
+        onAdd(selection);
+        setValue((prev) => prev + 1);
     };
 
     if (loading) {
@@ -88,13 +89,15 @@ function ProductForm(props) {
                         handler={handleChange}
                     />
                 </div>
-                {selection.quantity > 0 ? (
+                {value > 0 ? (
                     <>
                         <div className={styles.input_container}>
                             <QtyButton
                                 product={selection}
                                 src="project"
                                 html_for="quantity"
+                                value={value}
+                                setValue={setValue}
                             />
                         </div>
                         <Link to="/cart">

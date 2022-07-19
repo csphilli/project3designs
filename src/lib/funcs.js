@@ -27,9 +27,9 @@ export const createProdObj = (obj) => {
         obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit;
     return {
         ...obj,
-        quantity: 0,
+        // quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
-        sold_out: obj.inventory === 0 ? true : false,
+        // sold_out: obj.inventory === 0 ? true : false,
         sale_limit: limit,
         // maxQty:
     };

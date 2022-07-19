@@ -1,51 +1,61 @@
-import React, { createContext, useEffect, useState, useMemo } from "react";
+import React, {
+    createContext,
+    useEffect,
+    useState,
+    useMemo,
+    useCallback,
+} from "react";
 
 export const CartContext = createContext(null);
 export const CartProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [cartQty, setCartQty] = useState(null);
 
-    const onAdd = (product) => {
-        const exists = cartItems?.find(
-            (item) => item.product_id === product.product_id
-        );
-        if (exists) {
-            setCartItems(
-                cartItems.map((item) =>
-                    item.product_id === exists.product_id
-                        ? { ...exists, quantity: exists.quantity + 1 }
-                        : item
-                )
-            );
-        } else setCartItems([...cartItems, { ...product, quantity: 1 }]);
-        setCartQty((prevState) => prevState + 1);
-    };
+    // use effect to populate cart with localstorage
 
-    const onMinus = (product) => {
-        const exists = cartItems?.find(
-            (item) => item.product_id === product.product_id
-        );
-        if (exists && exists.quantity - 1 === 0) {
-            console.log("exists and will delete");
-
-            setCartItems(
-                cartItems.filter(
-                    (item) => item.product_id !== exists.product_id
-                )
+    const onAdd = useCallback(
+        (product) => {
+            const exists = cartItems?.find(
+                (item) => item.product_id === product.product_id
             );
-        } else if (exists) {
-            console.log("exists but reducing qty");
+            if (exists) {
+                setCartItems(
+                    cartItems.map((item) =>
+                        item.product_id === exists.product_id
+                            ? { ...exists, quantity: exists.quantity + 1 }
+                            : item
+                    )
+                );
+            } else setCartItems([...cartItems, { ...product, quantity: 1 }]);
+            setCartQty((prevState) => prevState + 1);
+        },
+        [cartItems]
+    );
 
-            setCartItems(
-                cartItems.map((item) =>
-                    item.product_id === exists.product_id
-                        ? { ...exists, quantity: exists.quantity - 1 }
-                        : item
-                )
+    const onMinus = useCallback(
+        (product) => {
+            const exists = cartItems?.find(
+                (item) => item.product_id === product.product_id
             );
-        }
-        setCartQty((prevState) => prevState - 1);
-    };
+            if (exists && exists.quantity - 1 === 0) {
+                setCartItems(
+                    cartItems.filter(
+                        (item) => item.product_id !== exists.product_id
+                    )
+                );
+            } else if (exists) {
+                setCartItems(
+                    cartItems.map((item) =>
+                        item.product_id === exists.product_id
+                            ? { ...exists, quantity: exists.quantity - 1 }
+                            : item
+                    )
+                );
+            }
+            setCartQty((prevState) => prevState - 1);
+        },
+        [cartItems]
+    );
 
     const cartProviderValues = useMemo(
         () => ({

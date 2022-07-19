@@ -22,8 +22,6 @@ export const ProductProvider = (props) => {
     // };
 
     useEffect(() => {
-        console.log("product provider ran");
-
         fetchProducts();
     }, []);
 

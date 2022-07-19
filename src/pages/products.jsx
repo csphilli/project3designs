@@ -14,7 +14,7 @@ function Products() {
 
     const allowSelling = true;
 
-    const groupProducts = () => {
+    useEffect(() => {
         let list = [];
         cProducts.forEach((item) => {
             const exists = list.find((obj) => obj.p3_id === item.p3_id);
@@ -29,10 +29,6 @@ function Products() {
         sortProducts(list);
         setProducts(list);
         setLoading(false);
-    };
-
-    useEffect(() => {
-        groupProducts();
     }, [cProducts]);
 
     if (allowSelling === true) {
