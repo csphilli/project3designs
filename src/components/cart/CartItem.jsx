@@ -4,7 +4,7 @@ import * as styles from "../../scss/cart/cartItem.module.scss";
 import { formattedPrice } from "../../lib";
 
 function CartItem(props) {
-    const { product, src } = props;
+    const { product, src, value, setValue } = props;
 
     return (
         <div className={styles.item_container}>
@@ -25,7 +25,12 @@ function CartItem(props) {
             </div>
             <div className={styles.subheading_container}>
                 <p className={styles.desc}>Qty:</p>
-                <QtyButton product={product} src={src} />
+                <QtyButton
+                    product={product}
+                    src={src}
+                    value={value}
+                    setValue={setValue}
+                />
             </div>
             <div className={styles.subheading_container}>
                 <p className={styles.desc}>Total:</p>

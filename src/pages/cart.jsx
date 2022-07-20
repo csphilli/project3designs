@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Seo from "../components/Seo";
-import { loadLocal, formattedPrice } from "../lib";
+import { formattedPrice } from "../lib";
 import CartItem from "../components/cart/CartItem";
-import { ProjectContext } from "../lib/ProjectContext";
 import * as styles from "../scss/cart/shoppingCart.module.scss";
-function Cart() {
-    const [cartItems, setCartItems] = useState([]);
-    const { cartQty } = useContext(ProjectContext) || 0;
+import { CartContext } from "../components/providers/CartProvider";
 
-    useEffect(() => {
-        setCartItems(loadLocal());
-    }, [cartQty]);
+function Cart() {
+    const { cartItems, cartQty } = useContext(CartContext);
+    const [value, setValue] = useState(null);
 
     if (cartItems && cartItems.length < 1) {
         return (
@@ -49,6 +46,8 @@ function Cart() {
                                 key={item.product_id}
                                 product={item}
                                 src="cart"
+                                value={item.quantity}
+                                setValue={setValue}
                             />
                         ))}
                     </div>
