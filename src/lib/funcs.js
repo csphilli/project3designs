@@ -91,55 +91,30 @@ export const formattedPrice = (value, ccy = "eur") => {
 };
 
 // Loads an existing shopping cart
-export const loadLocal = () => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (!local) return null;
-    return local.map((item) => item.value);
-};
+// export const loadLocal = () => {
+//     const local = JSON.parse(localStorage.getItem("cartItems"));
+//     if (!local) return null;
+//     return local.map((item) => item.value);
+// };
 
 // When loading a post page that contains product cart info, refreshes quantities from localStorage
-export const refreshQtyFromLocal = (prodList) => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (!local) return;
-    prodList.forEach((item1) => {
-        const exists = local.find((item2) => item2.key === item1.product_id);
-        if (!exists) return;
-        item1.quantity = exists.value.quantity;
-    });
-};
+// export const refreshQtyFromLocal = (prodList) => {
+//     const local = JSON.parse(localStorage.getItem("cartItems"));
+//     if (!local) return;
+//     prodList.forEach((item1) => {
+//         const exists = local.find((item2) => item2.key === item1.product_id);
+//         if (!exists) return;
+//         item1.quantity = exists.value.quantity;
+//     });
+// };
 
 // Gets the total count items in cart for navbar cart icon
-export const getCartQty = () => {
-    const local = JSON.parse(localStorage.getItem("cartItems"));
-    if (local) {
-        return local.reduce((total, item) => total + item.value.quantity, 0);
-    } else return 0;
-};
-
-// Saves item to localStorage
-export const saveToLocal = async (product_id, product) => {
-    let local = JSON.parse(localStorage.getItem("cartItems"));
-    if (local) {
-        const exists = local.find((item) => item.key === product_id);
-        if (exists && product.quantity > 0) {
-            local.forEach((item) => {
-                if (item.key === exists.key) {
-                    item.value = product;
-                }
-            });
-        } else if (exists && product.quantity === 0) {
-            local = local.filter((item) => item.key !== exists.key);
-        } else {
-            local.push({ key: product_id, value: product });
-        }
-        localStorage.setItem("cartItems", JSON.stringify(local));
-    } else {
-        localStorage.setItem(
-            "cartItems",
-            JSON.stringify([{ key: product_id, value: product }])
-        );
-    }
-};
+// export const getCartQty = () => {
+//     const local = JSON.parse(localStorage.getItem("cartItems"));
+//     if (local) {
+//         return local.reduce((total, item) => total + item.value.quantity, 0);
+//     } else return 0;
+// };
 
 // Will be a switch case statement later
 export const sortProducts = (products) => {

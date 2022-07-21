@@ -6,12 +6,35 @@ import React, {
     useCallback,
 } from "react";
 
+// Expiration date of localStorage cart: 1 week in milliseconds. If a user alters the cart within the expiration window, it resets.
+const EXPIRES = 7 * 24 * 60 * 60 * 1000;
+
 export const CartContext = createContext(null);
 export const CartProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [cartQty, setCartQty] = useState(null);
 
-    // use effect to populate cart with localstorage
+    useEffect(() => {
+        const local = JSON.parse(localStorage.getItem("cartItems"));
+        if (local && Math.floor(Date.now()) < local.expires) {
+            setCartItems(local.items);
+            setCartQty(
+                local.items.reduce((acc, index) => acc + index.quantity, 0)
+            );
+        } else {
+            localStorage.removeItem("cartItems");
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem(
+            "cartItems",
+            JSON.stringify({
+                expires: Math.floor(Date.now() + EXPIRES),
+                items: [...cartItems],
+            })
+        );
+    }, [cartItems]);
 
     const onAdd = useCallback(
         (product) => {
