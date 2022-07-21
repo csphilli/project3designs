@@ -60,6 +60,7 @@ export const CartProvider = (props) => {
             const exists = cartItems?.find(
                 (item) => item.product_id === product.product_id
             );
+
             if (exists && exists.quantity - 1 === 0) {
                 setCartItems(
                     cartItems.filter(

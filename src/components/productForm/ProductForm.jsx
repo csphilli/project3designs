@@ -27,7 +27,7 @@ function ProductForm(props) {
 
     const currQty = useCallback(
         (prod_id) => {
-            const qty = cartItems.find(
+            const qty = cartItems?.find(
                 (item) => item.product_id === prod_id
             )?.quantity;
             return qty ? qty : 0;
@@ -43,7 +43,7 @@ function ProductForm(props) {
             setValue(currQty(list[0].product_id));
             setLoading(false);
         }
-    }, [cProducts, currQty, p3_id]);
+    }, [cProducts]);
 
     const handleChange = (e) => {
         const item = products.find(
