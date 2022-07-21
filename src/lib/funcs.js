@@ -116,12 +116,17 @@ export const formattedPrice = (value, ccy = "eur") => {
 //     } else return 0;
 // };
 
-// Will be a switch case statement later
-export const sortProducts = (products) => {
-    products.forEach((obj) => {
-        obj.product_list.sort((b, a) => b.price - a.price);
-    });
-};
+// export const productsPageSorting = (products, column, order = "asc") => {
+//     if (order === "asc") {
+//         products.forEach((obj) => {
+//             obj.product_list.sort((b, a) => b[`${column}`] - a[`${column}`]);
+//         });
+//     } else {
+//         products.forEach((obj) => {
+//             obj.product_list.sort((b, a) => a[`${column}`] - b[`${column}`]);
+//         });
+//     }
+// };
 
 // DLT? Used to assign text to the tooltip texts.
 export const getTooltipText = (prod) => {

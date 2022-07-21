@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { formattedPrice, sortProducts } from "../lib/index";
+import { formattedPrice } from "../lib/index";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ProductCard from "../components/ProductCard";
 import Seo from "../components/Seo";
@@ -14,6 +14,24 @@ function Products() {
 
     const allowSelling = true;
 
+    const sorting = (products, column, order = "asc") => {
+        if (order === "asc") {
+            products.forEach((obj) => {
+                obj.product_list.sort(
+                    (b, a) => b[`${column}`] - a[`${column}`]
+                );
+            });
+        } else if (order === "des") {
+            products.forEach((obj) => {
+                obj.product_list.sort(
+                    (b, a) => a[`${column}`] - b[`${column}`]
+                );
+            });
+        } else {
+            console.error(`Sorting by '${order}' is not supported.`);
+        }
+    };
+
     useEffect(() => {
         let list = [];
         cProducts.forEach((item) => {
@@ -26,7 +44,7 @@ function Products() {
                     product_list: new Array(item),
                 });
         });
-        sortProducts(list);
+        sorting(list, "price");
         setProducts(list);
         setLoading(false);
     }, [cProducts]);

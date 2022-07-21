@@ -42,8 +42,9 @@ exports.handler = async (data) => {
             .from("products")
             .select("*")
             .eq("active", true)
-            .order("updated", { ascending: false })
-            .order("inventory", { ascending: false });
+            .order("id", { ascending: true });
+        // .order("updated", { ascending: false });
+        // .order("inventory", { ascending: false });
 
         if (error) throw new Error(error);
 
