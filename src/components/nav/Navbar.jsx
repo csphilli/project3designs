@@ -6,11 +6,13 @@ import { BsCart } from "react-icons/bs";
 import { CgClose } from "react-icons/cg";
 import { HiOutlineMenu } from "react-icons/hi";
 import NavLogo from "./NavLogo";
-import { CartContext } from "../providers/CartProvider";
+// import { CartContext } from "../providers/CartProvider";
+import { useCartContext } from "../providers/CartProvider";
 // import { ProjectContext } from "../../lib/ProjectContext";
 
 function Navbar({ path }) {
-    const { cartQty } = useContext(CartContext);
+    // const { cartQty } = useContext(CartContext);
+    const { cartQty } = useCartContext();
     const [showNav, setShowNav] = useState(false);
 
     const handleMenuClick = () => {

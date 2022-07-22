@@ -3,10 +3,10 @@ import Seo from "../components/Seo";
 import { formattedPrice } from "../lib";
 import CartItem from "../components/cart/CartItem";
 import * as styles from "../scss/cart/shoppingCart.module.scss";
-import { CartContext } from "../components/providers/CartProvider";
+import { useCartContext } from "../components/providers/CartProvider";
 
 function Cart() {
-    const { cartItems, cartQty } = useContext(CartContext);
+    const { cartItems, cartQty } = useCartContext();
     const [value, setValue] = useState(null);
 
     if (cartItems && cartItems.length < 1) {

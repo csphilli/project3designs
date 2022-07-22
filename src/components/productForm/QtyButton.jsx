@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import * as styles from "../../scss/qtyButton.module.scss";
 import { BiTrash } from "react-icons/bi";
-import { CartContext } from "../providers/CartProvider";
+import { useCartContext } from "../providers/CartProvider";
 
 function QtyButton(props) {
     const { product, src, value, setValue } = props;
-    const { onAdd, onMinus } = useContext(CartContext);
+    const { onAdd, onMinus } = useCartContext();
 
     const handleAdd = (e) => {
         e.preventDefault();

@@ -5,10 +5,10 @@ import ProductCard from "../components/ProductCard";
 import Seo from "../components/Seo";
 import * as styles from "../scss/products.module.scss";
 import { Link } from "gatsby";
-import { ProductContext } from "../components/providers/ProductProvider";
+import { useProductContext } from "../components/providers/ProductProvider";
 
 function Products() {
-    const { products: cProducts } = useContext(ProductContext);
+    const { products: cProducts } = useProductContext();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 

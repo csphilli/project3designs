@@ -4,9 +4,9 @@ import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
 import { Link } from "gatsby";
 import QtyButton from "./QtyButton";
-import { ProductContext } from "../providers/ProductProvider";
+import { useProductContext } from "../providers/ProductProvider";
 import LoadingSpinner from "../LoadingSpinner";
-import { CartContext } from "../providers/CartProvider";
+import { useCartContext } from "../providers/CartProvider";
 import { CgInfinity } from "react-icons/cg";
 
 const TEXT = {
@@ -18,8 +18,8 @@ const TEXT = {
 
 function ProductForm(props) {
     const { p3_id } = props;
-    const { products: cProducts } = useContext(ProductContext);
-    const { cartItems, onAdd } = useContext(CartContext);
+    const { products: cProducts } = useProductContext();
+    const { cartItems, onAdd } = useCartContext();
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState(null);
     const [selection, setSelection] = useState(null);
