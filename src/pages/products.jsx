@@ -34,7 +34,7 @@ function Products() {
 
     useEffect(() => {
         let list = [];
-        cProducts.forEach((item) => {
+        cProducts?.forEach((item) => {
             const exists = list.find((obj) => obj.p3_id === item.p3_id);
             if (exists) {
                 exists.product_list.push(item);

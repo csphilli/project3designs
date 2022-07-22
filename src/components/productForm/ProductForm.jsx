@@ -36,8 +36,8 @@ function ProductForm(props) {
     );
 
     useEffect(() => {
-        let list = cProducts.filter((item) => item.p3_id === p3_id);
-        if (list.length > 0) {
+        let list = cProducts?.filter((item) => item.p3_id === p3_id);
+        if (list?.length > 0) {
             setProducts(list);
             setSelection(list[0]);
             setValue(currQty(list[0].product_id));

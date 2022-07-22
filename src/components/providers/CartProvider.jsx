@@ -9,7 +9,7 @@ import React, {
 // Expiration date of localStorage cart: 1 week in milliseconds. If a user alters the cart within the expiration window, it resets.
 const EXPIRES = 7 * 24 * 60 * 60 * 1000;
 
-export const CartContext = createContext(null);
+export const CartContext = createContext([]);
 export const CartProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [cartQty, setCartQty] = useState(null);

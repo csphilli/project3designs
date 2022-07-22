@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useMemo } from "react";
 import { createProdObj, getProducts } from "../../lib";
 
-export const ProductContext = createContext(null);
+export const ProductContext = createContext([]);
 export const ProductProvider = (props) => {
     const [products, setProducts] = useState([]);
 
@@ -10,16 +10,6 @@ export const ProductProvider = (props) => {
         const prods = data.data.map((item) => createProdObj(item));
         setProducts(prods);
     };
-
-    // const updateQuantity = (p3_id, prod_id, qty) => {
-    //     const exists = products.find((item) => item.p3_id === p3_id);
-    //     if (exists) {
-    //         const prod = exists.find((item) => item.product_id === prod_id);
-    //         if (prod) {
-    //             prod;
-    //         }
-    //     }
-    // };
 
     useEffect(() => {
         fetchProducts();
