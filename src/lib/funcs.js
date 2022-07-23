@@ -27,11 +27,8 @@ export const createProdObj = (obj) => {
         obj.inventory < obj.sale_limit ? obj.inventory : obj.sale_limit;
     return {
         ...obj,
-        // quantity: 0,
         price: (Number(obj.unit_amount) / 100).toFixed(2),
-        // sold_out: obj.inventory === 0 ? true : false,
         sale_limit: limit,
-        // maxQty:
     };
 };
 
@@ -88,62 +85,4 @@ export const formattedPrice = (value, ccy = "eur") => {
         currency: ccy,
         maximumSignificantDigits: 5,
     }).format(value);
-};
-
-// Loads an existing shopping cart
-// export const loadLocal = () => {
-//     const local = JSON.parse(localStorage.getItem("cartItems"));
-//     if (!local) return null;
-//     return local.map((item) => item.value);
-// };
-
-// When loading a post page that contains product cart info, refreshes quantities from localStorage
-// export const refreshQtyFromLocal = (prodList) => {
-//     const local = JSON.parse(localStorage.getItem("cartItems"));
-//     if (!local) return;
-//     prodList.forEach((item1) => {
-//         const exists = local.find((item2) => item2.key === item1.product_id);
-//         if (!exists) return;
-//         item1.quantity = exists.value.quantity;
-//     });
-// };
-
-// Gets the total count items in cart for navbar cart icon
-// export const getCartQty = () => {
-//     const local = JSON.parse(localStorage.getItem("cartItems"));
-//     if (local) {
-//         return local.reduce((total, item) => total + item.value.quantity, 0);
-//     } else return 0;
-// };
-
-// export const productsPageSorting = (products, column, order = "asc") => {
-//     if (order === "asc") {
-//         products.forEach((obj) => {
-//             obj.product_list.sort((b, a) => b[`${column}`] - a[`${column}`]);
-//         });
-//     } else {
-//         products.forEach((obj) => {
-//             obj.product_list.sort((b, a) => a[`${column}`] - b[`${column}`]);
-//         });
-//     }
-// };
-
-// DLT? Used to assign text to the tooltip texts.
-export const getTooltipText = (prod) => {
-    switch (prod.tax_code_name) {
-        case "General - Tangible Goods": {
-            // if (prod.inventory < 1 || prod.quantity === prod.inventory)
-            if (prod.inventory === 0 || prod.quantity === prod.inventory)
-                return TOOLTIPS.SOLD_OUT;
-            else if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
-            break;
-        }
-        case "e-book": {
-            if (prod.quantity >= prod.max_qty) return TOOLTIPS.MAX_QTY;
-            break;
-        }
-        default: {
-            return "Invalid Tooltip";
-        }
-    }
 };
