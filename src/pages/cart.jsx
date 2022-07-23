@@ -7,7 +7,7 @@ import { useCartContext } from "../components/providers/CartProvider";
 
 function Cart() {
     const { cartItems, cartQty } = useCartContext();
-    const [setValue] = useState(null);
+    const [value, setValue] = useState(null);
 
     if (cartItems && cartItems.length < 1) {
         return (
