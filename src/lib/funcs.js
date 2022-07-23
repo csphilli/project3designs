@@ -1,7 +1,7 @@
-const TOOLTIPS = {
-    MAX_QTY: "Max Quantity in Cart",
-    SOLD_OUT: "Sold Out",
-};
+// const TOOLTIPS = {
+//     MAX_QTY: "Max Quantity in Cart",
+//     SOLD_OUT: "Sold Out",
+// };
 
 const NETLIFY = {
     SINGLE: "/.netlify/functions/getProduct",

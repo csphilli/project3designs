@@ -22,7 +22,7 @@
 }
 
 .cart_form {
-    min-height: 75vh;
+    // min-height: 75vh;
 
     .btn_container {
         position: -webkit-sticky;
@@ -52,6 +52,7 @@
 
     .items_container {
         padding: 0 scaled(1, 1.5, 320, 1400);
+        min-height: calc(129px * 3);
     }
 
     .heading_container {
