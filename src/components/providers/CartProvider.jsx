@@ -37,15 +37,12 @@ const CartProvider = (props) => {
     useEffect(() => {
         if (products.length > 0) {
             let qty = 0;
-
             const local = JSON.parse(localStorage.getItem("cartItems"));
-
             if (
                 local?.items?.length === 0 ||
                 Math.floor(Date.now()) > local?.expires
             )
                 return;
-
             local.items.forEach((item) => {
                 const exists = products.find(
                     (cItem) => cItem.product_id === item.product_id
@@ -121,7 +118,6 @@ const CartProvider = (props) => {
                 );
             }
             setCartQty((prevState) => prevState - 1);
-            cartItems && console.log("cartItems", cartItems);
         },
         [cartItems]
     );
@@ -144,17 +140,3 @@ const CartProvider = (props) => {
 };
 
 export { useCartContext, CartProvider };
-
-/*
-nst CartContext = createContext([]);
-
-const useCartContext = () => {
-    const context = useContext(CartContext);
-    if (context === undefined) {
-        throw new Error("useCartContext was used outside of its Provider");
-    }
-    return context;
-};
-
-const CartProvider = (props) => {
-*/
