@@ -7,8 +7,10 @@ import Seo from "../components/Seo";
 import PurchaseComponent from "../components/projectPage/PurchaseComponent";
 import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
 import Carousel from "../components/Carousel";
+import { useProductContext } from "../components/providers/ProductProvider";
 
 export default function ProjectDetails({ data }) {
+    const { products } = useProductContext();
     const base = data.markdownRemark.frontmatter;
     const { html } = data.markdownRemark;
     const bullets = [
@@ -33,7 +35,11 @@ export default function ProjectDetails({ data }) {
                 <div className={styles.banner_container}>
                     <PageBanner data={data} bullets={bullets} />
                 </div>
-                <PurchaseComponent p3_id={base.p3_id} />
+                <PurchaseComponent
+                    products={products?.filter(
+                        (item) => item.p3_id === base.p3_id
+                    )}
+                />
             </section>
             <div className={styles.image_carousel}>
                 <Carousel images={data.allFile.nodes} />

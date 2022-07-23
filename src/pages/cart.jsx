@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Seo from "../components/Seo";
 import { formattedPrice } from "../lib";
 import CartItem from "../components/cart/CartItem";
@@ -7,7 +7,7 @@ import { useCartContext } from "../components/providers/CartProvider";
 
 function Cart() {
     const { cartItems, cartQty } = useCartContext();
-    const [value, setValue] = useState(null);
+    const [setValue] = useState(null);
 
     if (cartItems && cartItems.length < 1) {
         return (

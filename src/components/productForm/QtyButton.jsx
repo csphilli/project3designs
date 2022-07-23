@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import * as styles from "../../scss/qtyButton.module.scss";
 import { BiTrash } from "react-icons/bi";
 import { useCartContext } from "../providers/CartProvider";

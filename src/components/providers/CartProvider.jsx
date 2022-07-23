@@ -26,57 +26,50 @@ const CartProvider = (props) => {
     const [cartItems, setCartItems] = useState([]);
     const [cartQty, setCartQty] = useState(0);
 
+    /*
+    These effects have the following order:
+    1 - first effect will run but nothing will be done because there aren't yet products due to async function on getting them from the product context
+    2 - 2nd effect will run but because of the products gate, nothing will be done. If it did at this stage, and there were actually products saved in local storage, they would be deleted because the first effect is responsible for setting cart items.
+    3 - first effect will run again now due to products being in the dependency array. Now that products have come back from the async func in productContext, the functionality inside the first effect will run and as a result, set up the cartItems.
+    4 - Now the 2nd useEffect can safely run and it won't delete saved products. If local exists, it will simply create a new expiration date.
+    */
+
     useEffect(() => {
-        console.log(products);
+        if (products.length > 0) {
+            let qty = 0;
+
+            const local = JSON.parse(localStorage.getItem("cartItems"));
+
+            if (
+                local?.items?.length === 0 ||
+                Math.floor(Date.now()) > local?.expires
+            )
+                return;
+
+            local.items.forEach((item) => {
+                const exists = products.find(
+                    (cItem) => cItem.product_id === item.product_id
+                );
+                if (exists) {
+                    item.sale_limit =
+                        exists.sale_limit !== item.sale_limit
+                            ? exists.sale_limit
+                            : item.sale_limit;
+                    item.quantity =
+                        item.quantity > item.sale_limit
+                            ? item.sale_limit
+                            : item.quantity;
+                }
+                qty += item.quantity;
+            });
+            local.items.filter((item) => item.quantity > 0);
+            setCartItems(local.items);
+            setCartQty(qty);
+        }
     }, [products]);
 
-    // useEffect(() => {
-    // if (products) {
-    //     const local = JSON.parse(localStorage.getItem("cartItems"));
-    //     if (local?.list?.length > 0) {
-    //         console.log("local exists");
-    //     }
-    // }
-    // const updateFromLocal = () => {
-    // const local = JSON.parse(localStorage.getItem("cartItems"));
-    // if (local?.items.length > 0 && Math.floor(Date.now()) > local.expires) {
-    //     console.log("local length > 0 && expired");
-    //     localStorage.removeItem("cartItems");
-    //     return;
-    // }
-    // if (local?.items.length > 0 && products?.length === 0) {
-    //     console.log("local length > 0 but no product data");
-    //     setCartItems(local.items);
-    //     setCartQty(
-    //         local.items.reduce((acc, index) => acc + index.quantity, 0)
-    //     );
-    //     return;
-    // }
-    // if (local?.items.length > 0 && products?.length > 0) {
-    //     let qty = 0;
-    //     local.items.forEach((item) => {
-    //         const exists = products.find(
-    //             (p) => p.product_id === item.product_id
-    //         );
-    //         if (exists) {
-    //             item.sale_limit = exists.sale_limit;
-    //             item.quantity =
-    //                 item.quantity > item.sale_limit
-    //                     ? item.sale_limit
-    //                     : item.quantity;
-    //             qty += item.quantity;
-    //         }
-    //     });
-    //     setCartItems(local.items);
-    //     setCartQty(qty);
-    // }
-    // };
-    // }, [products]);
-
     useEffect(() => {
-        console.log("cart", cartItems);
-
-        if (cartItems?.length > 0) {
+        if (products.length > 0) {
             localStorage.setItem(
                 "cartItems",
                 JSON.stringify({
@@ -85,7 +78,7 @@ const CartProvider = (props) => {
                 })
             );
         }
-    }, [cartItems]);
+    }, [cartItems, products]);
 
     const onAdd = useCallback(
         (product) => {

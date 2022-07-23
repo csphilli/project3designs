@@ -3,13 +3,13 @@ import ProductForm from "../productForm/ProductForm";
 import * as styles from "../../scss/projectsPages/purchaseComponent.module.scss";
 
 function PurchaseComponent(props) {
-    const { p3_id } = props;
+    const { products } = props;
 
     return (
         <div className={styles.component_container}>
             <section className={styles.physical_product_container}>
                 <h2>Available for Purchase</h2>
-                <ProductForm p3_id={p3_id} />
+                <ProductForm products={products} />
             </section>
             <aside className={styles.product_info}>
                 <h2>Product Details</h2>

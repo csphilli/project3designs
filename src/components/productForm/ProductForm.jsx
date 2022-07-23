@@ -1,10 +1,9 @@
-import React, { useEffect, useContext, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import SelectField from "./SelectField";
 import * as styles from "../../scss/formElements/productForm.module.scss";
 import { formattedPrice } from "../../lib";
 import { Link } from "gatsby";
 import QtyButton from "./QtyButton";
-import { useProductContext } from "../providers/ProductProvider";
 import LoadingSpinner from "../LoadingSpinner";
 import { useCartContext } from "../providers/CartProvider";
 import { CgInfinity } from "react-icons/cg";
@@ -17,46 +16,34 @@ const TEXT = {
 };
 
 function ProductForm(props) {
-    const { p3_id } = props;
-    const { products: cProducts } = useProductContext();
+    const { products } = props;
     const { cartItems, onAdd } = useCartContext();
     const [loading, setLoading] = useState(true);
-    const [products, setProducts] = useState(null);
-    const [selection, setSelection] = useState(null);
+    const [selection, setSelection] = useState([]);
     const [value, setValue] = useState(0);
 
-    const currQty = useCallback(
-        (prod_id) => {
-            const qty = cartItems?.find(
-                (item) => item.product_id === prod_id
-            )?.quantity;
-            return qty ? qty : 0;
-        },
-        [cartItems]
-    );
+    useEffect(() => {
+        setSelection(products[0]);
+        setLoading(false);
+    }, [products]);
 
     useEffect(() => {
-        let list = cProducts?.filter((item) => item.p3_id === p3_id);
-        if (list?.length > 0) {
-            setProducts(list);
-            setSelection(list[0]);
-            setValue(currQty(list[0].product_id));
-            setLoading(false);
-        }
-    }, [cProducts]);
+        setValue(
+            cartItems?.find((item) => item.product_id === selection.product_id)
+                ?.quantity
+        );
+    }, [selection, cartItems]);
 
     const handleChange = (e) => {
         const item = products.find(
             (item) => item.product_id === e.target.value
         );
         setSelection(item);
-        setValue(currQty(item.product_id));
     };
 
     const addToCart = (e) => {
         e.preventDefault();
         onAdd(selection);
-        setValue((prev) => prev + 1);
     };
 
     if (loading) {

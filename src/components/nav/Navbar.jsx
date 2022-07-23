@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "gatsby";
 import * as styles from "../../scss/nav/navbar.module.scss";
 import { graphql, useStaticQuery } from "gatsby";
@@ -6,12 +6,9 @@ import { BsCart } from "react-icons/bs";
 import { CgClose } from "react-icons/cg";
 import { HiOutlineMenu } from "react-icons/hi";
 import NavLogo from "./NavLogo";
-// import { CartContext } from "../providers/CartProvider";
 import { useCartContext } from "../providers/CartProvider";
-// import { ProjectContext } from "../../lib/ProjectContext";
 
 function Navbar({ path }) {
-    // const { cartQty } = useContext(CartContext);
     const { cartQty } = useCartContext();
     const [showNav, setShowNav] = useState(false);
 
