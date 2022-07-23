@@ -95,7 +95,6 @@ const CartProvider = (props) => {
                 );
             } else setCartItems([...cartItems, { ...product, quantity: 1 }]);
             setCartQty((prevState) => prevState + 1);
-            cartItems && console.log("cartItems", cartItems);
         },
         [cartItems]
     );
