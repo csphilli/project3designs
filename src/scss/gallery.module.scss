@@ -1,6 +1,7 @@
 @use "./abstracts/" as *;
 
 .gallery_grid_container {
+    margin-top: scaled(2, 8, 320, 1400);
     display: grid;
     grid-template-columns: repeat(
         auto-fit,

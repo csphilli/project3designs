@@ -6,42 +6,42 @@
     position: relative;
     transition: 200ms ease-in-out;
     padding: scaled(1, 1.5, 320, 1400);
-    min-height: 30rem;
+    min-height: 25rem;
     z-index: 0;
 
     .image_container {
         display: inline-block;
         margin-bottom: 2rem;
-
-        // .image {
-        //     border-radius: $formElementRadius;
-        // }
     }
 
     .title_container {
         flex-grow: 1;
-        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 12rem;
 
-        .title {
-            font-family: "Montserrat", sans-serif;
-            color: $mainLightColor;
-            font-size: scaled(1, 1.5, 320, 1400);
-            text-transform: capitalize;
+        .upper_wrapper {
+            margin-bottom: 1rem;
+            .title {
+                font-family: "Montserrat", sans-serif;
+                color: $mainLightColor;
+                font-size: scaled(1, 1.5, 320, 1400);
+                text-transform: capitalize;
+            }
+
+            p {
+                font-family: "Roboto", sans-serif;
+                color: rgb(183, 183, 183);
+                font-size: scaled(1, 1.1, 320, 1400);
+            }
         }
 
-        p {
-            font-family: "Roboto", sans-serif;
-            color: rgb(183, 183, 183);
-            font-size: scaled(1, 1.1, 320, 1400);
-        }
-
-        p:last-child {
+        .date {
+            text-align: right;
             font-style: italic;
             color: rgb(145, 145, 145);
             font-size: scaled(0.7, 0.9, 320, 1400);
-            position: absolute;
-            right: 0;
-            bottom: 0;
         }
     }
 }

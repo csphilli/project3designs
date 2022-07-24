@@ -41,9 +41,9 @@ function Gallery() {
             <section className={hero.heroContainer}>
                 <h2>Welcome to the Gallery!</h2>
                 <p>
-                    Here you'll find images of our most prized creations. They
-                    all link back to the actual project page if you're
-                    interested in learning more.
+                    Here you'll find a collection of carefully currated images
+                    of the projects we've done. They all link to the respective
+                    project if you'd like to learn more about it.
                 </p>
             </section>
             <section className={styles.gallery_grid_container}>

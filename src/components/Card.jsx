@@ -15,9 +15,11 @@ function Card({ props }) {
                 />
             </div>
             <div className={styles.title_container}>
-                <h3 className={styles.title}>{props.title}</h3>
-                <p>{props.post_snippet.substring(0, 150).concat("...")}</p>
-                <p>{props.date}</p>
+                <div className={styles.upper_wrapper}>
+                    <h3 className={styles.title}>{props.title}</h3>
+                    <p>{props.post_snippet.substring(0, 125).concat("...")}</p>
+                </div>
+                <p className={styles.date}>{props.date}</p>
             </div>
         </div>
     );
