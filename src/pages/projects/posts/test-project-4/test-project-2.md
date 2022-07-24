@@ -1,8 +1,8 @@
 ---
-title: This can sell for €700
-description: meta description 1
-p3_id: 1
-slug: test-project-1
+title: Test title 2
+description: meta description 2
+p3_id: 2
+slug: test-project-2
 page_root: projects
 date: 2022-04-28T10:15:10+00:00
 author_name: Christopher Phillips
