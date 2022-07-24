@@ -15,6 +15,11 @@ function Card({ props }) {
             </div>
             <div className={styles.title_container}>
                 <h3 className={styles.title}>{props.title}</h3>
+                <p>
+                    This little piece of text may potentially serve a purpose as
+                    a text snippet
+                </p>
+                <p>October 3, 2021</p>
             </div>
         </div>
     );

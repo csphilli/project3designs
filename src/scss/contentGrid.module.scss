@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: repeat(
         auto-fit,
-        minmax(scaled(20, 25, 320, 1400), 1fr)
+        minmax(scaled(15, 20, 320, 1400), 1fr)
     );
     place-items: center;
     gap: scaled(1, 4, 320, 1400);
