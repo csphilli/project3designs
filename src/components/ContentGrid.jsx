@@ -25,7 +25,8 @@ function ContentGrid({ pageId }) {
                         }
                         slug
                         page_root
-                        date
+                        date(formatString: "MMMM DD, YYYY")
+                        post_snippet
                     }
                     id
                 }
