@@ -9,6 +9,15 @@
 ) {
 }
 
+@mixin darkGradientBackground($angle: 15) {
+    background: rgb(0, 0, 0, 0.2);
+    background: linear-gradient(
+        $angle + deg,
+        rgb(29, 29, 29) 0%,
+        rgb(64, 64, 64) 65%
+    );
+}
+
 @mixin flexbox($direction: row, $justify: flex-start, $align: stretch) {
     display: flex;
     flex-direction: $direction;
