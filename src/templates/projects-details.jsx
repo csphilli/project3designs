@@ -5,7 +5,7 @@ import { readTime } from "../lib";
 import PageBanner from "../components/projectPage/PageBanner";
 import Seo from "../components/Seo";
 import PurchaseComponent from "../components/projectPage/PurchaseComponent";
-import * as styles from "../scss/templateStyling/projectsDetails.module.scss";
+import * as styles from "../scss/projects/projectTemplate/projectTemplateStyling.module.scss";
 import Carousel from "../components/Carousel";
 import { useProductContext } from "../components/providers/ProductProvider";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import * as styles from "../../scss/projectsPages/pageBanner.module.scss";
+import * as styles from "../../scss/projects/postStyling/pageBanner.module.scss";
 import IconBulletList from "../lists/IconBulletList";
 
 function PageBanner(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../scss/card.module.scss";
+import * as styles from "../scss/projects/indexPageStyling/card.module.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 function Card({ props }) {

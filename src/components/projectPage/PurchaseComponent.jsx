@@ -1,6 +1,6 @@
 import React from "react";
 import ProductForm from "../productForm/ProductForm";
-import * as styles from "../../scss/projectsPages/purchaseComponent.module.scss";
+import * as styles from "../../scss/projects/postStyling/purchaseComponent.module.scss";
 
 function PurchaseComponent(props) {
     const { products } = props;
