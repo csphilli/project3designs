@@ -1,0 +1,36 @@
+@use "../abstracts/" as *;
+
+.product_section {
+  display: flex;
+  transition: 300ms;
+  border-radius: $borderRadius;
+  border: 0.5px solid black;
+  overflow: hidden;
+
+  .image {
+    max-width: 8rem;
+    aspect-ratio: 1/1;
+  }
+
+  .product_text_container {
+    margin: auto 0;
+    margin-left: 1rem;
+    width: 100%;
+
+    .field {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      .heading {
+        font-size: scaled(1, 1.1, 320, 1400);
+      }
+    }
+  }
+}
+
+.product_section:hover,
+.product_section:focus {
+  box-shadow: 1px 3px 10px 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.01);
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+}

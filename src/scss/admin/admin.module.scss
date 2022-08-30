@@ -1,0 +1,14 @@
+@use "../abstracts/" as *;
+
+.section_container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(scaled(15, 25, 320, 1400), 1fr)
+  );
+  gap: 1rem;
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
