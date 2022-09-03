@@ -2,34 +2,65 @@ import React, { useRef, useState } from "react";
 import * as styles from "../../scss/admin/adminProductCard.module.scss";
 import { formattedPrice } from "../../lib";
 import { CgInfinity } from "react-icons/cg";
-import AdminFormField from "./AdminFormField";
+import AdminTextInput from "./AdminTextInput";
+import { reqKeys } from "../../lib/admin/models";
 
 function AdminProductCard(props) {
   const { product } = props;
   const [showForm, setShowForm] = useState(false);
-  const currentFormValues = useRef({
-    p3_id: product.p3_id,
-    price: product.unit_amount,
-    name: product.name,
-    inventory: product.inventory,
-    sale_limit: product.sale_limit,
-    image_url: product.image_url,
-    project_link: product.slug,
-    size: product.size,
-    active: product.active,
+  const [imageState, setImageState] = useState({
+    currImage: product.image_url,
+    newImage: "",
   });
 
-  const newFormValues = useRef({
-    p3_id: "",
-    price: "",
-    name: "",
-    inventory: "",
-    sale_limit: "",
-    image_url: "",
-    project_link: "",
-    size: "",
-    active: "",
-  });
+  // Specifies which fields from the database are editable in the forms.
+
+  // const getInputType = (key, item, index) => {
+  //   const type = Object.keys(inputCategories).find((k) =>
+  //     Object.values(inputCategories[k]).find((item) => item === test)
+  //   );
+  // };
+  // switch (type) {
+  //   case "number": {
+  //     return (
+  //       <AdminTextInput
+  //         key={index}
+  //         item={item}
+  //         newFormValues={newFormValues}
+  //         updateForm={updateForm}
+  //         imageState={imageState}
+  //         setImageState={setImageState}
+  //         getInventory={getInventory}
+  //       />
+  //     );
+  //   }
+  //   case "radio": {
+  //     return (
+  //       <AdminTextInput
+  //         key={index}
+  //         item={item}
+  //         newFormValues={newFormValues}
+  //         updateForm={updateForm}
+  //         imageState={imageState}
+  //         setImageState={setImageState}
+  //         getInventory={getInventory}
+  //       />
+  //     );
+  //   }
+  // }
+
+  // const { number: a, text: b, radio: c, select: d } = inputCategories;
+  // const test = "active";
+  // let key = Object.keys(inputCategories).find((k) =>
+  //   Object.values(inputCategories[k]).find((item) => item === test)
+  // );
+  // console.log(key);
+
+  const currentFormValues = useRef(
+    Object.entries(product).filter(([k]) => reqKeys.includes(k))
+  );
+
+  const newFormValues = useRef(currentFormValues.current.map(([k]) => [k, ""]));
 
   const getInventory = (amount) => {
     if (amount === 999) {
@@ -41,13 +72,15 @@ function AdminProductCard(props) {
   const updateProduct = (e) => {
     e.preventDefault();
     console.log("updating product");
-    const data = JSON.parse(JSON.stringify(newFormValues.current));
-    for (const prop in data) {
-      if (`${data[prop]}` === "") {
-        newFormValues.current[prop] = currentFormValues.current[prop];
+    const obj = Object.fromEntries(currentFormValues.current);
+    const data = newFormValues.current.map(([k, v]) => {
+      if (v.length === 0) {
+        return [k, obj[k]];
       }
-    }
-    console.log(newFormValues.current);
+      return [k, v];
+    });
+
+    console.log("Sending: ", data);
 
     toggleForm();
 
@@ -56,6 +89,7 @@ function AdminProductCard(props) {
 		1: Send products to DB.
 		Set loading spinner with modal overlay.
 		2: Trigger a page reload once status is 200.
+		3: Ensure correct types are being sent. Ie: Active is boolean
 		*/
   };
 
@@ -70,8 +104,11 @@ function AdminProductCard(props) {
     setShowForm((prev) => !prev);
   };
 
-  const updateForm = (e, field) => {
-    newFormValues.current[`${field}`] = e.target.value;
+  const updateForm = (e, key) => {
+    newFormValues.current.find(([k]) => k === key)[1] = e.target.value;
+    if (key === "image_url") {
+      setImageState({ ...imageState, newImage: e.target.value });
+    }
   };
 
   if (!showForm) {
@@ -83,7 +120,7 @@ function AdminProductCard(props) {
       >
         <img
           className={styles.image}
-          src={product.image_url}
+          src={imageState.currImage}
           alt="ERROR: NO IMAGE AT URL"
         />
         <div className={styles.product_text_container}>
@@ -111,25 +148,23 @@ function AdminProductCard(props) {
   } else {
     return (
       <section className={styles.edit_product_form_container}>
-        <div className={styles.header_container}>
-          <h2 className={styles.edit_title}>Editing product...</h2>
+        <div className={styles.toggle_btn_container}>
           <button className={styles.toggle_btn} onClick={toggleForm}>
             X
           </button>
         </div>
-        <div className={styles.info_wrapper}>
-          <p className={styles.column_heading}>Current</p>
-          <p className={styles.separator}>→</p>
-          <p className={styles.column_heading}>Updated</p>
-        </div>
-        <form autoComplete="off">
-          {Object.keys(newFormValues.current).map((item, index) => (
-            <AdminFormField
+
+        <form id="admin_form" autoComplete="off">
+          {currentFormValues.current.map((item, index) => (
+            <AdminTextInput
               key={index}
               item={item}
               currentFormValues={currentFormValues}
               newFormValues={newFormValues}
               updateForm={updateForm}
+              imageState={imageState}
+              setImageState={setImageState}
+              getInventory={getInventory}
             />
           ))}
         </form>

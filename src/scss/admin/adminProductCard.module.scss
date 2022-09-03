@@ -48,32 +48,40 @@
   overflow: hidden;
   box-shadow: 1px 3px 15px 10px rgba(0, 0, 0, 0.1);
 
-  .header_container {
+  .toggle_btn_container {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
+
     .toggle_btn {
       height: 25px;
       aspect-ratio: 1/1;
-      border: 0.5px solid black;
+      margin-right: 2rem;
+      // border: none;
+      border: 1px solid transparent;
       transition: 300ms ease-in-out;
+      background-color: $importantButtonColor;
     }
 
     .toggle_btn:hover,
     .toggle_btn:focus {
       cursor: pointer;
+      color: $importantButtonColorHover;
+      color: $mainDarkColor;
+      border: 1px solid rgba(0, 0, 0, 0.2);
       transition: 300ms ease-in-out;
       box-shadow: 1px 3px 25px 5px rgba(0, 0, 0, 0.1);
     }
   }
 
-  .edit_title {
-    font-size: scaled(1, 1.2, 320, 1400);
-    color: $formDarkTint;
-  }
+  // .edit_title {
+  //   font-size: scaled(1, 1.2, 320, 1400);
+  //   color: $formDarkTint;
+  // }
 
-  .column_heading {
-    font-weight: bold;
-  }
+  // .column_heading {
+  //   font-weight: bold;
+  // }
 
   .current_value {
     color: $formDarkTint;
@@ -81,8 +89,8 @@
   }
 
   .info_wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 0.5rem;
     padding: 1rem 1rem;
 
@@ -93,7 +101,7 @@
   }
 }
 
-@media screen and (min-width: 675px) {
+@media screen and (min-width: $adminFormScreenSize) {
   .info_wrapper {
     margin-right: 1rem;
   }
