@@ -29,18 +29,24 @@ function Admin() {
 
   return (
     <main>
-      <h2>Admin Panel</h2>
+      <h2>Admin Panel - Measure Twice, Cut Once™️</h2>
       {loading ? (
         <div className={styles.loading_container}>
           <LoadingSpinner type="products" />
         </div>
       ) : (
-        <section className={styles.section_container}>
-          {products.map((list) =>
-            list.product_list.map((item) => (
-              <AdminProductCard key={item.product_id} product={item} />
-            ))
-          )}
+        <section className={styles.edit_section}>
+          <div className={styles.instrux}>
+            <h3>Edit Product</h3>
+            <p>Click on product to edit.</p>
+          </div>
+          <div className={styles.edit_products_container}>
+            {products.map((list) =>
+              list.product_list.map((item) => (
+                <AdminProductCard key={item.product_id} product={item} />
+              ))
+            )}
+          </div>
         </section>
       )}
     </main>

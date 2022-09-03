@@ -1,0 +1,73 @@
+@use "../abstracts/" as *;
+
+form {
+  border-top: 1px solid black;
+  padding-top: 1rem;
+
+  // add media query here so that when on desktop, i add the scroll effect. On mobile, dont want an inner scroll effect.
+
+  .outer_field_container {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      font-size: scaled(1, 1.2, 320, 1400);
+      color: $formDarkTint;
+      font-style: italic;
+    }
+
+    .inner_field_container {
+      padding: 1rem 1rem;
+      border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+
+      .radio_wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 0.75rem;
+
+        input[type="radio"] {
+          height: 1rem;
+          aspect-ratio: 1/1;
+        }
+      }
+      .radio_wrapper:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .info_wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: 0.2rem;
+
+      .separator {
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    .input_wrapper {
+      label {
+        color: $formDarkTint;
+      }
+    }
+
+    input {
+      width: 100%;
+    }
+
+    input::placeholder {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+@media screen and (min-width: 650px) {
+  form {
+    border-top: 1px solid black;
+    padding-top: 1rem;
+    max-height: 500px;
+    overflow: scroll;
+  }
+}
