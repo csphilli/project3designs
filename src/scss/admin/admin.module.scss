@@ -13,25 +13,16 @@ h2 {
 
   .edit_products_container {
     display: grid;
-    grid-template-columns: 1fr;
-    align-items: start;
-    // grid-template-columns: repeat(
-    //   auto-fit,
-    //   minmax(scaled(15, 25, 320, 1400), 1fr)
-    // );
+    // grid-template-columns: 1fr;
+    // align-items: start;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(scaled(15, 25, 320, 1400), 1fr)
+    );
     gap: 1rem;
     ul {
       margin: 0;
       padding: 0;
-    }
-  }
-}
-
-@media screen and (min-width: $adminFormScreenSize) {
-  .edit_section {
-    .edit_products_container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
     }
   }
 }

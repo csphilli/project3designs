@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useProductContext } from "../components/providers/ProductProvider";
 import * as styles from "../scss/admin/admin.module.scss";
 import LoadingSpinner from "../components/LoadingSpinner";
-import AdminProductCard from "../components/admin/AdminProductCard";
+import AdminEditProduct from "../components/admin/AdminEditProduct";
 
 function Admin() {
   const { products: aProducts } = useProductContext();
@@ -42,8 +42,8 @@ function Admin() {
           </div>
           <div className={styles.edit_products_container}>
             {products.map((list) =>
-              list.product_list.map((item) => (
-                <AdminProductCard key={item.product_id} product={item} />
+              list.product_list.map((item, index) => (
+                <AdminEditProduct key={index} product={item} />
               ))
             )}
           </div>
