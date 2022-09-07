@@ -13,8 +13,6 @@ h2 {
 
   .edit_products_container {
     display: grid;
-    // grid-template-columns: 1fr;
-    // align-items: start;
     grid-template-columns: repeat(
       auto-fit,
       minmax(scaled(15, 25, 320, 1400), 1fr)

@@ -9,14 +9,14 @@ import * as styles from "../../scss/admin/productForm.module.scss";
 
 function ProductForm(props) {
   const { product, toggleModal } = props;
-  const { tax_code: tc, active: status } = adminSelectOptions;
+  const { tax_code: tc, status } = adminSelectOptions;
   const [typeOptions, setTypeOptions] = useState(tc[product.tax_code]);
-  const [statusOptions, setStatusOptions] = useState(status[product.active]);
+  const [statusOptions, setStatusOptions] = useState(status[product.status]);
 
   const handleSelectionChange = (e, key) => {
     if (key === "tax_code") {
       setTypeOptions(e.target.value);
-    } else if (key === "active") {
+    } else if (key === "status") {
       setStatusOptions(e.target.value);
     } else
       console.error(`Product form change handler for ${key} doesn't exist`);

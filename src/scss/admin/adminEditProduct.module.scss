@@ -70,6 +70,8 @@
   border-radius: $borderRadius;
   border: 0.5px solid black;
   background-color: $mainLightColor;
+  max-height: 90vh;
+  overflow-y: scroll;
 
   .modal_pain {
     padding: scaled(1, 1.5, 320, 1400) scaled(1, 2, 320, 1400);

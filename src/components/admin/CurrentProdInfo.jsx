@@ -1,20 +1,17 @@
 import React from "react";
 import { getFieldName } from "../../lib/admin/funcs";
-import { reqKeys } from "../../lib/admin/models";
+import { adminInputCategories, reqKeys } from "../../lib/admin/models";
 import * as styles from "../../scss/admin/currentProdInfo.module.scss";
 import { adminSelectOptions } from "../../lib/admin/models";
 
 function CurrentProdInfo(props) {
   const { product } = props;
-  //   const { tax_code: tc, active: status } = adminSelectOptions;
-  //   const [typeOptions, setTypeOptions] = useState(tc[product.tax_code]);
-  //   const [statusOptions, setStatusOptions] = useState(status[product.active]);
 
   const getValue = (item, key) => {
-    // return product[item][key];
-    console.log(item, key);
-
-    return "testing";
+    if (adminInputCategories.select.includes(item)) {
+      return adminSelectOptions[item][key];
+    }
+    return key;
   };
 
   return (
