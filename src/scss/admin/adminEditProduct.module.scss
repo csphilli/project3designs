@@ -81,5 +81,7 @@
 @media screen and (min-width: $adminFormScreenSize) {
   .modal_container {
     --width: 65%;
+    max-height: 100vh;
+    overflow: hidden;
   }
 }
