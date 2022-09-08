@@ -1,0 +1,71 @@
+@use "../abstracts/" as *;
+
+form[id="admin_form"] {
+  background-color: $mainDarkColor;
+  padding: scaled(1, 2, 320, 1400) scaled(1, 2, 320, 1400);
+  border-radius: $formElementRadius;
+
+  label {
+    color: $mainLightColor;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: scaled(1, 1.2, 320, 1400);
+    color: $mainLightColor;
+  }
+
+  input {
+    max-width: 100%;
+  }
+
+  .field_container {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(scaled(3, 7, 320, 1400), 1fr)
+    );
+    margin-bottom: 0.4rem;
+  }
+
+  .field_container:last-child {
+    margin-bottom: 0;
+  }
+
+  .button_container {
+    margin-top: 1rem;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.3);
+
+    .form_btn {
+      border-radius: $formElementRadius;
+      border: none;
+      outline: none;
+      padding: scaled(0.1, 0.5, 320, 1400) scaled(1.5, 3, 320, 1400);
+      font-family: "Oswald", sans-serif;
+      color: $mainDarkColor;
+      transition: 300ms ease-in-out;
+    }
+
+    .submit {
+      background-color: rgb(54, 194, 54);
+    }
+
+    .cancel {
+      background-color: rgb(210, 0, 0);
+    }
+
+    .submit:hover,
+    .submit:focus,
+    .cancel:hover,
+    .cancel:focus {
+      cursor: pointer;
+      color: $mainLightColor;
+      transform: scale(1.02);
+      transition: 300ms ease-in-out;
+    }
+  }
+}

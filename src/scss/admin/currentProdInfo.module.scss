@@ -1,0 +1,28 @@
+@use "../abstracts/" as *;
+
+.current_info_container {
+  padding: scaled(1, 2, 320, 1400) scaled(1, 2, 320, 1400);
+
+  .field_container {
+    display: grid;
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(scaled(3, 7, 320, 1400), 1fr)
+    );
+    margin-bottom: 0.5rem;
+
+    h3 {
+      margin: 0;
+      font-size: scaled(1, 1.2, 320, 1400);
+      color: $mainDarkColor;
+    }
+
+    p {
+      overflow: hidden;
+    }
+  }
+
+  .field_container:last-child {
+    margin-bottom: 0;
+  }
+}

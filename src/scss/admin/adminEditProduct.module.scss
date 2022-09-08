@@ -1,0 +1,87 @@
+@use "../abstracts/" as *;
+
+.product_section {
+  display: flex;
+  transition: 300ms;
+  border-radius: $borderRadius;
+  border: 0.5px solid black;
+  overflow: hidden;
+
+  .image {
+    max-width: 8rem;
+    aspect-ratio: 1/1;
+  }
+
+  .product_text_container {
+    margin: auto 0;
+    margin-left: 1rem;
+    width: 100%;
+
+    .field {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      .heading {
+        font-size: scaled(1, 1.1, 320, 1400);
+      }
+    }
+  }
+}
+
+.inventory_icon {
+  padding-top: 0.2rem;
+}
+
+.product_section:hover,
+.product_section:focus {
+  box-shadow: 1px 3px 10px 10px rgba(0, 0, 0, 0.1);
+  transform: scale(1.01);
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+}
+
+// Modal
+
+.modal_overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_container {
+  --width: 95%;
+  --offsetX: calc((100% - var(--width)) / 2);
+  --offsetY: 5%;
+  position: fixed;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(scaled(18, 25, 320, 1400), 1fr)
+  );
+  top: var(--offsetY);
+  left: var(--offsetX);
+  width: var(--width);
+  transform: translateX(-var(--offsetX)) translateY(-var(--offsetY));
+  z-index: 15;
+  border-radius: $borderRadius;
+  border: 0.5px solid black;
+  background-color: $mainLightColor;
+  max-height: 90vh;
+  overflow-y: scroll;
+
+  .modal_pain {
+    padding: scaled(1, 1.5, 320, 1400) scaled(1, 2, 320, 1400);
+  }
+}
+
+@media screen and (min-width: $adminFormScreenSize) {
+  .modal_container {
+    --width: 65%;
+    max-height: 100vh;
+    overflow: hidden;
+  }
+}
