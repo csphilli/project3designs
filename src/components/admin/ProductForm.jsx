@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { getInputType, getFieldName } from "../../lib/admin/funcs";
-import {
-  reqKeys,
-  adminSelectOptions,
-  adminInputCategories,
-} from "../../lib/admin/models";
 import * as styles from "../../scss/admin/productForm.module.scss";
+const { getFieldName, getInputType } = require("../../lib/admin/funcs");
+const {
+  adminInputCategories,
+  adminSelectOptions,
+  reqKeys,
+} = require("../../lib/admin/models");
 
 function ProductForm(props) {
   const { product, toggleModal } = props;
